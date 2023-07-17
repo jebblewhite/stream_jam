@@ -1,0 +1,25 @@
+TO DO
+
+Check out twine and how to make it work with incremental part
+
+Create basic fantasy setting where spirit is generated - use agriculture, trading, military
+
+alloys, lumber, mushrooms
+grow metals (???)
+tin
+
+
+generate crops
+use crops to feed people - grow pops
+town has limited space
+
+agriculture - using gains for own development
+trading - using gains for social development
+military - using gains for dominance
+
+crops grow
+randomly, a rare crop will grow (TIN, copper)
+use rare crops for varying purposes (???) affect rate of rare crops?
+
+while procedural == true:  
+    

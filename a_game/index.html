@@ -5,16 +5,16 @@
 	<body>
         Time: <span id="timer">0</span>
         <br>
+		<div class="spirit" id="divspirit">
+			Spirit: <span id="spirit">0</span>
+		</div>
 		<div class="b"> 
 		<button class="button" onclick="harvestCrops(harvestPower)">Harvest Crops</button>
+		<div class="oreincrease" id="divoreincrease">
+			<button class="button" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
+		</div>
 		Crops: <span id="crops">0</span>
 		<br>
-		<div class="workers" id="divworkers">
-			Workers: <span id="workers">0</span>
-		</div>
-		<div class="worker" id="divworker">
-			<button class="button" id="buyworker" onclick="buyWorker()">Hire Worker -- Cost : 50 crops</button>
-		</div>
 		<div class="copper" id="divcopper">
 			Copper: <span id="copper">0</span>
 		</div>
@@ -22,6 +22,38 @@
 			Tin: <span id="tin">0</span>
 		</div>
 		<br>
+		</div>
+		<div class="b"> 
+			<div class="worker" id="divworker">
+				<button class="button" id="buyworker" onclick="buyWorker()">Hire Worker -- Cost : 50 crops</button>
+			</div>
+			<div class="workers" id="divworkers">
+				Workers: <span id="workers">0</span>
+			</div>
+			<div class="unassignedworkers" id="divunassignedworkers">
+				Unassigned Workers: <span id="unassignedworkers">0</span>
+				<br>
+				Farmers: <span id="farmers">0</span>
+				<br>
+				Merchants: <span id="merchants">0</span>
+				<br>
+				Soldiers: <span id="soldiers">0</span>
+			</div>
+			<div class="assignfarmer" id="divassignfarmer">
+				<button class="button" id="assignfarmer" onclick="assignFarmer()">Assign Farmer</button>
+			</div>
+			<div class="assignmerchant" id="divassignmerchant">
+				<button class="button" id="assignmerchant" onclick="assignMerchant()">Assign Merchant</button>
+			</div>
+			<div class="assignsoldier" id="divassignsoldier">
+				<button class="button" id="assignsoldier" onclick="assignSoldier()">Assign Soldier</button>
+			</div>
+		</div>
+		<div class="b" display="none" id="divtrade"> 
+			Trade
+		</div>
+		<div class="b" display="none" id="divwarfare"> 
+			Warfare
 		</div>
 		<script type="text/javascript" src="main.js"></script>
 	</body>

@@ -23,3 +23,28 @@ use rare crops for varying purposes (???) affect rate of rare crops?
 
 while procedural == true:  
     
+
+
+
+PLAN 
+
+Objective : Increase spirit
+
+In beginning -- harvest crops (might tie a cooldown to it later)
+
+When crop threshold is reached, unlock multiple opportunities for refinement
+
+Gain a pop -- each pop provides spirit
+
+
+agricultural: -- produces food
+    Upgrades:
+
+trade:  -- generates constant spirit -- exchange resources (bad to begin with)
+    Upgrades:
+
+military:  -- risk/reward for much spirit -- capture food / ore 
+    Upgrades:
+        Reduce risk
+        Raise reward
+        Increase rate

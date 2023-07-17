@@ -22,6 +22,14 @@ body{
     display: none;
 }
 
+.workers {
+  display: none;
+}
+
+.worker {
+  display: none;
+}
+
 .b {
     display: inline-block;
     position: relative;

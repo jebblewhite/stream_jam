@@ -59,11 +59,11 @@ function harvestCrops(x){
         document.getElementById('crops').innerHTML = resources.crops;
         document.getElementById('divcrops').style.display = "block";
         document.getElementById('copper').innerHTML = resources.copper;
-        if (copper > 0) {
+        if (resources.copper > 0) {
             document.getElementById('divcopper').style.display = "block";
         }
         document.getElementById('tin').innerHTML = resources.tin;
-        if (tin > 0) {
+        if (resources.tin > 0) {
             document.getElementById('divtin').style.display = "block";
         }
     };

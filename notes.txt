@@ -48,7 +48,7 @@ trade:  -- generates constant spirit -- exchange resources (bad to begin with)
 
     More traders, less cooldown
 
-    Upgrades:
+    Upgrades -- cost Grivna:
     Better offers upfront
     More spirit yields from trades
     Random haggle chance
@@ -66,3 +66,10 @@ To do -- Again
 List Warfare Stats -- and show Upgrades
 Create Trade screen
 write milo a script
+
+
+Todo
+
+Show and hide upgrades
+add coooldown to trade -- and make spirit gain dependent on value -- also randomise trade values
+Make new upgrades -- later make the upgrades generic

@@ -26,6 +26,8 @@ var resources = {
     "grivna" : 0
 }
 
+var upgrades = {"oreChanceIncrease":{"cost":100, "resource":"crops", "div":"divoreincrease", "element_id":"oreincrease", "element_content": "Increase chance of finding ores when harvesting crops -- Cost : ^^^F crops"}}
+
 const goodsList = [
     "crops",
     "copper",
@@ -125,13 +127,14 @@ function assignSoldier() {
 }
 
 function increaseOreChance(){
-    if (resources.crops >= oreChanceIncreaseCost) {
+    if (resources.crops >= upgrades["oreChanceIncrease"]["cost"]) {
         copperChance++;
         tinChance++;
-        resources.crops = resources.crops - oreChanceIncreaseCost;
-        oreChanceIncreaseCost = oreChanceIncreaseCost*2;
+        resources.crops = resources.crops - upgrades["oreChanceIncrease"]["cost"];
+        upgrades["oreChanceIncrease"]["cost"] = upgrades["oreChanceIncrease"]["cost"]*2;
         document.getElementById('crops').innerHTML = resources.crops;
-        document.getElementById('oreincrease').innerHTML = "Increase chance of finding ores when harvesting crops -- Cost : " + oreChanceIncreaseCost + " crops";
+        document.getElementById('oreincrease').innerHTML = "Increase chance of finding ores when harvesting crops -- Cost : " + upgrades["oreChanceIncrease"]["cost"] + " crops";
+        document.getElementById('divoreincrease').style.display = "none";
     }
 }
 
@@ -279,6 +282,14 @@ function rewireLoggingToElement(eleLocator, eleOverflowLocator, autoScroll) {
     }
 }
 
+function checkUpgrades(){
+    for (let item in upgrades){
+        if (resources[upgrades[item]["resource"]] >= upgrades[item]["cost"]) {
+            document.getElementById(upgrades[item]["div"]).style.display = "block";
+            document.getElementById(upgrades[item]["element_id"]).innerHTML = upgrades[item]["element_content"].replace("^^^F", upgrades[item]["cost"])
+        }
+    }     
+}
 
 window.setInterval(function(){
 	timer++;
@@ -332,8 +343,8 @@ window.setInterval(function(){
     }
     if (resources.crops >= 100) {
         document.getElementById('divupgrades').style.display = "block";
-        document.getElementById('divoreincrease').style.display = "block";
     }
+    checkUpgrades()
     if (workers > 0){
         eatFood(workers)
     }

@@ -35,23 +35,48 @@ body{
 }
 
 .unassignedworkers{
-  display : none
+  display : none;
+  font-size: 12px;
 }
 
 .assignfarmer{
-  display : none
+  display : none;
 }
 
 .assignmerchant{
-  display : none
+  display : none;
 }
 
 .assignsoldier{
-  display : none
+  display : none;
 }
 
 .spirit {
   display: none;
+}
+
+.trade {
+  display: none;
+}
+
+.warfare {
+  display: none;
+}
+
+.warfaredesc {
+  font-size: 12px;
+}
+
+.upgrades {
+  display: none
+}
+
+.grivna {
+  display: none
+}
+
+.crops {
+  display: none
 }
 
 .b {
@@ -85,3 +110,11 @@ body{
     background-color: black; 
     color: white;
   }
+
+#log-container { 
+  overflow: hidden;
+  height: 150px;
+  font-family: 'Roboto Mono', sans-serif;
+	font-size:14px;
+	color: var(--text-color); 
+}

@@ -3,18 +3,18 @@
 		<link rel="stylesheet" type="text/css" href="interface.css" />
 	</head>
 	<body>
-        Time: <span id="timer">0</span>
         <br>
 		<div class="spirit" id="divspirit">
 			Spirit: <span id="spirit">0</span>
 		</div>
 		<div class="b"> 
 		<button class="button" onclick="harvestCrops(harvestPower)">Harvest Crops</button>
-		<div class="oreincrease" id="divoreincrease">
-			<button class="button" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
+		<div class = "crops" id="divcrops">
+			Crops: <span id="crops">0</span>
 		</div>
-		Crops: <span id="crops">0</span>
-		<br>
+		<div class="grivna" id="divgrivna">
+			Grivna: <span id="grivna">0</span>
+		</div>
 		<div class="copper" id="divcopper">
 			Copper: <span id="copper">0</span>
 		</div>
@@ -22,13 +22,26 @@
 			Tin: <span id="tin">0</span>
 		</div>
 		<br>
+		<br>
+		<br>
+		<br>
+		<div id="log-container">
+			<pre id="log"></pre>
+		</div>
+		<br>
+		<div class="upgrades" id="divupgrades">
+			Upgrades
+			<div class="oreincrease" id="divoreincrease">
+				<button class="button" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
+			</div>
+		</div>
 		</div>
 		<div class="b"> 
 			<div class="worker" id="divworker">
-				<button class="button" id="buyworker" onclick="buyWorker()">Hire Worker -- Cost : 50 crops</button>
+				<button class="button" id="buyworker" onclick="buyWorker()">Offer food -- Cost : 50 crops</button>
 			</div>
 			<div class="workers" id="divworkers">
-				Workers: <span id="workers">0</span>
+				Population: <span id="workers">0</span>
 			</div>
 			<div class="unassignedworkers" id="divunassignedworkers">
 				Unassigned Workers: <span id="unassignedworkers">0</span>
@@ -49,11 +62,30 @@
 				<button class="button" id="assignsoldier" onclick="assignSoldier()">Assign Soldier</button>
 			</div>
 		</div>
-		<div class="b" display="none" id="divtrade"> 
-			Trade
+		<div class="b"> 
+			<div class="trade" id="divtrade">
+				Trade
+				<div class="tradetable" id="divtradetable">
+					<button class="button" id="trade1" onclick="trade(1)">TRADE 1</button>
+					<button class="button" id="trade2" onclick="trade(2)">TRADE 2</button>
+					<button class="button" id="trade3" onclick="trade(3)">TRADE 3</button>
+				</div>
+			</div>
 		</div>
-		<div class="b" display="none" id="divwarfare"> 
-			Warfare
+		<div class="b"> 
+			<div class="warfare" id="divwarfare">
+				Warfare
+				<div class="warfaredesc">
+					Your army will go to war every 10 ticks
+					<br>
+					Soldier Power: <span id="soldierpower">5</span>
+					<br>
+					Chance of reward: <span id="soldierreward">30%</span>
+					<br>
+					Chance of losing troops: <span id="soldierrisk">10%</span>
+				</div>
+			</div>
+			
 		</div>
 		<script type="text/javascript" src="main.js"></script>
 	</body>

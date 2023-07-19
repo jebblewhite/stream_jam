@@ -40,6 +40,8 @@ Gain a pop -- each pop provides spirit
 agricultural: -- produces food
     Upgrades:
     clicking power upgraded by number of farmers
+    harvest power increase
+    harvesting also generates spirit
 
 trade:  -- generates constant spirit -- exchange resources (bad to begin with)
     Each trader generates an additional spirit
@@ -80,3 +82,7 @@ Make new upgrades -- later make the upgrades generic
 Better Trade cooldown
 Harvest based on number of Farmers
 Gain Trophies from warfare (these generate spirit)
+
+
+Add trophies as the output of military -- generate spirit per tick
+finish war things -- rewards are janky

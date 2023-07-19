@@ -20,11 +20,11 @@ var progression = 0;
 var dealModifier = 1;
 var tradeCooldownTime = 10000
 var resources = {
-    "crops" : 10000,
+    "crops" : 0,
     "copper" : 0,
     "tin" : 0,
     "spirit" : 0,
-    "grivna" : 1000,
+    "grivna" : 0,
     "trophies" : 0
 }
 
@@ -54,6 +54,12 @@ var fullTrade = {
 }
 
 const tradeFactions = ['The Barony of St Byzantinov', 'The Kingdom of Polthia', 'The lands of Sul-os']
+
+const warTable = {
+    'The Barony of St Byzantinov':{"riskChance": 10, "rewardChance": 30, "riskMultiplier": 1, "rewardMultiplier": 1, "bonusResource": "crops"},
+    'The Kingdom of Polthia': {"riskChance": 25, "rewardChance": 25, "riskMultiplier": 3, "rewardMultiplier": 5, "bonusResource": "tin"}, 
+    'The lands of Sul-os': {"riskChance": 50, "rewardChance": 5, "riskMultiplier": 8, "rewardMultiplier": 69, "bonusResource": "copper"}
+}
 
 function harvestCrops(x){
         resources.crops = resources.crops + x;
@@ -253,15 +259,34 @@ function refreshTrade(){
     
 }
 
-function makeWar(x, riskChance, rewardChance){
+function generateSingleWar(x){
+    warPartner = tradeFactions[x]
+}
+
+function generateWar(){
+
+}
+
+function war(x) {
+    makeWar(soldierPower*soldiers, warTable[tradeFactions[x-1]]["riskChance"], warTable[tradeFactions[x-1]]["rewardChance"], warTable[tradeFactions[x-1]]["riskMultiplier"], warTable[tradeFactions[x-1]]["rewardMultiplier"], warTable[tradeFactions[x-1]]["bonusResource"])
+}
+
+function makeWar(x, riskChance, rewardChance, riskMultiplier, rewardMultiplier, bonusResource){
     let y = Math.random() * 100;
-    if (riskChance > y) {
-        soldiers = soldiers - 1
-        workers = workers - 1
-        console.log("One of your soldiers died in battle.")
+    if (riskChance >= y) {
+        if (soldiers >= riskMultiplier){
+            soldiers = soldiers - riskMultiplier
+            workers = workers - riskMultiplier
+            console.log(riskMultiplier + " of your soldiers died in battle.")
+        }
+        else {
+            workers = workers - soldiers
+            console.log(soldiers + " of your soldiers died in battle.")
+            soldiers = 0
+        }
     }
     let z = Math.random() * 100;
-    if (rewardChance > z) {
+    if (rewardChance >= z) {
         randTin = Math.floor(x*(Math.random()*3+1)/2);
         resources.tin = resources.tin + randTin;
         randCopper = Math.floor(x*(Math.random()*3+1)/2);

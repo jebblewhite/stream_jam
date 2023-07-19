@@ -31,8 +31,11 @@
 		<br>
 		<div class="upgrades" id="divupgrades">
 			Upgrades
-			<div class="oreincrease" id="divoreincrease">
+			<div class="upgrades" id="divoreincrease">
 				<button class="button" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
+			</div>
+			<div class="upgrades" id="divbettertradedeals">
+				<button class="button" id="bettertradedeals" onclick="betterTradeDeals()"></button>
 			</div>
 		</div>
 		</div>
@@ -66,9 +69,10 @@
 			<div class="trade" id="divtrade">
 				Trade
 				<div class="tradetable" id="divtradetable">
-					<button class="button" id="trade1" onclick="trade(1)">TRADE 1</button>
-					<button class="button" id="trade2" onclick="trade(2)">TRADE 2</button>
-					<button class="button" id="trade3" onclick="trade(3)">TRADE 3</button>
+					<button class="button_cooldown" id="trade1" onclick="trade(1)">TRADE 1</button>
+					<button class="button_cooldown" id="trade2" onclick="trade(2)">TRADE 2</button>
+					<button class="button_cooldown" id="trade3" onclick="trade(3)">TRADE 3</button>
+					<button class="button_cooldown" id="refreshtrade" onclick="refreshTrade()">Refresh Trades</button>
 				</div>
 			</div>
 		</div>

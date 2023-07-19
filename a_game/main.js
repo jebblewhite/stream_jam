@@ -17,16 +17,20 @@ var soldierRisk = 10
 var workerSpirit = 1
 var merchantSpirit = 2
 var progression = 0;
-
+var dealModifier = 1;
 var resources = {
-    "crops" : 0,
+    "crops" : 10000,
     "copper" : 0,
     "tin" : 0,
     "spirit" : 0,
-    "grivna" : 0
+    "grivna" : 0,
+    "trophies" : 0
 }
 
-var upgrades = {"oreChanceIncrease":{"cost":100, "resource":"crops", "div":"divoreincrease", "element_id":"oreincrease", "element_content": "Increase chance of finding ores when harvesting crops -- Cost : ^^^F crops"}}
+var upgrades = {
+    "oreChanceIncrease":{"cost":100, "resource":"crops", "div":"divoreincrease", "element_id":"oreincrease", "element_content": "Increase chance of finding ores when harvesting crops -- Cost : ^^^F crops"},
+    "betterTradeDeals":{"cost":100, "resource":"grivna", "div":"divbettertradedeals", "element_id":"bettertradedeals", "element_content": "Better Trade deals -- Cost : ^^^F grivna"}
+}
 
 const goodsList = [
     "crops",
@@ -126,6 +130,18 @@ function assignSoldier() {
     }
 }
 
+function betterTradeDeals(){
+    if (resources.grivna >= upgrades["betterTradeDeals"]["cost"]) {
+        dealModifier = dealModifier + 0.25
+        console.log(dealModifier)
+        resources.grivna = resources.grivna - upgrades["betterTradeDeals"]["cost"];
+        upgrades["betterTradeDeals"]["cost"] = upgrades["betterTradeDeals"]["cost"]*2;
+        document.getElementById('grivna').innerHTML = resources.grivna;
+        document.getElementById(upgrades["betterTradeDeals"]["element_id"]).innerHTML = upgrades["betterTradeDeals"]["element_content"].replace("^^^F", upgrades["betterTradeDeals"]["cost"])
+        document.getElementById(upgrades["betterTradeDeals"]["div"]).style.display = "none";
+    }
+}
+
 function increaseOreChance(){
     if (resources.crops >= upgrades["oreChanceIncrease"]["cost"]) {
         copperChance++;
@@ -162,19 +178,27 @@ function getRandomInt(max) {
 function generateSingleTrade(x){
     let y = getRandomInt(3)
     tradePartner = tradeFactions[y]
+    var appropList = []
+    for (let item in grivnaTable) {
+        if (grivnaTable[item] <= x) {
+            appropList.push(item)
+            document.getElementById('div'+item).style.display = "block";
+        }
+    }
     let z = getRandomInt(goodsList.length)
+    var tradeValue = Math.ceil(x*(Math.random()*3+1)/2) // if x=10 -- generate number between 5 and 20
     if (getRandomInt(2) == 1){
         giveGood = "grivna"
-        getGood = goodsList[z]
-        giveValue = x*grivnaTable[getGood]
-        getValue = x
+        getGood = appropList[z]
+        giveValue = tradeValue
+        getValue = Math.ceil(Math.ceil((x/grivnaTable[getGood])*(Math.random()*3+1)/2)*dealModifier)
     } else {
         getGood = "grivna"
-        giveGood = goodsList[z]
-        getValue = x*grivnaTable[giveGood]
-        giveValue = x
+        giveGood = appropList[z]
+        getValue = Math.ceil(tradeValue*dealModifier)
+        giveValue = Math.ceil((x/grivnaTable[giveGood])*(Math.random()*3+1)/2)
     }
-    return [tradePartner, giveGood, giveValue, getGood, getValue]
+    return [tradePartner, giveGood, giveValue, getGood, getValue, tradeValue]
     
 }
 
@@ -195,17 +219,23 @@ function trade(x){
     if (resources[fullTrade[x][1]] >= fullTrade[x][2]){
         resources[fullTrade[x][1]] = resources[fullTrade[x][1]] - fullTrade[x][2]
         resources[fullTrade[x][3]] = resources[fullTrade[x][3]] + fullTrade[x][4]
-        resources.spirit = resources.spirit + 2*merchantPower*merchants
+        resources.spirit = resources.spirit + 10*fullTrade[x][5]
         console.log("Traded " + fullTrade[x][2] + " " + fullTrade[x][1] + " for " + fullTrade[x][4] + " " + fullTrade[x][3] + ".")
-        console.log("Gained " + 2*merchantPower*merchants + " Spirit through Trade")
+        console.log("Gained " + 10*fullTrade[x][5] + " Spirit through Trade")
         //update all resources
         document.getElementById('tin').innerHTML = resources.tin;
         document.getElementById('copper').innerHTML = resources.copper;
         document.getElementById('crops').innerHTML = resources.crops;
         document.getElementById('spirit').innerHTML = resources.spirit;
         document.getElementById('grivna').innerHTML = resources.grivna;
-
+        tradeCooldown()
+        
     }
+}
+
+function refreshTrade(){
+    tradeCooldown()
+    
 }
 
 function makeWar(x, riskChance, rewardChance){
@@ -239,6 +269,29 @@ function makeWar(x, riskChance, rewardChance){
 
 
 }
+
+
+function tradeCooldown(){
+    document.getElementById('trade1').disabled = true;
+    document.getElementById('trade2').disabled = true;
+    document.getElementById('trade3').disabled = true;
+    document.getElementById('refreshtrade').disabled = true;
+    document.getElementById('trade1').innerHTML = 'Refreshing...';
+    document.getElementById('trade2').innerHTML = 'Refreshing...';
+    document.getElementById('trade3').innerHTML = 'Refreshing...';
+    document.getElementById('refreshtrade').innerHTML = 'Refreshing...'
+    setTimeout(function(){
+        document.getElementById('trade1').disabled = false;
+        document.getElementById('trade2').disabled = false;
+        document.getElementById('trade3').disabled = false;
+        document.getElementById('refreshtrade').disabled = false;
+        generateTrades(merchantPower*merchants)
+        document.getElementById('refreshtrade').innerHTML = 'Refresh Trades'
+    },15000);
+}
+
+
+
 
 rewireLoggingToElement(
     () => document.getElementById("log"),

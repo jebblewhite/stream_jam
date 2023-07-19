@@ -72,4 +72,6 @@ Todo
 
 Show and hide upgrades DONE
 add cooldown to trade -- and make spirit gain dependent on value -- also randomise trade values
+    TRADE
+    
 Make new upgrades -- later make the upgrades generic

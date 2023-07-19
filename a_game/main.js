@@ -18,19 +18,22 @@ var workerSpirit = 1
 var merchantSpirit = 2
 var progression = 0;
 var dealModifier = 1;
+var tradeCooldownTime = 10000
 var resources = {
     "crops" : 10000,
     "copper" : 0,
     "tin" : 0,
     "spirit" : 0,
-    "grivna" : 0,
+    "grivna" : 1000,
     "trophies" : 0
 }
 
 var upgrades = {
     "oreChanceIncrease":{"cost":100, "resource":"crops", "div":"divoreincrease", "element_id":"oreincrease", "element_content": "Increase chance of finding ores when harvesting crops -- Cost : ^^^F crops"},
-    "betterTradeDeals":{"cost":100, "resource":"grivna", "div":"divbettertradedeals", "element_id":"bettertradedeals", "element_content": "Better Trade deals -- Cost : ^^^F grivna"}
+    "betterTradeDeals":{"cost":100, "resource":"grivna", "div":"divbettertradedeals", "element_id":"bettertradedeals", "element_content": "Better Trade deals -- Cost : ^^^F grivna"},
+    "reduceTradeCooldown":{"cost":150, "resource":"grivna", "div":"divreducetradecooldown", "element_id":"reducetradecooldown", "element_content": "Reduce Trade Cooldown -- Cost : ^^^F grivna"}
 }
+
 
 const goodsList = [
     "crops",
@@ -130,10 +133,22 @@ function assignSoldier() {
     }
 }
 
+function reduceTradeCooldown(){
+    if (resources.grivna >= upgrades["reduceTradeCooldown"]["cost"]) {
+        if (tradeCooldownTime>1000){
+            tradeCooldownTime = tradeCooldownTime - 1000
+        }
+        resources.grivna = resources.grivna - upgrades["reduceTradeCooldown"]["cost"];
+        upgrades["reduceTradeCooldown"]["cost"] = upgrades["reduceTradeCooldown"]["cost"]*2;
+        document.getElementById('grivna').innerHTML = resources.grivna;
+        document.getElementById(upgrades["reduceTradeCooldown"]["element_id"]).innerHTML = upgrades["reduceTradeCooldown"]["element_content"].replace("^^^F", upgrades["reduceTradeCooldown"]["cost"])
+        document.getElementById(upgrades["reduceTradeCooldown"]["div"]).style.display = "none";
+    }
+}
+
 function betterTradeDeals(){
     if (resources.grivna >= upgrades["betterTradeDeals"]["cost"]) {
         dealModifier = dealModifier + 0.25
-        console.log(dealModifier)
         resources.grivna = resources.grivna - upgrades["betterTradeDeals"]["cost"];
         upgrades["betterTradeDeals"]["cost"] = upgrades["betterTradeDeals"]["cost"]*2;
         document.getElementById('grivna').innerHTML = resources.grivna;
@@ -191,11 +206,11 @@ function generateSingleTrade(x){
         giveGood = "grivna"
         getGood = appropList[z]
         giveValue = tradeValue
-        getValue = Math.ceil(Math.ceil((x/grivnaTable[getGood])*(Math.random()*3+1)/2)*dealModifier)
+        getValue = Math.round(Math.ceil((x/grivnaTable[getGood])*(Math.random()*3+1)/2)*dealModifier) // if x=10 and resource = "tin" -- number between
     } else {
         getGood = "grivna"
         giveGood = appropList[z]
-        getValue = Math.ceil(tradeValue*dealModifier)
+        getValue = Math.round(tradeValue*dealModifier)
         giveValue = Math.ceil((x/grivnaTable[giveGood])*(Math.random()*3+1)/2)
     }
     return [tradePartner, giveGood, giveValue, getGood, getValue, tradeValue]
@@ -287,7 +302,7 @@ function tradeCooldown(){
         document.getElementById('refreshtrade').disabled = false;
         generateTrades(merchantPower*merchants)
         document.getElementById('refreshtrade').innerHTML = 'Refresh Trades'
-    },15000);
+    },tradeCooldownTime);
 }
 
 

@@ -53,6 +53,7 @@ trade:  -- generates constant spirit -- exchange resources (bad to begin with)
     More spirit yields from trades
     Random haggle chance
     automatic *best* trade
+    Merchants procure a random resource every tick
 
 military:  -- risk/reward for much spirit -- capture food / ore 
     Upgrades:
@@ -75,3 +76,7 @@ add cooldown to trade -- and make spirit gain dependent on value -- also randomi
     TRADE
     
 Make new upgrades -- later make the upgrades generic
+
+Better Trade cooldown
+Harvest based on number of Farmers
+Gain Trophies from warfare (these generate spirit)

@@ -70,6 +70,6 @@ write milo a script
 
 Todo
 
-Show and hide upgrades
-add coooldown to trade -- and make spirit gain dependent on value -- also randomise trade values
+Show and hide upgrades DONE
+add cooldown to trade -- and make spirit gain dependent on value -- also randomise trade values
 Make new upgrades -- later make the upgrades generic

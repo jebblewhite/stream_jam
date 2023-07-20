@@ -489,8 +489,6 @@ window.setInterval(function(){
     }
     
     
-    
-    //document.getElementById('timer').innerHTML = timer; 
     if (resources.crops >= workerCost) {
         document.getElementById('divworker').style.display = "block";
     }

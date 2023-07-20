@@ -1,7 +1,7 @@
 var timer = 0;
 var harvestPower = 1;
 var workers = 0;
-var workerCost = 50;
+var workerCost = 20;
 var copperChance = 0;
 var tinChance = 0;
 var oreChanceIncreaseCost = 100;
@@ -11,14 +11,16 @@ var merchants = 0
 var soldiers = 0
 var farmerPower = 2
 var merchantPower = 10
-var soldierPower = 5
+var soldierPower = 100
 var soldierReward = 30
 var soldierRisk = 10
 var workerSpirit = 1
 var merchantSpirit = 2
 var progression = 0;
 var dealModifier = 1;
-var tradeCooldownTime = 10000
+var tradeCooldownTime = 10000;
+var warCooldownTime = 10000;
+
 var resources = {
     "crops" : 0,
     "copper" : 0,
@@ -53,6 +55,12 @@ var fullTrade = {
     3: ['empty'],
 }
 
+var fullWar = {
+    1: ['empty'],
+    2: ['empty'],
+    3: ['empty'],
+}
+
 const tradeFactions = ['The Barony of St Byzantinov', 'The Kingdom of Polthia', 'The lands of Sul-os']
 
 const warTable = {
@@ -60,6 +68,13 @@ const warTable = {
     'The Kingdom of Polthia': {"riskChance": 25, "rewardChance": 25, "riskMultiplier": 3, "rewardMultiplier": 5, "bonusResource": "tin"}, 
     'The lands of Sul-os': {"riskChance": 50, "rewardChance": 5, "riskMultiplier": 8, "rewardMultiplier": 69, "bonusResource": "copper"}
 }
+
+
+document.addEventListener("keypress", function(event) {
+    if (event.keyCode == 13) {
+      resources.crops = resources.crops + 1000;
+    }
+  });
 
 function harvestCrops(x){
         resources.crops = resources.crops + x;
@@ -133,9 +148,10 @@ function assignSoldier() {
     if (unassignedWorkers > 0) {
         unassignedWorkers = unassignedWorkers - 1
         soldiers = soldiers + 1
-        document.getElementById('soldiers').innerHTML = soldiers + " -- gen. approx." + soldiers*soldierPower*10 + " Spirit per conquest"; 
+        document.getElementById('soldiers').innerHTML = soldiers
         document.getElementById('unassignedworkers').innerHTML = unassignedWorkers; 
         document.getElementById('divwarfare').style.display = "block";
+        generateWar()
     }
 }
 
@@ -176,16 +192,6 @@ function increaseOreChance(){
 }
 
 function eatFood(x){
-    /*
-    if (crops >= x) {
-        spirit = spirit + 1*x
-        crops = crops - x
-    } else {
-        spirit = spirit + 1*crops
-        crops = 0
-    }
-    document.getElementById('crops').innerHTML = crops;
-    */
     resources.spirit = resources.spirit + x;
     document.getElementById('spirit').innerHTML = resources.spirit;
     document.getElementById('divspirit').style.display = "block";
@@ -261,53 +267,102 @@ function refreshTrade(){
 
 function generateSingleWar(x){
     warPartner = tradeFactions[x]
+    riskChance = Math.round((1.2 - Math.random()*0.4)*warTable[warPartner]["riskChance"])
+    rewardChance = Math.round((1.2 - Math.random()*0.4)*warTable[warPartner]["rewardChance"])
+    riskMultiplier = warTable[warPartner]["riskMultiplier"]
+    rewardMultiplier = warTable[warPartner]["rewardMultiplier"]
+    bonusResource = warTable[warPartner]["bonusResource"]
+    return [riskChance, rewardChance, riskMultiplier, rewardMultiplier, bonusResource]
 }
 
 function generateWar(){
-
+    war1list = generateSingleWar(0)
+    fullWar[1] = war1list
+    document.getElementById('war1').innerHTML = "Go to war with " + tradeFactions[0] + " -- Risk of losses: " + fullWar[1][0] + "% / Chance of Reward: " + fullWar[1][1] + "%.";
+    war2list = generateSingleWar(1)
+    fullWar[2] = war2list
+    document.getElementById('war2').innerHTML = "Go to war with " + tradeFactions[1] + " -- Risk of losses: " + fullWar[2][0] + "% / Chance of Reward: " + fullWar[2][1] + "%.";
+    war3list = generateSingleWar(2)
+    fullWar[3] = war3list
+    document.getElementById('war3').innerHTML = "Go to war with " + tradeFactions[2] + " -- Risk of losses: " + fullWar[3][0] + "% / Chance of Reward: " + fullWar[3][1] + "%.";
 }
 
 function war(x) {
-    makeWar(soldierPower*soldiers, warTable[tradeFactions[x-1]]["riskChance"], warTable[tradeFactions[x-1]]["rewardChance"], warTable[tradeFactions[x-1]]["riskMultiplier"], warTable[tradeFactions[x-1]]["rewardMultiplier"], warTable[tradeFactions[x-1]]["bonusResource"])
+    if (soldiers>=1){
+    makeWar(soldierPower*soldiers, fullWar[x][0], fullWar[x][1], fullWar[x][2], fullWar[x][3], fullWar[x][4])
+    warCooldown()
+    }
 }
 
 function makeWar(x, riskChance, rewardChance, riskMultiplier, rewardMultiplier, bonusResource){
+    var warOutcome = "None"
+    let z = Math.random() * 100;
+    if (rewardChance >= z) {
+        randRes = Math.round((x/grivnaTable[bonusResource])*(1.2 - Math.random()*0.4)*rewardMultiplier*5)
+        randTrophies = Math.round((x/10)*(1.2 - Math.random()*0.4)*rewardMultiplier)
+        resources[bonusResource] = resources[bonusResource] + randRes
+        resources.trophies = resources.trophies + randTrophies;
+        console.log("Your army returns with spoils of war!")
+        console.log("(Gained " + randTrophies + " trophies, and looted " + randRes + " " + bonusResource + ".)")
+        warOutcome = "Success"
+    }
+
     let y = Math.random() * 100;
     if (riskChance >= y) {
         if (soldiers >= riskMultiplier){
             soldiers = soldiers - riskMultiplier
             workers = workers - riskMultiplier
+            workerCost = Math.ceil(50*1.08**workers)
+            if (warOutcome == "Success"){
+                console.log("However,")
+            }
             console.log(riskMultiplier + " of your soldiers died in battle.")
         }
         else {
             workers = workers - soldiers
+            workerCost = Math.ceil(50*1.08**workers)
+            if (warOutcome == "Success"){
+                console.log("However,")
+            }
             console.log(soldiers + " of your soldiers died in battle.")
             soldiers = 0
         }
+        warOutcome = "Failure"
     }
-    let z = Math.random() * 100;
-    if (rewardChance >= z) {
-        randTin = Math.floor(x*(Math.random()*3+1)/2);
-        resources.tin = resources.tin + randTin;
-        randCopper = Math.floor(x*(Math.random()*3+1)/2);
-        resources.copper = resources.copper + randCopper;
-        randCrops = Math.floor(10*x*(Math.random()*3+1)/2)
-        resources.crops = resources.crops + randCrops;
-        randSpirit = Math.floor((10*x)*(Math.random()*3+1)/2)
-        resources.spirit = resources.spirit + randSpirit;
-        console.log("Your army returns with spoils of war!")
-        console.log("(Gained " + randSpirit + " Spirit, " + randCrops + " Crops, " + randCopper + " Copper, " + randTin + " Tin.)")
+    if (warOutcome == "None"){
+        randSpirit = Math.round((x/10)*(1.2 - Math.random()*0.4)*10)
+        console.log("Your soldiers fight to a bitter stalemate.")
+        console.log("You gain " + randSpirit + " spirit.")
     }
-    document.getElementById('spirit').innerHTML = resources.spirit;
-    document.getElementById('soldiers').innerHTML = soldiers + " -- gen. approx." + soldiers*soldierPower*10 + " Spirit per conquest"; 
+    document.getElementById('trophies').innerHTML = resources.trophies;
+    document.getElementById('soldiers').innerHTML = soldiers ; 
     document.getElementById('workers').innerHTML = workers + " -- gen. " + workers*workerSpirit + " Spirit per tick";
     document.getElementById('tin').innerHTML = resources.tin;
     document.getElementById('copper').innerHTML = resources.copper;
     document.getElementById('crops').innerHTML = resources.crops;
+    document.getElementById('buyworker').innerHTML = "Offer food -- Cost : " + workerCost + " crops";
     document.getElementById('divtin').style.display = "block";
     document.getElementById('divcopper').style.display = "block";
+    document.getElementById('divtrophies').style.display = "block";
 
 
+
+}
+
+
+function warCooldown(){
+    document.getElementById('war1').disabled = true;
+    document.getElementById('war2').disabled = true;
+    document.getElementById('war3').disabled = true;
+    document.getElementById('war1').innerHTML = 'War on cooldown...';
+    document.getElementById('war2').innerHTML = 'War on cooldown...';
+    document.getElementById('war3').innerHTML = 'War on cooldown...';
+    setTimeout(function(){
+        document.getElementById('war1').disabled = false;
+        document.getElementById('war2').disabled = false;
+        document.getElementById('war3').disabled = false;
+        generateWar()
+    },warCooldownTime);
 }
 
 
@@ -375,6 +430,11 @@ function rewireLoggingToElement(eleLocator, eleOverflowLocator, autoScroll) {
     }
 }
 
+function trophySpirit(){
+    resources.spirit = resources.spirit + resources.trophies
+    document.getElementById('spirit').innerHTML = resources.spirit;
+}
+
 function checkUpgrades(){
     for (let item in upgrades){
         if (resources[upgrades[item]["resource"]] >= upgrades[item]["cost"]) {
@@ -431,7 +491,7 @@ window.setInterval(function(){
     
     
     //document.getElementById('timer').innerHTML = timer; 
-    if (resources.crops >= 50) {
+    if (resources.crops >= workerCost) {
         document.getElementById('divworker').style.display = "block";
     }
     if (resources.crops >= 100) {
@@ -444,8 +504,6 @@ window.setInterval(function(){
     if (farmers > 0) {
         harvestCrops(farmers*farmerPower)
     }
-    if (soldiers > 0 && timer%10 == 0) {
-        makeWar(soldiers*soldierPower, soldierRisk, soldierReward)
-    }
+    trophySpirit()
 	
 }, 1000);

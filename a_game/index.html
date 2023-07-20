@@ -21,6 +21,9 @@
 		<div class="tin" id="divtin">
 			Tin: <span id="tin">0</span>
 		</div>
+		<div class="trophies" id="divtrophies">
+			Trophies: <span id="trophies">0</span>
+		</div>
 		<br>
 		<br>
 		<br>
@@ -44,7 +47,7 @@
 		</div>
 		<div class="b"> 
 			<div class="worker" id="divworker">
-				<button class="button" id="buyworker" onclick="buyWorker()">Offer food -- Cost : 50 crops</button>
+				<button class="button" id="buyworker" onclick="buyWorker()">Offer food -- Cost : 20 crops</button>
 			</div>
 			<div class="workers" id="divworkers">
 				Population: <span id="workers">0</span>
@@ -71,6 +74,15 @@
 		<div class="b"> 
 			<div class="trade" id="divtrade">
 				Trade
+				<div class="warfaredesc">
+					Go to war with neighbouring states
+					<br>
+					Approx. Trade Value: <span id="merchantpower">10</span>
+					<br>
+					Better Deal Value Bonus: +<span id="merchantdeals">0</span>%
+					<br>
+					Trade Cooldown: <span id="merchantcooldown">10</span>s
+				</div>
 				<div class="tradetable" id="divtradetable">
 					<button class="button_cooldown" id="trade1" onclick="trade(1)">TRADE 1</button>
 					<button class="button_cooldown" id="trade2" onclick="trade(2)">TRADE 2</button>
@@ -83,13 +95,13 @@
 			<div class="warfare" id="divwarfare">
 				Warfare
 				<div class="warfaredesc">
-					Your army will go to war every 10 ticks
+					Go to war with neighbouring states
 					<br>
-					Soldier Power: <span id="soldierpower">5</span>
+					Reward Multiplier: <span id="soldierpower">1x</span>
 					<br>
-					Chance of reward: <span id="soldierreward">30%</span>
+					Reward Chance Boost: <span id="soldierreward">0</span>
 					<br>
-					Chance of losing troops: <span id="soldierrisk">10%</span>
+					Risk Chance Reduction: <span id="soldierrisk">0</span>
 				</div>
 				<div class="wartable" id="divwartable">
 					<button class="button_cooldown" id="war1" onclick="war(1)">WAR 1</button>
@@ -97,7 +109,6 @@
 					<button class="button_cooldown" id="war3" onclick="war(3)">WAR 3</button>
 				</div>
 			</div>
-			
 		</div>
 		<script type="text/javascript" src="main.js"></script>
 	</body>

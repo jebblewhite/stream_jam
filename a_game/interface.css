@@ -79,6 +79,10 @@ body{
   display: none
 }
 
+.trophies {
+  display: none
+}
+
 .b {
     display: inline-block;
     position: relative;

@@ -86,3 +86,10 @@ Gain Trophies from warfare (these generate spirit)
 
 Add trophies as the output of military -- generate spirit per tick
 finish war things -- rewards are janky
+
+Todo
+Make trophies gen spirit per tick (1)
+Add Warfare upgrades, Agriculture upgrades
+Add descriptions
+Make a social Media post (BOOOO) [DONE]
+Have lunch :))) << - DOing this one

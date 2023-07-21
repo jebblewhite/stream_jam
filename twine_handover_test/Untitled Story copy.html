@@ -15,7 +15,6 @@ This game is made using twine.
 
 <p>The value you entered on the first page was:</p>
     <p id="value-output"></p>
-    <span id="help">0</span>
     <button class="button" onclick="passBack()" id="passBack">Pass back</button>
 It goes [[here|path1]]
 
@@ -57,9 +56,8 @@ window.addEventListener('message', function (e) {
         
     // Display the value on the page
     var output = document.getElementById('value-output');
-    output.innerText = data;
-    continuityArray = data;
-    document.getElementById('value-output').innerHTML = continuityArray[0]
+    output.innerHTML = data;
+    continuityArray = data
     // If you encode the message in JSON before sending them,
     // then decode here
     // const decoded = JSON.parse(data);
@@ -67,10 +65,11 @@ window.addEventListener('message', function (e) {
 
 function passBack(){
     continuityArray.push(6)
-    var data = { section: '1' , passedArray: continuityArray}
+    var data = { section: '2' , passedArray: continuityArray}
     var event = new CustomEvent('myCustomEvent', { detail: data })
     window.parent.document.dispatchEvent(event)
 }
+
 </script>
 
 </body>

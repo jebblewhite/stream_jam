@@ -3,9 +3,20 @@
 		<link rel="stylesheet" type="text/css" href="interface.css" />
 	</head>
 	<body>
+		<iframe class="interactiveFiction" id="interactiveFiction1" src="i_f_test_1.html"></iframe>
+		<iframe class="interactiveFiction" id="interactiveFiction2" src="Untitled Story copy.html"></iframe>
+		<div id="procedural0">
         Time: <span id="timer">0</span>
-        <br>
-        <button class="button" onclick="handOver()">Handover to Twine</button>
+			<br>
+			<button class="button" onclick="handOver(1)">Handover to Twine 1</button>
+			<br>
+		</div>
+		<div class="future" id="procedural1">
+			Time: <span id="timer">0</span>
+			<br>
+			<button class="button" onclick="handOver(2)">Handover to Twine 2</button>
+			<br>
+		</div>
 		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>

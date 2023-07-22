@@ -93,3 +93,19 @@ Add Warfare upgrades, Agriculture upgrades
 Add descriptions
 Make a social Media post (BOOOO) [DONE]
 Have lunch :))) << - DOing this one
+
+Todo
+Make some breakfast
+Chill until 9am
+
+Fuse metals (onetime) - cost tin
+Increase farmer power - cost copper
+Add farmer power to click power  - cost crops
+Gain spirit when you gain crops - cost bronze
+
+Increase reward multiplier - cost trophies
+Increase reward chance - cost copper
+Reduce Risk - cost tin
+
+Add trophies, bronze to trade warTable
+Make upgrades show in descriptions

@@ -83,6 +83,10 @@ body{
   display: none
 }
 
+.bronze {
+  display: none
+}
+
 .b {
     display: inline-block;
     position: relative;

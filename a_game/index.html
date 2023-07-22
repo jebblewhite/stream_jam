@@ -4,10 +4,10 @@
 	</head>
 	<body>
 		<div class="spirit" id="divspirit">
-			Spirit: <span id="spirit">0</span>
+			Spirit: <span id="spirit">0</span>	
 		</div>
 		<div class="b"> 
-		<button class="button" onclick="harvestCrops(harvestPower)">Harvest Crops</button>
+		<button class="button" onclick="harvestCrops(harvestPower, 1)">Harvest Crops</button>
 		<div class = "crops" id="divcrops">
 			Crops: <span id="crops">0</span>
 		</div>
@@ -19,6 +19,9 @@
 		</div>
 		<div class="tin" id="divtin">
 			Tin: <span id="tin">0</span>
+		</div>
+		<div class="bronze" id="divbronze">
+			Bronze: <span id="bronze">0</span>
 		</div>
 		<div class="trophies" id="divtrophies">
 			Trophies: <span id="trophies">0</span>
@@ -42,6 +45,28 @@
 			<div class="upgrades" id="divreducetradecooldown">
 				<button class="button" id="reducetradecooldown" onclick="reduceTradeCooldown()"></button>
 			</div>
+			<div class="upgrades" id="divfusemetals">
+				<button class="button" id="fusemetals" onclick="fuseMetalsUp()"></button>
+			</div>
+			<div class="upgrades" id="divfarmerclick">
+				<button class="button" id="farmerclick" onclick="farmerClickUp()"></button>
+			</div>
+			<div class="upgrades" id="divfarmerspirit">
+				<button class="button" id="farmerspirit" onclick="farmerSpiritUp()"></button>
+			</div>
+			<div class="upgrades" id="divfarmerpower">
+				<button class="button" id="farmerpower" onclick="farmerPowerUp()"></button>
+			</div>
+			<div class="upgrades" id="divsoldiermulti">
+				<button class="button" id="soldiermulti" onclick="soldierMultiUp()"></button>
+			</div>
+			<div class="upgrades" id="divsoldierchance">
+				<button class="button" id="soldierchance" onclick="soldierChanceUp()"></button>
+			</div>
+			<div class="upgrades" id="divsoldierrisk">
+				<button class="button" id="soldierrisk" onclick="soldierRiskUp()"></button>
+			</div>
+			
 		</div>
 		</div>
 		<div class="b"> 
@@ -74,7 +99,7 @@
 			<div class="trade" id="divtrade">
 				Trade
 				<div class="warfaredesc">
-					Go to war with neighbouring states
+					Make trade with neighbouring states
 					<br>
 					Approx. Trade Value: <span id="merchantpower">10</span>
 					<br>
@@ -94,7 +119,7 @@
 			<div class="warfare" id="divwarfare">
 				Warfare
 				<div class="warfaredesc">
-					Go to war with neighbouring states
+					Make war with neighbouring states
 					<br>
 					Reward Multiplier: <span id="soldierpower">1x</span>
 					<br>

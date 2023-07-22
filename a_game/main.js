@@ -6,19 +6,32 @@ var copperChance = 0;
 var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
+var workerSpirit = 1
+
 var farmers = 0
 var merchants = 0
 var soldiers = 0
+
 var farmerPower = 2
 var merchantPower = 10
 var soldierPower = 100
-var soldierReward = 30
-var soldierRisk = 10
-var workerSpirit = 1
+
+var farmerPower = 2
+var farmerClick = 0
+var farmerSpirit = 0
+var fuseMetals = false
+
+var soldierReward = 1
+var soldierRisk = 0
+var soldierChance = 0
+
+
 var merchantSpirit = 2
-var progression = 0;
 var dealModifier = 1;
 var tradeCooldownTime = 10000;
+
+var progression = 0;
+
 var warCooldownTime = 10000;
 
 var resources = {
@@ -27,17 +40,25 @@ var resources = {
     "tin" : 0,
     "spirit" : 0,
     "grivna" : 0,
-    "trophies" : 0
+    "trophies" : 0,
+    "bronze" : 0
 }
 
 var upgrades = {
-    "oreChanceIncrease":{"cost":100, "resource":"crops", "div":"divoreincrease", "element_id":"oreincrease", "element_content": "Increase chance of finding ores when harvesting crops -- Cost : ^^^F crops"},
-    "betterTradeDeals":{"cost":100, "resource":"grivna", "div":"divbettertradedeals", "element_id":"bettertradedeals", "element_content": "Better Trade deals -- Cost : ^^^F grivna"},
-    "reduceTradeCooldown":{"cost":150, "resource":"grivna", "div":"divreducetradecooldown", "element_id":"reducetradecooldown", "element_content": "Reduce Trade Cooldown -- Cost : ^^^F grivna"}
+    "oreChanceIncrease":{"segment": 'divupgrades',"cost":30, "resource":"crops", "div":"divoreincrease", "element_id":"oreincrease", "element_content": "Increase chance of finding ores when harvesting crops -- Cost : ^^^F crops"},
+    "betterTradeDeals":{"segment": 'divupgrades',"cost":100, "resource":"grivna", "div":"divbettertradedeals", "element_id":"bettertradedeals", "element_content": "Better Trade deals -- Cost : ^^^F grivna"},
+    "reduceTradeCooldown":{"segment": 'divupgrades',"cost":150, "resource":"grivna", "div":"divreducetradecooldown", "element_id":"reducetradecooldown", "element_content": "Reduce Trade Cooldown -- Cost : ^^^F grivna"},
+    "fuseMetalsUp": {"segment": 'divupgrades',"cost":150, "resource":"tin", "div":"divfusemetals", "element_id":"fusemetals", "element_content": "Farmers fuse copper and tin (2:1) to create bronze -- Cost : ^^^F tin"},
+    "farmerClickUp": {"segment": 'divupgrades',"cost":1000, "resource":"crops", "div":"divfarmerclick", "element_id":"farmerclick", "element_content": "Multiply Click harvest power by total Farmer harvest power -- Cost : ^^^F crops"},
+    "farmerSpiritUp": {"segment": 'divupgrades',"cost":100, "resource":"bronze", "div":"divfarmerspirit", "element_id":"farmerspirit", "element_content": "Gain spirit when you gain crops -- Cost : ^^^F bronze"},
+    "farmerPowerUp": {"segment": 'divupgrades',"cost":100, "resource":"copper", "div":"divfarmerpower", "element_id":"farmerpower", "element_content": "Double Farmer harvest power -- Cost : ^^^F copper"},
+    "soldierMultiUp": {"segment": 'divwarfare',"cost":120, "resource":"trophies", "div":"divsoldiermulti", "element_id":"soldiermulti", "element_content": "Double War rewards -- Cost : ^^^F trophies"},
+    "soldierChanceUp": {"segment": 'divwarfare',"cost":80, "resource":"copper", "div":"divsoldierchance", "element_id":"soldierchance", "element_content": "Reward Chance Boost Up -- Cost : ^^^F copper"},
+    "soldierRiskUp": {"segment": 'divwarfare',"cost":80, "resource":"tin", "div":"divsoldierrisk", "element_id":"soldierrisk", "element_content": "Risk Chance Reduction -- Cost : ^^^F tin"}
 }
 
 
-const goodsList = [
+var goodsList = [
     "crops",
     "copper",
     "tin"
@@ -46,7 +67,9 @@ const goodsList = [
 const grivnaTable = {
     "crops" : 1,
     "copper" : 10,
-    "tin" : 10
+    "tin" : 20,
+    "trophies" : 50,
+    "bronze" : 100
 }
 
 var fullTrade = {
@@ -76,7 +99,10 @@ document.addEventListener("keypress", function(event) {
     }
   });
 
-function harvestCrops(x){
+function harvestCrops(x, click){
+        if (click == 1){
+            x = x + x*farmerClick*farmers*farmerPower
+        }
         resources.crops = resources.crops + x;
         let y = Math.random() * 100;
         if (copperChance > y) {
@@ -86,6 +112,8 @@ function harvestCrops(x){
         if (tinChance > z) {
             resources.tin = resources.tin + x
         }
+        resources.spirit = resources.spirit+(x*farmerSpirit)
+        document.getElementById('spirit').innerHTML = resources.spirit;
         document.getElementById('crops').innerHTML = resources.crops;
         document.getElementById('divcrops').style.display = "block";
         document.getElementById('copper').innerHTML = resources.copper;
@@ -155,6 +183,93 @@ function assignSoldier() {
     }
 }
 
+
+function fuseMetalsUp() {
+    upgradeName = "fuseMetalsUp" //Upgrade Name
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
+        fuseMetals = true //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] = "none"; // Change for onetime use
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+        document.getElementById('divbronze').style.display = block;
+    }
+}
+
+function farmerClickUp() {
+    upgradeName = "farmerClickUp" //Upgrade Name
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
+        farmerClick++ //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+    }
+}
+
+function farmerSpiritUp() {
+    upgradeName = "farmerSpiritUp" //Upgrade Name
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
+        farmerSpirit = 1//Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+    }
+}
+
+function farmerPowerUp() {
+    upgradeName = "farmerPowerUp" //Upgrade Name
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
+        farmerPower = farmerPower*2 //Upgrade Effect
+        document.getElementById('farmers').innerHTML = farmers + " -- gen. " + farmers*farmerPower + " Crops per tick"; 
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+    }
+}
+
+function soldierMultiUp() {
+    upgradeName = "soldierMultiUp" //Upgrade Name
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
+        rewardMultiplier = rewardMultiplier*2 //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+    }
+}
+
+function soldierChanceUp() {
+    upgradeName = "soldierChanceUp" //Upgrade Name
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
+        soldierChance = soldierChance + 10 //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+    }
+}
+
+function soldierRiskUp() {
+    upgradeName = "soldierRiskUp" //Upgrade Name
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
+        soldierRisk = soldierRisk + 10 //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+    }
+}
+
 function reduceTradeCooldown(){
     if (resources.grivna >= upgrades["reduceTradeCooldown"]["cost"]) {
         if (tradeCooldownTime>1000){
@@ -181,8 +296,8 @@ function betterTradeDeals(){
 
 function increaseOreChance(){
     if (resources.crops >= upgrades["oreChanceIncrease"]["cost"]) {
-        copperChance++;
-        tinChance++;
+        copperChance = copperChance + 4;
+        tinChance = tinChance + 2;
         resources.crops = resources.crops - upgrades["oreChanceIncrease"]["cost"];
         upgrades["oreChanceIncrease"]["cost"] = upgrades["oreChanceIncrease"]["cost"]*2;
         document.getElementById('crops').innerHTML = resources.crops;
@@ -206,13 +321,13 @@ function generateSingleTrade(x){
     let y = getRandomInt(3)
     tradePartner = tradeFactions[y]
     var appropList = []
-    for (let item in grivnaTable) {
-        if (grivnaTable[item] <= x) {
-            appropList.push(item)
-            document.getElementById('div'+item).style.display = "block";
+    for (let item in goodsList) {
+        if (grivnaTable[goodsList[item]] <= x) {
+            appropList.push(goodsList[item])
+            document.getElementById('div'+goodsList[item]).style.display = "block";
         }
     }
-    let z = getRandomInt(goodsList.length)
+    let z = getRandomInt(appropList.length)
     var tradeValue = Math.ceil(x*(Math.random()*3+1)/2) // if x=10 -- generate number between 5 and 20
     if (getRandomInt(2) == 1){
         giveGood = "grivna"
@@ -294,20 +409,25 @@ function war(x) {
     }
 }
 
+function wakeUp(){
+    output = []
+}
+
 function makeWar(x, riskChance, rewardChance, riskMultiplier, rewardMultiplier, bonusResource){
     var warOutcome = "None"
-    let z = Math.random() * 100;
+    let z = Math.random() * (100-soldierChance);
     if (rewardChance >= z) {
         randRes = Math.round((x/grivnaTable[bonusResource])*(1.2 - Math.random()*0.4)*rewardMultiplier*5)
         randTrophies = Math.round((x/10)*(1.2 - Math.random()*0.4)*rewardMultiplier)
         resources[bonusResource] = resources[bonusResource] + randRes
         resources.trophies = resources.trophies + randTrophies;
+        goodsList.indexOf("trophies") === -1 ? goodsList.push("trophies") : oops = 1;
         console.log("Your army returns with spoils of war!")
         console.log("(Gained " + randTrophies + " trophies, and looted " + randRes + " " + bonusResource + ".)")
         warOutcome = "Success"
     }
 
-    let y = Math.random() * 100;
+    let y = Math.random() * (100+soldierRisk);
     if (riskChance >= y) {
         if (soldiers >= riskMultiplier){
             soldiers = soldiers - riskMultiplier
@@ -331,6 +451,7 @@ function makeWar(x, riskChance, rewardChance, riskMultiplier, rewardMultiplier, 
     }
     if (warOutcome == "None"){
         randSpirit = Math.round((x/10)*(1.2 - Math.random()*0.4)*10)
+        resources.spirit = resources.spirit + randSpirit;
         console.log("Your soldiers fight to a bitter stalemate.")
         console.log("You gain " + randSpirit + " spirit.")
     }
@@ -385,7 +506,19 @@ function tradeCooldown(){
     },tradeCooldownTime);
 }
 
-
+function makeBronze() {
+    if (resources.copper >= 2 && resources.tin >= 1){
+        resources.copper = resources.copper - 2
+        resources.tin = resources.tin - 1
+        resources.bronze = resources.bronze + 1;
+        document.getElementById('divbronze').style.display = block;
+        document.getElementById('tin').innerHTML = resources.tin;
+        document.getElementById('copper').innerHTML = resources.copper;
+        document.getElementById('bronze').innerHTML = resources.bronze;
+        goodsList.indexOf("bronze") === -1 ? goodsList.push("bronze") : oops = 1;
+    }
+    
+}
 
 
 rewireLoggingToElement(
@@ -438,8 +571,11 @@ function trophySpirit(){
 function checkUpgrades(){
     for (let item in upgrades){
         if (resources[upgrades[item]["resource"]] >= upgrades[item]["cost"]) {
-            document.getElementById(upgrades[item]["div"]).style.display = "block";
-            document.getElementById(upgrades[item]["element_id"]).innerHTML = upgrades[item]["element_content"].replace("^^^F", upgrades[item]["cost"])
+            if (document.getElementById(upgrades[item]["segment"]).style.display == "block") {
+                document.getElementById(upgrades[item]["div"]).style.display = "block";
+                document.getElementById(upgrades[item]["element_id"]).innerHTML = upgrades[item]["element_content"].replace("^^^F", upgrades[item]["cost"])
+            }
+            
         }
     }     
 }
@@ -465,7 +601,7 @@ window.setInterval(function(){
         console.log()
         progression++
     }
-    if (progression == 2 && resources.crops > 49) {
+    if (progression == 2 && resources.crops > 19) {
         console.log("A lone wanderer comes to you, looking for food.")
         console.log()
         progression++
@@ -492,7 +628,7 @@ window.setInterval(function(){
     if (resources.crops >= workerCost) {
         document.getElementById('divworker').style.display = "block";
     }
-    if (resources.crops >= 100) {
+    if (resources.crops >= 30) {
         document.getElementById('divupgrades').style.display = "block";
     }
     checkUpgrades()
@@ -500,7 +636,10 @@ window.setInterval(function(){
         eatFood(workers)
     }
     if (farmers > 0) {
-        harvestCrops(farmers*farmerPower)
+        harvestCrops(farmers*farmerPower, 0)
+        if (fuseMetals) {
+            makeBronze()
+        }
     }
     trophySpirit()
 	

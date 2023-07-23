@@ -8,11 +8,11 @@ var happiness = 0
 
 
 function setProcParams(x) {
-    if (x==1) {
+    if (x==2) {
         passedArray = [farmers, merchants, soldiers]
         console.log(1, passedArray)
     }
-    if (x==2) {
+    if (x==4) {
         passedArray = [farmers, merchants, soldiers, happiness]
         console.log(2, passedArray)
 

@@ -3,136 +3,147 @@
 		<link rel="stylesheet" type="text/css" href="interface.css" />
 	</head>
 	<body>
-		<div class="spirit" id="divspirit">
-			Spirit: <span id="spirit">0</span>	
-		</div>
-		<div class="b"> 
-		<button class="button" onclick="harvestCrops(harvestPower, 1)">Harvest Crops</button>
-		<div class = "crops" id="divcrops">
-			Crops: <span id="crops">0</span>
-		</div>
-		<div class="grivna" id="divgrivna">
-			Grivna: <span id="grivna">0</span>
-		</div>
-		<div class="copper" id="divcopper">
-			Copper: <span id="copper">0</span>
-		</div>
-		<div class="tin" id="divtin">
-			Tin: <span id="tin">0</span>
-		</div>
-		<div class="bronze" id="divbronze">
-			Bronze: <span id="bronze">0</span>
-		</div>
-		<div class="trophies" id="divtrophies">
-			Trophies: <span id="trophies">0</span>
-		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<div id="log-container">
-			<pre id="log"></pre>
-		</div>
-		<br>
-		<div class="upgrades" id="divupgrades">
-			Upgrades
-			<div class="upgrades" id="divoreincrease">
-				<button class="button" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
+		<iframe class="interactiveFiction" id="interactiveFiction2" src="if2.html"></iframe>
+		<iframe class="interactiveFiction" id="interactiveFiction4" src="if4.html"></iframe>
+		<div id="procedural1">
+			<div class="spirit" id="divspirit">
+				Spirit: <span id="spirit">0</span>
+				<button class="button future" id="wakeup" onclick="handOver(2)">Wake up</button>
 			</div>
-			<div class="upgrades" id="divbettertradedeals">
-				<button class="button" id="bettertradedeals" onclick="betterTradeDeals()"></button>
+			<div class="b"> 
+			<button class="button" onclick="harvestCrops(harvestPower, 1)">Harvest Crops</button>
+			<div class = "crops" id="divcrops">
+				Crops: <span id="crops">0</span>
 			</div>
-			<div class="upgrades" id="divreducetradecooldown">
-				<button class="button" id="reducetradecooldown" onclick="reduceTradeCooldown()"></button>
+			<div class="grivna" id="divgrivna">
+				Grivna: <span id="grivna">0</span>
 			</div>
-			<div class="upgrades" id="divfusemetals">
-				<button class="button" id="fusemetals" onclick="fuseMetalsUp()"></button>
+			<div class="copper" id="divcopper">
+				Copper: <span id="copper">0</span>
 			</div>
-			<div class="upgrades" id="divfarmerclick">
-				<button class="button" id="farmerclick" onclick="farmerClickUp()"></button>
+			<div class="tin" id="divtin">
+				Tin: <span id="tin">0</span>
 			</div>
-			<div class="upgrades" id="divfarmerspirit">
-				<button class="button" id="farmerspirit" onclick="farmerSpiritUp()"></button>
+			<div class="bronze" id="divbronze">
+				Bronze: <span id="bronze">0</span>
 			</div>
-			<div class="upgrades" id="divfarmerpower">
-				<button class="button" id="farmerpower" onclick="farmerPowerUp()"></button>
+			<div class="trophies" id="divtrophies">
+				Trophies: <span id="trophies">0</span>
 			</div>
-			<div class="upgrades" id="divsoldiermulti">
-				<button class="button" id="soldiermulti" onclick="soldierMultiUp()"></button>
+			<br>
+			<br>
+			<br>
+			<br>
+			<div id="log-container">
+				<pre id="log"></pre>
 			</div>
-			<div class="upgrades" id="divsoldierchance">
-				<button class="button" id="soldierchance" onclick="soldierChanceUp()"></button>
-			</div>
-			<div class="upgrades" id="divsoldierrisk">
-				<button class="button" id="soldierrisk" onclick="soldierRiskUp()"></button>
-			</div>
-			
-		</div>
-		</div>
-		<div class="b"> 
-			<div class="worker" id="divworker">
-				<button class="button" id="buyworker" onclick="buyWorker()">Offer food -- Cost : 20 crops</button>
-			</div>
-			<div class="workers" id="divworkers">
-				Population: <span id="workers">0</span>
-			</div>
-			<div class="unassignedworkers" id="divunassignedworkers">
-				Unassigned Workers: <span id="unassignedworkers">0</span>
-				<br>
-				Farmers: <span id="farmers">0</span>
-				<br>
-				Merchants: <span id="merchants">0</span>
-				<br>
-				Soldiers: <span id="soldiers">0</span>
-			</div>
-			<div class="assignfarmer" id="divassignfarmer">
-				<button class="button" id="assignfarmer" onclick="assignFarmer()">Assign Farmer</button>
-			</div>
-			<div class="assignmerchant" id="divassignmerchant">
-				<button class="button" id="assignmerchant" onclick="assignMerchant()">Assign Merchant</button>
-			</div>
-			<div class="assignsoldier" id="divassignsoldier">
-				<button class="button" id="assignsoldier" onclick="assignSoldier()">Assign Soldier</button>
-			</div>
-		</div>
-		<div class="b"> 
-			<div class="trade" id="divtrade">
-				Trade
-				<div class="warfaredesc">
-					Make trade with neighbouring states
-					<br>
-					Approx. Trade Value: <span id="merchantpower">10</span>
-					<br>
-					Better Deal Value Bonus: +<span id="merchantdeals">0</span>%
-					<br>
-					Trade Cooldown: <span id="merchantcooldown">10</span>s
+			<br>
+			<div class="upgrades" id="divupgrades">
+				Upgrades
+				<div class="upgrades" id="divoreincrease">
+					<button class="button" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
 				</div>
-				<div class="tradetable" id="divtradetable">
-					<button class="button_cooldown" id="trade1" onclick="trade(1)">TRADE 1</button>
-					<button class="button_cooldown" id="trade2" onclick="trade(2)">TRADE 2</button>
-					<button class="button_cooldown" id="trade3" onclick="trade(3)">TRADE 3</button>
-					<button class="button_cooldown" id="refreshtrade" onclick="refreshTrade()">Refresh Trades</button>
+				<div class="upgrades" id="divbettertradedeals">
+					<button class="button" id="bettertradedeals" onclick="betterTradeDeals()"></button>
+				</div>
+				<div class="upgrades" id="divreducetradecooldown">
+					<button class="button" id="reducetradecooldown" onclick="reduceTradeCooldown()"></button>
+				</div>
+				<div class="upgrades" id="divfusemetals">
+					<button class="button" id="fusemetals" onclick="fuseMetalsUp()"></button>
+				</div>
+				<div class="upgrades" id="divfarmerclick">
+					<button class="button" id="farmerclick" onclick="farmerClickUp()"></button>
+				</div>
+				<div class="upgrades" id="divfarmerspirit">
+					<button class="button" id="farmerspirit" onclick="farmerSpiritUp()"></button>
+				</div>
+				<div class="upgrades" id="divfarmerpower">
+					<button class="button" id="farmerpower" onclick="farmerPowerUp()"></button>
+				</div>
+				<div class="upgrades" id="divsoldiermulti">
+					<button class="button" id="soldiermulti" onclick="soldierMultiUp()"></button>
+				</div>
+				<div class="upgrades" id="divsoldierchance">
+					<button class="button" id="soldierchance" onclick="soldierChanceUp()"></button>
+				</div>
+				<div class="upgrades" id="divsoldierrisk">
+					<button class="button" id="soldierrisk" onclick="soldierRiskUp()"></button>
+				</div>
+				
+			</div>
+			</div>
+			<div class="b"> 
+				<div class="worker" id="divworker">
+					<button class="button" id="buyworker" onclick="buyWorker()">Offer food -- Cost : 20 crops</button>
+				</div>
+				<div class="workers" id="divworkers">
+					Population: <span id="workers">0</span>
+				</div>
+				<div class="unassignedworkers" id="divunassignedworkers">
+					Unassigned Workers: <span id="unassignedworkers">0</span>
+					<br>
+					Farmers: <span id="farmers">0</span>
+					<br>
+					Merchants: <span id="merchants">0</span>
+					<br>
+					Soldiers: <span id="soldiers">0</span>
+				</div>
+				<div class="assignfarmer" id="divassignfarmer">
+					<button class="button" id="assignfarmer" onclick="assignFarmer()">Assign Farmer</button>
+				</div>
+				<div class="assignmerchant" id="divassignmerchant">
+					<button class="button" id="assignmerchant" onclick="assignMerchant()">Assign Merchant</button>
+				</div>
+				<div class="assignsoldier" id="divassignsoldier">
+					<button class="button" id="assignsoldier" onclick="assignSoldier()">Assign Soldier</button>
 				</div>
 			</div>
-		</div>
-		<div class="b"> 
-			<div class="warfare" id="divwarfare">
-				Warfare
-				<div class="warfaredesc">
-					Make war with neighbouring states
-					<br>
-					Reward Multiplier: <span id="soldierpower">1x</span>
-					<br>
-					Reward Chance Boost: <span id="soldierreward">0</span>
-					<br>
-					Risk Chance Reduction: <span id="soldierrisk">0</span>
-				</div>
-				<div class="wartable" id="divwartable">
-					<button class="button_cooldown" id="war1" onclick="war(1)">WAR 1</button>
-					<button class="button_cooldown" id="war2" onclick="war(2)">WAR 2</button>
-					<button class="button_cooldown" id="war3" onclick="war(3)">WAR 3</button>
+			<div class="b"> 
+				<div class="trade" id="divtrade">
+					Trade
+					<div class="warfaredesc">
+						Make trade with neighbouring states
+						<br>
+						Approx. Trade Value: <span id="merchantpower">10</span>
+						<br>
+						Better Deal Value Bonus: +<span id="merchantdeals">0</span>%
+						<br>
+						Trade Cooldown: <span id="merchantcooldown">10</span>s
+					</div>
+					<div class="tradetable" id="divtradetable">
+						<button class="button_cooldown" id="trade1" onclick="trade(1)">TRADE 1</button>
+						<button class="button_cooldown" id="trade2" onclick="trade(2)">TRADE 2</button>
+						<button class="button_cooldown" id="trade3" onclick="trade(3)">TRADE 3</button>
+						<button class="button_cooldown" id="refreshtrade" onclick="refreshTrade()">Refresh Trades</button>
+					</div>
 				</div>
 			</div>
+			<div class="b"> 
+				<div class="warfare" id="divwarfare">
+					Warfare
+					<div class="warfaredesc">
+						Make war with neighbouring states
+						<br>
+						Reward Multiplier: <span id="soldierpower">1x</span>
+						<br>
+						Reward Chance Boost: <span id="soldierreward">0</span>
+						<br>
+						Risk Chance Reduction: <span id="soldierrisk">0</span>
+					</div>
+					<div class="wartable" id="divwartable">
+						<button class="button_cooldown" id="war1" onclick="war(1)">WAR 1</button>
+						<button class="button_cooldown" id="war2" onclick="war(2)">WAR 2</button>
+						<button class="button_cooldown" id="war3" onclick="war(3)">WAR 3</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="future" id="procedural3">
+			Time: <span id="timer">0</span>
+			<br>
+			<button class="button" onclick="handOver(4)">Handover to Twine Section 4</button>
+			<br>
 		</div>
 		<script type="text/javascript" src="main.js"></script>
 	</body>

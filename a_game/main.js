@@ -1,4 +1,13 @@
 var timer = 0;
+
+var i_f_params = {}
+var proc_params = {}
+
+var job = 0
+var peace = 0
+var dignity = 0
+var social = 0
+
 var harvestPower = 1;
 var workers = 0;
 var workerCost = 20;
@@ -7,6 +16,7 @@ var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
 var workerSpirit = 1
+var spiritThreshold = 5000
 
 var farmers = 0
 var merchants = 0
@@ -124,6 +134,9 @@ function harvestCrops(x, click){
         if (resources.tin > 0) {
             document.getElementById('divtin').style.display = "block";
         }
+        if (resources.bronze > 0) {
+            document.getElementById('divbronze').style.display = "block";
+        }
     };
 
 
@@ -193,7 +206,7 @@ function fuseMetalsUp() {
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
-        document.getElementById('divbronze').style.display = block;
+        document.getElementById('divbronze').style.display = 'block';
     }
 }
 
@@ -511,7 +524,7 @@ function makeBronze() {
         resources.copper = resources.copper - 2
         resources.tin = resources.tin - 1
         resources.bronze = resources.bronze + 1;
-        document.getElementById('divbronze').style.display = block;
+        document.getElementById('divbronze').style.display = 'block';
         document.getElementById('tin').innerHTML = resources.tin;
         document.getElementById('copper').innerHTML = resources.copper;
         document.getElementById('bronze').innerHTML = resources.bronze;
@@ -580,6 +593,57 @@ function checkUpgrades(){
     }     
 }
 
+
+function setProcParams(x) {
+    if (x==2) {
+        passedArray = [farmers, merchants, soldiers]
+        console.log(2, passedArray)
+    }
+    if (x==4) {
+        passedArray = [farmers, merchants, soldiers, job, peace, dignity, social]
+        console.log(4, passedArray)
+
+    }
+    console.log(passedArray)
+    return passedArray
+}
+
+function handOver(x) {
+    document.getElementById("procedural"+(x-1)).style.display = "none";
+    document.getElementById("interactiveFiction"+x).style.display = "block";
+    var myArray = setProcParams(x)
+    console.log(myArray)
+    document.getElementById("interactiveFiction"+x).contentWindow.postMessage(myArray, '*');
+}
+
+window.document.addEventListener('myCustomEvent', handleEvent, false)
+
+function handleEvent(e) {
+  console.log(e.detail) // outputs: {foo: 'bar'}
+  hide_i_f(e.detail.section);
+  i_f_params[e.detail.section] = e.detail.passedArray
+  console.log(parseInt(e.detail.section)+1)
+  startProcedural(parseInt(e.detail.section)+1)
+}
+
+function startProcedural(x) {
+    if (x==3) {
+        farmers = i_f_params[x-1][0]
+        merchants = i_f_params[x-1][1]
+        soldiers = i_f_params[x-1][2]
+        job = i_f_params[x-1][3]
+        dignity = i_f_params[x-1][4]
+        peace = i_f_params[x-1][5]
+        social = i_f_params[x-1][6]
+        
+    }
+    document.getElementById("procedural"+x).style.display = "block";
+}
+
+function hide_i_f(x) {
+    document.getElementById("interactiveFiction"+x).style.display = "none";
+}
+
 window.setInterval(function(){
 	timer++;
     if (timer == 1) {
@@ -642,5 +706,8 @@ window.setInterval(function(){
         }
     }
     trophySpirit()
+    if (resources.spirit >= spiritThreshold) {
+        document.getElementById('wakeup').style.display = "block";
+    }
 	
 }, 1000);

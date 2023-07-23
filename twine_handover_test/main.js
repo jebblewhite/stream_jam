@@ -8,11 +8,11 @@ var happiness = 0
 
 
 function setProcParams(x) {
-    if (x==2) {
+    if (x==1) {
         passedArray = [farmers, merchants, soldiers]
         console.log(1, passedArray)
     }
-    if (x==4) {
+    if (x==2) {
         passedArray = [farmers, merchants, soldiers, happiness]
         console.log(2, passedArray)
 
@@ -20,6 +20,7 @@ function setProcParams(x) {
     console.log(passedArray)
     return passedArray
 }
+//force git push update
 
 function handOver(x) {
     document.getElementById("procedural"+(x-1)).style.display = "none";

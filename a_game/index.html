@@ -11,67 +11,67 @@
 				<button class="button future" id="wakeup" onclick="handOver(2)">Wake up</button>
 			</div>
 			<div class="b"> 
-			<button class="button" onclick="harvestCrops(harvestPower, 1)">Harvest Crops</button>
-			<div class = "crops" id="divcrops">
-				Crops: <span id="crops">0</span>
-			</div>
-			<div class="grivna" id="divgrivna">
-				Grivna: <span id="grivna">0</span>
-			</div>
-			<div class="copper" id="divcopper">
-				Copper: <span id="copper">0</span>
-			</div>
-			<div class="tin" id="divtin">
-				Tin: <span id="tin">0</span>
-			</div>
-			<div class="bronze" id="divbronze">
-				Bronze: <span id="bronze">0</span>
-			</div>
-			<div class="trophies" id="divtrophies">
-				Trophies: <span id="trophies">0</span>
-			</div>
-			<br>
-			<br>
-			<br>
-			<br>
-			<div id="log-container">
-				<pre id="log"></pre>
-			</div>
-			<br>
-			<div class="upgrades" id="divupgrades">
-				Upgrades
-				<div class="upgrades" id="divoreincrease">
-					<button class="button" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
+				<button class="button" onclick="harvestCrops(harvestPower, 1)">Harvest Crops</button>
+				<div class = "crops" id="divcrops">
+					Crops: <span id="crops">0</span>
 				</div>
-				<div class="upgrades" id="divbettertradedeals">
-					<button class="button" id="bettertradedeals" onclick="betterTradeDeals()"></button>
+				<div class="grivna" id="divgrivna">
+					Grivna: <span id="grivna">0</span>
 				</div>
-				<div class="upgrades" id="divreducetradecooldown">
-					<button class="button" id="reducetradecooldown" onclick="reduceTradeCooldown()"></button>
+				<div class="copper" id="divcopper">
+					Copper: <span id="copper">0</span>
 				</div>
-				<div class="upgrades" id="divfusemetals">
-					<button class="button" id="fusemetals" onclick="fuseMetalsUp()"></button>
+				<div class="tin" id="divtin">
+					Tin: <span id="tin">0</span>
 				</div>
-				<div class="upgrades" id="divfarmerclick">
-					<button class="button" id="farmerclick" onclick="farmerClickUp()"></button>
+				<div class="bronze" id="divbronze">
+					Bronze: <span id="bronze">0</span>
 				</div>
-				<div class="upgrades" id="divfarmerspirit">
-					<button class="button" id="farmerspirit" onclick="farmerSpiritUp()"></button>
+				<div class="trophies" id="divtrophies">
+					Trophies: <span id="trophies">0</span>
 				</div>
-				<div class="upgrades" id="divfarmerpower">
-					<button class="button" id="farmerpower" onclick="farmerPowerUp()"></button>
+				<br>
+				<br>
+				<br>
+				<br>
+				<div id="log-container">
+					<pre id="log"></pre>
 				</div>
-				<div class="upgrades" id="divsoldiermulti">
-					<button class="button" id="soldiermulti" onclick="soldierMultiUp()"></button>
+				<br>
+				<div class="upgrades" id="divupgrades">
+					Upgrades
+					<div class="upgrades" id="divoreincrease">
+						<button class="button" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
+					</div>
+					<div class="upgrades" id="divbettertradedeals">
+						<button class="button" id="bettertradedeals" onclick="betterTradeDeals()"></button>
+					</div>
+					<div class="upgrades" id="divreducetradecooldown">
+						<button class="button" id="reducetradecooldown" onclick="reduceTradeCooldown()"></button>
+					</div>
+					<div class="upgrades" id="divfusemetals">
+						<button class="button" id="fusemetals" onclick="fuseMetalsUp()"></button>
+					</div>
+					<div class="upgrades" id="divfarmerclick">
+						<button class="button" id="farmerclick" onclick="farmerClickUp()"></button>
+					</div>
+					<div class="upgrades" id="divfarmerspirit">
+						<button class="button" id="farmerspirit" onclick="farmerSpiritUp()"></button>
+					</div>
+					<div class="upgrades" id="divfarmerpower">
+						<button class="button" id="farmerpower" onclick="farmerPowerUp()"></button>
+					</div>
+					<div class="upgrades" id="divsoldiermulti">
+						<button class="button" id="soldiermulti" onclick="soldierMultiUp()"></button>
+					</div>
+					<div class="upgrades" id="divsoldierchance">
+						<button class="button" id="soldierchance" onclick="soldierChanceUp()"></button>
+					</div>
+					<div class="upgrades" id="divsoldierrisk">
+						<button class="button" id="soldierrisk" onclick="soldierRiskUp()"></button>
+					</div>
+					
 				</div>
-				<div class="upgrades" id="divsoldierchance">
-					<button class="button" id="soldierchance" onclick="soldierChanceUp()"></button>
-				</div>
-				<div class="upgrades" id="divsoldierrisk">
-					<button class="button" id="soldierrisk" onclick="soldierRiskUp()"></button>
-				</div>
-				
-			</div>
 			</div>
 			<div class="b"> 
 				<div class="worker" id="divworker">
@@ -140,10 +140,40 @@
 			</div>
 		</div>
 		<div class="future" id="procedural3">
-			Time: <span id="timer">0</span>
-			<br>
-			<button class="button" onclick="handOver(4)">Handover to Twine Section 4</button>
-			<br>
+			<div class="b">
+				Spirit : <span>1000</span>
+				<br>
+				Time until the weekend : <span id="timetilweekend">7200</span>
+				<br>
+				<button class="button future" id="handover4" onclick="handOver(4)">Handover to Twine Section 4</button>
+				<br>
+				<div id="log-container">
+					<pre id="log"></pre>
+				</div>
+			</div>
+			<div class="b">
+				Peace of Mind: <span id="peace">0</span>
+				<br>
+				Dignity : <span id="dignity">0</span>
+				<br>
+				Job Security : <span id="job">0</span>
+				<br>
+				Social Contact : <span id="social">0</span>
+				<br>
+				<button class="button_cooldown" id="peacebutton" onclick="peaceClick()">Click for Peace of Mind</button>
+				<br>
+				<br>
+				<button class="button_cooldown" id="dignitybutton" onclick="dignityClick()">Click for Dignity</button>
+				<br>
+				<br>
+				<button class="button_cooldown" id="jobbutton" onclick="jobClick()">Click for Job Security</button>
+				<br>
+				<br>
+				<button class="button_cooldown" id="socialbutton" onclick="socialClick()">Click for Social Contact</button>
+			</div>
+			<div class="b">
+				
+			</div>
 		</div>
 		<script type="text/javascript" src="main.js"></script>
 	</body>

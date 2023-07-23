@@ -1,4 +1,5 @@
 var timer = 0;
+var procSection = 1
 
 var i_f_params = {}
 var proc_params = {}
@@ -16,7 +17,7 @@ var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
 var workerSpirit = 1
-var spiritThreshold = 5000
+var spiritThreshold = 500
 
 var farmers = 0
 var merchants = 0
@@ -101,6 +102,16 @@ const warTable = {
     'The Kingdom of Polthia': {"riskChance": 25, "rewardChance": 25, "riskMultiplier": 3, "rewardMultiplier": 5, "bonusResource": "tin"}, 
     'The lands of Sul-os': {"riskChance": 50, "rewardChance": 5, "riskMultiplier": 8, "rewardMultiplier": 69, "bonusResource": "copper"}
 }
+
+
+
+var timeTilWeekend = 7200
+
+
+
+
+
+
 
 
 document.addEventListener("keypress", function(event) {
@@ -645,69 +656,75 @@ function hide_i_f(x) {
 }
 
 window.setInterval(function(){
-	timer++;
-    if (timer == 1) {
-        console.log("This is the beginning of The Free Republic of Tielze.")
-    }
-    if (timer == 2) {
-        console.log("Around you are sprawling fields, ripe to harvest.")
-        console.log()
-    }
-    if (progression == 0 && resources.crops > 0 && timer > 2) {
-        console.log("You swing your scythe, and gain crops")
-        console.log("Is this your purpose?")
-        console.log()
-        progression++
-    }
-    if (progression == 1 && resources.crops > 9) {
-        console.log("Maybe if you were to harvest more crops you could ")
-        console.log("draw the attention of others?")
-        console.log()
-        progression++
-    }
-    if (progression == 2 && resources.crops > 19) {
-        console.log("A lone wanderer comes to you, looking for food.")
-        console.log()
-        progression++
-    }
-    if (progression == 6 && workers > 0) {
-        console.log("Which tools will you provide them?")
-        console.log()
-        progression++
-    }
-    if (progression == 5 && workers > 0) {
-        console.log("This. This is your purpose.")
-        progression++
-    }
-    if (progression == 4 && workers > 0) {
-        console.log("You feel their Spirit surging forth.")
-        progression++
-    }
-    if (progression == 3 && workers > 0) {
-        console.log("The wanderer agrees to work with you.")
-        progression++
-    }
-    
-    
-    if (resources.crops >= workerCost) {
-        document.getElementById('divworker').style.display = "block";
-    }
-    if (resources.crops >= 30) {
-        document.getElementById('divupgrades').style.display = "block";
-    }
-    checkUpgrades()
-    if (workers > 0){
-        eatFood(workers)
-    }
-    if (farmers > 0) {
-        harvestCrops(farmers*farmerPower, 0)
-        if (fuseMetals) {
-            makeBronze()
+    if (procSection == 1){
+        timer++;
+        if (timer == 1) {
+            console.log("This is the beginning of The Free Republic of Tielze.")
+        }
+        if (timer == 2) {
+            console.log("Around you are sprawling fields, ripe to harvest.")
+            console.log()
+        }
+        if (progression == 0 && resources.crops > 0 && timer > 2) {
+            console.log("You swing your scythe, and gain crops")
+            console.log("Is this your purpose?")
+            console.log()
+            progression++
+        }
+        if (progression == 1 && resources.crops > 9) {
+            console.log("Maybe if you were to harvest more crops you could ")
+            console.log("draw the attention of others?")
+            console.log()
+            progression++
+        }
+        if (progression == 2 && resources.crops > 19) {
+            console.log("A lone wanderer comes to you, looking for food.")
+            console.log()
+            progression++
+        }
+        if (progression == 6 && workers > 0) {
+            console.log("Which tools will you provide them?")
+            console.log()
+            progression++
+        }
+        if (progression == 5 && workers > 0) {
+            console.log("This. This is your purpose.")
+            progression++
+        }
+        if (progression == 4 && workers > 0) {
+            console.log("You feel their Spirit surging forth.")
+            progression++
+        }
+        if (progression == 3 && workers > 0) {
+            console.log("The wanderer agrees to work with you.")
+            progression++
+        }
+        
+        
+        if (resources.crops >= workerCost) {
+            document.getElementById('divworker').style.display = "block";
+        }
+        if (resources.crops >= 30) {
+            document.getElementById('divupgrades').style.display = "block";
+        }
+        checkUpgrades()
+        if (workers > 0){
+            eatFood(workers)
+        }
+        if (farmers > 0) {
+            harvestCrops(farmers*farmerPower, 0)
+            if (fuseMetals) {
+                makeBronze()
+            }
+        }
+        trophySpirit()
+        if (resources.spirit >= spiritThreshold) {
+            document.getElementById('wakeup').style.display = "block";
         }
     }
-    trophySpirit()
-    if (resources.spirit >= spiritThreshold) {
-        document.getElementById('wakeup').style.display = "block";
+    if (procSection==3) {
+        timeTilWeekend--
+        
     }
 	
 }, 1000);

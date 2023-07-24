@@ -8,6 +8,18 @@ var job = 0
 var peace = 0
 var dignity = 0
 var social = 0
+var mentalSpirit = 4763
+
+var jobDone = 0
+var peacePerClick = 1
+var dignityPerClick = 1
+var socialPerClick = 1
+
+var noWorkDone = 0
+var jobWarned = false
+var workPerTen = [1,1,1,1,1,1,1,0]
+var timeTilDecay = 13
+var socialWarned = false
 
 var harvestPower = 1;
 var workers = 0;
@@ -17,7 +29,7 @@ var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
 var workerSpirit = 1
-var spiritThreshold = 500
+var spiritThreshold = 0
 
 var farmers = 0
 var merchants = 0
@@ -105,7 +117,7 @@ const warTable = {
 
 
 
-var timeTilWeekend = 7200
+var timeTilWeekend = 600
 
 
 
@@ -633,7 +645,6 @@ function handleEvent(e) {
   console.log(e.detail) // outputs: {foo: 'bar'}
   hide_i_f(e.detail.section);
   i_f_params[e.detail.section] = e.detail.passedArray
-  console.log(parseInt(e.detail.section)+1)
   startProcedural(parseInt(e.detail.section)+1)
 }
 
@@ -646,13 +657,208 @@ function startProcedural(x) {
         dignity = i_f_params[x-1][4]
         peace = i_f_params[x-1][5]
         social = i_f_params[x-1][6]
+        document.getElementById("job").innerHTML = job
+        document.getElementById("dignity").innerHTML = dignity
+        document.getElementById("peace").innerHTML = peace
+        document.getElementById("social").innerHTML = social
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
         
     }
+    procSection = x
     document.getElementById("procedural"+x).style.display = "block";
+    
+    
 }
 
 function hide_i_f(x) {
     document.getElementById("interactiveFiction"+x).style.display = "none";
+}
+
+function jobClick() {
+    jobDone = 1
+    noWorkDone = 0
+    jobWarned = false
+    document.getElementById('job').innerHTML =  job
+}
+
+function dignityClick() {
+    dignity = dignity + dignityPerClick   
+    document.getElementById('dignity').innerHTML =  dignity
+    console.log("You maintain your dignity. (+" + dignityPerClick +" dignity)")
+    dignityPerClick = 0
+}
+
+function peaceClick() {
+    peace = peace + peacePerClick
+    console.log("You breathe deeply and find your focus. (+" + peacePerClick +" inner peace)")
+    peacePerClick = 0
+    document.getElementById('peace').innerHTML =  peace
+}
+
+function socialClick() {
+    social = social + socialPerClick
+    job--
+    console.log("You catch up with friends and family. (+" + socialPerClick +" social contact)")
+    socialPerClick = 0
+    timeTilDecay = 13
+    socialWarned = false
+    document.getElementById('social').innerHTML =  social
+    document.getElementById('job').innerHTML =  job
+}
+
+function increasePerClick() {
+    dignityPerClick = 2
+
+    if (peacePerClick <= 3) {
+        peacePerClick = peacePerClick + 1
+    } else if (peacePerClick <= 8) {
+        peacePerClick = peacePerClick + 2
+    } else if (peacePerClick <= 13) {
+        peacePerClick = peacePerClick + 3
+    } else if (peacePerClick <= 16) {
+        peacePerClick = peacePerClick + 4
+    } else {
+        peacePerClick = 20
+    }
+
+    if (socialPerClick <= 3) {
+        socialPerClick = socialPerClick + 1
+    } else if (socialPerClick <= 8) {
+        socialPerClick = socialPerClick + 2
+    } else if (socialPerClick <= 13) {
+        socialPerClick = socialPerClick + 3
+    } else if (socialPerClick <= 16) {
+        socialPerClick = socialPerClick + 4
+    } else {
+        socialPerClick = 20
+    }
+    
+    // 0 -> 1 -> 2 -> 3 -> 4 -> 6 -> 8 -> 10 -> 13 -> 16 -> 20 -> 20 -> ... -> 20
+    
+}
+
+function changeSpirit() {
+    if (job>=900){
+        mentalSpirit = mentalSpirit + 4
+    } else if (job>=700){
+        mentalSpirit = mentalSpirit + 3
+    } else if (job>=500){
+        mentalSpirit = mentalSpirit + 2
+    } else if (job>=300){
+        mentalSpirit = mentalSpirit + 1
+    } else if (job>=100){
+        mentalSpirit = mentalSpirit
+    } else {
+        mentalSpirit = mentalSpirit - 1
+    }
+
+    if (dignity>=900){
+        mentalSpirit = mentalSpirit + 4
+    } else if (dignity>=700){
+        mentalSpirit = mentalSpirit + 3
+    } else if (dignity>=500){
+        mentalSpirit = mentalSpirit + 2
+    } else if (dignity>=300){
+        mentalSpirit = mentalSpirit + 1
+    } else if (dignity>=100){
+        mentalSpirit = mentalSpirit
+    } else {
+        mentalSpirit = mentalSpirit - 1
+    }
+
+    if (peace>=500){
+        mentalSpirit = mentalSpirit + 4
+    } else if (peace>=700){
+        mentalSpirit = mentalSpirit + 3
+    } else if (peace>=500){
+        mentalSpirit = mentalSpirit + 2
+    } else if (peace>=300){
+        mentalSpirit = mentalSpirit + 1
+    } else if (peace>=100){
+        mentalSpirit = mentalSpirit
+    } else {
+        mentalSpirit = mentalSpirit - 1
+    }
+
+    if (social>=900){
+        mentalSpirit = mentalSpirit + 4
+    } else if (social>=700){
+        mentalSpirit = mentalSpirit + 3
+    } else if (social>=500){
+        mentalSpirit = mentalSpirit + 2
+    } else if (social>=300){
+        mentalSpirit = mentalSpirit + 1
+    } else if (social>=100){
+        mentalSpirit = mentalSpirit
+    } else {
+        mentalSpirit = mentalSpirit - 1
+    }
+    mentalSpirit--
+    document.getElementById('spirit3').innerHTML =  mentalSpirit
+}
+
+function statDecay() {
+    var theRemovedElement = workPerTen.shift()
+    workPerTen.push(jobDone)
+    jobDone = 0
+    if (workPerTen.reduce((a, b) => a + b, 0)==8){
+        job = job + 12
+        console.log("You finish up a hard day of work. (+" + 12 +" job security)")
+        workPerTen = [1,1,1,1,1,1,1,0]
+    }
+    if (workPerTen.reduce((a, b) => a + b, 0)==0){
+        noWorkDone++
+    }
+    if (noWorkDone >= 7) {
+        job = job - 3
+        if (!jobWarned) {
+            console.log("You should really do some work...")
+            jobWarned = true
+        }
+    if (noWorkDone >= 12) {
+        job = job - 7
+    }
+        
+    }
+    dignity--
+    peace--
+    if (timeTilDecay <=3) {
+        social = social - 2
+        if (!socialWarned) {
+            console.log("You miss your friends and family...")
+            socialWarned = true
+        }
+    } else if (timeTilDecay == 0) {
+        social = social - 5
+        
+    } else {
+        timeTilDecay--
+    }
+    
+    document.getElementById('job').innerHTML =  job
+    document.getElementById('dignity').innerHTML =  dignity
+    document.getElementById('peace').innerHTML =  peace
+    document.getElementById('social').innerHTML =  social
 }
 
 window.setInterval(function(){
@@ -724,6 +930,10 @@ window.setInterval(function(){
     }
     if (procSection==3) {
         timeTilWeekend--
+        document.getElementById('timetilweekend').innerHTML = timeTilWeekend
+        changeSpirit()
+        statDecay()
+        increasePerClick()
         
     }
 	

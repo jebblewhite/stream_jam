@@ -32,12 +32,6 @@
 				</div>
 				<br>
 				<br>
-				<br>
-				<br>
-				<div id="log-container">
-					<pre id="log"></pre>
-				</div>
-				<br>
 				<div class="upgrades" id="divupgrades">
 					Upgrades
 					<div class="upgrades" id="divoreincrease">
@@ -99,7 +93,24 @@
 					<button class="button" id="assignsoldier" onclick="assignSoldier()">Assign Soldier</button>
 				</div>
 			</div>
-			<div class="b"> 
+			<div class="b">
+				<div class="warfare" id="divwarfare">
+					Warfare
+					<div class="warfaredesc">
+						Make war with neighbouring states
+						<br>
+						Reward Multiplier: <span id="soldierpower">1x</span>
+						<br>
+						Reward Chance Boost: <span id="soldierreward">0</span>
+						<br>
+						Risk Chance Reduction: <span id="soldierrisk">0</span>
+					</div>
+					<div class="wartable" id="divwartable">
+						<button class="button_cooldown" id="war1" onclick="war(1)">WAR 1</button>
+						<button class="button_cooldown" id="war2" onclick="war(2)">WAR 2</button>
+						<button class="button_cooldown" id="war3" onclick="war(3)">WAR 3</button>
+					</div>
+				</div> 
 				<div class="trade" id="divtrade">
 					Trade
 					<div class="warfaredesc">
@@ -119,39 +130,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="b"> 
-				<div class="warfare" id="divwarfare">
-					Warfare
-					<div class="warfaredesc">
-						Make war with neighbouring states
-						<br>
-						Reward Multiplier: <span id="soldierpower">1x</span>
-						<br>
-						Reward Chance Boost: <span id="soldierreward">0</span>
-						<br>
-						Risk Chance Reduction: <span id="soldierrisk">0</span>
-					</div>
-					<div class="wartable" id="divwartable">
-						<button class="button_cooldown" id="war1" onclick="war(1)">WAR 1</button>
-						<button class="button_cooldown" id="war2" onclick="war(2)">WAR 2</button>
-						<button class="button_cooldown" id="war3" onclick="war(3)">WAR 3</button>
-					</div>
-				</div>
-			</div>
 		</div>
 		<div class="future" id="procedural3">
 			<div class="b">
-				Spirit : <span>1000</span>
+				Spirit : <span id="spirit3">1000</span>
 				<br>
 				Time until the weekend : <span id="timetilweekend">7200</span>
 				<br>
 				<button class="button future" id="handover4" onclick="handOver(4)">Handover to Twine Section 4</button>
 				<br>
-				<div id="log-container">
-					<pre id="log"></pre>
-				</div>
-			</div>
-			<div class="b">
+				<br>
 				Peace of Mind: <span id="peace">0</span>
 				<br>
 				Dignity : <span id="dignity">0</span>
@@ -160,6 +148,10 @@
 				<br>
 				Social Contact : <span id="social">0</span>
 				<br>
+				<br>
+			</div>
+			<div class="b">
+
 				<button class="button_cooldown" id="peacebutton" onclick="peaceClick()">Click for Peace of Mind</button>
 				<br>
 				<br>
@@ -171,9 +163,9 @@
 				<br>
 				<button class="button_cooldown" id="socialbutton" onclick="socialClick()">Click for Social Contact</button>
 			</div>
-			<div class="b">
-				
-			</div>
+		</div>
+		<div id="log-container">
+			<pre id="log"></pre>
 		</div>
 		<script type="text/javascript" src="main.js"></script>
 	</body>

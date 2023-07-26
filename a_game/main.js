@@ -20,6 +20,40 @@ var jobWarned = false
 var workPerTen = [1,1,1,1,1,1,1,0]
 var timeTilDecay = 13
 var socialWarned = false
+var eventCounter = 0
+
+var eventList = [
+    {
+        "event_text": "Borysko says you're behind on the Kostenko account.  You are, of course.  Very behind.",
+        "options": ["Find someone else to help you.","Put in some (unpaid) overtime.","Just leave it."], 
+        "outcomes": ["","",""]
+    },
+    {
+        "event_text": "A colleague, Anna, is having an ‘Olympics party’ at the bar the rest of the accounts team frequent.  You weren’t invited.",
+        "options": ["Go anyway.","Just go home."], 
+        "outcomes": ["",""]
+    },
+    {
+        "event_text": "You spill coffee over yourself at lunch.  The stain, almost impressively, looks like you had a bathroom accident.",
+        "options": ["Live with it.","Spend your lunch break dashing back home to get clean clothes.","Just go home.  And stay there."], 
+        "outcomes": ["","",""]
+    },
+    {
+        "event_text": "Your lunch is missing from the break room fridge.",
+        "options": ["Find whoever took it and confront them.","Eat nothing.","Complain to Borysko."], 
+        "outcomes": ["","",""]
+    },
+    {
+        "event_text": "Borysko wants you to present to management.  It’ll be extra work.",
+        "options": ["Ask him to find someone else.","Say you’ll do it (and do).","Say you’ll do it (and don’t)."], 
+        "outcomes": ["","",""]
+    },
+    {
+        "event_text": "The president has called for emergency international talks over the continued presence of Russian troops and material on the Russian, Belarusian, Crimean borders, and in the Black Sea.  Among others, the American, Japanese, German, Australian, Israeli governments have instructed their citizens to leave the country. Roleplaying is tomorrow.",
+        "options": ["Cancel roleplaying.","Carry on."], 
+        "outcomes": ["","",""]
+    }
+]
 
 var harvestPower = 1;
 var workers = 0;
@@ -861,6 +895,31 @@ function statDecay() {
     document.getElementById('social').innerHTML =  social
 }
 
+function showEvent(x){
+    document.getElementById('events').style.display = "block"
+    document.getElementById('event_text').innerHTML =  eventList[x]["event_text"]
+    for (let item in eventList[x]["options"]) {
+        document.getElementById('eventoption'+item).style.display = "block"
+        document.getElementById('eventoption'+item).innerHTML =  eventList[x]["options"][item]
+    }
+
+
+}
+
+function eventOption(x){
+    eventOutcome(eventList[eventCounter]["outcomes"][x])
+    for (let item in eventList[x]["options"]) {
+        document.getElementById('eventoption'+item).style.display = "none"
+    }
+    document.getElementById('events').style.display = "none"
+    eventCounter++
+    
+}
+
+function eventOutcome(decision){
+    console.log("decision made " + decision)
+}
+
 window.setInterval(function(){
     if (procSection == 1){
         timer++;
@@ -934,6 +993,37 @@ window.setInterval(function(){
         changeSpirit()
         statDecay()
         increasePerClick()
+        if (timeTilWeekend <=540) {
+            if (eventCounter==0) {
+                showEvent(0)
+            }
+        }
+        if (timeTilWeekend <=480) {
+            if (eventCounter==1) {
+                showEvent(1)
+            }
+        }
+        if (timeTilWeekend <=420) {
+            if (eventCounter==2) {
+                showEvent(2)
+            }
+        }
+        if (timeTilWeekend <=360) {
+            if (eventCounter==3) {
+                showEvent(3)
+            }
+        }
+        if (timeTilWeekend <=300) {
+            if (eventCounter==4) {
+                showEvent(4)
+            }
+        }
+        if (timeTilWeekend <=240) {
+            if (eventCounter==5) {
+                showEvent(5)
+            }
+        }
+        
         
     }
 	

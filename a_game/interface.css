@@ -141,6 +141,12 @@ body{
     color: white;
   }
 
+  .button_cooldown:hover {
+    background-color: black; 
+    color: white;
+  }
+
+
 #log-container { 
   overflow: hidden;
   height: 300px;

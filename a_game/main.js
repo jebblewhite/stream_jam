@@ -4,6 +4,22 @@ var procSection = 1
 var i_f_params = {}
 var proc_params = {}
 
+
+var section8outcome = 0
+
+var morale = 1000000
+var manpower = 500000
+var economy = 200000
+var culture = 6000
+
+var section5progress = 0
+var section5type = "m"
+var section5scene = 0
+var timeTil5end = 60
+var section5scenelist = [1,2,3,4,5,6,7,8,9,10]
+
+var timeTil8end = 100
+
 var job = 0
 var peace = 0
 var dignity = 0
@@ -21,37 +37,38 @@ var workPerTen = [1,1,1,1,1,1,1,0]
 var timeTilDecay = 13
 var socialWarned = false
 var eventCounter = 0
+var timeTilWeekend = 600
 
 var eventList = [
     {
         "event_text": "Borysko says you're behind on the Kostenko account.  You are, of course.  Very behind.",
         "options": ["Find someone else to help you.","Put in some (unpaid) overtime.","Just leave it."], 
-        "outcomes": ["","",""]
+        "outcomes": ["","","",""]
     },
     {
         "event_text": "A colleague, Anna, is having an ‘Olympics party’ at the bar the rest of the accounts team frequent.  You weren’t invited.",
         "options": ["Go anyway.","Just go home."], 
-        "outcomes": ["",""]
+        "outcomes": ["","",""]
     },
     {
         "event_text": "You spill coffee over yourself at lunch.  The stain, almost impressively, looks like you had a bathroom accident.",
         "options": ["Live with it.","Spend your lunch break dashing back home to get clean clothes.","Just go home.  And stay there."], 
-        "outcomes": ["","",""]
+        "outcomes": ["","","",""]
     },
     {
         "event_text": "Your lunch is missing from the break room fridge.",
         "options": ["Find whoever took it and confront them.","Eat nothing.","Complain to Borysko."], 
-        "outcomes": ["","",""]
+        "outcomes": ["","","",""]
     },
     {
         "event_text": "Borysko wants you to present to management.  It’ll be extra work.",
         "options": ["Ask him to find someone else.","Say you’ll do it (and do).","Say you’ll do it (and don’t)."], 
-        "outcomes": ["","",""]
+        "outcomes": ["","","",""]
     },
     {
         "event_text": "The president has called for emergency international talks over the continued presence of Russian troops and material on the Russian, Belarusian, Crimean borders, and in the Black Sea.  Among others, the American, Japanese, German, Australian, Israeli governments have instructed their citizens to leave the country. Roleplaying is tomorrow.",
         "options": ["Cancel roleplaying.","Carry on."], 
-        "outcomes": ["","",""]
+        "outcomes": ["","","",""]
     }
 ]
 
@@ -148,13 +165,6 @@ const warTable = {
     'The Kingdom of Polthia': {"riskChance": 25, "rewardChance": 25, "riskMultiplier": 3, "rewardMultiplier": 5, "bonusResource": "tin"}, 
     'The lands of Sul-os': {"riskChance": 50, "rewardChance": 5, "riskMultiplier": 8, "rewardMultiplier": 69, "bonusResource": "copper"}
 }
-
-
-
-var timeTilWeekend = 600
-
-
-
 
 
 
@@ -650,47 +660,89 @@ function checkUpgrades(){
     }     
 }
 
+function selectRandomScene() {
+    let x = getRandomInt(section5scenelist.length)
+    randomScene = section5scenelist[x]
+    section5scenelist.splice(x,1)
+    return randomScene
+}
 
 function setProcParams(x) {
     if (x==2) {
-        passedArray = [farmers, merchants, soldiers]
-        console.log(2, passedArray)
+        passedArray = [parseInt(x), farmers, merchants, soldiers]
+        
     }
     if (x==4) {
-        passedArray = [farmers, merchants, soldiers, job, peace, dignity, social]
-        console.log(4, passedArray)
+        passedArray = [parseInt(x), farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit]
+        
 
     }
-    console.log(passedArray)
+    if (x==6 || x==7) {
+        if (section5progress % 2 == 0) {
+            section5scene = (section5progress/2)+1
+            section5type = "m"
+        } else {
+            section5scene = selectRandomScene()
+            section5type = "s"
+        }
+        section5progress++
+        passedArray = [parseInt(x), farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, morale, manpower, economy, culture, section5progress, section5type, section5scene]
+        
+    }
+    if (x=="8_5") {
+        passedArray = [x, farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, morale, manpower, economy, culture, section5progress, section5type, section5scene, section8outcome]
+    }
+    console.log(x)
     return passedArray
 }
 
 function handOver(x) {
     document.getElementById("procedural"+(x-1)).style.display = "none";
-    document.getElementById("interactiveFiction"+x).style.display = "block";
-    var myArray = setProcParams(x)
+    document.getElementById("interactiveFiction2").style.display = "block";
+    procSection = x
+    console.log(x)
+    if (procSection == 6) {
+        if (section5progress >= 1) {//change back to 10
+            procSection = 7
+        } else {
+            timeTil5end = 60
+        }
+    
+        
+    }
+    if (procSection == 9) {
+        procSection = "8_5"
+    }
+    console.log(procSection)
+    var myArray = setProcParams(procSection)
     console.log(myArray)
-    document.getElementById("interactiveFiction"+x).contentWindow.postMessage(myArray, '*');
+    document.getElementById("interactiveFiction2").contentWindow.postMessage(myArray, '*');
 }
 
 window.document.addEventListener('myCustomEvent', handleEvent, false)
 
 function handleEvent(e) {
   console.log(e.detail) // outputs: {foo: 'bar'}
-  hide_i_f(e.detail.section);
+  hide_i_f();
   i_f_params[e.detail.section] = e.detail.passedArray
-  startProcedural(parseInt(e.detail.section)+1)
+  if (e.detail.section == "8_5") {
+    startProcedural(69)
+  }
+  else if (e.detail.section != 6) {
+    startProcedural(parseInt(e.detail.section)+1)
+  }
+  else {
+    startProcedural(parseInt(e.detail.section)-1);
+}
+  
 }
 
 function startProcedural(x) {
     if (x==3) {
-        farmers = i_f_params[x-1][0]
-        merchants = i_f_params[x-1][1]
-        soldiers = i_f_params[x-1][2]
-        job = i_f_params[x-1][3]
-        dignity = i_f_params[x-1][4]
-        peace = i_f_params[x-1][5]
-        social = i_f_params[x-1][6]
+        job = i_f_params[x-1][4]
+        dignity = i_f_params[x-1][5]
+        peace = i_f_params[x-1][6]
+        social = i_f_params[x-1][7]
         document.getElementById("job").innerHTML = job
         document.getElementById("dignity").innerHTML = dignity
         document.getElementById("peace").innerHTML = peace
@@ -719,13 +771,16 @@ function startProcedural(x) {
         
     }
     procSection = x
+    if (procSection == 69) {
+        x = 5
+    }
     document.getElementById("procedural"+x).style.display = "block";
     
     
 }
 
-function hide_i_f(x) {
-    document.getElementById("interactiveFiction"+x).style.display = "none";
+function hide_i_f() {
+    document.getElementById("interactiveFiction2").style.display = "none";
 }
 
 function jobClick() {
@@ -1023,8 +1078,25 @@ window.setInterval(function(){
                 showEvent(5)
             }
         }
+        if (timeTilWeekend <= 598) {
+            handOver(4)
+        }
         
         
+    }
+    if (procSection == 5 || procSection == 69) {
+        console.log("yippee")
+        timeTil5end--
+        if (timeTil5end <= 58 && procSection == 5) {
+            handOver(6)
+        }
+    }
+    if (procSection == 8) {
+        console.log("yahoo")
+        timeTil8end--
+        if (timeTil8end <= 98) {
+            handOver(9)
+        }
     }
 	
 }, 1000);

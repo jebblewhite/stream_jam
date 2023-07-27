@@ -139,3 +139,11 @@ Section 5 - Warfare
 Section 8 - Hospital
     Start with mentalSpirit from Section 3
 Section 9 - Section 5, reduced 
+
+
+
+Section 1 Rework
+    Descriptions for Warfare and Trade
+    Colour coding for Ag,War,Trade (Green,Red,Blue)
+    General Spacing out
+    

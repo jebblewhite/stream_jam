@@ -28,7 +28,7 @@ var job = 0
 var peace = 0
 var dignity = 0
 var social = 0
-var mentalSpirit = 4763
+var mentalSpirit = 5146
 
 var jobDone = 0
 var peacePerClick = 1
@@ -47,12 +47,12 @@ var eventList = [
     {
         "event_text": "Borysko says you're behind on the Kostenko account.  You are, of course.  Very behind.",
         "options": ["Find someone else to help you.","Put in some (unpaid) overtime.","Just leave it."], 
-        "outcomes": ["","","",""]
+        "outcomes": [[0,-20,10,15],"","",""]
     },
     {
         "event_text": "A colleague, Anna, is having an ‘Olympics party’ at the bar the rest of the accounts team frequent.  You weren’t invited.",
         "options": ["Go anyway.","Just go home."], 
-        "outcomes": ["","",""]
+        "outcomes": ["","","",""]
     },
     {
         "event_text": "You spill coffee over yourself at lunch.  The stain, almost impressively, looks like you had a bathroom accident.",
@@ -84,7 +84,7 @@ var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
 var workerSpirit = 1
-var spiritThreshold = 0
+var spiritThreshold = 1000000
 
 var farmers = 0
 var merchants = 0
@@ -773,6 +773,7 @@ function startProcedural(x) {
         console.log("")
         console.log("")
         console.log("")
+        console.log("Intro go here")
         
     } else if (x==5) {
         console.log("")
@@ -893,7 +894,7 @@ function peaceClick() {
 function socialClick() {
     social = social + socialPerClick
     job--
-    console.log("You catch up with friends and family. (+" + socialPerClick +" social contact)")
+    console.log("You catch up with friends. (+" + socialPerClick +" social contact)")
     socialPerClick = 0
     timeTilDecay = 13
     socialWarned = false
@@ -961,7 +962,7 @@ function changeSpirit() {
         mentalSpirit = mentalSpirit - 1
     }
 
-    if (peace>=500){
+    if (peace>=900){
         mentalSpirit = mentalSpirit + 4
     } else if (peace>=700){
         mentalSpirit = mentalSpirit + 3
@@ -1020,7 +1021,7 @@ function statDecay() {
     if (timeTilDecay <=3) {
         social = social - 2
         if (!socialWarned) {
-            console.log("You miss your friends and family...")
+            console.log("You miss your friends...")
             socialWarned = true
         }
     } else if (timeTilDecay == 0) {
@@ -1076,12 +1077,12 @@ function loseSpirit(){
 }
 
 function powerThrough(){
-    mentalSpirit++
+    mentalSpirit = mentalSpirit + 5
     document.getElementById("section8spirit").innerHTML = mentalSpirit
 }
 
 function scream(){
-    mentalSpirit = mentalSpirit + 80
+    mentalSpirit = mentalSpirit + 400
     weakness++
     screamPressed = true
     console.log("You scream through the pain")
@@ -1225,34 +1226,64 @@ window.setInterval(function(){
         changeSpirit()
         statDecay()
         increasePerClick()
-        if (timeTilWeekend <=540) {
+        if (timeTilWeekend <=570) {
             if (eventCounter==0) {
                 showEvent(0)
+                if (timeTilWeekend<=540){
+                    mentalSpirit = mentalSpirit - 3
+                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                }
+                if (timeTilWeekend <=510) {eventOption(3)}
             }
         }
-        if (timeTilWeekend <=480) {
+        if (timeTilWeekend <=510) {
             if (eventCounter==1) {
                 showEvent(1)
+                if (timeTilWeekend<=480){
+                    mentalSpirit = mentalSpirit - 3
+                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                }
+                if (timeTilWeekend <=450) {eventOption(3)}
             }
         }
-        if (timeTilWeekend <=420) {
+        if (timeTilWeekend <=450) {
             if (eventCounter==2) {
                 showEvent(2)
+                if (timeTilWeekend<=420){
+                    mentalSpirit = mentalSpirit - 3
+                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                }
+                if (timeTilWeekend <=390) {eventOption(3)}
             }
         }
-        if (timeTilWeekend <=360) {
+        if (timeTilWeekend <=390) {
             if (eventCounter==3) {
                 showEvent(3)
+                if (timeTilWeekend<=360){
+                    mentalSpirit = mentalSpirit - 3
+                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                }
+                if (timeTilWeekend <=330) {eventOption(3)}
             }
         }
-        if (timeTilWeekend <=300) {
+        if (timeTilWeekend <=330) {
             if (eventCounter==4) {
                 showEvent(4)
+                if (timeTilWeekend<=300){
+                    mentalSpirit = mentalSpirit - 3
+                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                }
+                if (timeTilWeekend <=270) {eventOption(3)}
             }
         }
-        if (timeTilWeekend <=240) {
+        if (timeTilWeekend <=270) {
             if (eventCounter==5) {
                 showEvent(5)
+                if (timeTilWeekend<=240){
+                    mentalSpirit = mentalSpirit - 3
+                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                }
+                if (timeTilWeekend <=210) {eventOption(3)}
             }
         }
         if (timeTilWeekend <= 598) {
@@ -1288,7 +1319,7 @@ window.setInterval(function(){
             foreignAid()
             foreignAidGiven = true
         }
-        if (timeTil5end <= 0 && procSection == 5) {
+        if (timeTil5end <= 58 && procSection == 5) {
             handOver(6)
         }
     }
@@ -1304,9 +1335,14 @@ window.setInterval(function(){
         if (timeTil8end <= 0 || mentalSpirit <=0) {
             console.log("gam ovr")
             if (timeTil8end <=0) {
-                section8outcome = "bad_end"
+                if (weakness >= 5){
+                    section8outcome = "good_end"
+                }
+                else {
+                    section8outcome = "bad_end"
+                }
             } else {
-                "good_end"
+                section8outcome = "medium_end"
             }
             handOver(9)
         }

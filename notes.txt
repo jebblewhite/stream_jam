@@ -144,6 +144,29 @@ Section 9 - Section 5, reduced
 
 Section 1 Rework
     Descriptions for Warfare and Trade
-    Colour coding for Ag,War,Trade (Green,Red,Blue)
-    General Spacing out
-    
+    Colour coding for Ag,War,Trade (Green,Red,Blue) X 
+    General Spacing out X
+    Rework Trade upgrades -- not just cost grivna, cost copper and tin and crops..
+    add 2 more trade upgrades 
+
+Intro to Sec3  -- MILO ctrlf "Intro go here"
+Event values - MILO to complete base, jason write function for rubber banding
+More events - MIL:O
+different labels for buttons X
+0 job - You think you're going to lose your job
+0 dignity - You are disgusting
+0 peace - You have a panic attack in the street 
+0 social - You have never felt so alone 
+
+Section5
+North East and Southern fronts 
+Recruit Soldiers for Grivna 
+Grivna Cost for campaigns
+Expected outcome -- Good player net gain land and morale 
+    economy only goes up from aid 
+    manpower only goes up from spending economy 
+upgrades cost grivna 
+
+Section8 
+Make button cooldown
+

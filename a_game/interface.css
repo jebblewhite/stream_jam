@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
 
 :root {
-  --text-color: #000000;
-  --text-background-color: #ffffff;
-  --border-color: #000000;
+  --text-color: #ffffff;
+  --text-background-color: #424242;
+  --border-color:  #ffffff;
 }
 
 body{
@@ -11,15 +11,18 @@ body{
 	font-family: 'Roboto Mono', sans-serif;
 	font-size:18px;
 	color: var(--text-color);
+  background-color: var(--text-background-color);
 }
 
 
 .tin {
-    display: none;
+    display: none;;
+    color: rgb(208, 208, 207)
 }
 
 .copper {
-    display: none;
+    display: none;;
+    color: rgb(253, 196, 91)
 }
 
 .workers {
@@ -52,7 +55,8 @@ body{
 }
 
 .spirit {
-  display: none;
+  display: none;;
+  color: rgb(253, 148, 255)
 }
 
 .trade {
@@ -72,20 +76,25 @@ body{
 }
 
 .grivna {
-  display: none
+  display: none;
+  color: gold
 }
 
 .crops {
-  display: none
+  display: none;
+  color: rgba(100, 199, 0, 0.907)
 }
 
 .trophies {
-  display: none
+  display: none;
+  color: rgb(234, 154, 125)
 }
 
 .bronze {
-  display: none
+  display: none;
+  color: rgb(216, 165, 14)
 }
+
 
 .b {
     display: inline-block;
@@ -94,14 +103,14 @@ body{
     float: left;
     width: 23%;
     height: 400px;
-    background-color: white;
     justify-content: center;
     align-items: center;
 }
+
 .button {
-    background-color: #ffffff; 
-    border: 2px solid black;
-    color: rgb(0, 0, 0);
+    background-color: var(--text-background-color); 
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
     padding: 15px 32px; 
     text-align: center;
     text-decoration: none;
@@ -113,20 +122,49 @@ body{
     margin: 0 auto
   }
 
-
 .button_cooldown {
-  background: #ffffff;
-  margin: 0 auto;
-  border: 2px solid black;
-  color: #000000;
-  font-family: 'Roboto Mono', sans-serif;
-  text-align: center;
-  text-decoration: none;
-  padding: 15px 32px; 
-  font-size: 16px;
-  cursor: pointer;
-  width: 100%;
+    margin: 0 auto;
+    background-color: var(--text-background-color); 
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    font-family: 'Roboto Mono', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 32px; 
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+  }
+.button:hover {
+    background-color: var(--text-color); 
+    color: var(--text-background-color);
+    border: 2px solid var(--text-background-color);
+  }
+
+.button_cooldown:hover {
+    background-color: var(--text-color); 
+    color: var(--text-background-color);
+    border: 2px solid var(--text-background-color);
+  }
+
+.waaaakeup{
+  background-color: blueviolet;
+  color: gold;
 }
+
+.tradeup{
+  background-color: #02aeae; 
+}
+
+.warfareup{
+  background-color: #d30101; 
+}
+
+.agriculture{
+  background-color: #3b8714; 
+}
+
+
 
 
 
@@ -136,15 +174,7 @@ body{
 }
 
 
-  .button:hover {
-    background-color: black; 
-    color: white;
-  }
 
-  .button_cooldown:hover {
-    background-color: black; 
-    color: white;
-  }
 
 
 #log-container { 
@@ -167,4 +197,28 @@ body{
 
 .future{
   display: none
+}
+
+.costcopper{
+  border-color: rgb(253, 196, 91);
+}
+
+.costcrops{
+  border-color: rgba(100, 199, 0, 0.907);
+}
+
+.costtin{
+  border-color: rgb(208, 208, 207);
+}
+
+.costgrivna{
+  border-color: gold;
+}
+
+.costbronze{
+  border-color: rgb(216, 165, 14);
+}
+
+.costtrophies{
+  border-color: rgb(234, 154, 125);
 }

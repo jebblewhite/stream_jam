@@ -7,10 +7,11 @@
 		<div id="procedural1">
 			<div class="spirit" id="divspirit">
 				Spirit: <span id="spirit">0</span>
-				<button class="button future" id="wakeup" onclick="handOver(2)">Wake up</button>
+				<button class="button future waaaakeup" id="wakeup" onclick="handOver(2)">Wake up</button>
 			</div>
 			<div class="b"> 
 				<button class="button" onclick="harvestCrops(harvestPower, 1)">Harvest Crops</button>
+				<br>
 				<div class = "crops" id="divcrops">
 					Crops: <span id="crops">0</span>
 				</div>
@@ -34,34 +35,34 @@
 				<div class="upgrades" id="divupgrades">
 					Upgrades
 					<div class="upgrades" id="divoreincrease">
-						<button class="button" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
+						<button class="button agriculture costcrops" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
 					</div>
 					<div class="upgrades" id="divbettertradedeals">
-						<button class="button" id="bettertradedeals" onclick="betterTradeDeals()"></button>
+						<button class="button tradeup costgrivna" id="bettertradedeals" onclick="betterTradeDeals()"></button>
 					</div>
 					<div class="upgrades" id="divreducetradecooldown">
-						<button class="button" id="reducetradecooldown" onclick="reduceTradeCooldown()"></button>
+						<button class="button tradeup costgrivna" id="reducetradecooldown" onclick="reduceTradeCooldown()"></button>
 					</div>
 					<div class="upgrades" id="divfusemetals">
-						<button class="button" id="fusemetals" onclick="fuseMetalsUp()"></button>
+						<button class="button agriculture costtin" id="fusemetals" onclick="fuseMetalsUp()"></button>
 					</div>
 					<div class="upgrades" id="divfarmerclick">
-						<button class="button" id="farmerclick" onclick="farmerClickUp()"></button>
+						<button class="button agriculture costcrops" id="farmerclick" onclick="farmerClickUp()"></button>
 					</div>
 					<div class="upgrades" id="divfarmerspirit">
-						<button class="button" id="farmerspirit" onclick="farmerSpiritUp()"></button>
+						<button class="button agriculture costbronze" id="farmerspirit" onclick="farmerSpiritUp()"></button>
 					</div>
 					<div class="upgrades" id="divfarmerpower">
-						<button class="button" id="farmerpower" onclick="farmerPowerUp()"></button>
+						<button class="button agriculture costcopper" id="farmerpower" onclick="farmerPowerUp()"></button>
 					</div>
 					<div class="upgrades" id="divsoldiermulti">
-						<button class="button" id="soldiermulti" onclick="soldierMultiUp()"></button>
+						<button class="button warfareup costtrophies" id="soldiermulti" onclick="soldierMultiUp()"></button>
 					</div>
 					<div class="upgrades" id="divsoldierchance">
-						<button class="button" id="soldierchance" onclick="soldierChanceUp()"></button>
+						<button class="button warfareup costcopper" id="soldierchance" onclick="soldierChanceUp()"></button>
 					</div>
 					<div class="upgrades" id="divsoldierrisk">
-						<button class="button" id="soldierrisk" onclick="soldierRiskUp()"></button>
+						<button class="button warfareup costtin" id="soldierrisk" onclick="soldierRiskUp()"></button>
 					</div>
 					
 				</div>
@@ -82,14 +83,20 @@
 					<br>
 					Soldiers: <span id="soldiers">0</span>
 				</div>
+				<br>
+				<br>
 				<div class="assignfarmer" id="divassignfarmer">
-					<button class="button" id="assignfarmer" onclick="assignFarmer()">Assign Farmer</button>
+					<button class="button agriculture" id="assignfarmer" onclick="assignFarmer()">Assign Farmer</button>
 				</div>
+				
+				<br>
 				<div class="assignmerchant" id="divassignmerchant">
-					<button class="button" id="assignmerchant" onclick="assignMerchant()">Assign Merchant</button>
+					<button class="button  tradeup" id="assignmerchant" onclick="assignMerchant()">Assign Merchant</button>
 				</div>
+				
+				<br>
 				<div class="assignsoldier" id="divassignsoldier">
-					<button class="button" id="assignsoldier" onclick="assignSoldier()">Assign Soldier</button>
+					<button class="button warfareup" id="assignsoldier" onclick="assignSoldier()">Assign Soldier</button>
 				</div>
 			</div>
 			<div class="b">
@@ -105,11 +112,17 @@
 						Risk Chance Reduction: <span id="soldierrisk">0</span>
 					</div>
 					<div class="wartable" id="divwartable">
-						<button class="button_cooldown" id="war1" onclick="war(1)">WAR 1</button>
-						<button class="button_cooldown" id="war2" onclick="war(2)">WAR 2</button>
-						<button class="button_cooldown" id="war3" onclick="war(3)">WAR 3</button>
+						<button class="button_cooldown warfareup" id="war1" onclick="war(1)">WAR 1</button>
+						<br>
+						<br>
+						<button class="button_cooldown warfareup" id="war2" onclick="war(2)">WAR 2</button>
+						<br>
+						<br>
+						<button class="button_cooldown warfareup" id="war3" onclick="war(3)">WAR 3</button>
 					</div>
-				</div> 
+				</div>
+				<br>
+				<br>
 				<div class="trade" id="divtrade">
 					Trade
 					<div class="warfaredesc">
@@ -122,10 +135,16 @@
 						Trade Cooldown: <span id="merchantcooldown">10</span>s
 					</div>
 					<div class="tradetable" id="divtradetable">
-						<button class="button_cooldown" id="trade1" onclick="trade(1)">TRADE 1</button>
-						<button class="button_cooldown" id="trade2" onclick="trade(2)">TRADE 2</button>
-						<button class="button_cooldown" id="trade3" onclick="trade(3)">TRADE 3</button>
-						<button class="button_cooldown" id="refreshtrade" onclick="refreshTrade()">Refresh Trades</button>
+						<button class="button_cooldown tradeup" id="trade1" onclick="trade(1)">TRADE 1</button>
+						<br>
+						<br>
+						<button class="button_cooldown tradeup" id="trade2" onclick="trade(2)">TRADE 2</button>
+						<br>
+						<br>
+						<button class="button_cooldown tradeup" id="trade3" onclick="trade(3)">TRADE 3</button>
+						<br>
+						<br>
+						<button class="button_cooldown tradeup" id="refreshtrade" onclick="refreshTrade()">Refresh Trades</button>
 					</div>
 				</div>
 			</div>

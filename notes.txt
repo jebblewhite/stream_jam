@@ -192,11 +192,11 @@ if low spirit
 more positive, less negative 
 """
 
-FIX SEC3 SLOWDOWN 
+X FIX SEC3 SLOWDOWN 
 
 BUFF SWOLE ALPHA TAX AND NERF BETA FARMER RESOURCE OUTPUT
 
 Milo's extra variables:
     insubordination (created in if61m, called in if62m)
     usb (created in if63m, called in)
-    $mentalBreak (set to 1 at end of if65m)
+    $mentalBreak (set to 1 at end of if65m) -- will just do this in the progress number (starts at )

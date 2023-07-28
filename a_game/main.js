@@ -38,6 +38,8 @@ var jobDone = 0
 var peacePerClick = 1
 var dignityPerClick = 1
 var socialPerClick = 1
+var socincrementSteps = [1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
+var peaceincrementSteps = [1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
 
 var noWorkDone = 0
 var jobWarned = false
@@ -110,7 +112,7 @@ var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
 var workerSpirit = 1
-var spiritThreshold = 0 //1000000
+var spiritThreshold = 10000000
 
 var farmers = 0
 var merchants = 0
@@ -133,7 +135,7 @@ var soldierChance = 0
 var merchantSpirit = 2
 var spiritModifier = 1
 var dealModifier = 1;
-var tradeCooldownTime = 10000;
+var tradeCooldownTime = 6000;
 
 var progression = 0;
 
@@ -151,12 +153,12 @@ var resources = {
 
 var upgrades = {
     "oreChanceIncrease":{"segment": 'divupgrades',"cost":30, "resource":"crops", "div":"divoreincrease", "element_id":"oreincrease", "element_content": "Increase chance of finding ores when harvesting crops -- Cost : ^^^F crops"},
-    "betterTradeDeals":{"segment": 'divtrade',"cost":200, "resource":"crops", "div":"divbettertradedeals", "element_id":"bettertradedeals", "element_content": "Better Trade deals -- Cost : ^^^F crops"},
-    "reduceTradeCooldown":{"segment": 'divtrade',"cost":20, "resource":"copper", "div":"divreducetradecooldown", "element_id":"reducetradecooldown", "element_content": "Reduce Trade Cooldown -- Cost : ^^^F copper"},
+    "betterTradeDeals":{"segment": 'divtrade',"cost":120, "resource":"crops", "div":"divbettertradedeals", "element_id":"bettertradedeals", "element_content": "Better Trade deals -- Cost : ^^^F crops"},
+    "reduceTradeCooldown":{"segment": 'divtrade',"cost":15, "resource":"copper", "div":"divreducetradecooldown", "element_id":"reducetradecooldown", "element_content": "Reduce Trade Cooldown -- Cost : ^^^F copper"},
     "fuseMetalsUp": {"segment": 'divupgrades',"cost":150, "resource":"tin", "div":"divfusemetals", "element_id":"fusemetals", "element_content": "Farmers fuse copper and tin (2:1) to create bronze -- Cost : ^^^F tin"},
-    "farmerClickUp": {"segment": 'divupgrades',"cost":1000, "resource":"crops", "div":"divfarmerclick", "element_id":"farmerclick", "element_content": "Multiply Click harvest power by total Farmer harvest power -- Cost : ^^^F crops"},
+    "farmerClickUp": {"segment": 'divupgrades',"cost":70, "resource":"tin", "div":"divfarmerclick", "element_id":"farmerclick", "element_content": "Increase click power by 10% of total Farmer harvest power -- Cost : ^^^F tin"},
     "farmerSpiritUp": {"segment": 'divupgrades',"cost":100, "resource":"bronze", "div":"divfarmerspirit", "element_id":"farmerspirit", "element_content": "Gain spirit when you gain crops -- Cost : ^^^F bronze"},
-    "farmerPowerUp": {"segment": 'divupgrades',"cost":100, "resource":"copper", "div":"divfarmerpower", "element_id":"farmerpower", "element_content": "Double Farmer harvest power -- Cost : ^^^F copper"},
+    "farmerPowerUp": {"segment": 'divupgrades',"cost":100, "resource":"copper", "div":"divfarmerpower", "element_id":"farmerpower", "element_content": "Boost Farmer harvest power by 50% -- Cost : ^^^F copper"},
     "soldierMultiUp": {"segment": 'divwarfare',"cost":120, "resource":"trophies", "div":"divsoldiermulti", "element_id":"soldiermulti", "element_content": "Double War rewards -- Cost : ^^^F trophies"},
     "soldierChanceUp": {"segment": 'divwarfare',"cost":80, "resource":"copper", "div":"divsoldierchance", "element_id":"soldierchance", "element_content": "Reward Chance Boost Up -- Cost : ^^^F copper"},
     "soldierRiskUp": {"segment": 'divwarfare',"cost":80, "resource":"tin", "div":"divsoldierrisk", "element_id":"soldierrisk", "element_content": "Risk Chance Reduction -- Cost : ^^^F tin"},
@@ -212,7 +214,7 @@ document.addEventListener("keypress", function(event) {
 
 function harvestCrops(x, click){
         if (click == 1){
-            x = x + x*farmerClick*farmers*farmerPower
+            x = x + Math.floor(x*farmerClick*farmers*farmerPower*0.1)
         }
         resources.crops = resources.crops + x;
         let y = Math.random() * 100;
@@ -325,7 +327,7 @@ function farmerClickUp() {
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
         farmerClick++ //Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*4; // Change for onetime use
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -337,7 +339,7 @@ function farmerSpiritUp() {
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
         farmerSpirit = 1//Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2**1000; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -347,7 +349,7 @@ function farmerSpiritUp() {
 function farmerPowerUp() {
     upgradeName = "farmerPowerUp" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
-        farmerPower = farmerPower*3 //Upgrade Effect
+        farmerPower = Math.round(farmerPower*1.5) //Upgrade Effect
         document.getElementById('farmers').innerHTML = farmers + " -- gen. " + farmers*farmerPower + " Crops per tick"; 
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
@@ -397,7 +399,7 @@ function reduceTradeCooldown(){
     upgradeName = "reduceTradeCooldown"
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades["reduceTradeCooldown"]["cost"]) {
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades["reduceTradeCooldown"]["cost"];
-        upgrades["reduceTradeCooldown"]["cost"] = upgrades["reduceTradeCooldown"]["cost"]*3;
+        upgrades["reduceTradeCooldown"]["cost"] = upgrades["reduceTradeCooldown"]["cost"]*2;
         if (tradeCooldownTime>1000){
             tradeCooldownTime = tradeCooldownTime - 1000
         } else { 
@@ -416,7 +418,7 @@ function betterTradeDeals(){
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades["betterTradeDeals"]["cost"]) {
         dealModifier = dealModifier + 0.2
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades["betterTradeDeals"]["cost"];
-        upgrades["betterTradeDeals"]["cost"] = upgrades["betterTradeDeals"]["cost"]*3;
+        upgrades["betterTradeDeals"]["cost"] = upgrades["betterTradeDeals"]["cost"]*2;
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
         document.getElementById(upgrades["betterTradeDeals"]["element_id"]).innerHTML = upgrades["betterTradeDeals"]["element_content"].replace("^^^F", upgrades["betterTradeDeals"]["cost"])
         document.getElementById(upgrades["betterTradeDeals"]["div"]).style.display = "none";
@@ -454,7 +456,11 @@ function doubleSpiritValue(){
 function taxThePops(){
     upgradeName = "taxThePops" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
-        taxWorkers++ //Upgrade Effect
+        if (taxWorkers==0){
+            taxWorkers++
+        }else{
+            taxWorkers = taxWorkers*2 //Upgrade Effect
+        }
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
@@ -985,6 +991,7 @@ function peaceClick() {
     peace = peace + peacePerClick
     console.log("You breathe deeply and find your focus. (+" + peacePerClick +" inner peace)")
     peacePerClick = 0
+    peaceincrementSteps = [1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
     document.getElementById('peace').innerHTML =  peace
 }
 
@@ -993,6 +1000,7 @@ function socialClick() {
     job--
     console.log("You catch up with friends. (+" + socialPerClick +" social contact)")
     socialPerClick = 0
+    socincrementSteps = [1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
     timeTilDecay = 13
     socialWarned = false
     document.getElementById('social').innerHTML =  social
@@ -1000,97 +1008,36 @@ function socialClick() {
 }
 
 function increasePerClick() {
-    dignityPerClick = 2
-
-    if (peacePerClick <= 3) {
-        peacePerClick = peacePerClick + 1
-    } else if (peacePerClick <= 8) {
-        peacePerClick = peacePerClick + 2
-    } else if (peacePerClick <= 13) {
-        peacePerClick = peacePerClick + 3
-    } else if (peacePerClick <= 16) {
-        peacePerClick = peacePerClick + 4
-    } else {
-        peacePerClick = 20
+    dignityPerClick = 2;
+    if (peacePerClick!=20){
+        peacePerClick = peaceincrementSteps.shift()
     }
-
-    if (socialPerClick <= 3) {
-        socialPerClick = socialPerClick + 1
-    } else if (socialPerClick <= 8) {
-        socialPerClick = socialPerClick + 2
-    } else if (socialPerClick <= 13) {
-        socialPerClick = socialPerClick + 3
-    } else if (socialPerClick <= 16) {
-        socialPerClick = socialPerClick + 4
-    } else {
-        socialPerClick = 20
+    if (socialPerClick!=20){
+        socialPerClick = socincrementSteps.shift()
     }
-    
-    // 0 -> 1 -> 2 -> 3 -> 4 -> 6 -> 8 -> 10 -> 13 -> 16 -> 20 -> 20 -> ... -> 20
-    
+    console.log(peacePerClick)
+}
+
+
+function calculateContribution(value) {
+    if (value >= 900) return 4;
+    if (value >= 700) return 3;
+    if (value >= 500) return 2;
+    if (value >= 300) return 1;
+    if (value >= 100) return 0;
+    return -1;
 }
 
 function changeSpirit() {
-    if (job>=900){
-        mentalSpirit = mentalSpirit + 4
-    } else if (job>=700){
-        mentalSpirit = mentalSpirit + 3
-    } else if (job>=500){
-        mentalSpirit = mentalSpirit + 2
-    } else if (job>=300){
-        mentalSpirit = mentalSpirit + 1
-    } else if (job>=100){
-        mentalSpirit = mentalSpirit
-    } else {
-        mentalSpirit = mentalSpirit - 1
-    }
+    const jobContribution = calculateContribution(job);
+    const dignityContribution = calculateContribution(dignity);
+    const peaceContribution = calculateContribution(peace);
+    const socialContribution = calculateContribution(social);
 
-    if (dignity>=900){
-        mentalSpirit = mentalSpirit + 4
-    } else if (dignity>=700){
-        mentalSpirit = mentalSpirit + 3
-    } else if (dignity>=500){
-        mentalSpirit = mentalSpirit + 2
-    } else if (dignity>=300){
-        mentalSpirit = mentalSpirit + 1
-    } else if (dignity>=100){
-        mentalSpirit = mentalSpirit
-    } else {
-        mentalSpirit = mentalSpirit - 1
-    }
+    mentalSpirit += jobContribution + dignityContribution + peaceContribution + socialContribution - 1;
+    mentalSpirit = Math.max(0, mentalSpirit);
 
-    if (peace>=900){
-        mentalSpirit = mentalSpirit + 4
-    } else if (peace>=700){
-        mentalSpirit = mentalSpirit + 3
-    } else if (peace>=500){
-        mentalSpirit = mentalSpirit + 2
-    } else if (peace>=300){
-        mentalSpirit = mentalSpirit + 1
-    } else if (peace>=100){
-        mentalSpirit = mentalSpirit
-    } else {
-        mentalSpirit = mentalSpirit - 1
-    }
-
-    if (social>=900){
-        mentalSpirit = mentalSpirit + 4
-    } else if (social>=700){
-        mentalSpirit = mentalSpirit + 3
-    } else if (social>=500){
-        mentalSpirit = mentalSpirit + 2
-    } else if (social>=300){
-        mentalSpirit = mentalSpirit + 1
-    } else if (social>=100){
-        mentalSpirit = mentalSpirit
-    } else {
-        mentalSpirit = mentalSpirit - 1
-    }
-    mentalSpirit--
-    if (mentalSpirit<0) {
-        mentalSpirit = 0
-    }
-    document.getElementById('spirit3').innerHTML =  mentalSpirit
+    document.getElementById('spirit3').innerHTML = mentalSpirit;
 }
 
 function statDecay() {

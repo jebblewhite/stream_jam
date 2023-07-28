@@ -169,11 +169,24 @@ window.pass_back = function passBack(){
 		State.variables.section5scene = 0
 		State.variables.section5type = 0
 		State.variables.section8outcome = 0
-};</script><tw-passagedata pid="1" name="Landing Node" tags="" position="944,197" size="100,100">
-[[Click to continue|Sending Node]]</tw-passagedata><tw-passagedata pid="2" name="if2" tags="" position="285,538" size="100,100">&lt;&lt;script&gt;&gt;
+};</script><tw-passagedata pid="1" name="Landing Node" tags="" position="3736,205" size="100,100">
+[[Click to continue|Sending Node]]</tw-passagedata><tw-passagedata pid="2" name="if2" tags="" position="602,504" size="100,100">&lt;&lt;script&gt;&gt;
+console.log(State.variables.continuityArray)
 
+var focusarr = State.variables.continuityArray.slice(1,4)
+
+const max = Math.max(...focusarr);
+
+const index = focusarr.indexOf(max);
+
+if (index == 0) {
+	State.variables.focus = &quot;Agriculture&quot;
+} else if (index == 1) {
+	State.variables.focus = &quot;Commerce&quot;
+} else {
+	State.variables.focus = &quot;Military&quot;
+}
 console.log(State.variables)
-console.log(State.variables.continuityArray[0])
 &lt;&lt;/script&gt;&gt;
 
 &lt;&lt;set $job to 150&gt;&gt;
@@ -183,58 +196,1135 @@ console.log(State.variables.continuityArray[0])
 
 &lt;&lt;goto &quot;if2start&quot;&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="3" name="Handover Node" tags="" position="1050,1438" size="100,100">&lt;&lt;= window.pass_back() &gt;&gt;
-&lt;&lt;goto &quot;Landing Node&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="if4" tags="" position="523,538" size="100,100">
+</tw-passagedata><tw-passagedata pid="3" name="Handover Node" tags="" position="3842,1446" size="100,100">&lt;&lt;= window.pass_back() &gt;&gt;
+&lt;&lt;goto &quot;Landing Node&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="if4" tags="" position="1707,503" size="100,100">
+&lt;&lt;script&gt;&gt;
+console.log(State.variables.continuityArray)
+
+var focusarr = State.variables.continuityArray.slice(1,4)
+
+const max = Math.max(...focusarr);
+
+const index = focusarr.indexOf(max);
+
+if (index == 0) {
+	State.variables.focus = &quot;Agriculture&quot;
+} else if (index == 1) {
+	State.variables.focus = &quot;Commerce&quot;
+} else {
+	State.variables.focus = &quot;Military&quot;
+}
+&lt;&lt;/script&gt;&gt;
+
 &lt;&lt;set $mentalSpirit to $continuityArray[7]&gt;&gt;
+&lt;&lt;set $section3outcome to $continuityArray[8]&gt;&gt;
+
+&lt;&lt;if $section3outcome is &quot;cancel&quot;&gt;&gt;
+&lt;&lt;goto &quot;Cancel roleplaying.&quot;&gt;&gt;
+&lt;&lt;else&gt;&gt;
+&lt;&lt;goto &quot;Carry on.&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 
 
-&lt;&lt;goto &quot;if4start&quot;&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="5" name="if6" tags="" position="1032,537" size="100,100">
-&lt;&lt;set $section5progress to $continuityArray[13]&gt;&gt;
-&lt;&lt;set $section5type to $continuityArray[14]&gt;&gt;
-&lt;&lt;set $section5scene to $continuityArray[15]&gt;&gt;
+&lt;!--&lt;&lt;goto &quot;if4start&quot;&gt;&gt;--&gt;
+
+&lt;!--This shouldn&#39;t actually be a choice here, but the &#39;goto&#39; above should be in a conditional dependent on what decision is picked at the end of 3 (I thought that final decision would be here, but it&#39;s there so the variable needs to carry over.)--&gt;
+
+[[Cancel roleplaying.]]
+
+[[Carry on.]]</tw-passagedata><tw-passagedata pid="5" name="if6" tags="" position="3824,545" size="100,100">
+&lt;&lt;set $section5progress to $continuityArray[14]&gt;&gt;
+&lt;&lt;set $section5type to $continuityArray[15]&gt;&gt;
+&lt;&lt;set $section5scene to $continuityArray[16]&gt;&gt;
 &lt;&lt;set $destination to &quot;if6start&quot;+$section5scene+$section5type&gt;&gt;
 
 &lt;&lt;goto $destination&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="6" name="Sending Node" tags="" position="947,345" size="100,100">&lt;&lt;set $section to ($continuityArray[0])&gt;&gt;
+</tw-passagedata><tw-passagedata pid="6" name="Sending Node" tags="" position="3739,353" size="100,100">&lt;&lt;set $section to ($continuityArray[0])&gt;&gt;
 &lt;&lt;set $destination to &quot;if&quot;+$section&gt;&gt;
-&lt;&lt;goto $destination&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="if7" tags="" position="1448,529" size="100,100">&lt;&lt;goto &quot;if7start&quot;&gt;&gt;
-</tw-passagedata><tw-passagedata pid="8" name="if8_5" tags="" position="1701,527" size="100,100">&lt;&lt;goto &quot;if8_5start&quot;&gt;&gt;
-</tw-passagedata><tw-passagedata pid="9" name="if10" tags="" position="1576,1586" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="10" name="if2start" tags="" position="285,645" size="100,100">[[if2end]] </tw-passagedata><tw-passagedata pid="11" name="if2end" tags="" position="208,1238" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="12" name="if4start" tags="" position="524,642" size="100,100">[[if4end]] </tw-passagedata><tw-passagedata pid="13" name="if4end" tags="" position="536,1139" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="14" name="if6start1m" tags="" position="814,660" size="100,100">Flash 1 - Main
+&lt;&lt;goto $destination&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="if7" tags="" position="4240,537" size="100,100">&lt;&lt;goto &quot;if7start&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="8" name="if8_5" tags="" position="4493,535" size="100,100">&lt;&lt;goto &quot;if8_5start&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="9" name="if10" tags="" position="4368,1594" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="10" name="if2start" tags="" position="599,705" size="100,100">The fridge hums.
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="15" name="if6start1s" tags="" position="814.3637390136719,768" size="100,100">Flash 1 - Side
+It’s what makes you realise you’re hungry.
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="16" name="if6start2m" tags="" position="924.3637390136719,660" size="100,100">Flash 2 - Main
+[[Get up off the sofa.]]
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="17" name="if6start3m" tags="" position="1033.3637390136719,662" size="100,100">Flash 3 - Main
+[[Stay lying.]]</tw-passagedata><tw-passagedata pid="11" name="if2end" tags="" position="601,1901" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="12" name="if4end" tags="" position="3328,1147" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="13" name="if6start1m" tags="" position="3606,668" size="100,100">Flash 1 - Main
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="18" name="if6start4m" tags="" position="1144.3637390136719,660" size="100,100">Flash 4 - Main
+[[if6end]] </tw-passagedata><tw-passagedata pid="14" name="if6start1s" tags="" position="3606,776" size="100,100">Flash 1 - Side
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="19" name="if6start5m" tags="" position="1251.3637390136719,658" size="100,100">Flash 5 - Main
+[[if6end]] </tw-passagedata><tw-passagedata pid="15" name="if6start2m" tags="" position="3716,668" size="100,100">Flash 2 - Main
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="20" name="if6start2s" tags="" position="924.3637390136719,765.5683288574219" size="100,100">Flash 2 - Side
+[[if6end]] </tw-passagedata><tw-passagedata pid="16" name="if6start3m" tags="" position="3825,670" size="100,100">Flash 3 - Main
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="21" name="if6start3s" tags="" position="1034.3637390136719,765.5683288574219" size="100,100">Flash 3 - Side
+[[if6end]] </tw-passagedata><tw-passagedata pid="17" name="if6start4m" tags="" position="3936,668" size="100,100">Flash 4 - Main
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="22" name="if6start4s" tags="" position="1149.3637390136719,765.5683288574219" size="100,100">Flash 4 - Side
+[[if6end]] </tw-passagedata><tw-passagedata pid="18" name="if6start5m" tags="" position="4043,666" size="100,100">Flash 5 - Main
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="23" name="if6start5s" tags="" position="1256.3637390136719,764.5683288574219" size="100,100">Flash 5 - Side
+[[if6end]] </tw-passagedata><tw-passagedata pid="19" name="if6start2s" tags="" position="3716,773" size="100,100">Flash 2 - Side
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="24" name="if6start6s" tags="" position="815.3637390136719,875.5683288574219" size="100,100">Flash 6 - Side
+[[if6end]] </tw-passagedata><tw-passagedata pid="20" name="if6start3s" tags="" position="3826,773" size="100,100">Flash 3 - Side
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="25" name="if6start7s" tags="" position="923.3637390136719,872.5683288574219" size="100,100">Flash 7 - Side
+[[if6end]] </tw-passagedata><tw-passagedata pid="21" name="if6start4s" tags="" position="3941,773" size="100,100">Flash 4 - Side
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="26" name="if6start8s" tags="" position="1035.3637390136719,875.5683288574219" size="100,100">Flash 8 - Side
+[[if6end]] </tw-passagedata><tw-passagedata pid="22" name="if6start5s" tags="" position="4048,772" size="100,100">Flash 5 - Side
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="27" name="if6start9s" tags="" position="1154.3637390136719,874.5683288574219" size="100,100">Flash 9 - Side
+[[if6end]] </tw-passagedata><tw-passagedata pid="23" name="if6start6s" tags="" position="3607,883" size="100,100">Flash 6 - Side
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="28" name="if6start10s" tags="" position="1260.3637390136719,872.5683288574219" size="100,100">Flash 10 - Side
+[[if6end]] </tw-passagedata><tw-passagedata pid="24" name="if6start7s" tags="" position="3715,880" size="100,100">Flash 7 - Side
 
-[[if6end]] </tw-passagedata><tw-passagedata pid="29" name="if6end" tags="" position="1070.1920166015625,1207.0491943359375" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="30" name="if7end" tags="" position="1406.0700988769531,1218.6234130859375" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="31" name="if8_5end" tags="" position="1723.3637390136719,1313.5683288574219" size="100,100">[[Click to continue|Handover Node]]
+[[if6end]] </tw-passagedata><tw-passagedata pid="25" name="if6start8s" tags="" position="3827,883" size="100,100">Flash 8 - Side
 
-[[Other Option|if10]]</tw-passagedata><tw-passagedata pid="32" name="if7start" tags="" position="1445.3637390136719,644.3612670898438" size="100,100">[[if7end]]</tw-passagedata><tw-passagedata pid="33" name="if8_5start" tags="" position="1704.3637390136719,638.3612670898438" size="100,100">[[if8_5end]] </tw-passagedata></tw-storydata>
+[[if6end]] </tw-passagedata><tw-passagedata pid="26" name="if6start9s" tags="" position="3946,882" size="100,100">Flash 9 - Side
+
+[[if6end]] </tw-passagedata><tw-passagedata pid="27" name="if6start10s" tags="" position="4052,880" size="100,100">Flash 10 - Side
+
+[[if6end]] </tw-passagedata><tw-passagedata pid="28" name="if6end" tags="" position="3862,1215" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="29" name="if7end" tags="" position="4198,1226" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="30" name="if8_5end" tags="" position="4515,1321" size="100,100">[[Click to continue|Handover Node]]
+
+[[Other Option|if10]]</tw-passagedata><tw-passagedata pid="31" name="if7start" tags="" position="4237,652" size="100,100">[[if7end]]</tw-passagedata><tw-passagedata pid="32" name="if8_5start" tags="" position="4496,646" size="100,100">[[if8_5end]] </tw-passagedata><tw-passagedata pid="33" name="Get up off the sofa." tags="" position="499,905" size="100,100">The milk in the fridge is still good, just.  The cereal box is empty, but you find an old one at the back of the cupboard.  It is stale.  You eat looking out of the little kitchen window until the neighbour across the courtyard comes into his kitchen, at which point you move to the seat at your table from which you can’t look out, but where he can’t see you by looking in.
+
+The tram is crowded.  The air is tight with perfume and aftershave, the lingering scent of cigarettes and body odour.  You hope that last one isn’t you.
+
+The receptionist at work does not greet you.  At first he smiled, then he simply waved you in, now he barely glances up.  A neutral kind of familiarity that you are perfectly comfortable with.
+
+Borysko intercepts you before you can reach your cubicle.
+
+“On time today Fedir?  Is it a special occasion I don’t know about?”
+
+“No sir.”
+
+“Just decided to do your job?”
+
+“I suppose so.”
+
+He pauses, eyes you.
+
+“Well I’m not going to complain.
+
+“I just wanted to congratulate you on the Ovostav regulations analysis.  Very good.
+
+“Two weeks late and therefore fucking pointless, but very good.
+
+“Get your fucking act together Fedir.  It doesn’t matter how fucking good the work is, if it’s late then we can’t fucking use it.  And that’s if you do it at all.
+
+“You know I really want to like you, Fedir.  Just, you know, try.
+
+“Alright?”
+
+You nod and he lets you go.
+
+[[“To your cubicle.|Work]]
+
+&lt;&lt;set $job = $job + 15&gt;&gt;
+&lt;&lt;set $peace = $peace - 15&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="Stay lying." tags="" position="702,902" size="100,100">The buzzing of your phone is unavoidable.  You look at the clock on your microwave.  It’s wrong of course, but it reminds you to look past it, out the window.  It’s past nine, judging by the light.  Probably by quite a bit.
+
+It’s Borysko.  Who else?  He’s wanting to know “where the fuck” you are.  You could let it ring out, but you know that would be pointless.  There’s no more rest now.
+
+“Yeah?”
+
+“Where the fuck are you?”
+
+So predictable.
+
+“On my way.”
+
+You can hear the silence.  Maybe he’s listening for the sounds of the tram.  Maybe he’s just deciding whether to call you out or not.
+
+“Well whatever,” he decides eventually, “just be here.”
+
+“Yes, of course.”
+
+Another silence, then a sound that’s almost a grunt, probably a sigh, and the line goes dead.
+
+You look around.  The thin curtains over the main window are drawn.  Everything is a faintly purple shadow.  The little window in the kitchen lets in a little more light, but mostly it just lets out your privacy.  Or it would, if your neighbour across the courtyard hadn’t already gone out to work.  Like you should have.  Over an hour ago.
+
+You look back at your sofa-bed.  Maybe you should have slept.  But then you would have had to put on a sheet.
+
+You take a deep breath.  You feel the muscles in your chest push back.  The air rough against your throat.  You could try to shake it out, splash some cold water on your face, yawn, but then you would feel less.  At least tiredness is something.
+
+So you simply step over the paper and the pencils and the dice that have spilt across your floor and [[leave for work.|Work]]
+
+&lt;&lt;set $LateToWork to &quot;True&quot;&gt;&gt;
+&lt;&lt;set $job = $job - 30&gt;&gt;
+&lt;&lt;set $peace = $peace + 35&gt;&gt;
+&lt;&lt;set $dignity = $dignity - 5&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="Work" tags="" position="599,1099" size="100,100">“Fedir!  By the grace of God, where have you been?”
+
+“Sir.”
+
+You bow, a small&lt;&lt;if $focus is &quot;Military&quot;&gt;&gt;, sharp gesture.&lt;&lt;elseif $focus is &quot;Commerce&quot;&gt;&gt; smirk playing across your lips.&lt;&lt;else&gt;&gt; gesture of contrition.&lt;&lt;/if&gt;&gt;  The Prime Minister has met you on the steps of the Tielze House of Ministers.  Black obsidian stairs feel like a perfect void beneath your feet, railings of polished brass and tin cutting strait lines across the steps to become thick columns, rising up to line the building’s gleaming white marble facade.  A dichotomy of dark and light, good and bad, struggle and hope, supported by, or imprisoned behind, bars of the metals that made this country great.  It is beautiful and grand and nothing on the building behind you.  The Free Temple of the Lord, a monument of plaster: duck egg blue and pure, snow white filigree, topped by seven gleaming domes of tin, copper, gold, silver, steel, platinum, and bronze.  You could stare at it for hours, without ever even walking into its sacred hall.
+
+But for now, as the Prime Minister is happy to remind you, you have business.
+
+“You are aware, are you not, that the Polthian Ambassador is here to see you?”
+
+“I am very aware, thank you sir.  That is why I have come back.”
+
+“Come back?”
+
+“Yes, from the Barony sir.”
+
+The Prime Minister’s confusion is obvious.
+
+“The Barony?”
+
+It’s not a particularly eloquent response.
+
+“Yes sir, the Barony.  Do you remember the way Prince Fyopkin was behaving at the second season ball?”
+
+“I … I’m not sure.”
+
+“He was skittish sir.  Didn’t care to be in a room on his own, but was also clearly worried about large groups.  He was a man afraid, sir.”
+
+“Of what?”
+
+“Of making a decision.  Did it not seem odd to you that he was here in the first place?”
+
+“He was visiting his cousin, the Barony Ambassador, was he not?”
+
+“Indeed, that is what he //said//.  But does it not seem an inauspicious time?  The Barony closes more and more doors to us every day.”
+
+“You feel you have to tell me that?”
+
+“Of course not sir.  But then, did it not seem odd to you that Fyopkin came?”
+
+“I am a busy man you know, Fedir.  I cannot wonder about every unusual thing that happens in my court.”
+
+“Well, //I// wondered.  So I made some enquiries.  One of his servants gossiped about a journey they had made to the eastern plains, which led me to our exploratory division, which led me to-”
+
+“Did I not just say I am a busy man?”
+
+“Apologies.  He had come into a surplus of mammoth hide.”
+
+The Prime Minister’s eyes widen.
+
+“Mammoth hide?  Or the exact thing that Polthia will be needing as their northern war approaches a winter stalemate?”
+
+“The exact same.”
+
+“And?”
+
+“I believe I will be able to satisfy the Polthian Ambassador’s desires.”
+
+“Excellent Fedir!
+
+“Fedir!
+
+“Fedir!
+
+“Fedir, what’s the fucking point of you coming in, &lt;&lt;if $LateToWork is &quot;True&quot;&gt;&gt;an hour and a half late, I should add, &lt;&lt;/if&gt;&gt;if you’re not going to fucking do anything.”  You blink up at Borysko.  Flakes of dandruff threaten to fall from the edge of his thinning hairline.  “Do you want this job?”
+
+[[Yes.|I want this job.]]
+
+[[No.|I don’t want this job.]]</tw-passagedata><tw-passagedata pid="36" name="I want this job." tags="" position="501,1298" size="100,100">&quot;Do you?  Then why do you never fucking do it?&quot;
+
+&quot;I’m good at it.&quot;
+
+&quot;Is that an answer?&quot;
+
+You stare back.
+
+&quot;Prove it to me then.  Alright?&quot;
+
+Maybe you nod; you honestly aren’t paying enough attention to know.  He definitely shakes his head before he slithers off across the carpet.  You see the slime trail, a twisting curve cutting across the alternating gray-on-gray lines of the carpet squares.  Then you blink it away, look up into the lighting panel above your neighbour’s cubicle.  The one above your own is the sun hanging high in the cloudless blue sky of Tielze, a land of adventure, excitement, a place where things actually //happen//.  But your neighbour’s is a ceiling light, horrible and always seemingly flickering in a way that you can only really consciously notice in the moment after you blink.  It belongs to the space of the chipped-to-show-the-chipboard desk you sit at, the yellowing plastic monitor that sits atop that, and the spreadsheet that waits for you to pour the minutes of your life into its conceptual [[endlessness.]]
+
+&lt;&lt;set $job = $job + 15&gt;&gt;
+&lt;&lt;set $dignity = $dignity - 20&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="I don’t want this job." tags="" position="702,1301" size="100,100">Borysko blinks.  His wet eyes remind you of a frog.  Note to self: make an ironic twist on a frog prince, some frog … slum landlord or something.
+
+&quot;You don’t?  Then why are you here?&quot;
+
+&quot;Because I need the money.&quot;
+
+&quot;You’re not supposed to fucking say it Fedir.  Human Resources don’t like that kind of thing.  One big happy family.  Okay?
+
+&quot;And do your fucking work.&quot;
+
+He slithers off across the carpet.  You see the slime trail, a twisting curve cutting across the alternating gray-on-gray lines of the carpet squares.  Then you blink it away, look up into the lighting panel above your neighbour’s cubicle.  The one above your own is the sun hanging high in the cloudless blue sky of Tielze, a land of adventure, excitement, a place where things actually //happen//.  But your neighbour’s is a ceiling light, horrible and always seemingly flickering in a way that you can only really consciously notice in the moment after you blink.  It belongs to the space of the chipped-to-show-the-chipboard desk you sit at, the yellowing plastic monitor that sits atop that, and the spreadsheet that waits for you to pour the minutes of your life into its conceptual [[endlessness.]]
+
+&lt;&lt;set $dignity = $dignity + 10&gt;&gt;
+&lt;&lt;set $peace = $peace + 5&gt;&gt;
+&lt;&lt;set $job = $job - 20&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="endlessness." tags="" position="601,1499" size="100,100">Saturday.
+
+You have picked the papers off the floor and laid them on the table.  It took you almost half an hour to get them perfect.  The map sits just off centre, the table of resources slotting in along half of one side, the alliance chart taking up the other.  A screen, hand-made, partitions off one side.  The other three sides are set: character sheet for plate, pencil for knife, dice tray for fork, drinking glass for drinking glass.  You’ve put the candles on the kitchen work surface.  You used to have them on the table, but that was before Oksana made the map.
+
+That was a beautiful afternoon.
+
+Danylo arrives first.  Unusual.  You talk about what you usually talk about when it’s just you and Danylo: your childhoods.  The same stories about the woods, the battles you fought with sticks for swords and tree stumps for castles.  He makes a comment: ‘You should really come out some time, it’ll be good for you.  It’s the off-season, I can get you a staff discount.’  You make a noise that could almost be an answer and turn on the Xbox.
+
+Isai arrives next, so you finish your match and talk about your tabletop roleplaying game until Oksana arrives and you can actually [[start playing.]]</tw-passagedata><tw-passagedata pid="39" name="start playing." tags="" position="601,1699" size="100,100">&lt;&lt;if $focus is &quot;Military&quot;&gt;&gt;You are standing on an outcropping of rock, looking down into a ravine.  To your back, to the east, is Tielze proper, your glorious land of freedom and strength.  Ahead of you are the lands occupied by Polthia, a people oppressed and yearning for their brothers and sisters to the east.  Below you are the people who are going to change all of that.  Three people does not sound much of an army, but anyone who knows these three people like you do would not hesitate to call them a force to be reckoned with.
+
+Danylo stands proudly at their head.  A metal-mancer, he is one with the very land of Tielze.  Thick, knotted muscle can be seen pushing against the ever-shifting, ever-growing alloys that encase him.  He is a master of nature and all things that grow, just as metals sprout like wood from the blessed soil of your home.  A sword that can change length, sharpness, and even shape at will coils around itself, obscuring most of his broad-shouldered back.
+
+Oksana, the skin-snatcher, stands in the shadow of a rock beside him.  Today she is wearing the flesh of a young woman, fair-haired, round-faced, and utterly unremarkable.  It is a common guise for Oksana, a convenient mask to raise few suspicions and small enough to be hidden easily if required: when Oksana slips from it to become the indistinct, flickering, half-seen thing which is her true form.  The pack on her back is her wardrobe: the most essential, valuable, and pleasing skins that she has taken from those unlucky enough to have gained the interest of Tielze’s most notable assassin.
+
+Lastly, Isai rustles in the slight breeze.  It is impossible to tell, now, where his skin ends and his cloak begins, save by the way that the fresher parchment bends more easily in the breeze.  A lore-liver, Isai has made himself of the knowledge of a thousand generations.  From the time of the ancient empires, to the chaos of the northern invasion, the time of heresy, the Great Illumination, the time of empire, to the fracturing, and now to the age of subjugation, the people of Tielze have written their stories of pain, struggle, love, and survival.  Isai has become them, letting their words sink into him, until there is nothing but bone left beneath the pages, and maybe not even that.  Their power is his, and his life is theirs.
+
+They watch a small group of elite Polthian guard pick their way through the narrow valley.  You know they are talking about whether to fight.  You know that, inevitably, they will.  And so they do.  Danylo jumps from the rock, the metal of his boots extending into semi-collapsible struts to break his fall.  He barks out a challenge, surrender or die.
+
+&quot;No shame in the former!  No shame in seeing the truth.  That you don’t stand a chance.&quot;
+
+Much more interesting if they fight.  So they do.  The soldiers lower their wing-tipped spears.  The front four charge, screaming glory to their king.  The back two stay standing, one leg in front of the other.  Ready for a charge they will never make.  Blood is already running dark trails through the dust of their armour.  The points of Oksana’s daggers peek through their throats.  She can barely be seen between them, a figure that is only really there the moment you look away.
+
+Isai nods sadly, he has no tears left in his body with which to cry, and raises his swirling ink eyes to the charging guard.  He lets them read what they see there.  They read and they read, and as it all crashes into them, each attempts to remain who they were before.  Both fail.  One weeps and screams, attempts to run but can no longer decide on a way.  He cries for it all to end at first, until the weight of words crushes him and he instead resorts to the safety of animal cries.  The other simply falls, to lie face first in the dust of the valley, the part of him that was once himself now nothing in the face of all the ‘other’.
+
+Danylo leaps forward to deal with the remaining two.  As he swings for one, his sword snapping forward, a viper to its prey, the other hits his mark.  It lodges between two plates of metal, but the guard’s victory is short lived as the living armour twists, snapping around so quickly that the spear point goes from horizontal to vertical faster than the man can think.  He does not let go until his momentum forces him to, at which point it is too late.  No trebuchet could have done a better job.  The other one dies to the sword a moment later, its writhing knocking the spear out of his hand before snaking over his plate and finding the gap between helm and chest.  He is liberated from his head, or of his body.
+
+The three do not say a word as they clean their weapons and continue on their journey.  They have a long way to go yet.  The battle has not yet even started.
+
+&quot;Good session.&quot;  You say, as you take the last crisps from the communal bowl.
+
+&quot;A little bloody.&quot;
+
+&quot;It wasn’t a question Isai, it was a statement,&quot; you say with satisfaction, licking your fingers.
+
+&quot;I thought it was great,&quot; Oksana shrugs.  A rough doodle of her skin-stealing rogue/assassin is visible on the page of sketch paper she has leaning on her knee.
+
+&quot;No complaints from me,&quot; Danylo agrees, holding his hands up, mollifying.
+
+&quot;Good.  That’s the correct answer.  Next week we’ll get into more of it.  Bring the spicy crisps next time Isai.&quot;
+
+&quot;Yeah, sure.&quot;  Isai shrugs his thin shoulders.  &quot;I’ll see you next week, Fedir.  Oksana, Danylo.  See you next week.&quot;  He smiles, waves, and heads out.  The other two aren’t far behind.
+
+And you sit down on the sofa again.&lt;&lt;elseif $focus is &quot;Commerce&quot;&gt;&gt;The damp sinks through your clothes - thick traveller&#39;s robes, deep hood pulled up - and into your skin.  Your feet have sunk up to your ankles in the mud.  At first you tried pulling them out when they got that far, but you’ve given up on that now.
+
+This is when you feel your most alive.
+
+One by one, you see the figures coalesce through the mist.
+
+Danylo leads the way, uncharacteristically hunched, uncomfortable with the subterfuge.  A metal-mancer, he is one with the very land of Tielze.  Thick, knotted muscle can be seen pushing against the ever shifting, ever growing alloys that encase him.  He is a master of nature and all things that grow, just as metals sprout like wood from the blessed soil of your home.  The sword he wears on his back, a sword that can change length, sharpness, and even shape at will coils around itself, is only partially obscured by his body.
+
+Oksana, the skin-snatcher, walks just behind him.  You are surprised to see her wearing the flesh of a young woman, fair-haired, round faced, and utterly unremarkable.  It is a common guise for Oksana, a convenient mask to raise few suspicions and small enough to be hidden easily if required: when Oksana slips from it to become the indistinct, flickering, half-seen thing which is her true form.  The pack on her back is her wardrobe: the most essential, valuable, and pleasing skins that she has taken from those unlucky enough to have gained the interest of Tielze’s most notable assassin.
+
+Lastly, Isai rustles with each step.  It is impossible to tell, now, where his skin ends and his cloak begins, save by the way that the fresher parchment bends more easily.  A lore-liver, Isai has made himself of the knowledge of a thousand generations.  From the time of the ancient empires, to the chaos of the northern invasion, the time of heresy, the Great Illumination, the time of empire, to the fracturing, and now to the age of subjugation, the people of Tielze have written their stories of pain, struggle, love, and survival.  Isai has become them, letting their words sink into him, until there is nothing but bone left beneath the pages, and maybe not even that.  Their power is his, and his life is theirs.
+
+They know exactly where to find you.
+
+&quot;Fedir.  It’s good to see a familiar face here,&quot; Danylo says, placing his giant gauntleted hand on your shoulder.  Oksana merely nods, while Isai’s smile brings a warmth to this place you didn’t think was possible.
+
+&quot;Well glad I am that you have made it safely through.  There was no trouble?&quot;
+
+&quot;The steppe caravans were as helpful as always,&quot; Isai answers your question.  &quot;One family recognized Danylo by his accent, but I gave his wife the story of her grandmother and he let the guard patrol go without a word.&quot;
+
+&quot;Then you are prepared?&quot;
+
+&quot;As much as we’ll ever be.&quot;  Danylo begins to laugh, the sound of a bear humping a boulder, but Oksana pokes him sharply in the ribs and he remembers himself.
+
+&quot;Good.  Then there is no point in delaying.  I have discovered that the prince keeps the ledger in his private chambers.  I will ‘arrive’ on business in half an hour.  He will accept me, even at this time.  How you get into his room is up to you.&quot;
+
+As you speak, you indicate the Prince’s window.  Danylo sucks on his teeth contemplatively, but Oksana shakes her head.
+
+&quot;We will go through the servant’s quarters.  Better subterfuge here than stealth.&quot;
+
+&quot;Do you have a disguise?&quot;
+
+&quot;No, but I can gain one.&quot;
+
+You look down at your feet.  Neither Danylo and Isai say anything either.  You all accept the necessity, but none of you want to actively endorse it.  Oksana grits her teeth, packs away her skin and invisibly disappears.
+
+Fifteen minutes later a young man, no more than sixteen, approaches wearing the clothes of a stable-hand.
+
+&quot;This will do,&quot; he says with Oksana’s voice.
+
+You see Danylo swallow hard, but Isai keeps them on track.
+
+&quot;A stable boy will not be able to get to the upper floors.&quot;
+
+&quot;No.  But he can get in far enough to cause a distraction.  Although he could use some help with that.&quot;
+
+All of you look to Danylo, who shakes his head and smiles slightly.
+
+&quot;Alright.  A good old-fashioned?&quot;
+
+&quot;Why not?&quot;
+
+So you all leave, them moving towards the servant’s quarters, you the main gate.
+
+The Prince almost seems relieved to see you.  It is a shame.  Almost.  Your meeting is cut short by a commotion from the stables.  All the locks, all the bits, all the latches, suddenly, as if by magic, simply disappeared.  Melted away.  And the animals, as if the very forces of nature themselves had urged them, all, as one, bolted.  The horses made for the front gate while the pigs simply wallowed in the fresh dirt.  A chicken was seen riding a goat.  The stable-hand on duty was simply not up to the task.  If anything, it seemed that his ineffectual bumblings were making everything worse.
+
+You left in the confusion, but you still know what will have happened.  Eventually, but not without some losses, the people of the castle will have the animals under control.  Then they would have found that one of the Prince’s personal guards had died.  Some will suspect magical means, others will assume it is what it looks like, a heart attack.  That the man died with a look in his eyes as if he had just seen a thousand worlds through the lens of a million lives, that his reality had been opened up to so much suffering, anger, joy and //life// that //he//, as an individual separate from it all, had simply ceased to be, that was something the people preferred to simply remain a mystery.
+
+And, of course, the stable-hand was never seen again.  You wonder who will be blamed for that.  You wonder if Oksana bothered keeping his skin.
+
+&quot;Good session?&quot;  You ask, as Isai rejects the dregs of the communal crisp bowl and it is handed to you.
+
+&quot;Very good, I thought.&quot;  Isai answers, sitting back happily.
+
+&quot;I still don’t see why I couldn’t have just snuck up to the room myself,&quot; Oksana grumbles.
+
+&quot;You could have done,&quot; you concede, for the third time this evening, &quot;but you have to admit it was more fun this way.  For everyone.&quot;
+
+She shrugs and rolls her eyes, in a way you know she doesn’t mean seriously.
+
+&quot;I still think you should have let me turn myself into a horse,&quot; Danylo complains.
+
+&quot;Next time Dany, next time.&quot;
+
+You all chat for a while longer, but then Danylo has to go, then Isai, and Oksana goes with him.
+
+And you sit down on the sofa again.&lt;&lt;else&gt;&gt;Your arms ache from the angle at which they’re pulled behind your back, you’ve squirmed enough that you’ve chafed the skin from your ankles, and your eye will hardly open from when you ‘talked back’.  But the thing you really worry about is the sun.
+
+It should be a beautiful day.  On the edge of a field, the tall stalks of newly sprouted copper glistening beautifully against the clear blue sky.  The air is still, but nevertheless you hear the //ping// of the tight, ripe strands of metal glancing off each other.
+
+And then, behind you, in the shade of the forest, a nightingale starts to sing, a song as varied as the land which it calls home.
+
+It is perfect.  The sounds of your childhood.  The sounds of your country.
+
+Sweat rolls across your bloodied eye and you feel the sting of the salt.
+
+You are surprised you have sweat left to lose.
+
+Behind you, under the sound of the nightingale, you hear voices.  But the people of Sol-os have a thousand tongues and you never learnt more than the four court dialects.  Whatever pigeon or regional language this is, it is not one you recognise.  But you recognise brutality when you see it.  These are men accustomed to desperation, but ones who believe they have just found their way out.  You cannot blame them for being willing to do anything to hold on to that.
+
+But you are that.  The Financial Vizier to the Prime Minister of Tielze.
+
+Or: a hefty ransom.
+
+You hope that the Prime Minister does not pay.  You are gifted, a great asset to the Republic.  But still, there are others.  And if anyone knows your country’s financial woes, it is you.
+
+This is what you are thinking about when you see it.  You missed it at first, copper against copper, but it is too thick, and when it moves you see it for what it is.
+
+Danylo crouches between the stalks, smiling at you.  A metal-mancer, he is one with the very land of Tielze.  Thick, knotted muscle can be seen pushing against the ever shifting, ever growing alloys that encase him.  He is a master of nature and all things that grow, just as metals sprout like wood from the blessed soil of your home.  The sword he wears on his back, a sword that can change length, sharpness, and even shape at will coils around itself, is only partially obscured by his body.
+
+Then you notice Oksana.  You are surprised to see her wearing the flesh of a young woman, fair-haired, round faced, and utterly unremarkable.  It is a common guise for Oksana, a convenient mask to raise few suspicions and small enough to be hidden easily if required: when Oksana slips from it to become the indistinct, flickering, half-seen thing which is her true form.  The pack on her back is her wardrobe: the most essential, valuable, and pleasing skins that she has taken from those unlucky enough to have gained the interest of Tielze’s most notable assassin.
+
+Lastly, of course, is Isai, rustling even in the almost dead air.  It is impossible to tell, now, where his skin ends and his cloak begins, save by the way that the fresher parchment bends more easily.  A lore-liver, Isai has made himself of the knowledge of a thousand generations.  From the time of the ancient empires, to the chaos of the northern invasion, the time of heresy, the Great Illumination, the time of empire, to the fracturing, and now to the age of subjugation, the people of Tielze have written their stories of pain, struggle, love, and survival.  Isai has become them, letting their words sink into him, until there is nothing but bone left beneath the pages, and maybe not even that.  Their power is his, and his life is theirs.
+
+Isai nods to you, his smile more concerned than his companion’s, while Oksana acknowledges you with a glance.  You smile back, nodding to show that you are okay.  Danylo gives you a thumbs up and the three briefly disappear back into the mass of stalks.
+
+It is just a few minutes later that things begin to happen.  The pinging of stalk against stalk goes, in an instant, from the gentle sound of the healthy growth to a mad cacophony.  A thousand stalks rush to meet each other at once, the force of their attraction ripping them from the ground.  At first they simply bend to a point they themselves obscure, performers bowing low, and you imagine it from above, a giant circle of the crop, all the milometer thin strands trying to touch the same point.  But then they rise, the stalks at the centre climbing up in a fountain, twisting and bending into new shapes as others rush in to fill the void.
+
+The men behind you are shouting now.  You can just about hear them over the sound of the stalks clashing and rubbing against each other.  Again, you cannot understand the words, but you would guess from the tone that they are readying themselves for a fight.
+
+The fountain of copper has almost revealed its goal.  It’s split in three, two streams long, the other short.  Arms and a head.  It begins to push itself off from the now barren ground, and as it does a figure steps before it, the paper of his robes and skin whipping around him in the gusts of wind created by the roiling mass of metal behind him.
+
+He nods at you, almost imperceptibly, and you close your eyes just before he opens his.
+
+There is a moment of silence, and then you hear the panic and the screams.  Some voices are simply confused, and you imagine some of the bandits running to scoop their comrades off the ground, attempt to save the men who have just fallen, screaming or babbling or simply unmoving, the selves they thought they were overwhelmed by the stories of a thousand thousand others, the lives unique to their own bodies lost to a flood of //other//.
+
+But one bandit, at least, remembers why he is here.  You see him out of the corner of your eye as you open it again, running towards you.
+
+You see the dagger, seemingly floating free in the air, a moment before he runs into it.  It is sharp enough that he does not stop running as his head slumps against his shoulder and rolls to hang against his chest.
+
+He is the only one.  The rest, quite simply, run.
+
+&quot;Thank you.&quot;  is all you manage to say when your saviours untie you.
+
+&quot;Please, no need.  Protecting Tielze.  It’s what we do.&quot;  Isai whispers as he attempts to help you to your feet.  You do not manage it, and you pass out attempting, for some reason, to read the words written on his lips, knowing that when you wake, you will be safe once more.
+
+&quot;Was that okay?&quot;  You ask as you scoop up the last few crumbs from your bag of crisps.
+
+&quot;Yeah, that was nice.&quot;  Isai answers.
+
+&quot;Hey, if you’re going to give me the chance to make a mech, I’m not going to complain.&quot;  Danylo laughs.
+
+&quot;Still think we should have just killed them.&quot;  Oksana shurgs.  &quot;Think about how cool it would have been if you’d shot some of those stalks out of your mech arm Dany?&quot;
+
+&quot;Pretty fucking cool, to be fair.&quot;
+
+Isai shrugs. &quot;I think we did the right thing.  The more mercy we show even the criminals of Sol-os, the more leverage we’ll have with the Sultan.&quot;
+
+That starts a discussion on the relative merits of &quot;diplomatic advantage&quot; vs &quot;fuck-off-cool mech fights&quot;, a discussion that ultimately ends inconclusively when Danylo has to go home.  You attempt to keep the discussion alive a bit longer, hoping that &quot;diplomatic advantage&quot; will have the upper hand now that it’s two against one, but it has already died, and soon the other two leave as well.
+
+And you sit down on the sofa again.&lt;&lt;/if&gt;&gt;
+
+[[Go to sleep.|if2end][$dignity = $dignity - 5; $peace = $peace - 5; $job = $job + 10]]
+
+[[Stay awake to dream.|if2end][$peace = $peace + 10; $job = $job - 10]]</tw-passagedata><tw-passagedata pid="40" name="Cancel roleplaying." tags="" position="1602,699" size="100,100">You sit.  There is no sound but the hum of the fridge and the creaking of your old sofa, but that is only when you move.  Every so often your phone buzzes with another Telegram update.  Sometimes you check it, sometimes you don’t.
+
+You remember watching the Eurovision song contest as a child.  Each time another score was revealed, you would feel this surge of hope.  Each time it wasn’t Ukraine, you’d feel it even more the next time.  As the victory became more and more impossible, you would hope more and more.  More and more that something went wrong, that suddenly someone would stand up and say that there had been a mistake, that actually they’d missed a bunch of twelve points, and they were all for you.
+
+&lt;&lt;if $mentalSpirit gte 4000&lt;!--PLACEHOLDER ALERT!  FIX PLZ!!!!!--&gt;&gt;&gt;That is what you feel now.  The little kid with sticky fingers, almost pushing his face against that old, flickering box of a TV, believing more and more in the impossible as the inevitable became more and more inevitable.  Each buzz of the phone brings more of what you know it will, and yet each time you look, you feel the hope that you’ll see a picture of Vladimir Putin accompanied by the words &quot;backs down&quot;, or &quot;surrenders&quot;, or even just fucking &quot;dies&quot;.
+
+You never do.
+
+But if something is to happen, someone has to make it happen.  //That’s// different.  It’s different that you know that now.  No-one is going to pop out and find those missing points.  No-one is going to smack Putin around the face and talk some sense into him.
+
+You can’t.
+
+But you are also //not// sitting and staring between the pixels of the TV.  The ‘results have //not// been checked, and verified.’
+
+There is time.  Time to fight, to stand for your country, to stand for freedom, for equality, for justice.  Against tyranny, apathy, and corruption.  To stand, fight, and do whatever is necessary, for Ukraine.
+
+Or, of course, you could live.  Run.  Get out while you can.  Maybe phone Oksana, drive to the border, find somewhere in Poland, or Germany, somewhere safe, somewhere in NATO.  You can do things there, tell the world what is happening.  Maybe you can’t save your country.  Maybe they don’t need accountants on the front line.  But maybe if you lived, somewhere safe, you could do something.
+
+Or maybe you should fight.  That is best.  That is the right thing to do.
+
+But will you do it?
+
+[[You will, you will stay and fight.|Stay to fight][$mentalSpirit to $mentalSpirit + 100]]
+
+[[You will go and live.|Leave to live][$mentalSpirit to $mentalSpirit - 100]]&lt;&lt;else&gt;&gt;You don’t feel that anymore.  It was beautiful, you suppose.  To be so naive.  Pure, maybe.  Is it pure to look maths, logic, reality, in the face and say &quot;no, I don’t believe&quot;?  Or do we just call it that to save the delicate feelings of children?  And idiots.  Are you better than them for knowing, each time the phone buzzes, that it will only be bad news, that things will only get worse, that soon the country will be engulfed in flame and Kyiv will fall and President Zelensky will end in some unmarked grave, a casualty of some ‘unknown illness’ caught while awaiting trial, or the victim of another code-violating hospital window, or a fucking bullet in the skull in Maidan Nezalezhnosti?
+
+No, you are not better.
+
+You are a coward.  A coward who, really, is just going to run, run, his tail between his legs, out, out now, pack up the little things you can, it’s easy, you’re special, you only have one room’s worth of stuff (if you don’t count the bathroom, of course), you can put it all in a bag now and run pissing yourself to the border and out, away, to die somewhere forgotten and alone and a waste, a fucking waste you sack of blood and piss and shit and blood that never bled for anyone, you useless fucking coward.
+
+Or are you simply lazy?  Is that it?  Are you just going to sit there, farting into your sofa bed (still no fucking sheet on it) and wait until someone either gives you a gun or gives you a bullet.  And then you’ll die, you’ll die in this bombed-out apartment or you’ll die on a field somewhere in Donbas, not because you cared, not because you were a hero, a great patriot, but because you were too fucking lazy to run, too fucking apathetic to scream as the shell hit you, as the gas filled your lungs, as you were carted off to some Siberian gulag to die cosplaying Solzhenitsyn.
+
+Which is it?  Are you going to run?  Or are you going to die?  Are you a coward, or are you lazy?
+
+[[Lazy.|Stay to fight][$mentalSpirit to $mentalSpirit + 50]]
+
+[[A coward.|Leave to live][$mentalSpirit to $mentalSpirit - 50]]&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="Carry on." tags="" position="1799,700" size="100,100">Isai arrives first.  His face reminds you of one of those Greek theatre masks: bone white, with eyes so sunken that they appear like black pits.  All he does when you open the door is silently hug you.  You feel his chest move up and down against yours, the breaths deep, even, but laboured.  You can feel the tension to control them.  You do not say anything when he breaks away, and he says nothing either as he near collapses to sit on the floor.  You perch on the sofa bed.
+
+His voice when it finally comes, is strained.  You wonder how much he has cried.
+
+&quot;Again.&quot;
+
+You don’t know what to say, so you wait for him to speak again.
+
+&quot;I didn’t think it could happen again.  Not in my lifetime.&quot;
+
+&quot;What about twenty-fourteen?&quot;
+
+He looks up at you.
+
+&quot;What about Donetsk?  What about Luhansk?&quot;  He smiles: ironic, joyless.  &quot;I know.  And I knew.  But //how//?  I thought we were supposed to ‘never forget’.  I thought the twentieth century was over, I thought everything was supposed to be fine after the wall fell.  That’s what I was told.  What else was it all for then?  If not to be an end.
+
+&quot;Haven’t my people suffered enough?&quot;
+
+&quot;Your people?&quot;
+
+&quot;Our people.  Sorry.&quot;  He shrugs.  &quot;I thought suffering would come easier.  We’re supposed to be used to it.&quot;
+
+You also don’t have a response to that.  You think you are about to lapse back into silence when Isai does something you’ve never seen him do before.  Something you couldn’t have imagined him doing.
+
+He screams.
+
+&quot;Why!  Why can’t we just have our peace!  A thousand years!  More!  A thousand years of beatings and death and now, //now// we’ve finally got our peace and it’s - what? it’s being taken away?  I’m Ukrainian!  My father was Ukrainian, and his father, and his father and I don’t even know how far back!  They might have come straight here after the fall of the second temple!  And my mother, my mother’s Ukrainian!  She was Ukrainian because //they// forced her mother and father, because //they// … I don’t even know.  Why do they do it?&quot;  He does not expect an answer, and you do not give one.  When he continues, his voice has lost all emotion.  &quot;//I// am Ukrainian.  And I was promised peace in my time.  The world owes us that.
+
+&quot;God, what have we done?  Both my peoples, what have we done?&quot;
+
+You wonder if he knows the answer.
+
+The doorbell rings.  Oksana is keyed up, her arms swinging by her side when she moves.
+
+&quot;Do you think it’s going to happen?&quot;
+
+You stare blankly at her, while Isai’s eyes go wide.
+
+&quot;Yes,&quot; he says, simply.
+
+She looks down at him.
+
+&quot;You think they’d dare?  They’re just posturing.  They want to make us think they’re going to come down from Belarus just because they want us to stop watching Donbas.  It’s a feint and we shouldn’t be falling for it.&quot;
+
+&quot;Why would it be?  What is to stop it being real?&quot;
+
+&quot;Us?  He can’t really think of doing it.  We won’t live under Russia.  We’ll fight.  It’s stupid, he just wants Donbas.&quot;
+
+&quot;Like in twenty-fourteen?&quot;
+
+&quot;Things are different now.  Zelensky won’t-&quot;
+
+The doorbell rings again.  Danylo looks almost as pale as Isai, but he tries to smile.
+
+&quot;Hello all!  All excited for the game?&quot;  The three of you stare at him.  For a moment the smile falls, and the stress and fear beneath shines out.  
+
+&quot;Please.&quot;
+
+It is all he has to say.  Isai is on his feet and at the table first.
+
+&quot;I was thinking of restatting a bit, if that’s okay Fedir?  I’m thinking of taking ‘staves and rods’ as a tertiary discipline to replace ‘hand-to-hand’.  I just think I’d look cooler with a big staff.&quot;
+
+&quot;Yeah, that’s fine.&quot;  You say, moving to sit down.  Oksana joins you, while Danylo stands by the door.  The smile hangs loosely on his face.
+
+&quot;We’ll stay together, right?  You know you’re my best friends.&quot;
+
+&quot;We’ll stay together, Danylo.&quot;  Isai smiles from the table.
+
+&quot;Good.  Right.  Right, I was thinking about how I want to approach the dragon problem.  Dragons hoard, right?  Like, precious things.  Like gold.  You know, a metal…&quot;
+
+You play for a long time.  You stop only for a brief moment, an instant in which reality is allowed to flow back in, the moment after you’ve sat back in your chairs and stretched.  When the adventure fades and for a moment you are warm and comfortable around the gaming table, your bellies full with crisps and sweats and fizzy drinks, and the moment after that, when you remember the rest.
+
+&quot;I … I don’t have work in the morning,&quot; Danylo says, hopefully.
+
+&quot;Neither do I,&quot; Oksana continues.
+
+&quot;I don’t need to study,&quot; Isai says, as they all turn to you.
+
+&quot;I want to keep going.&quot;
+
+And so you do.  Long into the night.  Until your phones all begin to buzz.
+
+&quot;Special military operation,&quot; Isai reads out.
+
+&quot;What the fuck does that mean?&quot;  Oksana sounds almost like a petulant child.
+
+&quot;War.  That’s what it means, doesn’t it?  War.&quot;
+
+You look from Danylo who spoke, to Isai, who slowly lowers his phone.
+
+&quot;Yes.  I think it does.&quot;
+
+[[We need to find a way to help, to fight.|Stay with group][$mentalSpirit to $mentalSpirit + 200]]
+
+[[We need to run, to get out.|Leave with group][$mentalSpirit to $mentalSpirit - 50]]</tw-passagedata><tw-passagedata pid="42" name="Stay to fight" tags="" position="1402,901" size="100,100">Having made &lt;&lt;if $mentalSpirit gte 4000&lt;!--PLACEHOLDER ALERT!  FIX PLZ!!!!!--&gt;&gt;&gt;the decision to die&lt;&lt;else&gt;&gt;your decision, you are ready to start acting on it immediately, but you are unsure what volunteering for the military entails.  It is only after pacing around the flat for half-an-hour that you even think to just Google it.  Recruitment offices.  They’ll be open in the morning.
+
+You should probably try to sleep, then.
+
+You can’t.
+
+Pack, then.
+
+What does a soldier need?  What do they give you?
+
+You spend a long time staring at your papers, a long time staring at Oksana’s map.  You want to take it with you, but it’s big and heavy.  And not yours.  You can’t simply take it.  Tielze and the Barony and Polthia and Sol-os are your home.  If anything, //you// are the one who does not need this map.  It is //their// portal to a world you are lucky enough to be able to enter at any time.
+
+&lt;&lt;if $focus is &quot;Military&quot;&gt;&gt;Of course, that means very little, when the map is here and they are not.  But&lt;&lt;elseif $focus is &quot;Commerce&quot;&gt;&gt;You cannot just take it from them.  And anyway,&lt;&lt;else&gt;&gt;You do not want to part with it.  But&lt;&lt;/if&gt;&gt; it will be safer here.  If it isn’t…
+
+So you take some clothes, some toiletries.  Don’t they provide that stuff?  Isn’t there a uniform?
+
+So you take only things you don’t mind throwing away.  That isn’t difficult.
+
+It’s still early, still before four.
+
+Soldiers are fit.  You are not.
+
+You should get fit.  Push-ups, like in the movies.
+
+You don’t manage many.  You try sit-ups, planks, squats.
+
+You are on your sofa, wondering whether it is good or bad that it has no sheet on it to absorb your sweat.
+
+Your phone buzzes.  A news alert.  President Putin’s face.
+
+You stand at the back of the crowd, your traditional Barony bear skin cloak wrapped close around you, its hood drawn, keeping you safe from snow and spies both.
+
+The Baron talks from his balcony, framed by the countless swirled, lined, dotted, zigzagged domes of the Towers of a Thousand Colours.
+
+He talks about saving Tielze from itself.  He talks about freedom, sovereignty and liberation.  He talks about weapons that don’t exist, phantom ideologies, alliances your government has never signed.  He talks of your people as puppets, of Polthia and their allies; the great Alliance of the West.  He says they have been committing a genocide, a nightmare in both its tone and reality.  You wonder if it is only to justify one of his own.
+
+He talks of retribution.  He talks of subjugation, and necessity, that your people have done nothing but bring it all upon themselves.
+
+He talks of war, although he never says the word.
+
+You move again when you see your neighbour in his kitchen across the courtyard.  You go to stand up, to move to a position where he can’t see you, but then you stop.
+
+He’s frying an egg.  He’s making toast.  He’s tapping his foot, listening to music.
+
+He eats, disappears.  When he comes back the grey under-shirt is under a shirt.
+
+He’s dressed for work.  He’s going out.
+
+You check your phone.  The final frame of Putin’s speech is still there.  He stares directly out at you, slouched ever so slightly, one hand on the desk, the other clinging to it like a drowning man to a plank of wood.  He held his hands like that the entire way through.  He declared war, he sent his people off to die, to kill, and his hands didn’t move.
+
+You don’t know what that means.
+
+Your neighbour has left.  Off to work in a country at war.
+
+You won’t do the same.
+
+You pick up the rucksack you packed last night.  Too light for an entire life’s treasures.
+
+It’s cold out, just above freezing, but the strong winds make it feel much colder.  The streets are noticeably emptier than normal, but you are not alone on the tram, which is still running as regularly as always.
+
+You are far from the first person at the recruitment office.  The line stretches around the building.
+
+All types of men are there.  This one, with square glasses, looks like Isai’s PhD friends.  This one, a taxi driver, or landlord.  This one a stay-at-home father.  This one a farmer, this one a shop clerk, this one a boxer.
+
+You walk through the snows, your leather boots finding the trail left by the hundreds before you.  Your battle standard waves in the breeze, the cavalry armour gleaming in the thin winter sun, the-
+
+The man ahead of you in the queue offers you a cigarette.  You decline, but offer him a light, which he takes, despite definitely having one of his own.
+
+He’s Boyko.  He talks to you about his son.  His son is twenty-one, studying anthropology in America.  Boyko wants him to stay there, but he wants him to have a Ukraine to come back to.
+
+&quot;I thought we were about to become something.  That new one, Zelensky, he was going to sort it all out.  The young people like him.  He was going to make us something, free like they are in the west, but strong, Slav strong.  Something new; who has that opportunity nowadays?  We do, that’s Ukraine.  That’s what I want to give my son, that’s what I want to him to come back to.
+
+You don’t have children and you tell him so.  He says someone young like you, you’ve got time.
+
+His son was good at football in school.  Boyko discouraged him, said he should get a proper job, but he’s not sure he was right to do that now.  He doesn’t really know what anthropology is, but he knew football.
+
+You’ve never really played football, and you tell him.  He says someone young like you, you should play football.  But there’s time.
+
+He talks about being a foreman.  He says it’s good work, outdoors, you can get to use your hands, but you’re still with other people.  Get to tell them what to do and they listen.  It’s good work, he says.
+
+He’s going to be a soldier.
+
+You are too.
+
+You tell him about Tielze, but he doesn’t understand.  He goes back to football.  The man behind him asks about some team or other.  You don’t listen very much; it’s a conversation you’ve heard so many times before.
+
+You move from foot to foot to keep warm until they let you inside.
+
+The men inside are different from the men outside.  They have something to do, and when they get their hands on you, you have something to do to.  That’s all they have to do to make you one of them.  They process you quickly.  You’re here, so there isn’t any convincing to do.  Are you healthy?  Able?  Between eighteen and sixty?  Then you’d be here whether you volunteered or not, so no need for more formalities.
+
+Sign here, here, and here.
+
+You’re a soldier now, Fedir.
+
+[[Slava Ukraine.|if4end]]</tw-passagedata><tw-passagedata pid="43" name="Leave to live" tags="" position="1598,901" size="100,100">Once you decide to run, you pack quickly.  It isn’t hard; sometimes it feels like living in your studio flat is like living in a suitcase anyway.
+
+It is the map that makes you stop.  It’s Oksana’s.  You think.  At least: if it is yours, then it is the whole group’s.  You can’t simply take it.  Tielze and the Barony and Polthia and Sol-os are your home.  If anything, //you// are the one who does not need this map.  It is //their// portal to a world you are lucky enough to be able to enter at any time.
+
+&lt;&lt;if $focus is &quot;Military&quot;&gt;&gt;Of course, that means very little, when the map is here and they are not.  But&lt;&lt;elseif $focus is &quot;Commerce&quot;&gt;&gt;You cannot just take it from them.  And besides,&lt;&lt;else&gt;&gt;You do not want to part with it.  But&lt;&lt;/if&gt;&gt; you cannot imagine the game ending.  No, no, that’s just not possible.  Without it…  No.  If they need the map to play, or, rather, if giving them the map might show them what it means, then they need to have the map, or access to the map.
+
+Maybe you just need to show them &lt;&lt;if $focus is &quot;Military&quot;&gt;&gt;that they can’t give up.&lt;&lt;elseif $focus is &quot;Commerce&quot;&gt;&gt;how much they mean to you.&lt;&lt;else&gt;&gt;how much it means to you.&lt;&lt;/if&gt;&gt;
+
+Tielze needs you.  And it needs them.
+
+You video call the group.
+
+Danylo picks up first.  He’s sitting in a dark room, you can see a wall behind him but that’s it.
+
+&quot;Hey man, what’s up?&quot;
+
+Oksana is there before you can answer.  Her apartment is a mess behind her.  You remember those pizza boxes from when you went round last month.
+
+&quot;What?&quot;
+
+And then, just as quickly, Isai is on the line, his family loudly arguing in the background.
+
+&quot;Fedir?  Is everything okay?&quot;
+
+&quot;The map,&quot; you say, hurriedly.
+
+&quot;My map?  What about it?&quot;  Oksana asks.
+
+&quot;I’m going away.  I can’t stay here, I can’t fight.  &lt;&lt;if $mentalSpirit gte 4000&lt;!--PLACEHOLDER ALERT!  FIX PLZ!!!!!--&gt;&gt;&gt;There’s more I can do outside, somewhere safe.&quot;
+
+You can tell none of the four of you quite believe you.&lt;&lt;else&gt;&gt;I … I can’t.  I, I’m sorry.  I have to go.  If there’s … if there’s a war.  I can’t see that.  Not real, not if it’s real.&quot;&lt;&lt;/if&gt;&gt;
+
+&quot;We’re leaving too.  My family.  You should come with us.&quot;
+
+You look at Isai.  Even over the phone, you can tell he is pale.  His face looks tight, his eyes sunken and dark.
+
+&quot;You can’t leave.&quot;  Your eyes flick to Oksana, staring confused into her webcam.  &quot;You can’t leave.&quot;  She repeats again.  &quot;If there’s going to be a war, we need to stand strong.  Ukraine needs to prove we’re not going to roll over for fucking Putin.  You can’t run.&quot;
+
+&quot;My parents need me, Oksana.&quot;
+
+&quot;Your country needs you.&quot;
+
+&quot;Guys, please.&quot;  Isai closes his mouth, but Oksana ignores Danylo.
+
+&quot;This is how he gets away with it.  This is how they always get away with it.  Because people don’t fight.  You’re always going on about our history, Isai, how abused we were.  This is the time to actually do something about it.  I learnt that from you!&quot;
+
+&quot;My family, Oksana … we’ve seen this too many times.  We always should have run.  We won’t suffer and die, not again, not this time.&quot;
+
+You see Oksana thinking.  She’s clearly neither happy nor satisfied, but it’s a tricky line to walk.  But she does not get a chance.
+
+&quot;I want us to stay together.&quot;  Your eyes turn to Danylo, whose wet eyes stare downwards into nothingness.  &quot;And I don’t want to die.&quot;
+
+&quot;But, Danylo.  You could fight.  You’re fit and healthy, you know survival skills and … and all that stuff.&quot;
+
+&quot;I don’t want to die.&quot;
+
+It is only after the pause that you realise you are the one who said it.
+
+The others turn away.
+
+&quot;We have to, Oksana.  We cannot fight this fight.&quot;  Isai sits back, his expression sad.
+
+&quot;We’re the greatest warriors Tielze has ever known!&quot;
+
+&quot;Please, Oksana.  I don’t want … you’re my best friends.  If Isai is going, and Fedir…  You should come too.  We should stay together, through this.&quot;  Fedir leans forward, the living metal of his armour moving to cover every inch of his skin, leaving only his eyes showing.
+
+The ripple in the air you know to be Oksana shivers.
+
+&quot;Fine.  Fine.&quot;
+
+&quot;Fedir?&quot;
+
+&quot;Yes, how may I be of service?&quot;
+
+There is a pause while the three of them look towards you, across the great table of the Hall of Heroes.
+
+&quot;Fedir.  Listen.  We’ll come pick you up.  We all meet at Fedir’s, as soon as we can?  We’ll travel in convoy.&quot;
+
+&quot;I’ll get my family.&quot;  Danylo agrees.
+
+&quot;I’ll get my bike.&quot;  Oksana concedes.
+
+They leave the hall.  
+
+It is a long time before you realise you are still holding your phone, the screen long blank.
+
+It buzzes.  A news alert.  President Putin’s face.
+
+You stand at the back of the crowd, your traditional Barony bear skin cloak wrapped close around you, its hood drawn, keeping you safe from snow and spies both.
+
+The Baron talks from his balcony, framed by the countless swirled, lined, dotted, zigzagged domes of the Towers of a Thousand Colours.
+
+He talks about saving Tielze from itself.  He talks about freedom, sovereignty and liberation.  He talks about weapons that don’t exist, phantom ideologies, alliances your government has never signed.  He talks of your people as puppets, of Polthia and their allies; the great Alliance of the West.  He says they have been committing a genocide, a nightmare in both its tone and reality.  You wonder if it is only to justify one of his own.
+
+He talks of retribution.  He talks of subjugation, and necessity, that your people have done nothing but bring it all upon themselves.
+
+He talks of war, although he never says the word.
+
+When Isai arrives, he finds you holding a toothbrush in one hand.  You do not let go of the sword, even as he helps you into the car.
+
+It is a one-handed blade.  You are not used to wielding weapons of any kind, but this is the one you are most comfortable with.  Not, it occurs to you, that you know how to use it.  Can it be too hard?  Point it at the … thing you want to ki-, attacker.  Slash.
+
+It gleams in the sunlight of the … of your office.  In the Tielze House of Ministers.  Why is it here?  You don’t need a sword here.  This is your office, you’re perfectly safe.
+
+The leather of the back-seat of Isai’s car is smooth.  You want to stroke it, but there’s little to touch between you, his mother, his kid-sister, and the blankets and baggage they’ve got stuffed in here with them.
+
+The road is dusty, the horses straining against their … harnesses, reins, pulling the wagon, no, carriage, closed sides, roof, warm and dark and safe.
+
+Isai is fighting with his mum and dad about the radio.  Isai wants the news, mum wants music, and dad wants silence.  You don’t know who wins.  All you hear is the sea.  Why?  Riding the storm waves of the False Ocean, heading towards Sol-os on an important diplomatic mission.
+
+Towards Sol-os.  Away from Tielze.
+
+Isai’s sister is screaming about something they left behind.  You hope it wasn’t the cat.
+
+Riding a dragon.  No, that isn’t possible.  Dragons are just beasts here, in Tielze, no-one has ever trained them.
+
+That was going to be a mission in the next campaign.  Danylo could have forged a saddle and harness, Isai could have found the ancient lore which, combined with modern science, allowed for their wills to be bent, and Oksana could have done something.  You don’t know.  Have to think about that.  What is the character motivation?  Why tame a dragon?  Why now?  Is it needed for the war with Polthia in some way?
+
+Polthia.  You’re running towards Polthia.
+
+Not running.  Riding.  Why?  Where?
+
+&lt;&lt;linkreplace &quot;No.&quot;&gt;&gt;&lt;&lt;linkreplace &quot;No,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;staying,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;safe,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;still,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;riding,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;running,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;racing,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;safe,&quot;&gt;&gt;[[still.]]&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="Stay with group" tags="" position="2000,901" size="100,100">&quot;No, no we can’t leave.&quot;  Oksana is indignant.
+
+&quot;What //can// we do?&quot;  Isai’s question seems genuine.
+
+&quot;Well … fight, of course!&quot;
+
+&quot;I’m a history student, Fedir’s an accountant and you’re a … whatever you are at the moment.  What could we do to fight?&quot;
+
+&quot;I could fight.&quot;  Danylo’s voice is quiet.
+
+&quot;Really?  You work for a woodland adventure park.  You’re not a trained soldier.&quot;  Isai’s tone is questioning, not indignant.
+
+&quot;It’s the right thing.&quot;
+
+It is when they turn to you that you realise that you’d spoken.
+
+&quot;We should.  I mean … we have to?&quot;
+
+&quot;Fedir’s right&quot;  Oksana places her hand on your shoulder.  &quot;If there’s going to be a war, we //need// to stand strong.  Ukraine needs to prove we’re not going to roll over for fucking Putin.  You can’t run.&quot;
+
+&quot;My parents need me, Oksana.&quot;
+
+&quot;Your country needs you.  This is how he gets away with it.  This is how they always get away with it.  Because people don’t fight.  You’re always going on about our history, Isai, how abused we were.  This is the time to actually do something about it.  I learnt that from you!&quot;
+
+&quot;My family, Oksana … we’ve seen this too many times.  We always should have run.  We won’t suffer and die, not again, not this time.&quot;
+
+You see Oksana thinking.  She’s clearly neither happy nor satisfied.  It’s a tricky line to walk.  But she does not get a chance.
+
+&quot;I want us to stay together.&quot;  Your eyes turn to Danylo, whose wet eyes stare downwards into nothingness.  &quot;And I don’t want to let everyone down.&quot;
+
+Isai stares at the ground.
+
+&quot;I can’t.  I can’t Danylo.  I have to … I have to be with my family.
+
+&quot;I’m sorry.
+
+&quot;You know, you know how much you all mean to me.  And of course, I want us to stay together.
+
+&quot;But I can’t.&quot;
+
+He sits perfectly still.
+
+&quot;I’m sorry, I’m sorry.  I have to be with them now.  I’m sorry.&quot;
+
+He stands up, moves to the door, and then stops and turns.
+
+&quot;I love you.  All of you.
+
+&quot;I…
+
+&quot;Be heroes.
+
+&quot;But come back.
+
+&quot;Or…
+
+&quot;Be here, when I come back.&quot;
+
+And he leaves.
+
+He walks away.
+
+You watch him go, down the grand corridor of the Hall of Heroes, his cloak of paper swaying from side to side.
+
+He can’t have.  It doesn’t make sense.
+
+Heroes stick together.
+
+He’ll come back.  He has to come back.
+
+This isn’t how the story can end.
+
+You’ve seen it too many times before, the fake-out.  It’s cliché, but the alternative would be unacceptable.  A violation of all the rules of good story telling.  The hero does not simply disappear, that’s not how it works, that’s not a subversion of expectation, it’s unsatisfying – no, more than that.  It’s devastating.
+
+No, it can’t happen.  It doesn’t happen.
+
+That’s what you tell yourself, as Danylo leaves to be with his family, turning at the door to confirm that he’ll pick you up in a few hours so you can be together, sign up together.  
+
+It’s what you continue to tell yourself as Oksana leaves to somewhere you did not catch.
+
+Isai will come back.  He simply has to.
+
+You &lt;&lt;linkappend &quot;believe.&quot;&gt;&gt;
+
+You &lt;&lt;linkappend &quot;Believe.&quot;&gt;&gt;
+
+You &lt;&lt;linkappend &quot;Believe.&quot;&gt;&gt;
+
+The armies of Sol-os stretch from horizon to horizon, a desert of men superseding the desert of sand.  No, no that’s wrong.  The armies of the Barony of Byzantinov stretch from horizon to horizon, superseding the snow that engulfs the valley.
+
+They are marching forward, you watch them from your balcony, shivering.  You wish to think it was from the cold, but the cold does not make urine trickle warmly down your leg.
+
+&quot;We can’t take them on.  We just can’t, it’s not possible.&quot;  Danylo shakes his head.
+
+&quot;What other choice do we have?  We have to fight, there’s no other way.&quot;
+
+Danylo stares at the oncoming horde, silent for what feels like minutes.
+
+&quot;I know.  I know.
+
+&quot;We are the heroes of Tielze.  This is what we do.&quot;
+
+&quot;Yes.&quot;  Oksana nods her head, a ripple in the air you are too fearful to take pride in noticing.  &quot;If we didn’t fight, we would cease to be heroes.  And if we ceased to be heroes, what else would we be?&quot;
+
+What else would they be?
+
+What else would we be?
+
+They’re fighting now.  Blood marks Oksana’s path; a line of falling bodies, a wave of confused and terrified screams.  Two daggers flashing at throats.
+
+Danylo cannot be missed.  He meets the line head on, his sword twisting this way to counter a blow, then that way to stab up between plates of armour.  His own armour ripples, a constant movement, only just ahead of the sword points and spear heads that attempt to find the non-existent weak point.
+
+The screaming is less.  A single dagger now, flying through the ranks.  She has lost a blade.
+
+And look, there, Danylo, he’s on his knees.  His armour still flows, his sword still strikes, but he no longer stands against a line, he is surrounded, crushed, pulled down by a mass of bodies, coming too fast for him to counter.
+
+It is only a matter of time.
+
+And then you hear a rustling, a dry sound, paper on paper.
+
+A hand rests on your shoulder and you look up.
+
+&quot;You didn’t think I would leave Tielze to die, did you?
+
+&quot;You didn’t think I’d leave you to die?
+
+&quot;Now, close your eyes.&quot;
+
+Danylo is here.  He asks you what you’ve packed.
+
+You ask him what he means.
+
+You ask him what happened to Isai?
+
+He explains that Isai is with his parents.  But that’s a lie.
+
+Isai was just here, on the balcony.
+
+Isai had to come back.
+
+He has to.
+
+There is no other way.
+
+You believe.
+
+You believe as you walk down the stairs.
+
+You believe as you get in the car.
+
+You believe as you ride through the early morning traffic, not noticeably lighter than any other day.
+
+You believe as you step out into the cold and the wind, strong enough to feel even colder than the just-above-freezing it actually is.
+
+You believe Isai is here, and here he is.
+
+&quot;You came back,&quot; you whisper the cliché for fear of breaking it.
+
+He is weeping.
+
+&quot;Martial law,&quot; he says.  &quot;All men, eighteen to sixty.&quot;
+
+Danylo hugs him.
+
+You hug him, weeping as much as he, weeping tears of joy.
+
+&quot;I’m so, so sorry Isai.  But at least we’re staying together,&quot; Danylo says after you let go.
+
+Isai looks at at his friend for a long time.
+
+&quot;Yes.  Yes, I suppose it will be better.  To die with friends.&quot;
+
+&quot;Don’t.  Please.&quot;
+
+&quot;I’m sorry.&quot;
+
+The three of you stand in silence for a long time.  Crowds of men pass by.  This one, with square glasses, looks like Isai’s PhD friends.  This one, a taxi driver, or landlord.  This one a stay-at-home father.  This one a farmer, this one a shop clerk, this one a boxer.
+
+They are all heading to where you must head.
+
+&quot;We should go.&quot;  Isai says at last.
+
+&quot;It’s time to become soldiers.
+
+[[Slava Ukraine.|if4end]]&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="Leave with group" tags="" position="1799,902" size="100,100">&quot;No, no we can’t leave.&quot;  Oksana is indignant.
+
+&quot;What //can// we do?&quot;  Isai’s question seems genuine.
+
+&quot;Well … fight, of course!&quot;
+
+&quot;I’m a history student, Fedir’s an accountant and you’re a … whatever you are at the moment.  What could we do to fight?&quot;
+
+&quot;I could fight.&quot;  Danylo’s voice is quiet.
+
+&quot;Really?  You work for a woodland adventure park.  You’re not a trained soldier.&quot;  Isai’s tone is questioning, not indignant.
+
+&quot;Please.&quot;
+
+All of them turn to you.  You feel yourself begin to sweat.  You cannot think straight.  You are not even sure you can see straight.
+
+&quot;I don’t want to die.&quot;
+
+It’s all you hear yourself say.  You lose a lot of what happens afterward.  Talking, shouting, tears.  Your heart thumps through all of it.  You think so much about your breathing and yet there doesn’t seem to be any way to control it, to slow it down.  You don’t really try.  You hear the blood pumping through your ears, but even that you cannot focus on.  When you realise you are rocking backwards and forwards you try to stop, but a little shriek starts to boil up from the back of your throat so you bite your tongue and don’t stop.
+
+You scream when Isai places his hand on your shoulder, but for some reason no-one else hears it.
+
+&quot;We’re getting our families.  We’ll come and pick you up.  Don’t pack too much.  Do you understand?&quot;  You nod, but it does not convince him.  He repeats it twice more, places a large glass of water in front of you, says something about everything being alright, and then you’re alone again.
+
+You sit and eventually you try to move your eyes, but once you have you realise that there is so much around you that you cannot see, and then you can’t stop moving them.
+
+You feel tired.  So, so tired.  Everything is strained.  It has been that way for hours.
+
+You cannot let it go.  You sit tighter, your conscious mind finally freed by the effort of keeping it frozen, but all it can do is maintain, hold your muscles tight by force where instinct begins to fail.
+
+But even that, in the end, is too much.
+
+You collapse, surrendering to whatever it is you were ready for.
+
+When nothing happens, you pack.
+
+Isai returns to find you sitting on the sofa, holding a toothbrush in one hand and a tube of toothpaste in the other.  You’re just about able to help him throw some of your clothes in a bag, although you do not let go of the sword.
+
+It is a one-handed blade.  You are not used to wielding weapons of any kind, but this is the one you are most comfortable with.  Not, it occurs to you, that you know how to use it.  Can it be too hard?  Point it at the … thing you want to ki-, attacker.  Slash.
+
+It gleams in the sunlight of the … of your office.  In the Tielze House of Ministers.  Why is it here?  You don’t need a sword here.  This is your office, you’re perfectly safe.
+
+The leather of the back seat of Isai’s car is smooth.  You want to stroke it, but there’s little to touch between you, his mother, his kid-sister, and the blankets and baggage they’ve got stuffed in here with them.
+
+The road is dusty, the horses straining against their … harnesses, reins, pulling the wagon, no, carriage, closed sides, roof, warm and dark and safe.
+
+Isai is fighting with his mum and dad about the radio.  Isai wants the news, mum wants music, and dad wants silence.  You don’t know who wins.  All you hear is the sea.  Why?  Riding the storm waves of the False Ocean, heading towards Sol-os on an important diplomatic mission.
+
+Towards Sol-os.  Away from Tielze.
+
+Isai’s sister is screaming about something they left behind.  You hope it wasn’t the cat.
+
+Riding a dragon.  No, that isn’t possible.  Dragons are just beasts here, in Tielze, no-one has ever trained them.
+
+That was going to be a mission in the next roleplaying campaign.  Danylo could have forged a saddle and harness, Isai could have found the ancient lore which, combined with modern science, allowed for their wills to be bent, and Oksana could have done something.  You don’t know.  Have to think about that.  What is the character motivation?  Why tame a dragon?  Why now?  Is it needed for the war with Polthia in some way?
+
+Polthia.  You’re running towards Polthia.
+
+Not running.  Riding.  Why?  Where?
+
+&lt;&lt;linkreplace &quot;No.&quot;&gt;&gt;&lt;&lt;linkreplace &quot;No,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;staying,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;safe,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;still,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;riding,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;running,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;racing,&quot;&gt;&gt;&lt;&lt;linkreplace &quot;safe,&quot;&gt;&gt;[[still.]]&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="still." tags="" position="1703,1101" size="100,100">Still.
+
+No stop-start.
+
+A line of cars 10 miles long.
+
+You can eat, now the moving has stopped.  You realise you are very hungry.  Hungrier than you have been in your life.  Your advisors, associates, travelling companions - oh it doesn’t matter now who they were - they tried to feed you, as they try now, but then it didn’t work, and now it does.
+
+You eat.  You remember the story of Moses and the Israelites, and the manna from heaven.  And how they grew bored of it.
+
+You almost feel sorry for the chefs.  They are the greatest in the republic and yet half their meals go untasted, mere set-dressing for the nobles, ministers, and courtiers who use these state dinners as nothing more than an opportunity to network.
+
+Here is the head of the grain consortium.  You throw him off guard when you ‘mistakenly’ refer to his wife by his mistress’s name.  You’ll have few problems with him this harvest.
+
+Here is the Minister of Information.  You have a servant bring her a bottle of Sol-os red.  You’ll get a meeting with her within a week.
+
+Here are the heroes of the realm.  They take you out of the car and wrap a coat around your shoulders, insist you get some fresh air.  Isai tells you about about the President’s new martial law.  No, he must have meant Prime Minister’s.  Yes, all men are to fight.  But that won’t be a problem for the heroes of the Republic.  You?  You as well?  Why?  No, that would be madness.  You’re an accountant.  No, no that can’t be.  But what about Oksana?  She’s a capable fighter.  It would be rank foolishness to reject one of the world’s greatest assassins.
+
+&quot;Fedir, please.&quot;
+
+&quot;Yes Danylo?&quot;
+
+&quot;Yes, good, Danylo.  That’s who I am.  Your friend, Danylo.&quot;
+
+&quot;It is an honour sir, that you would consider a humble court functionary your friend.&quot;
+
+&quot;Fedir, fucking listen!&quot;
+
+&quot;Oksana?&quot;
+
+&quot;We’re on the road to Poland.  We’re stuck, there’s cars all the way down.  There’s martial law.  We’ve been talking about it for hours.  They could send you back Fedir, they could send all of you back.&quot;
+
+&quot;Where?&quot;
+
+&quot;To the front.&quot;
+
+You’ve lost your sword.  You run back, out of the reception, into the night.  There’s nothing there, but road and cars.  An old woman waves at you.  She’s crying.  Isai’s mum.  You hug her, push her aside, dig through.  Your sword, finally.
+
+&quot;Your toothbrush?  What the hell do you need your toothbrush for?&quot;  Oksana has caught up with you.
+
+&quot;My sword.&quot;
+
+&quot;It’s a fucking toothbrush!&quot;
+
+&quot;It’s a sword!&quot;
+
+&quot;No, it’s a toothbrush!&quot;
+
+&lt;&lt;linkappend &quot;I know!&quot;&gt;&gt;
+
+&lt;&lt;linkappend &quot;I know!&quot;&gt;&gt;
+
+&lt;&lt;linkappend &quot;I know!&quot;&gt;&gt;
+
+&lt;&lt;linkappend &quot;I know!&quot;&gt;&gt;
+
+&quot;Then why-&quot;
+
+&quot;What else, Oksana?  What else do I fucking do?&quot;
+
+&quot;Get a grip!&quot;
+
+&quot;On what?  Why?&quot;
+
+&quot;Let him.&quot;  Isai steps forward.  The paper that is his face creased into a sad smile.
+
+&quot;It’s mad.&quot;  Oksana throws her hands up, almost knocking the baseball cap off her head.
+
+&quot;What isn’t mad now?&quot;
+
+She stares at Isai for a long time.  Then, suddenly, she begins to cry, embraces him, and runs away down the line of car-riages.
+
+&quot;Be ready to be strong.  Okay Fedir?  Be ready.&quot;
+
+&quot;I always am.  I have to be, for Tielze.&quot;
+
+&quot;Ukraine.&quot;
+
+&quot;Yes.&quot;
+
+&quot;Good.  [[Rest]] now, then.&quot;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="Rest" tags="" position="1703,1251" size="100,100">You wake to the sounds of a village being destroyed.
+
+You walk through it, the only one safe from the fire and arrows, the marauder’s blades, the choking smoke.
+
+A mother screams for her son.  Her miracle, she says, matched only by her daughter.  He isn’t made for killing, he isn’t like that.  He quietly tries to calm her.
+
+A man holding his girlfriend.  She’s crying silently.  You know it must be painful, the way he pulls at her hair.  His hands are the only parts of him that move.  They seem to want to hold every part of her at once.
+
+A grandmother looks confused.  You follow her eyes to the back of a man, shouting over his shoulder to her that everything will be okay.  She doesn’t understand as she asks where he is going, who are the men taking him, when will he be back?
+
+Another man, another mother.  She holds him, tells him that she’s proud.  He cries and tells her that everything will be okay.
+
+This one must only be eighteen.  He’s begging quietly, mumbling, numb, pale, ‘need my mum, please, need my mum’.  She’s on the other side of the road, watching.  Who will turn away first?
+
+The mother has let go now.  Her son gently prised her arms from him.  She crouches now by the daughter, urging her to look, to see, to remember this moment.  To remember her brother.
+
+You look away.
+
+And now it is your turn.
+
+A spear to the gut.
+
+Draft papers in hand.
+
+[[Slava Ukraine.|if4end]]</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){var e="(?:[\\x2D.0-9A-Z_a-z\\xB7\\xC0-\\xD6\\xD8-\\xF6\\xF8-\\u037D\\u037F-\\u1FFF\\u200C\\u200D\\u203F\\u2040\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD]|[\\uD800-\\uDB7F][\\uDC00-\\uDFFF])";return"[A-Za-z](?:"+e+"*-"+e+"*|[0-9A-Za-z]*)"}(),o=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",htmlTagName:i,cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:o,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_stringify",{value:JSON.stringify}),Object.defineProperty(JSON,"stringify",{configurable:!0,writable:!0,value:function(e,t,r){return JSON._real_stringify(e,function(e,r){var n=r;if("function"==typeof t)try{n=t(e,n)}catch(e){}return void 0===n&&(n=["(revive:eval)","undefined"]),n},r)}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e)

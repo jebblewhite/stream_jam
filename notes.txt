@@ -144,19 +144,19 @@ Section 9 - Section 5, reduced
 
 Section 1 Rework
     Descriptions for Warfare and Trade
-    Colour coding for Ag,War,Trade (Green,Red,Blue) X 
-    General Spacing out X
+    XColour coding for Ag,War,Trade (Green,Red,Blue) X 
+    XGeneral Spacing out X
     Rework Trade upgrades -- not just cost grivna, cost copper and tin and crops..
     add 2 more trade upgrades 
 
-Intro to Sec3  -- MILO ctrlf "Intro go here" DONE
-Event values - MILO to complete base, jason write function for rubber banding DONE
-More events - MIL:O DONE
-different labels for buttons X
-0 job - You think you're going to lose your job
-0 dignity - You are disgusting
-0 peace - You have a panic attack in the street 
-0 social - You have never felt so alone 
+XIntro to Sec3  -- MILO ctrlf "Intro go here" DONE
+XEvent values - MILO to complete base, jason write function for rubber banding DONE
+XMore events - MIL:O DONE
+Xdifferent labels for buttons X
+X0 job - You think you're going to lose your job
+X0 dignity - You are disgusting
+X0 peace - You have a panic attack in the street 
+X0 social - You have never felt so alone 
 
 Section5
 North East and Southern fronts 
@@ -171,8 +171,21 @@ Section8
 Make button cooldown
 
 MILO'S QUESTIONS/POINTS FOR THE SON OF JAS.
-    I couldn't find the function in the Twine that calculates the 'focus' (military, agriculture, commerce) for if2.  So I've just made a variable called $Focus, which can have values "Military", "Commerce", or "Agriculture".  Actually assigning the variable I leave to you.
-    The final 'work' section about cancelling roleplaying is essential, and answering it should probably be the end condition for 3.  Maybe after timer runs out all other elements but that question disappear, if it hasn't already been slected?
-    Check my comment at in 'if4' in Twine.
-    Just found a place where I used $Focus in section 4.  Is that an issue?  Especially since it won't have changed since 2?  If problem, really inconsequential part, can easily cut.
-    I've put 2 and 4 into Twine.
+    XI couldn't find the function in the Twine that calculates the 'focus' (military, agriculture, commerce) for if2.  So I've just made a variable called $Focus, which can have values "Military", "Commerce", or "Agriculture".  Actually assigning the variable I leave to you.
+    XThe final 'work' section about cancelling roleplaying is essential, and answering it should probably be the end condition for 3.  Maybe after timer runs out all other elements but that question disappear, if it hasn't already been slected?
+    XCheck my comment at in 'if4' in Twine.
+    XJust found a place where I used $Focus in section 4.  Is that an issue?  Especially since it won't have changed since 2?  If problem, really inconsequential part, can easily cut.
+    XI've put 2 and 4 into Twine.
+
+TODO
+X sec3 Outcome of events function do thing 
+X why is the log container being weird 
+X WHY CAPITAL LETTER 
+FIX COOLDOWN WAR BUG 
+
+X"""If high spirit 
+less positive, more negative 
+
+if low spirit 
+more positive, less negative 
+"""

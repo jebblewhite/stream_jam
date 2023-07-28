@@ -29,6 +29,10 @@ var peace = 0
 var dignity = 0
 var social = 0
 var mentalSpirit = 5146
+var jobLow = false
+var peaceLow = false
+var socialLow = false
+var dignityLow = false
 
 var jobDone = 0
 var peacePerClick = 1
@@ -42,6 +46,7 @@ var timeTilDecay = 13
 var socialWarned = false
 var eventCounter = 0
 var timeTilWeekend = 600
+var section3outcome = "none"
 
 var eventList = [
     {
@@ -50,7 +55,7 @@ var eventList = [
         "outcomes": [[10,-30,10,15],[-15,-15,20,-5],[0,10,-40,0],""]
     },
     {
-        "event_text": "A colleague, Anna, is having an ‘Olympics party’ at the bar frequented by the rest of the accounts team.  You weren’t invited.",
+        "event_text": "A colleague, Anna, is having an 'Olympics party' at the bar frequented by the rest of the accounts team.  You weren't invited.",
         "options": ["Go anyway.","Just go home."], 
         "outcomes": [[-20,-15,0,20],[0,-5,0,-10],"",""]
     },
@@ -64,7 +69,7 @@ var eventList = [
         "options": ["Say you're very bad at dancing, but say you'll buy her a drink anyway.","Dance (badly).","Tell her no."], 
          "outcomes": [[10,0,0,15],[10,-10,0,25],[20,5,0,-30],""]
     },
-    {
+    {   
         "event_text": "Your lunch is missing from the breakroom fridge.",
         "options": ["Find whoever took it and confront them.","Eat nothing.","Complain to Borysko."], 
         "outcomes": [[10,30,-5,-30],[-20,-20,0,0],[10,-10,0,5],""]
@@ -72,7 +77,7 @@ var eventList = [
     {
         "event_text": "It's Artur's birthday.  You didn't get him anything.",
         "options": ["Avoid him all day.","Just wish him a happy birthday.","Sneak out to buy him something."], 
-        "outcomes": [[-10,-5,0,-20],[-15,-10,10,],[-10,-15,-10,30],""]
+        "outcomes": [[-10,-5,0,-20],[-15,-10,10,5],[-10,-15,-10,30],""]
     },
     {
         "event_text": "You are very thirsty, but Herda, the most boring person in the office, is standing by the water cooler and shows no sign of leaving.",
@@ -85,14 +90,14 @@ var eventList = [
         "outcomes": [[15,-10,-5,5],[-5,5,5,-5],[25,0,-30,10],""]
     },
     {
-        "event_text": "Borysko wants you to present to management.  It’ll be extra work.",
-        "options": ["Ask him to find someone else.","Say you’ll do it (and do).","Say you’ll do it (and don’t)."], 
+        "event_text": "Borysko wants you to present to management.  It'll be extra work.",
+        "options": ["Ask him to find someone else.","Say you'll do it (and do).","Say you'll do it (and don't)."], 
         "outcomes": [[10,-20,-15,0],[-20,-5,20,10],[15,-30,-40,0],""]
     },
     {
         "event_text": "The president has called for emergency international talks over the continued presence of Russian troops and material on the Russian, Belarusian, Crimean borders, and in the Black Sea.  Among others, the American, Japanese, German, Australian, Israeli governments have instructed their citizens to leave the country. Roleplaying is tomorrow.",
         "options": ["Cancel roleplaying.","Carry on."], 
-        "outcomes": ["","","",""]
+        "outcomes": ["cancel","carry_on"]
     }
 ]
 
@@ -104,7 +109,7 @@ var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
 var workerSpirit = 1
-var spiritThreshold = 1000000
+var spiritThreshold = 0 //1000000
 
 var farmers = 0
 var merchants = 0
@@ -697,7 +702,7 @@ function setProcParams(x) {
         
     }
     if (x==4) {
-        passedArray = [parseInt(x), farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit]
+        passedArray = [parseInt(x), farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, section3outcome]
         
 
     }
@@ -710,11 +715,11 @@ function setProcParams(x) {
             section5type = "s"
         }
         section5progress++
-        passedArray = [parseInt(x), farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, morale, manpower, economy, land, section5progress, section5type, section5scene]
+        passedArray = [parseInt(x), farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, section3outcome, morale, manpower, economy, land, section5progress, section5type, section5scene]
         
     }
     if (x=="8_5") {
-        passedArray = [x, farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, morale, manpower, economy, land, section5progress, section5type, section5scene, section8outcome]
+        passedArray = [x, farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, section3outcome, morale, manpower, economy, land, section5progress, section5type, section5scene, section8outcome]
     }
     console.log(x)
     return passedArray
@@ -722,6 +727,8 @@ function setProcParams(x) {
 
 function handOver(x) {
     document.getElementById("procedural"+(x-1)).style.display = "none";
+    document.getElementById("log-container").style.color = "#424242";
+    document.getElementById("hehe").style.overflow = "hidden";
     document.getElementById("interactiveFiction2").style.display = "block";
     procSection = x
     console.log(x)
@@ -889,6 +896,8 @@ function startProcedural(x) {
 
 function hide_i_f() {
     document.getElementById("interactiveFiction2").style.display = "none";
+    document.getElementById("log-container").style.color = "white";
+    document.getElementById("hehe").style.overflow = "auto";
 }
 
 function jobClick() {
@@ -1011,6 +1020,9 @@ function changeSpirit() {
         mentalSpirit = mentalSpirit - 1
     }
     mentalSpirit--
+    if (mentalSpirit<0) {
+        mentalSpirit = 0
+    }
     document.getElementById('spirit3').innerHTML =  mentalSpirit
 }
 
@@ -1051,7 +1063,34 @@ function statDecay() {
     } else {
         timeTilDecay--
     }
-    
+    if (peace<0){
+        peace=0
+        if (!peaceLow) {
+            console.log("You have a panic attack in the street.")
+            peaceLow = true
+        }
+    }
+    if (dignity<0){
+        dignity=0
+        if (!dignityLow) {
+            console.log("You are disgusting.")
+            dignityLow = true
+        }
+    }
+    if (job<0){
+        job=0
+        if (!jobLow) {
+            console.log("You are going to lose your job.")
+            jobLow = true
+        }
+    }
+    if (social<0){
+        social=0
+        if (!socialLow) {
+            console.log("You have never felt so alone.")
+            socialLow = true
+        }
+    }
     document.getElementById('job').innerHTML =  job
     document.getElementById('dignity').innerHTML =  dignity
     document.getElementById('peace').innerHTML =  peace
@@ -1070,7 +1109,16 @@ function showEvent(x){
 }
 
 function eventOption(x){
-    eventOutcome(eventList[eventCounter]["outcomes"][x])
+    if (eventCounter==9){
+        if (x==0){
+            section3outcome = "cancel"
+        } else {
+            section3outcome = "carry_on"
+        }
+        handOver(4)
+    } else {
+        eventOutcome(eventList[eventCounter]["outcomes"][x])
+    } 
     for (let item in eventList[x]["options"]) {
         document.getElementById('eventoption'+item).style.display = "none"
     }
@@ -1080,7 +1128,61 @@ function eventOption(x){
 }
 
 function eventOutcome(decision){
-    console.log("decision made " + decision)
+    if (decision.length == 4){
+        peace = peace + decision[0]
+        dignity = dignity + decision[1]
+        job = job + decision[2]
+        social = social + decision[3]
+        if (mentalSpirit<=2000) {
+            peace = peace + 10
+            dignity = dignity + 10
+            job = job + 10
+            social = social + 10
+        }
+        if (mentalSpirit>=5000) {
+            peace = peace - 10
+            dignity = dignity - 10
+            job = job - 10
+            social = social - 10
+        }
+        
+        if (peace<0){
+            peace=0
+            if (!peaceLow) {
+                console.log("You have a panic attack in the street.")
+                peaceLow = true
+            }
+            
+        }
+        if (dignity<0){
+            dignity=0
+            if (!dignityLow) {
+                console.log("You are disgusting.")
+                dignityLow = true
+            }
+        }
+        if (job<0){
+            job=0
+            if (!jobLow) {
+                console.log("You are going to lose your job.")
+                jobLow = true
+            }
+        }
+        if (social<0){
+            social=0
+            if (!socialLow) {
+                console.log("You have never felt so alone.")
+                socialLow = true
+            }
+        }
+        document.getElementById('job').innerHTML =  job
+        document.getElementById('dignity').innerHTML =  dignity
+        document.getElementById('peace').innerHTML =  peace
+        document.getElementById('social').innerHTML =  social
+    } else {
+        console.log("You are paralysed by indecision.")
+    }
+    
 }
 
 function doctorsPrognosis(){
@@ -1252,6 +1354,9 @@ window.setInterval(function(){
                 showEvent(0)
                 if (timeTilWeekend<=540){
                     mentalSpirit = mentalSpirit - 3
+                    if (mentalSpirit<0) {
+                        mentalSpirit = 0
+                    }
                     document.getElementById("spirit3").innerHTML = mentalSpirit
                 }
                 if (timeTilWeekend <=510) {eventOption(3)}
@@ -1262,6 +1367,9 @@ window.setInterval(function(){
                 showEvent(1)
                 if (timeTilWeekend<=480){
                     mentalSpirit = mentalSpirit - 3
+                    if (mentalSpirit<0) {
+                        mentalSpirit = 0
+                    }
                     document.getElementById("spirit3").innerHTML = mentalSpirit
                 }
                 if (timeTilWeekend <=450) {eventOption(3)}
@@ -1272,6 +1380,9 @@ window.setInterval(function(){
                 showEvent(2)
                 if (timeTilWeekend<=420){
                     mentalSpirit = mentalSpirit - 3
+                    if (mentalSpirit<0) {
+                        mentalSpirit = 0
+                    }
                     document.getElementById("spirit3").innerHTML = mentalSpirit
                 }
                 if (timeTilWeekend <=390) {eventOption(3)}
@@ -1282,6 +1393,9 @@ window.setInterval(function(){
                 showEvent(3)
                 if (timeTilWeekend<=360){
                     mentalSpirit = mentalSpirit - 3
+                    if (mentalSpirit<0) {
+                        mentalSpirit = 0
+                    }
                     document.getElementById("spirit3").innerHTML = mentalSpirit
                 }
                 if (timeTilWeekend <=330) {eventOption(3)}
@@ -1292,6 +1406,9 @@ window.setInterval(function(){
                 showEvent(4)
                 if (timeTilWeekend<=300){
                     mentalSpirit = mentalSpirit - 3
+                    if (mentalSpirit<0) {
+                        mentalSpirit = 0
+                    }
                     document.getElementById("spirit3").innerHTML = mentalSpirit
                 }
                 if (timeTilWeekend <=270) {eventOption(3)}
@@ -1302,6 +1419,9 @@ window.setInterval(function(){
                 showEvent(5)
                 if (timeTilWeekend<=240){
                     mentalSpirit = mentalSpirit - 3
+                    if (mentalSpirit<0) {
+                        mentalSpirit = 0
+                    }
                     document.getElementById("spirit3").innerHTML = mentalSpirit
                 }
                 if (timeTilWeekend <=210) {eventOption(3)}
@@ -1312,6 +1432,9 @@ window.setInterval(function(){
                 showEvent(6)
                 if (timeTilWeekend<=180){
                     mentalSpirit = mentalSpirit - 3
+                    if (mentalSpirit<0) {
+                        mentalSpirit = 0
+                    }
                     document.getElementById("spirit3").innerHTML = mentalSpirit
                 }
                 if (timeTilWeekend <=150) {eventOption(3)}
@@ -1322,6 +1445,9 @@ window.setInterval(function(){
                 showEvent(7)
                 if (timeTilWeekend<=120){
                     mentalSpirit = mentalSpirit - 3
+                    if (mentalSpirit<0) {
+                        mentalSpirit = 0
+                    }
                     document.getElementById("spirit3").innerHTML = mentalSpirit
                 }
                 if (timeTilWeekend <=90) {eventOption(3)}
@@ -1332,14 +1458,24 @@ window.setInterval(function(){
                 showEvent(8)
                 if (timeTilWeekend<=60){
                     mentalSpirit = mentalSpirit - 3
+                    if (mentalSpirit<0) {
+                        mentalSpirit = 0
+                    }
                     document.getElementById("spirit3").innerHTML = mentalSpirit
                 }
                 if (timeTilWeekend <=30) {eventOption(3)}
             }
         }
         //The last one needs to work differently here, see my note.
-        if (timeTilWeekend <= 598) {
-            handOver(4)
+        if (timeTilWeekend <= 0) {
+            showEvent(9)
+            document.getElementById('peacebutton').style.display = "none";
+            document.getElementById('dignitybutton').style.display = "none";
+            document.getElementById('jobbutton').style.display = "none";
+            document.getElementById('socialbutton').style.display = "none";
+            document.getElementById("log-container").style.color = "#424242";
+            document.getElementById("hehe").style.overflow = "hidden";
+            
         }
         
         

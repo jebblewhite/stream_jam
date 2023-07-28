@@ -47,27 +47,47 @@ var eventList = [
     {
         "event_text": "Borysko says you're behind on the Kostenko account.  You are, of course.  Very behind.",
         "options": ["Find someone else to help you.","Put in some (unpaid) overtime.","Just leave it."], 
-        "outcomes": [[0,-20,10,15],"","",""]
+        "outcomes": [[10,-30,10,15],[-15,-15,20,-5],[0,10,-40,0],""]
     },
     {
-        "event_text": "A colleague, Anna, is having an ‘Olympics party’ at the bar the rest of the accounts team frequent.  You weren’t invited.",
+        "event_text": "A colleague, Anna, is having an ‘Olympics party’ at the bar frequented by the rest of the accounts team.  You weren’t invited.",
         "options": ["Go anyway.","Just go home."], 
-        "outcomes": ["","","",""]
+        "outcomes": [[-20,-15,0,20],[0,-5,0,-10],"",""]
     },
     {
         "event_text": "You spill coffee over yourself at lunch.  The stain, almost impressively, looks like you had a bathroom accident.",
         "options": ["Live with it.","Spend your lunch break dashing back home to get clean clothes.","Just go home.  And stay there."], 
-        "outcomes": ["","","",""]
+        "outcomes": [[10,-30,0,0],[-5,10,10,-15],[10,5,-30,-5],""]
     },
     {
-        "event_text": "Your lunch is missing from the break room fridge.",
+        "event_text": "A girl at a the bar you go to after work sometimes says she recognises you and asks if you want to dance.",
+        "options": ["Say you're very bad at dancing, but say you'll buy her a drink anyway.","Dance (badly).","Tell her no."], 
+         "outcomes": [[10,0,0,15],[10,-10,0,25],[20,5,0,-30],""]
+    },
+    {
+        "event_text": "Your lunch is missing from the breakroom fridge.",
         "options": ["Find whoever took it and confront them.","Eat nothing.","Complain to Borysko."], 
-        "outcomes": ["","","",""]
+        "outcomes": [[10,30,-5,-30],[-20,-20,0,0],[10,-10,0,5],""]
+    },
+    {
+        "event_text": "It's Artur's birthday.  You didn't get him anything.",
+        "options": ["Avoid him all day.","Just wish him a happy birthday.","Sneak out to buy him something."], 
+        "outcomes": [[-10,-5,0,-20],[-15,-10,10,],[-10,-15,-10,30],""]
+    },
+    {
+        "event_text": "You are very thirsty, but Herda, the most boring person in the office, is standing by the water cooler and shows no sign of leaving.",
+        "options": ["Go get water.","Just dehydrate."], 
+        "outcomes": [[5,-20,0,10],[-5,5,-10,0],"",""]
+    },
+    {
+        "event_text": "Someone brings their dog to work.",
+        "options": ["Give it a pet, despite your allergies.","Avoid it.","Take an antihistamine and commit to spending the whole day with the dog."], 
+        "outcomes": [[15,-10,-5,5],[-5,5,5,-5],[25,0,-30,10],""]
     },
     {
         "event_text": "Borysko wants you to present to management.  It’ll be extra work.",
         "options": ["Ask him to find someone else.","Say you’ll do it (and do).","Say you’ll do it (and don’t)."], 
-        "outcomes": ["","","",""]
+        "outcomes": [[10,-20,-15,0],[-20,-5,20,10],[15,-30,-40,0],""]
     },
     {
         "event_text": "The president has called for emergency international talks over the continued presence of Russian troops and material on the Russian, Belarusian, Crimean borders, and in the Black Sea.  Among others, the American, Japanese, German, Australian, Israeli governments have instructed their citizens to leave the country. Roleplaying is tomorrow.",
@@ -773,7 +793,8 @@ function startProcedural(x) {
         console.log("")
         console.log("")
         console.log("")
-        console.log("Intro go here")
+        console.log("The work week stretches out ahead of you.")
+        console.log("Don't let it break you.")
         
     } else if (x==5) {
         console.log("")
@@ -1286,6 +1307,37 @@ window.setInterval(function(){
                 if (timeTilWeekend <=210) {eventOption(3)}
             }
         }
+        if (timeTilWeekend <=210) {
+            if (eventCounter==6) {
+                showEvent(6)
+                if (timeTilWeekend<=180){
+                    mentalSpirit = mentalSpirit - 3
+                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                }
+                if (timeTilWeekend <=150) {eventOption(3)}
+            }
+        }
+        if (timeTilWeekend <=150) {
+            if (eventCounter==7) {
+                showEvent(7)
+                if (timeTilWeekend<=120){
+                    mentalSpirit = mentalSpirit - 3
+                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                }
+                if (timeTilWeekend <=90) {eventOption(3)}
+            }
+        }
+        if (timeTilWeekend <=90) {
+            if (eventCounter==8) {
+                showEvent(8)
+                if (timeTilWeekend<=60){
+                    mentalSpirit = mentalSpirit - 3
+                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                }
+                if (timeTilWeekend <=30) {eventOption(3)}
+            }
+        }
+        //The last one needs to work differently here, see my note.
         if (timeTilWeekend <= 598) {
             handOver(4)
         }

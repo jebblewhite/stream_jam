@@ -149,9 +149,9 @@ Section 1 Rework
     Rework Trade upgrades -- not just cost grivna, cost copper and tin and crops..
     add 2 more trade upgrades 
 
-Intro to Sec3  -- MILO ctrlf "Intro go here"
-Event values - MILO to complete base, jason write function for rubber banding
-More events - MIL:O
+Intro to Sec3  -- MILO ctrlf "Intro go here" DONE
+Event values - MILO to complete base, jason write function for rubber banding DONE
+More events - MIL:O DONE
 different labels for buttons X
 0 job - You think you're going to lose your job
 0 dignity - You are disgusting
@@ -170,3 +170,9 @@ upgrades cost grivna
 Section8 
 Make button cooldown
 
+MILO'S QUESTIONS/POINTS FOR THE SON OF JAS.
+    I couldn't find the function in the Twine that calculates the 'focus' (military, agriculture, commerce) for if2.  So I've just made a variable called $Focus, which can have values "Military", "Commerce", or "Agriculture".  Actually assigning the variable I leave to you.
+    The final 'work' section about cancelling roleplaying is essential, and answering it should probably be the end condition for 3.  Maybe after timer runs out all other elements but that question disappear, if it hasn't already been slected?
+    Check my comment at in 'if4' in Twine.
+    Just found a place where I used $Focus in section 4.  Is that an issue?  Especially since it won't have changed since 2?  If problem, really inconsequential part, can easily cut.
+    I've put 2 and 4 into Twine.

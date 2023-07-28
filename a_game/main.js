@@ -47,7 +47,7 @@ var workPerTen = [1,1,1,1,1,1,1,0]
 var timeTilDecay = 13
 var socialWarned = false
 var eventCounter = 0
-var timeTilWeekend = 600
+var timeTilWeekend = 0 // 600
 var section3outcome = "none"
 
 var eventList = [
@@ -112,7 +112,7 @@ var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
 var workerSpirit = 1
-var spiritThreshold = 10000000
+var spiritThreshold = 0 // 10000000
 
 var farmers = 0
 var merchants = 0
@@ -120,7 +120,7 @@ var soldiers = 0
 
 var farmerPower = 2
 var merchantPower = 10
-var soldierPower = 100
+var soldierPower = 10
 
 var farmerPower = 2
 var farmerClick = 0
@@ -139,7 +139,7 @@ var tradeCooldownTime = 6000;
 
 var progression = 0;
 
-var warCooldownTime = 7000;
+var warCooldownTime = 4000;
 
 var resources = {
     "crops" : 0,
@@ -197,9 +197,9 @@ var fullWar = {
 const tradeFactions = ['The Barony of St Byzantinov', 'The Kingdom of Polthia', 'The lands of Sul-os']
 
 const warTable = {
-    'The Barony of St Byzantinov':{"riskChance": 10, "rewardChance": 30, "riskMultiplier": 1, "rewardMultiplier": 1, "bonusResource": "crops"},
-    'The Kingdom of Polthia': {"riskChance": 25, "rewardChance": 25, "riskMultiplier": 3, "rewardMultiplier": 5, "bonusResource": "tin"}, 
-    'The lands of Sul-os': {"riskChance": 50, "rewardChance": 5, "riskMultiplier": 8, "rewardMultiplier": 69, "bonusResource": "copper"}
+    'The Barony of St Byzantinov':{"riskChance": 10, "rewardChance": 30, "riskMultiplier": 10, "rewardMultiplier": 1, "bonusResource": "crops"},
+    'The Kingdom of Polthia': {"riskChance": 25, "rewardChance": 25, "riskMultiplier": 30, "rewardMultiplier": 5, "bonusResource": "tin"}, 
+    'The lands of Sul-os': {"riskChance": 50, "rewardChance": 5, "riskMultiplier": 80, "rewardMultiplier": 69, "bonusResource": "copper"}
 }
 
 
@@ -368,6 +368,8 @@ function soldierMultiUp() {
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+        document.getElementById("soldiermulti").innerHTML = Math.round(rewardMultiplier)
+        warCooldown()
     }
 }
 
@@ -380,6 +382,8 @@ function soldierChanceUp() {
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+        document.getElementById("soldierreward").innerHTML = Math.round(soldierChance/10)
+        warCooldown()
     }
 }
 
@@ -392,6 +396,8 @@ function soldierRiskUp() {
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+        document.getElementById("soldierrisk").innerHTML = Math.round(soldierRisk/10)
+        warCooldown()
     }
 }
 
@@ -520,6 +526,7 @@ function generateSingleTrade(x){
 }
 
 function generateTrades(x){
+    if (document.getElementById('trade1').disabled == false){
     trade1list = generateSingleTrade(x)
     fullTrade[1] = trade1list
     document.getElementById('trade1').innerHTML = trade1list[0] + " offers you " + trade1list[4] + " " + trade1list[3] + " for " + trade1list[2] + " " + trade1list[1]+".";
@@ -530,6 +537,7 @@ function generateTrades(x){
     fullTrade[3] = trade3list
     document.getElementById('trade3').innerHTML = trade3list[0] + " offers you " + trade3list[4] + " " + trade3list[3] + " for " + trade3list[2] + " " + trade3list[1]+".";
     //update trades
+    }
 }
 
 function trade(x){
@@ -562,19 +570,23 @@ function generateSingleWar(x){
     riskMultiplier = warTable[warPartner]["riskMultiplier"]
     rewardMultiplier = warTable[warPartner]["rewardMultiplier"]
     bonusResource = warTable[warPartner]["bonusResource"]
-    return [riskChance, rewardChance, riskMultiplier, rewardMultiplier, bonusResource]
+    displaychance = Math.round(100*rewardChance/(100-Math.min(soldierChance,99)))
+    displayrisk = Math.max(0,Math.round(100*riskChance/(100+soldierRisk)))
+    return [displayrisk, displaychance, riskMultiplier, rewardMultiplier, bonusResource]
 }
 
 function generateWar(){
-    war1list = generateSingleWar(0)
-    fullWar[1] = war1list
-    document.getElementById('war1').innerHTML = "Go to war with " + tradeFactions[0] + " -- Risk of losses: " + fullWar[1][0] + "% / Chance of Reward: " + fullWar[1][1] + "%.";
-    war2list = generateSingleWar(1)
-    fullWar[2] = war2list
-    document.getElementById('war2').innerHTML = "Go to war with " + tradeFactions[1] + " -- Risk of losses: " + fullWar[2][0] + "% / Chance of Reward: " + fullWar[2][1] + "%.";
-    war3list = generateSingleWar(2)
-    fullWar[3] = war3list
-    document.getElementById('war3').innerHTML = "Go to war with " + tradeFactions[2] + " -- Risk of losses: " + fullWar[3][0] + "% / Chance of Reward: " + fullWar[3][1] + "%.";
+    if (document.getElementById('war1').disabled == false){
+        war1list = generateSingleWar(0)
+        fullWar[1] = war1list
+        document.getElementById('war1').innerHTML = "Go to war with " + tradeFactions[0] + " -- " + fullWar[1][1] + "% Chance of Small Reward / " + fullWar[1][0] + "% Chance of Minor Casualties.";
+        war2list = generateSingleWar(1)
+        fullWar[2] = war2list
+        document.getElementById('war2').innerHTML = "Go to war with " + tradeFactions[1] + " -- " + fullWar[2][1] + "% Chance of Moderate Reward / " + fullWar[2][0] + "% Chance of Casualties.";
+        war3list = generateSingleWar(2)
+        fullWar[3] = war3list
+        document.getElementById('war3').innerHTML = "Go to war with " + tradeFactions[2] + " -- " + fullWar[3][1] + "% Chance of Great Reward / " + fullWar[3][0] + "% Chance of Significant Casualties.";
+    }
 }
 
 function war(x) {
@@ -590,42 +602,42 @@ function wakeUp(){
 
 function makeWar(x, riskChance, rewardChance, riskMultiplier, rewardMultiplier, bonusResource){
     var warOutcome = "None"
-    let z = Math.random() * (100-soldierChance);
+    let z = Math.random() * (100);
     if (rewardChance >= z) {
-        randRes = Math.round((x/grivnaTable[bonusResource])*(1.2 - Math.random()*0.4)*rewardMultiplier*5)
-        randTrophies = Math.round((x/10)*(1.2 - Math.random()*0.4)*rewardMultiplier)
+        var appropList = []
+        for (let item in goodsList) {
+            if (grivnaTable[goodsList[item]] <= x) {
+                appropList.push(goodsList[item])
+                document.getElementById('div'+goodsList[item]).style.display = "block";
+            }
+        }
+        let yum = getRandomInt(appropList.length)
+        randRes = Math.round((x/grivnaTable[bonusResource])*(1.2 - Math.random()*0.4)*rewardMultiplier*8)
+        randRes2 = Math.round((x/grivnaTable[appropList[yum]])*(1.2 - Math.random()*0.4)*rewardMultiplier*4)
+        randTrophies = Math.round((x)*(1.2 - Math.random()*0.4)*rewardMultiplier)
         resources[bonusResource] = resources[bonusResource] + randRes
+        resources[appropList[yum]] = resources[appropList[yum]] + randRes2
         resources.trophies = resources.trophies + randTrophies;
         goodsList.indexOf("trophies") === -1 ? goodsList.push("trophies") : oops = 1;
         console.log("Your army returns with spoils of war!")
-        console.log("(Gained " + randTrophies + " trophies, and looted " + randRes + " " + bonusResource + ".)")
+        console.log("(Gained " + randTrophies + " trophies, looted " + randRes + " " + bonusResource + " and "+ randRes2 + " "+ appropList[yum] + ".)")
         warOutcome = "Success"
     }
 
-    let y = Math.random() * (100+soldierRisk);
+    let y = Math.random() * (100);
     if (riskChance >= y) {
-        if (soldiers >= riskMultiplier){
-            soldiers = soldiers - riskMultiplier
-            workers = workers - riskMultiplier
-            workerCost = Math.ceil(50*1.08**workers)
-            if (warOutcome == "Success"){
-                console.log("However,")
-            }
-            console.log(riskMultiplier + " of your soldiers died in battle.")
+        var volDead = Math.ceil(soldiers*riskMultiplier/100)
+        soldiers = soldiers - volDead
+        workers = workers - volDead
+        workerCost = Math.ceil(20*1.08**workers)
+        if (warOutcome == "Success"){
+            console.log("However,")
         }
-        else {
-            workers = workers - soldiers
-            workerCost = Math.ceil(50*1.08**workers)
-            if (warOutcome == "Success"){
-                console.log("However,")
-            }
-            console.log(soldiers + " of your soldiers died in battle.")
-            soldiers = 0
-        }
+        console.log(volDead + " of your soldiers died in battle.")
         warOutcome = "Failure"
     }
     if (warOutcome == "None"){
-        randSpirit = Math.round((x/10)*(1.2 - Math.random()*0.4)*10)
+        randSpirit = Math.round((x)*(1.2 - Math.random()*0.4)*10)
         resources.spirit = resources.spirit + randSpirit;
         console.log("Your soldiers fight to a bitter stalemate.")
         console.log("You gain " + randSpirit + " spirit.")

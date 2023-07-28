@@ -146,8 +146,10 @@ Section 1 Rework
     Descriptions for Warfare and Trade
     XColour coding for Ag,War,Trade (Green,Red,Blue) X 
     XGeneral Spacing out X
-    Rework Trade upgrades -- not just cost grivna, cost copper and tin and crops..
+    xRework Trade upgrades -- not just cost grivna, cost copper and tin and crops..
     add 2 more trade upgrades 
+    grivna -- double trade spirit value  
+    tin -- double trade value 
 
 XIntro to Sec3  -- MILO ctrlf "Intro go here" DONE
 XEvent values - MILO to complete base, jason write function for rubber banding DONE
@@ -189,3 +191,12 @@ less positive, more negative
 if low spirit 
 more positive, less negative 
 """
+
+FIX SEC3 SLOWDOWN 
+
+BUFF SWOLE ALPHA TAX AND NERF BETA FARMER RESOURCE OUTPUT
+
+Milo's extra variables:
+    insubordination (created in if61m, called in if62m)
+    usb (created in if63m, called in)
+    $mentalBreak (set to 1 at end of if65m)

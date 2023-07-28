@@ -101,6 +101,7 @@ var eventList = [
     }
 ]
 
+var taxWorkers = 0
 var harvestPower = 1;
 var workers = 0;
 var workerCost = 20;
@@ -130,12 +131,13 @@ var soldierChance = 0
 
 
 var merchantSpirit = 2
+var spiritModifier = 1
 var dealModifier = 1;
 var tradeCooldownTime = 10000;
 
 var progression = 0;
 
-var warCooldownTime = 10000;
+var warCooldownTime = 7000;
 
 var resources = {
     "crops" : 0,
@@ -149,15 +151,18 @@ var resources = {
 
 var upgrades = {
     "oreChanceIncrease":{"segment": 'divupgrades',"cost":30, "resource":"crops", "div":"divoreincrease", "element_id":"oreincrease", "element_content": "Increase chance of finding ores when harvesting crops -- Cost : ^^^F crops"},
-    "betterTradeDeals":{"segment": 'divupgrades',"cost":100, "resource":"grivna", "div":"divbettertradedeals", "element_id":"bettertradedeals", "element_content": "Better Trade deals -- Cost : ^^^F grivna"},
-    "reduceTradeCooldown":{"segment": 'divupgrades',"cost":150, "resource":"grivna", "div":"divreducetradecooldown", "element_id":"reducetradecooldown", "element_content": "Reduce Trade Cooldown -- Cost : ^^^F grivna"},
+    "betterTradeDeals":{"segment": 'divtrade',"cost":200, "resource":"crops", "div":"divbettertradedeals", "element_id":"bettertradedeals", "element_content": "Better Trade deals -- Cost : ^^^F crops"},
+    "reduceTradeCooldown":{"segment": 'divtrade',"cost":20, "resource":"copper", "div":"divreducetradecooldown", "element_id":"reducetradecooldown", "element_content": "Reduce Trade Cooldown -- Cost : ^^^F copper"},
     "fuseMetalsUp": {"segment": 'divupgrades',"cost":150, "resource":"tin", "div":"divfusemetals", "element_id":"fusemetals", "element_content": "Farmers fuse copper and tin (2:1) to create bronze -- Cost : ^^^F tin"},
     "farmerClickUp": {"segment": 'divupgrades',"cost":1000, "resource":"crops", "div":"divfarmerclick", "element_id":"farmerclick", "element_content": "Multiply Click harvest power by total Farmer harvest power -- Cost : ^^^F crops"},
     "farmerSpiritUp": {"segment": 'divupgrades',"cost":100, "resource":"bronze", "div":"divfarmerspirit", "element_id":"farmerspirit", "element_content": "Gain spirit when you gain crops -- Cost : ^^^F bronze"},
     "farmerPowerUp": {"segment": 'divupgrades',"cost":100, "resource":"copper", "div":"divfarmerpower", "element_id":"farmerpower", "element_content": "Double Farmer harvest power -- Cost : ^^^F copper"},
     "soldierMultiUp": {"segment": 'divwarfare',"cost":120, "resource":"trophies", "div":"divsoldiermulti", "element_id":"soldiermulti", "element_content": "Double War rewards -- Cost : ^^^F trophies"},
     "soldierChanceUp": {"segment": 'divwarfare',"cost":80, "resource":"copper", "div":"divsoldierchance", "element_id":"soldierchance", "element_content": "Reward Chance Boost Up -- Cost : ^^^F copper"},
-    "soldierRiskUp": {"segment": 'divwarfare',"cost":80, "resource":"tin", "div":"divsoldierrisk", "element_id":"soldierrisk", "element_content": "Risk Chance Reduction -- Cost : ^^^F tin"}
+    "soldierRiskUp": {"segment": 'divwarfare',"cost":80, "resource":"tin", "div":"divsoldierrisk", "element_id":"soldierrisk", "element_content": "Risk Chance Reduction -- Cost : ^^^F tin"},
+    "doubleTradeValue": {"segment": 'divtrade',"cost":40, "resource":"tin", "div":"divdoubletradevalue", "element_id":"doubletradevalue", "element_content": "Double Trade Value -- Cost : ^^^F tin"},
+    "taxThePops": {"segment": 'divtrade',"cost":100, "resource":"grivna", "div":"divtaxthepops", "element_id":"taxthepops", "element_content": "Tax your workers -- Cost : ^^^F grivna"},
+    "doubleSpiritValue": {"segment": 'divtrade',"cost":300, "resource":"grivna", "div":"divdoublespiritvalue", "element_id":"doublespiritvalue", "element_content": "Double Spirit from Trades -- Cost : ^^^F grivna"}
 }
 
 
@@ -169,10 +174,10 @@ var goodsList = [
 
 const grivnaTable = {
     "crops" : 1,
-    "copper" : 10,
-    "tin" : 20,
-    "trophies" : 50,
-    "bronze" : 100
+    "copper" : 5,
+    "tin" : 10,
+    "trophies" : 25,
+    "bronze" : 50
 }
 
 var fullTrade = {
@@ -269,11 +274,14 @@ function assignMerchant() {
         merchants = merchants + 1
         if (merchants == 1) {
             generateTrades(merchantPower)
+            document.getElementById('merchantpower').innerHTML = merchantPower
             resources.grivna = resources.grivna + 10
             console.log("Your first Merchant brings with him 10 grivna.")
             console.log("(The local currency)")
             document.getElementById('grivna').innerHTML = resources.grivna
             document.getElementById('divgrivna').style.display = "block";
+        } else {
+            tradeCooldown()
         }
         document.getElementById('merchants').innerHTML = merchants+ " -- gen. " + merchants*merchantSpirit + " Spirit per tick"; 
         document.getElementById('unassignedworkers').innerHTML = unassignedWorkers;
@@ -285,10 +293,16 @@ function assignSoldier() {
     if (unassignedWorkers > 0) {
         unassignedWorkers = unassignedWorkers - 1
         soldiers = soldiers + 1
+        
         document.getElementById('soldiers').innerHTML = soldiers
         document.getElementById('unassignedworkers').innerHTML = unassignedWorkers; 
         document.getElementById('divwarfare').style.display = "block";
-        generateWar()
+        if (soldiers==1){
+            generateWar()
+        } else {
+            warCooldown()
+        }
+        
     }
 }
 
@@ -311,7 +325,7 @@ function farmerClickUp() {
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
         farmerClick++ //Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*4; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -333,7 +347,7 @@ function farmerSpiritUp() {
 function farmerPowerUp() {
     upgradeName = "farmerPowerUp" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
-        farmerPower = farmerPower*2 //Upgrade Effect
+        farmerPower = farmerPower*3 //Upgrade Effect
         document.getElementById('farmers').innerHTML = farmers + " -- gen. " + farmers*farmerPower + " Crops per tick"; 
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
@@ -380,26 +394,72 @@ function soldierRiskUp() {
 }
 
 function reduceTradeCooldown(){
-    if (resources.grivna >= upgrades["reduceTradeCooldown"]["cost"]) {
+    upgradeName = "reduceTradeCooldown"
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades["reduceTradeCooldown"]["cost"]) {
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades["reduceTradeCooldown"]["cost"];
+        upgrades["reduceTradeCooldown"]["cost"] = upgrades["reduceTradeCooldown"]["cost"]*3;
         if (tradeCooldownTime>1000){
             tradeCooldownTime = tradeCooldownTime - 1000
+        } else { 
+            upgrades["reduceTradeCooldown"]["cost"] = 10**200
         }
-        resources.grivna = resources.grivna - upgrades["reduceTradeCooldown"]["cost"];
-        upgrades["reduceTradeCooldown"]["cost"] = upgrades["reduceTradeCooldown"]["cost"]*2;
-        document.getElementById('grivna').innerHTML = resources.grivna;
+        
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
         document.getElementById(upgrades["reduceTradeCooldown"]["element_id"]).innerHTML = upgrades["reduceTradeCooldown"]["element_content"].replace("^^^F", upgrades["reduceTradeCooldown"]["cost"])
         document.getElementById(upgrades["reduceTradeCooldown"]["div"]).style.display = "none";
+        document.getElementById("merchantcooldown").innerHTML = Math.round(tradeCooldownTime/1000)
     }
 }
 
 function betterTradeDeals(){
-    if (resources.grivna >= upgrades["betterTradeDeals"]["cost"]) {
-        dealModifier = dealModifier + 0.25
-        resources.grivna = resources.grivna - upgrades["betterTradeDeals"]["cost"];
-        upgrades["betterTradeDeals"]["cost"] = upgrades["betterTradeDeals"]["cost"]*2;
-        document.getElementById('grivna').innerHTML = resources.grivna;
+    upgradeName = "betterTradeDeals"
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades["betterTradeDeals"]["cost"]) {
+        dealModifier = dealModifier + 0.2
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades["betterTradeDeals"]["cost"];
+        upgrades["betterTradeDeals"]["cost"] = upgrades["betterTradeDeals"]["cost"]*3;
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
         document.getElementById(upgrades["betterTradeDeals"]["element_id"]).innerHTML = upgrades["betterTradeDeals"]["element_content"].replace("^^^F", upgrades["betterTradeDeals"]["cost"])
         document.getElementById(upgrades["betterTradeDeals"]["div"]).style.display = "none";
+        document.getElementById("merchantdeals").innerHTML = Math.round((dealModifier-1)*100)
+
+    }
+}
+
+function doubleTradeValue(){
+    upgradeName = "doubleTradeValue" //Upgrade Name
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
+        merchantPower = merchantPower*2 //Upgrade Effect
+        document.getElementById('merchantpower').innerHTML = merchantPower*merchants;
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+        tradeCooldown()
+    }
+}
+
+function doubleSpiritValue(){
+    upgradeName = "doubleSpiritValue" //Upgrade Name
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
+        spiritModifier = spiritModifier * 2 //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
+    }
+}
+
+function taxThePops(){
+    upgradeName = "taxThePops" //Upgrade Name
+    if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
+        taxWorkers++ //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
 }
 
@@ -470,7 +530,7 @@ function trade(x){
     if (resources[fullTrade[x][1]] >= fullTrade[x][2]){
         resources[fullTrade[x][1]] = resources[fullTrade[x][1]] - fullTrade[x][2]
         resources[fullTrade[x][3]] = resources[fullTrade[x][3]] + fullTrade[x][4]
-        resources.spirit = resources.spirit + 10*fullTrade[x][5]
+        resources.spirit = resources.spirit + 10*fullTrade[x][5]*spiritModifier
         console.log("Traded " + fullTrade[x][2] + " " + fullTrade[x][1] + " for " + fullTrade[x][4] + " " + fullTrade[x][3] + ".")
         console.log("Gained " + 10*fullTrade[x][5] + " Spirit through Trade")
         //update all resources
@@ -605,6 +665,7 @@ function tradeCooldown(){
     document.getElementById('trade2').innerHTML = 'Refreshing...';
     document.getElementById('trade3').innerHTML = 'Refreshing...';
     document.getElementById('refreshtrade').innerHTML = 'Refreshing...'
+    document.getElementById('merchantpower').innerHTML = merchantPower*merchants;
     setTimeout(function(){
         document.getElementById('trade1').disabled = false;
         document.getElementById('trade2').disabled = false;
@@ -675,6 +736,12 @@ function rewireLoggingToElement(eleLocator, eleOverflowLocator, autoScroll) {
 function trophySpirit(){
     resources.spirit = resources.spirit + resources.trophies
     document.getElementById('spirit').innerHTML = resources.spirit;
+}
+
+function taxation(){
+    resources.grivna = resources.grivna + (workers*taxWorkers)
+    console.log("Your workers pay " + (workers*taxWorkers) + " grivna in tax.")
+    document.getElementById('grivna').innerHTML = resources.grivna;
 }
 
 function checkUpgrades(){
@@ -1339,6 +1406,10 @@ window.setInterval(function(){
             }
         }
         trophySpirit()
+        if (taxWorkers>0 && timer%5==0){
+            taxation()
+        }
+        
         if (resources.spirit >= spiritThreshold) {
             document.getElementById('wakeup').style.display = "block";
         }
@@ -1467,8 +1538,9 @@ window.setInterval(function(){
             }
         }
         //The last one needs to work differently here, see my note.
-        if (timeTilWeekend <= 0) {
+        if (timeTilWeekend <= 1) {
             showEvent(9)
+            timeTilWeekend = 1
             document.getElementById('peacebutton').style.display = "none";
             document.getElementById('dignitybutton').style.display = "none";
             document.getElementById('jobbutton').style.display = "none";

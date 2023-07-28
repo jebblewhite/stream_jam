@@ -7,7 +7,6 @@
 		<div id="procedural1">
 			<div class="spirit" id="divspirit">
 				Spirit: <span id="spirit">0</span>
-				<button class="button future waaaakeup" id="wakeup" onclick="handOver(2)">Wake up</button>
 			</div>
 			<div class="b"> 
 				<button class="button" onclick="harvestCrops(harvestPower, 1)">Harvest Crops</button>
@@ -38,10 +37,19 @@
 						<button class="button agriculture costcrops" id="oreincrease" onclick="increaseOreChance()">Increase chance of finding ores when harvesting crops -- Cost : 100 crops</button>
 					</div>
 					<div class="upgrades" id="divbettertradedeals">
-						<button class="button tradeup costgrivna" id="bettertradedeals" onclick="betterTradeDeals()"></button>
+						<button class="button tradeup costcrops" id="bettertradedeals" onclick="betterTradeDeals()"></button>
 					</div>
 					<div class="upgrades" id="divreducetradecooldown">
-						<button class="button tradeup costgrivna" id="reducetradecooldown" onclick="reduceTradeCooldown()"></button>
+						<button class="button tradeup costcopper" id="reducetradecooldown" onclick="reduceTradeCooldown()"></button>
+					</div>
+					<div class="upgrades" id="divdoubletradevalue">
+						<button class="button tradeup costtin" id="doubletradevalue" onclick="doubleTradeValue()"></button>
+					</div>
+					<div class="upgrades" id="divdoublespiritvalue">
+						<button class="button tradeup costgrivna" id="doublespiritvalue" onclick="doubleSpiritValue()"></button>
+					</div>
+					<div class="upgrades" id="divtaxthepops">
+						<button class="button tradeup costgrivna" id="taxthepops" onclick="taxThePops()"></button>
 					</div>
 					<div class="upgrades" id="divfusemetals">
 						<button class="button agriculture costtin" id="fusemetals" onclick="fuseMetalsUp()"></button>
@@ -98,6 +106,11 @@
 				<div class="assignsoldier" id="divassignsoldier">
 					<button class="button warfareup" id="assignsoldier" onclick="assignSoldier()">Assign Soldier</button>
 				</div>
+				<br>
+				<br>
+				<br>
+				<br>
+				<button class="button future waaaakeup" id="wakeup" onclick="handOver(2)">Wake up</button>
 			</div>
 			<div class="b">
 				<div class="warfare" id="divwarfare">

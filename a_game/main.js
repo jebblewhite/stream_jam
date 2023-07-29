@@ -5,8 +5,11 @@ var i_f_params = {}
 var proc_params = {}
 
 var weakness = 0
-var section8outcome = 0
+var section8outcome = ""  //I've changed this because you're setting it to a string later, hope this doesn't break anything!
 var screamPressed = false
+
+var insubordination = 0
+var usb = 0
 
 var foreignAidGiven = false
 var morale = 1000000
@@ -788,11 +791,11 @@ function setProcParams(x) {
             section5type = "s"
         }
         section5progress++
-        passedArray = [parseInt(x), farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, section3outcome, morale, manpower, economy, land, section5progress, section5type, section5scene]
+        passedArray = [parseInt(x), farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, section3outcome, morale, manpower, economy, land, insubordination, usb, section5progress, section5type, section5scene] //Order changed BUT I think I've fixed in Twine.
         
     }
     if (x=="8_5") {
-        passedArray = [x, farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, section3outcome, morale, manpower, economy, land, section5progress, section5type, section5scene, section8outcome]
+        passedArray = [x, farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, section3outcome, morale, manpower, economy, land, insubordination, usb, section5progress, section5type, section5scene, section8outcome] //Order changed BUT I think I've fixed in twine.
     }
     console.log(x)
     return passedArray
@@ -898,7 +901,7 @@ function startProcedural(x) {
         console.log("")
         console.log("")
         console.log("")
-        if (section5progress <=1){
+        if (section5progress <=8){ //I think this is right!  The mental break happens after 9 events.
             console.log("You are at war with The Barony of St Byzantinov.")
             console.log("Each day they push further into your territory and claim your trophies.")
             console.log("Fight for Tielze! Push them back!")

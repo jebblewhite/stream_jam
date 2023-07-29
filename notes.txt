@@ -194,9 +194,46 @@ more positive, less negative
 
 X FIX SEC3 SLOWDOWN 
 
-BUFF SWOLE ALPHA TAX AND NERF BETA FARMER RESOURCE OUTPUT
+X BUFF SWOLE ALPHA TAX AND NERF BETA FARMER RESOURCE OUTPUT
 
 Milo's extra variables:
     insubordination (created in if61m, called in if62m)
     usb (created in if63m, called in)
     $mentalBreak (set to 1 at end of if65m) -- will just do this in the progress number (starts at )
+
+
+Priorities
+rework war5 function 
+recruit function 
+make sure variables dont hit 0
+
+if soldiers hits zero, conscript for a big hit to morale 
+Random attacks every 20 seconds not 60, 50:50 chance -- lose manpower, land and morale randomly.
+
+
+Milo's comments:
+
+    Section 1:
+    Maybe change the wording on stalemante, 'bitter stalemate' leading into 'gain spirit' seems incongruous.
+    Found a bug where warefare would basically instantly reset occasionally.  Think it happens after buying soldiers.
+    Got the Barony to "120% chance of reward, 5% chance of casualty" which doesn't seem right...
+    Right, a couple of points on balance from my soldier build game:
+        I was routinely losing about a third of my whole army while attacking Polthia, even in the end game.  Since the Barony was basically a guaranteed win, and they guarantee food, attacking them basically always made the most sense.
+        Even by endgame, the percentages on Sol-us made it just not worth attacking at all.
+        I know it was my idea, but I find it odd that the easier of the metals to get (tin by attacking Polthia) is also the more valuable one vis-a-vis trading.  Not necessarily a problem.
+        Because we're losing soldiers so fast, what is the number we're tracking for the IF?  End game soldiers, or total soldiers bought? (I think should be the latter)
+    
+    Section 5:
+        The manpower numbers (you lost 30618 men) are far too high.  By like, a factor of 1000.
+        Because manpower is tied directly to money, it kind of makes me not care about manpower (especially since its easier to have too much manpower than too much money).  I think if it was horribly unbalancedly expensive to buy more troops (so starting manpower is essential), it would feel better.
+        What does land currently do?  In section 1 spirit derives from it, would make sense if something like that happened here again imo.
+        Currently it's possible to swing really hard early on and then you just sit there in debt, but not actually worrying because your spirit and land are stupid high.  Some kind of increasing spirit decay if you're not pushing regularly might help (or land if we tie it to spirit gain/decay).
+        Think natural manpower decay might be a bit too fast.
+
+        Changes I'd make (in order of priority)
+        I'd change manpower numbers, like keep everything the same but knock a few zeroes off.
+        I'd have manpower decay much more slowly (but obviously take a hit on Russian raids), and buying it much more expesive (like a couple orders of magnitude), so managing manpower would have more emotional weight.
+        I'd have the land decay rate increase inversely to the number of attacks in the last 60 seconds (to stop big early swings).
+        I'd have spirit decay at a regular rate, but also have it rise by 1 per tick per land (so have the decay rate just over starting land).
+        
+

@@ -1,5 +1,5 @@
 var timer = 0;
-var procSection = 1
+var procSection = 1 // 1
 
 var i_f_params = {}
 var proc_params = {}
@@ -7,23 +7,24 @@ var proc_params = {}
 var weakness = 0
 var section8outcome = ""  //I've changed this because you're setting it to a string later, hope this doesn't break anything!
 var screamPressed = false
-
+var time_until_scream = 0
 var insubordination = 0
 var usb = 0
 
 var foreignAidGiven = false
 var morale = 1000000
 var manpower = 500000
-var economy = 2000000
-var land = 60000
-var section5prebreak = ["Spirit", "Grivna", "Soldiers", "Trophies", "Make war with neighbouring states", "Push back against The Barony"]
-var section5postbreak = ["Morale", "Economy", "Manpower", "Land", "Defend your home", "Fight for Ukraine"]
+var economy = 3000000
+var land = 120000
+var foreignAidValue = 200000
+var section5prebreak = ["Spirit", "Grivna", "Soldiers", "Trophies", "Make war with neighbouring states", "Push back in the East -- Cost : 10K grivna", "Push back in the North -- Cost : 20K grivna", "Push back in the South -- Cost : 50K grivna", "Recruit Soldiers -- Cost : 5K grivna", "The Barony"]
+var section5postbreak = ["Morale", "Economy", "Manpower", "Land", "Defend your home. Defend Ukraine.", "Push back in the East -- Cost : 10K economy", "Push back in the North -- Cost : 20K economy", "Push back in the South -- Cost : 50K economy", "Recruit Soldiers -- Cost : 5K economy", "Russia"]
 
 var section5progress = 0
 var section5type = "m"
 var section5scene = 0
-var timeTil5end = 60
-var section5scenelist = [1,2,3,4,5,6,7,8,9,10]
+var timeTil5end = 60*20 // 60
+var section5scenelist = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 
 var timeTil8end = 100
 
@@ -821,7 +822,7 @@ function handOver(x) {
     procSection = x
     console.log(x)
     if (procSection == 6) {
-        if (section5progress >= 1) {//change back to 10
+        if (section5progress >= 19) {//I think this is right
             procSection = 7
         } else {
             timeTil5end = 60
@@ -1237,73 +1238,167 @@ function scream(){
     mentalSpirit = mentalSpirit + 400
     weakness++
     screamPressed = true
+    time_until_scream = 5
     console.log("You scream through the pain")
     document.getElementById("section8spirit").innerHTML = mentalSpirit
     document.getElementById("weakness").innerHTML = weakness
     document.getElementById("scream").style.display = "none"
 }   
 
-function war5(){
-    manpower = manpower - 2000
-    economy = economy - 4000
-    land = land + 200
-    morale = morale + 2000
-    war5Cooldown()
-    if (section5progress<=1){
-        document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale
-        document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy
-        document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land
-        document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower
-        document.getElementById("fightforukraine").innerHTML = section5prebreak[4]
-        if (!document.getElementById('war5').innerHTML == 'War on cooldown...'){
-            document.getElementById("war5").innerHTML = section5prebreak[5]
-        }
-        
-    } else {
-        document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale
-        document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy
-        document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land
-        document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower
-        document.getElementById("fightforukraine").innerHTML = section5postbreak[4]
-        if (!document.getElementById('war5').innerHTML == 'War on cooldown...'){
-            document.getElementById("war5").innerHTML = section5postbreak[5]
+function recruit(){
+    if (economy >= 5000) {
+        economy -= 5000
+        manpower += 5000
+        if (section5progress<=8){
+            document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy
+            document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower
+        } else {
+            document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy
+            document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower
         }
     }
-    function war5Cooldown(){
-        document.getElementById('war5').disabled = true;
-        document.getElementById('war5').innerHTML = 'War on cooldown...';
-        setTimeout(function(){
-            document.getElementById('war5').disabled = false;
-            if (section5progress<=1){
+}
+
+function war5(x){
+    if ((x==0 && economy>10000 && manpower>20000) || (x==1 && economy>20000 && manpower>15000) || (x==2 && economy>50000 && manpower>80000)){
+        let z = Math.random() * 100;
+        if (x==0){
+            var manpowerchange = 10000+(Math.round((z/100)*10000))
+            var economychange = 10000
+            var landchange = 600+(Math.round(((100-z)/100)*600))
+            var moralechange = (Math.round(((100-z)/100)*20000))
+
+        }
+        if (x==1) {
+            var manpowerchange = 5000+(Math.round((z/100)*10000))
+            var economychange = 20000
+            var landchange = 900+(Math.round(((100-z)/100)*200))
+            var moralechange = 5000+(Math.round(((100-z)/100)*10000))
+        }
+        if (x==2) {
+            var manpowerchange = 20000+(Math.round((z/100)*60000))
+            var economychange = 50000
+            var landchange = 3000+(Math.round(((100-z)/100)*2000))
+            var moralechange = 10000+(Math.round(((100-z)/100)*70000))
+        }
+        manpower = manpower - manpowerchange
+        economy = economy - economychange
+        land = land + landchange
+        morale = morale + moralechange
+        
+        if (section5progress<=8){
+            var landortrophies = section5prebreak[3]
+            var moraleorspirit = section5prebreak[0]
+            document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale
+            document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy
+            document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land
+            document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower
+            document.getElementById("fightforukraine").innerHTML = section5prebreak[4]
+            document.getElementById("recruit").innerHTML = section5prebreak[8]
+            if (document.getElementById('war5').innerHTML != 'War on cooldown...'){
                 document.getElementById("war5").innerHTML = section5prebreak[5]
-            } else {
-                document.getElementById("war5").innerHTML = section5postbreak[5]
+                document.getElementById("war5_1").innerHTML = section5prebreak[6]
+                document.getElementById("war5_2").innerHTML = section5prebreak[7]
             }
-        },warCooldownTime/5);
+            
+        } else {
+            var landortrophies = section5postbreak[3]
+            var moraleorspirit = section5postbreak[0]
+            document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale
+            document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy
+            document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land
+            document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower
+            document.getElementById("fightforukraine").innerHTML = section5postbreak[4]
+            document.getElementById("recruit").innerHTML = section5postbreak[8]
+            if (document.getElementById('war5').innerHTML != 'War on cooldown...'){
+                document.getElementById("war5").innerHTML = section5postbreak[5]
+                document.getElementById("war5_1").innerHTML = section5postbreak[6]
+                document.getElementById("war5_2").innerHTML = section5postbreak[7]
+                
+            }
+        }
+
+        if (z < 30) {
+            console.log("The campaign went better than expected.")
+        } else if ( z < 70) {
+            console.log("The campaign was relatively successful.")
+        } else {
+            console.log("The campaign was a bloodbath.")
+        }
+        console.log("You lost " + manpowerchange + " men.")
+        console.log("You took back " + landchange + " " + landortrophies + " and gained " + moralechange + " " + moraleorspirit + ".")
+        war5Cooldown()
+        
+        function war5Cooldown(){
+            document.getElementById('war5').disabled = true;
+            document.getElementById('war5_1').disabled = true;
+            document.getElementById('war5_2').disabled = true;
+            document.getElementById('war5').innerHTML = 'War on cooldown...';
+            document.getElementById('war5_1').innerHTML = 'War on cooldown...';
+            document.getElementById('war5_2').innerHTML = 'War on cooldown...';
+            setTimeout(function(){
+                document.getElementById('war5').disabled = false;
+                document.getElementById('war5_1').disabled = false;
+                document.getElementById('war5_2').disabled = false;
+                if (section5progress<=8){
+                    document.getElementById("war5").innerHTML = section5prebreak[5]
+                    document.getElementById("war5_1").innerHTML = section5prebreak[6]
+                    document.getElementById("war5_2").innerHTML = section5prebreak[7]
+                } else {
+                    document.getElementById("war5").innerHTML = section5postbreak[5]
+                    document.getElementById("war5_1").innerHTML = section5postbreak[6]
+                    document.getElementById("war5_2").innerHTML = section5postbreak[7]
+                }
+            },warCooldownTime);
+        }
+    } else {
+        console.log("You do not have the means to run this operation.")
     }
 }
 
 function loseMoraleEtc(){
     morale = morale - 1000
-    manpower = manpower - 500
+    manpower = manpower - 400
     land = land - 100
-    economy = economy - 3000
+    economy = economy - 2000
 }
 
 function foreignAid(){
     const foreignAidListPre = ["New Anglimerican Terran Order"]
     const foreignAidListPost = ["NATO"]
-    if (section5progress<=1){
+    if (section5progress<=8){
         var aidGiver = foreignAidListPre[getRandomInt(foreignAidListPre.length)]
         var aidResource = "Grivna"
     } else {
         var aidGiver = foreignAidListPost[getRandomInt(foreignAidListPost.length)]
         var aidResource = "Dollars in aid"
     }
-    economy = economy + 100000
-    console.log(aidGiver + " provide 100,000 " + aidResource)
+    economy = economy + foreignAidValue
+    console.log(aidGiver + " provide 200,000 " + aidResource)
 }
 
+function russianAttack(globalPower, landttack, moraleattack) {
+    let y = getRandomInt(100)+1
+    var menLosses = Math.round((y/100)*10000)
+    var landLosses = Math.round((y/100)*600)
+    var moraleLosses = Math.round((y/100)*7000)
+    manpower -= menLosses
+    land -= landLosses
+    morale -= moraleLosses
+    console.log(globalPower + " pushes into your territory.")
+    console.log("They claim " + landLosses + " " + landttack + ".")
+    console.log("You lose " + menLosses + " men and " + moraleLosses + " " + moraleattack + ".")
+    if (section5progress<=8){
+        document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale
+        document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land
+        document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower
+        
+    } else {
+        document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale
+        document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land
+        document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower
+    }
+}
 
 window.setInterval(function(){
     if (procSection == 1){
@@ -1515,33 +1610,54 @@ window.setInterval(function(){
         
     }
     if (procSection == 5 || procSection == 69) {
-        if (section5progress<=1){
+        if (section5progress<=8){
+            var globalPower = section5prebreak[9]
+            var landttack = section5prebreak[3]
+            var moraleattack = section5prebreak[0]
             document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale
             document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy
             document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land
             document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower
             document.getElementById("fightforukraine").innerHTML = section5prebreak[4]
-            if (!document.getElementById('war5').innerHTML == 'War on cooldown...'){
+            document.getElementById("recruit").innerHTML = section5prebreak[8]
+            if (document.getElementById('war5').innerHTML != 'War on cooldown...'){
                 document.getElementById("war5").innerHTML = section5prebreak[5]
+                document.getElementById("war5_1").innerHTML = section5prebreak[6]
+                document.getElementById("war5_2").innerHTML = section5prebreak[7]
             }
             
         } else {
+            var globalPower = section5postbreak[9]
+            var landttack = section5postbreak[3]
+            var moraleattack = section5postbreak[0]
             document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale
             document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy
             document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land
             document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower
             document.getElementById("fightforukraine").innerHTML = section5postbreak[4]
-            if (!document.getElementById('war5').innerHTML == 'War on cooldown...'){
+            document.getElementById("recruit").innerHTML = section5postbreak[8]
+            if (document.getElementById('war5').innerHTML != 'War on cooldown...'){
                 document.getElementById("war5").innerHTML = section5postbreak[5]
+                document.getElementById("war5_1").innerHTML = section5postbreak[6]
+                document.getElementById("war5_2").innerHTML = section5postbreak[7]
             }
         }
         timeTil5end--
         loseMoraleEtc()
-        if (timeTil5end < 30 && !foreignAidGiven){
+        if (timeTil5end % 30 == 0 && timeTil5end % 60 != 0 && !foreignAidGiven){
             foreignAid()
             foreignAidGiven = true
         }
-        if (timeTil5end <= 58 && procSection == 5) {
+        if (timeTil5end % 60 == 0) {
+            foreignAidGiven = false
+        }
+        if (timeTil5end % 20 == 0 && timeTil5end % 60 != 0) {
+            let yam = getRandomInt(2)
+            if (yam == 1){
+                russianAttack(globalPower, landttack, moraleattack)
+            }
+        }
+        if (timeTil5end <= 0 && procSection == 5) {
             handOver(6)
         }
     }
@@ -1551,7 +1667,8 @@ window.setInterval(function(){
         doctorsPrognosis()
         loseSpirit()
         screamPressed = false
-        if (timeTil8end <= 90){
+        time_until_scream--
+        if (timeTil8end <= 90 && time_until_scream <= 0){
             document.getElementById("scream").style.display = "block"
         }
         if (timeTil8end <= 0 || mentalSpirit <=0) {

@@ -1,5 +1,5 @@
 var timer = 0;
-var procSection = 1 // 1
+var procSection = 0 // 1
 
 var i_f_params = {}
 var proc_params = {}
@@ -319,7 +319,7 @@ function fuseMetalsUp() {
         fuseMetals = true //Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = "none"; // Change for onetime use
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
         document.getElementById('divbronze').style.display = 'block';
@@ -332,7 +332,7 @@ function farmerClickUp() {
         farmerClick++ //Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
@@ -344,7 +344,7 @@ function farmerSpiritUp() {
         farmerSpirit = 1//Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2**1000; // Change for onetime use
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
@@ -357,7 +357,7 @@ function farmerPowerUp() {
         document.getElementById('farmers').innerHTML = farmers + " -- gen. " + farmers*farmerPower + " Crops per tick"; 
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
@@ -369,7 +369,7 @@ function soldierMultiUp() {
         rewardMultiplier = rewardMultiplier*2 //Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
         document.getElementById("soldiermulti").innerHTML = (Math.round(rewardMultiplier)).toLocaleString("en-UK")
@@ -383,7 +383,7 @@ function soldierChanceUp() {
         soldierChance = soldierChance + 10 //Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
         document.getElementById("soldierreward").innerHTML = (Math.round(soldierChance/10)).toLocaleString("en-UK")
@@ -397,7 +397,7 @@ function soldierRiskUp() {
         soldierRisk = soldierRisk + 10 //Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
         document.getElementById("soldierrisk").innerHTML = (Math.round(soldierRisk/10)).toLocaleString("en-UK")
@@ -416,7 +416,7 @@ function reduceTradeCooldown(){
             upgrades["reduceTradeCooldown"]["cost"] = 10**200
         }
         
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades["reduceTradeCooldown"]["element_id"]).innerHTML = upgrades["reduceTradeCooldown"]["element_content"].replace("^^^F", upgrades["reduceTradeCooldown"]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades["reduceTradeCooldown"]["div"]).style.display = "none";
         document.getElementById("merchantcooldown").innerHTML = Math.round(tradeCooldownTime/1000)
@@ -429,7 +429,7 @@ function betterTradeDeals(){
         dealModifier = dealModifier + 0.2
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades["betterTradeDeals"]["cost"];
         upgrades["betterTradeDeals"]["cost"] = upgrades["betterTradeDeals"]["cost"]*2;
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades["betterTradeDeals"]["element_id"]).innerHTML = upgrades["betterTradeDeals"]["element_content"].replace("^^^F", upgrades["betterTradeDeals"]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades["betterTradeDeals"]["div"]).style.display = "none";
         document.getElementById("merchantdeals").innerHTML = Math.round((dealModifier-1)*100)
@@ -444,7 +444,7 @@ function doubleTradeValue(){
         document.getElementById('merchantpower').innerHTML = merchantPower*merchants;
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
         tradeCooldown()
@@ -457,7 +457,7 @@ function doubleSpiritValue(){
         spiritModifier = spiritModifier * 2 //Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
@@ -473,7 +473,7 @@ function taxThePops(){
         }
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
-        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
+        document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
@@ -485,7 +485,7 @@ function increaseOreChance(){
         tinChance = tinChance + 2;
         resources.crops = resources.crops - upgrades["oreChanceIncrease"]["cost"];
         upgrades["oreChanceIncrease"]["cost"] = upgrades["oreChanceIncrease"]["cost"]*2;
-        document.getElementById('crops').innerHTML = resources.crops;
+        document.getElementById('crops').innerHTML = resources.crops.toLocaleString("en-UK");
         document.getElementById('oreincrease').innerHTML = "Increase chance of finding ores when harvesting crops -- Cost : " + upgrades["oreChanceIncrease"]["cost"].toLocaleString("en-UK") + " crops";
         document.getElementById('divoreincrease').style.display = "none";
     }
@@ -810,13 +810,20 @@ function setProcParams(x) {
     if (x=="8_5") {
         passedArray = [x, farmers, merchants, soldiers, job, peace, dignity, social, mentalSpirit, section3outcome, morale, manpower, economy, land, insubordination, usb, section5progress, section5type, section5scene, section8outcome] //Order changed BUT I think I've fixed in twine.
     }
-    console.log(x)
+    if (x==0){
+        passedArray = [0,]
+    }
     return passedArray
 }
 
 function handOver(x) {
     if(x==10){
         document.getElementById("procedural"+(5)).style.display = "none";
+        document.getElementById("log-container").style.color = "#424242";
+        document.getElementById("hehe").style.overflow = "hidden";
+        document.getElementById("interactiveFiction2").style.display = "block";
+    } else if (x==0) {
+        document.getElementById("procedural"+(1)).style.display = "none";
         document.getElementById("log-container").style.color = "#424242";
         document.getElementById("hehe").style.overflow = "hidden";
         document.getElementById("interactiveFiction2").style.display = "block";
@@ -827,7 +834,6 @@ function handOver(x) {
         document.getElementById("interactiveFiction2").style.display = "block";
     }
     procSection = x
-    console.log(x)
     if (procSection == 6) {
         if (section5progress >= 19) {//I think this is right
             procSection = 7
@@ -841,7 +847,6 @@ function handOver(x) {
     if (procSection == 9) {
         procSection = "8_5"
     }
-    console.log(procSection)
     var myArray = setProcParams(procSection)
     console.log(myArray)
     document.getElementById("interactiveFiction2").contentWindow.postMessage(myArray, '*');
@@ -866,6 +871,28 @@ function handleEvent(e) {
 }
 
 function startProcedural(x) {
+    if (x==1) {
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("")
+    }
     if (x==3) {
         job = i_f_params[x-1][4]
         dignity = i_f_params[x-1][5]
@@ -1020,15 +1047,17 @@ function jobClick() {
     document.getElementById('job').innerHTML =  job.toLocaleString("en-UK")
 }
 
-function dignityClick() {
-    dignity = dignity + dignityPerClick   
-    document.getElementById('dignity').innerHTML =  dignity.toLocaleString("en-UK")
-    console.log("You maintain your dignity. (+" + dignityPerClick +" dignity)")
-    dignityPerClick = 0
+function dignityClick() { 
+    if (dignityPerClick>0){
+        dignity += dignityPerClick   
+        document.getElementById('dignity').innerHTML =  dignity.toLocaleString("en-UK")
+        console.log("You maintain your dignity. (+" + dignityPerClick +" dignity)")
+        dignityPerClick = 0
+    }
 }
 
 function peaceClick() {
-    peace = peace + peacePerClick
+    peace += peacePerClick
     console.log("You breathe deeply and find your focus. (+" + peacePerClick +" inner peace)")
     peacePerClick = 0
     peaceincrementSteps = [1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
@@ -1036,7 +1065,7 @@ function peaceClick() {
 }
 
 function socialClick() {
-    social = social + socialPerClick
+    social += socialPerClick
     job--
     console.log("You catch up with friends. (+" + socialPerClick +" social contact)")
     socialPerClick = 0
@@ -1055,7 +1084,6 @@ function increasePerClick() {
     if (socialPerClick!=20){
         socialPerClick = socincrementSteps.shift()
     }
-    console.log(peacePerClick)
 }
 
 
@@ -1081,11 +1109,11 @@ function changeSpirit() {
 }
 
 function statDecay() {
-    var theRemovedElement = workPerTen.shift()
+    const theRemovedElement = workPerTen.shift()
     workPerTen.push(jobDone)
     jobDone = 0
     if (workPerTen.reduce((a, b) => a + b, 0)==8){
-        job = job + 12
+        job += 12
         console.log("You finish up a hard day of work. (+" + 12 +" job security)")
         workPerTen = [1,1,1,1,1,1,1,0]
     }
@@ -1093,26 +1121,26 @@ function statDecay() {
         noWorkDone++
     }
     if (noWorkDone >= 7) {
-        job = job - 3
+        job -= 3
         if (!jobWarned) {
             console.log("You should really do some work...")
             jobWarned = true
         }
     if (noWorkDone >= 12) {
-        job = job - 7
+        job -= 7
     }
         
     }
     dignity--
     peace--
     if (timeTilDecay <=3) {
-        social = social - 2
+        social -= 2
         if (!socialWarned) {
             console.log("You miss your friends...")
             socialWarned = true
         }
     } else if (timeTilDecay == 0) {
-        social = social - 5
+        social -= 5
         
     } else {
         timeTilDecay--
@@ -1173,7 +1201,7 @@ function eventOption(x){
     } else {
         eventOutcome(eventList[eventCounter]["outcomes"][x])
     } 
-    for (let item in eventList[x]["options"]) {
+    for (let item in [0,1,2]) {
         document.getElementById('eventoption'+item).style.display = "none"
     }
     document.getElementById('events').style.display = "none"
@@ -1397,8 +1425,8 @@ function foreignAid(){
         var aidGiver = foreignAidListPost[getRandomInt(foreignAidListPost.length)]
         var aidResource = "Dollars in aid"
     }
-    economy = economy + foreignAidValue
-    console.log(aidGiver + " provide 200,000 " + aidResource)
+    economy = economy + (foreignAidValue-(section5progress*2500))
+    console.log(aidGiver + " provide "+ (foreignAidValue-(section5progress*2500)).toLocaleString + " " + aidResource)
 }
 
 function russianAttack(globalPower, landttack, moraleattack) {
@@ -1425,6 +1453,9 @@ function russianAttack(globalPower, landttack, moraleattack) {
 }
 
 window.setInterval(function(){
+    if (procSection == 0){
+        handOver(0)
+    }
     if (procSection == 1){
         timer++;
         if (timer == 1) {
@@ -1696,7 +1727,6 @@ window.setInterval(function(){
             document.getElementById("scream").style.display = "block"
         }
         if (timeTil8end <= 0 || mentalSpirit <=0) {
-            console.log("gam ovr")
             if (timeTil8end <=0) {
                 if (weakness >= 5){
                     section8outcome = "good_end"

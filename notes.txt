@@ -236,4 +236,18 @@ Milo's comments:
         I'd have the land decay rate increase inversely to the number of attacks in the last 60 seconds (to stop big early swings).
         I'd have spirit decay at a regular rate, but also have it rise by 1 per tick per land (so have the decay rate just over starting land).
         
+X manpower -- change start to 1M
+X decay between 1 and 20 per s 
+X 500 per 5K 
 
+X land decays at a rate of 0.4% per sec 
+
+X spirit change is spirit + land - 120000
+
+X spirit gain from raids removed 
+
+Milo's final night notes:
+    'Cancel roleplaying' isn't working, it's taking me to if I hadn't cancelled.
+    Didn't notice any other bugs I didn't cause myself.
+    Somehow, section 5 is too easy now.  Played it twice being 'stupid' and each time ended with almost 1mil spirit.  Proposed (and very thematic) nerf: reduce the amount of foreign aid each time it's given, I'd say by 5000.  Hammers home the 'how important foreign aid is' message.
+    

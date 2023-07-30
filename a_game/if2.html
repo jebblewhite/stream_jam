@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="if2" startnode="112" creator="Twine" creator-version="2.3.13" ifid="02252DB2-797B-481C-8D09-AC475020CB86" zoom="0.6" format="SugarCube" format-version="2.34.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+	<tw-storydata name="if2" startnode="1" creator="Twine" creator-version="2.3.13" ifid="02252DB2-797B-481C-8D09-AC475020CB86" zoom="0.6" format="SugarCube" format-version="2.34.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&family=Playfair+Display&display=swap');
 
 body{
@@ -184,7 +184,7 @@ window.pass_back = function passBack(){
 			
 		}
 		if (State.variables.continuityArray[0] == "6") {
-			State.variables.continuityArray = State.variables.continuityArray.slice(0,10).concat([State.variables.morale, State.variables.manpower, State.variables.manpower, State.variables.economy, State.variables.land, State.variables.insubordination, State.variables.usb], State.variables.continuityArray.slice(16,19))
+			State.variables.continuityArray = State.variables.continuityArray.slice(0,10).concat([State.variables.morale, State.variables.manpower, State.variables.economy, State.variables.land, State.variables.insubordination, State.variables.usb], State.variables.continuityArray.slice(16,19))
 		}
 
 		
@@ -209,7 +209,7 @@ window.pass_back = function passBack(){
 		State.variables.section5scene = 0
 		State.variables.section5type = 0
 		State.variables.section8outcome = 0
-};</script><tw-passagedata pid="1" name="Landing Node" tags="" position="7296,98" size="100,100">
+};</script><tw-passagedata pid="1" name="Landing Node" tags="" position="7300,90" size="100,100">
 [[Click to continue|Sending Node]]</tw-passagedata><tw-passagedata pid="2" name="if2" tags="" position="602,504" size="100,100">&lt;&lt;script&gt;&gt;
 console.log(State.variables.continuityArray)
 
@@ -361,7 +361,7 @@ There’s a sound by his side, and he looks down to see the rat.  It’s filthy,
 
 [[You bow and leave.]]
 
-&lt;&lt;set $morale to $morale - 100000&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;goto &quot;You bow and leave.&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="if6start2m" tags="" position="3400,701" size="100,100">There’s no internet, but she’s used to that.  She gets round it with a flash drive marked ‘Happy Things’ in permanent marker.  Of course, that’s only usable when they have power, but a solar-powered generator can usually get enough spare to get her laptop running.
+&lt;&lt;set $morale to $morale - 40000&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;goto &quot;You bow and leave.&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="if6start2m" tags="" position="3400,701" size="100,100">There’s no internet, but she’s used to that.  She gets round it with a flash drive marked ‘Happy Things’ in permanent marker.  Of course, that’s only usable when they have power, but a solar-powered generator can usually get enough spare to get her laptop running.
 
 Of course, there is no gas either.  Or water.  There is water, but they have been told that the Russians are dumping bodies in it.  Marta was already blaming the water for Heorhiy’s death, and her own illness, so everyone had stopped drinking it already.  They all ration out what the NGOs deliver now, trying to make it last in case the next delivery doesn’t come for a long time.
 
@@ -453,7 +453,7 @@ You have been taught by the greatest warriors in the world.  Your brethren, who 
 
 They have turned you from a financier into a hero.  But it is today that you prove it.
 
-[[Charge!|if6end]]</tw-passagedata><tw-passagedata pid="17" name="if6start7m" tags="" position="6304,701" size="100,100">Another day.
+[[Charge!|if6end]]</tw-passagedata><tw-passagedata pid="17" name="if6start6m" tags="" position="5784,697" size="100,100">Another day.
 
 You stand between Danylo and Isai.
 
@@ -649,7 +649,7 @@ The sun is hot.  In the distance you see a small car coming down the road.  The 
 
 Bohuslava just shakes her head.
 
-[[Take the missiles east.|if6end][$land to $land + 5000]]
+[[Take the missiles east.|if6end][$economy to $economy + 100000]]
 
 [[Take the refugees west.|if6end][$morale to $morale + 75000]]</tw-passagedata><tw-passagedata pid="19" name="if6start3s" tags="" position="4002,1895" size="100,100">&lt;div style=&quot;text-align: center;&quot;&gt;&lt;img src= &quot;Sketches/Cellist.jpg&quot; width=&quot;1000vw&quot;&gt;&lt;/div&gt;
 
@@ -715,9 +715,9 @@ But is it right?
 
 Is it more important that //Matviy// is remembered?  Or that as much money can be raised as possible?
 
-[[Go with her heart, perform one of Matviy’s pieces.|if6end][$morale to $morale + 100000; $economy to $economy + 500000]]
+[[Go with her heart, perform one of Matviy’s pieces.|if6end][$morale to $morale + 50000; $economy to $economy + 50000]]
 
-[[Go with her brain, perform one of the classics.|if6end][$morale to $morale + 60000; $economy to $economy + 200000]]</tw-passagedata><tw-passagedata pid="20" name="if6start4s" tags="" position="4598,1900" size="100,100">All Ewa knows is that she fancies a film.  What type, what genre, what length, all of these are things that are yet to be decided.  But she doesn’t mind that.  In fact, it’s half the fun; flicking through lists, slowly letting her mood anneal towards what, on some subconscious level, she already knows she wants to watch.
+[[Go with her brain, perform one of the classics.|if6end][$morale to $morale + 30000; $economy to $economy + 100000]]</tw-passagedata><tw-passagedata pid="20" name="if6start4s" tags="" position="4598,1900" size="100,100">All Ewa knows is that she fancies a film.  What type, what genre, what length, all of these are things that are yet to be decided.  But she doesn’t mind that.  In fact, it’s half the fun; flicking through lists, slowly letting her mood anneal towards what, on some subconscious level, she already knows she wants to watch.
 
 She opens the wine, which Kropka seems to find very interesting.  She thinks about giving him a tiny lick, but thinks better of it.  She doesn’t know for sure, but she can’t imagine that wine is good for guinea pigs.
 
@@ -777,7 +777,7 @@ You’re not really sure you want to sit and watch this, but there’s a donate 
 
 [[Donate to their charity.|https://www.paypal.com/donate/?hosted_button_id=7QD4GGZRHXLKE]]
 
-[[Continue with your life.|if6end]]</tw-passagedata><tw-passagedata pid="22" name="if6start6s" tags="" position="5800,1899" size="100,100">&quot;Have you ever read Mikhail Bakunin?&quot;
+[[Continue with your life.|if6end]]</tw-passagedata><tw-passagedata pid="22" name="if6start6s" tags="" position="5800,1895" size="100,100">&quot;Have you ever read Mikhail Bakunin?&quot;
 
 &quot;I’m sorry, what?&quot;  You turn to the butcher, who has paused in the act of packing your meat.
 
@@ -1081,7 +1081,9 @@ She leans in to ask him a question.
 
 [[“You want to go break something?”]]
 
-[[“You want to dance?”]]</tw-passagedata><tw-passagedata pid="27" name="if6end" tags="" position="7301,2299" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="28" name="if7end" tags="" position="13996,998" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="29" name="if8_5end" tags="" position="15101,1001" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="30" name="if7start" tags="" position="14000,807" size="100,100">Your first thought is of Oksana.  Then of the parents you hardly knew.
+[[“You want to dance?”]]</tw-passagedata><tw-passagedata pid="27" name="if6end" tags="" position="7301,2299" size="100,100">&lt;&lt;if $finished is &quot;True&quot;&gt;&gt;[[Back to scene select.|List of scenes (see what you missed!)]]
+
+&lt;&lt;else&gt;&gt;[[Click to continue|Handover Node]]&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="if7end" tags="" position="13996,998" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="29" name="if8_5end" tags="" position="15244.333333333334,999.3333333333334" size="100,100">[[Click to continue|Handover Node]]</tw-passagedata><tw-passagedata pid="30" name="if7start" tags="" position="14000,807" size="100,100">Your first thought is of Oksana.  Then of the parents you hardly knew.
 
 Then Danylo, as if looking for irony, or a pattern, or maybe meaning.
 
@@ -1808,7 +1810,7 @@ Sign here, here, and here.
 
 You’re a soldier now, Fedir.
 
-[[Slava Ukraine.|if4end]]</tw-passagedata><tw-passagedata pid="42" name="Leave to live" tags="" position="1598,901" size="100,100">Once you decide to run, you pack quickly.  It isn’t hard; sometimes it feels like living in your studio flat is like living in a suitcase anyway.
+[[Slava Ukraini.|if4end]]</tw-passagedata><tw-passagedata pid="42" name="Leave to live" tags="" position="1598,901" size="100,100">Once you decide to run, you pack quickly.  It isn’t hard; sometimes it feels like living in your studio flat is like living in a suitcase anyway.
 
 It is the map that makes you stop.  It’s Oksana’s.  You think.  At least: if it is yours, then it is the whole group’s.  You can’t simply take it.  Tielze and the Barony and Polthia and Sol-os are your home.  If anything, //you// are the one who does not need this map.  It is //their// portal to a world you are lucky enough to be able to enter at any time.
 
@@ -2014,9 +2016,9 @@ Isai will come back.  He simply has to.
 
 You &lt;&lt;linkappend &quot;believe.&quot;&gt;&gt;
 
-You &lt;&lt;linkappend &quot;Believe.&quot;&gt;&gt;
+&lt;&lt;linkappend &quot;Believe.&quot;&gt;&gt;
 
-You &lt;&lt;linkappend &quot;Believe.&quot;&gt;&gt;
+&lt;&lt;linkappend &quot;Believe.&quot;&gt;&gt;
 
 The armies of Sol-os stretch from horizon to horizon, a desert of men superseding the desert of sand.  No, no that’s wrong.  The armies of the Barony of Byzantinov stretch from horizon to horizon, superseding the snow that engulfs the valley.
 
@@ -2114,7 +2116,7 @@ They are all heading to where you must head.
 
 &quot;It’s time to become soldiers.
 
-[[Slava Ukraine.|if4end]]&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="Leave with group" tags="" position="1799,902" size="100,100">&quot;No, no we can’t leave.&quot;  Oksana is indignant.
+[[Slava Ukraini.|if4end]]&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="Leave with group" tags="" position="1799,902" size="100,100">&quot;No, no we can’t leave.&quot;  Oksana is indignant.
 
 &quot;What //can// we do?&quot;  Isai’s question seems genuine.
 
@@ -2278,9 +2280,9 @@ A spear to the gut.
 
 Draft papers in hand.
 
-[[Slava Ukraine.|if4end]]</tw-passagedata><tw-passagedata pid="47" name="Leave APC" tags="" position="2802,902" size="100,100">Isai’s hand is on your back, pushing you up.
+[[Slava Ukraini.|if4end]]</tw-passagedata><tw-passagedata pid="47" name="Leave APC" tags="" position="2802,902" size="100,100">Isai’s hand is on your back, pushing you up.&lt;&lt;if $stayAPC is &quot;True&quot;&gt;&gt;
 
-&lt;&lt;if $StayAPC is &quot;True&quot;&gt;&gt;He stops for just a moment when he feels resistance.
+He stops for just a moment when he feels resistance.
 
 &quot;Fedir.  Come.
 
@@ -2324,7 +2326,7 @@ The shooting you did not hear start, stops.  The squad leader shouts you forward
 
 [[Get up.]] 
 
-[[Stay down.|if6end][set $insubordination to 1]]</tw-passagedata><tw-passagedata pid="48" name="Get up." tags="" position="2804,1103" size="100,100">Your pack, your body, and your will push you down.  The mud holds you down.  But you get up.
+[[Stay down.|if6end][$insubordination to 1]]</tw-passagedata><tw-passagedata pid="48" name="Get up." tags="" position="2804,1103" size="100,100">Your pack, your body, and your will push you down.  The mud holds you down.  But you get up.
 
 &lt;&lt;linkappend &quot;Forward,&quot;&gt;&gt;&lt;&lt;linkappend &quot; down,&quot;&gt;&gt;&lt;&lt;linkappend &quot; up,&quot;&gt;&gt;&lt;&lt;linkappend &quot; forward,&quot;&gt;&gt;&lt;&lt;linkappend &quot; down,&quot;&gt;&gt;&lt;&lt;linkappend &quot; up-&quot;&gt;&gt;
 
@@ -2446,9 +2448,9 @@ Eventually your lord Knight turns to you all.
 
 And, with that, you help the casualties to their feet, reset the starting positions, and go back home as the next group comes in to do it all again.
 
-[[if6end]] 
+[[Continue|if6end]] 
 
-&lt;&lt;set $morale to $morale + 100000&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="You bow and leave." tags="" position="3996,898" size="100,100">&quot;I grow bored of this.&quot;  Isai walks back and forth in a tight loop around your small cell.
+&lt;&lt;set $morale to $morale + 50000&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="You bow and leave." tags="" position="3996,898" size="100,100">&quot;I grow bored of this.&quot;  Isai walks back and forth in a tight loop around your small cell.
 
 &quot;You’ve changed, Isai,&quot; Danylo comments, stretching his huge muscles.  Even without his armour, which sits quietly pining for him in the corner, he is a sight to behold.  &quot;I would never have thought you one eager for combat.&quot;
 
@@ -2526,8 +2528,8 @@ And so you stand and watch, as the sun sets and your teapot cools, waiting to be
 
 [[Continue.|if6end]]
 
-&lt;&lt;set $manpower to $manpower + 100&gt;&gt;
-&lt;&lt;set $morale to $morale + 1000&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="Let him go." tags="" position="4098,1098" size="100,100">They both stop in the doorway.
+&lt;&lt;set $manpower to $manpower + 200&gt;&gt;
+&lt;&lt;set $morale to $morale + 10000&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="Let him go." tags="" position="4094,1098" size="100,100">They both stop in the doorway.
 
 &quot;Fedir?&quot;  Isai asks.
 
@@ -2551,8 +2553,8 @@ But for now, there is dozing, and soon the matrons will call you to the dining h
 
 [[Continue.|if6end]]
 
-&lt;&lt;set $manpower to $manpower - 100&gt;&gt;
-&lt;&lt;set $morale to $morale - 1000&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="draw" tags="" position="3400,904" size="100,100">&lt;div style=&quot;text-align: center;&quot;&gt;&lt;img src= &quot;Sketches/Frogs.jpg&quot; width=&quot;1000vw&quot;&gt;&lt;/div&gt;
+&lt;&lt;set $manpower to $manpower - 200&gt;&gt;
+&lt;&lt;set $morale to $morale - 10000&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="draw" tags="" position="3400,904" size="100,100">&lt;div style=&quot;text-align: center;&quot;&gt;&lt;img src= &quot;Sketches/Frogs.jpg&quot; width=&quot;1000vw&quot;&gt;&lt;/div&gt;
 
 She leaves when the shelling gets louder.  The frogs are still just sitting together.
 
@@ -2592,19 +2594,19 @@ She opens the photos.  It is more personal than the ‘memes’, less narcissist
 
 [[Continue.|if6end]]
 
-&lt;&lt;set $morale to $morale + 25000&gt;&gt;
+&lt;&lt;set $morale to $morale + 5000&gt;&gt;
 &lt;&lt;set $usb to 1&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="He offers it a piece of the bread." tags="" position="2699,2096" size="100,100">&lt;div style=&quot;text-align: center;&quot;&gt;&lt;img src= &quot;Sketches/Rat.jpg&quot; width=&quot;1000vw&quot;&gt;&lt;/div&gt;
 
 It eats and nestles in the warmth, and together they watch the sunset fall on the forgotten town.
 
 [[Continue.|if6end]]
 
-&lt;&lt;set $economy to $economy - 50&gt;&gt;
+&lt;&lt;set $economy to $economy - 100&gt;&gt;
 &lt;&lt;set $morale to $morale + 5000&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="He shoos it away." tags="" position="2904,2099" size="100,100">It barely has the strength to move, but when when the man narrows his eyes in desperation, it does.  It is not far, he thinks, but he knows it will not come back, and he eats his meal alone, watching the sun set on the forgotten town.
 
 [[Continue|if6end]]
 
-&lt;set $morale to $morale - 1000&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="&quot;Charge!&quot;" tags="" position="6297,901" size="100,100">Your second time is different.  You know what to expect this time.  This time, you do not have to forget.
+&lt;&lt;set $morale to $morale - 1000&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="&quot;Charge!&quot;" tags="" position="5789,893" size="100,100">Your second time is different.  You know what to expect this time.  This time, you do not have to forget.
 
 You comport yourself admirably.  You are still yet to spill blood, but you are in no hurry to change that.  You move with your brothers, their eyes, their shield.  No, that’s not quite fair.  Danylo is the true shield.  For such a mammoth of a man, he moves with astounding elegance, crouched down low, the first man to the enemy’s gate, the first through, his blade through first, snaking out, snapping up to knock aside blow after blow while you and the other brothers moved in to join him.
 
@@ -2614,7 +2616,7 @@ The quest was such a resounding success that you even remember the celebrations 
 
 [[Think of nothing, merely prepare your body for the next trial.]]
 
-[[Push back, and try, try to make it work, try to make it fit, try to find a way of living.]]</tw-passagedata><tw-passagedata pid="59" name="Think of nothing, merely prepare your body for the next trial." tags="" position="6196,1101" size="100,100">You can stand for longer.  You can walk for longer, you can run for longer, you can run lower, you can carry more.  You can throw yourself upon the ground and throw yourself back up again.
+[[Push back, and try, try to make it work, try to make it fit, try to find a way of living.]]</tw-passagedata><tw-passagedata pid="59" name="Think of nothing, merely prepare your body for the next trial." tags="" position="5688,1093" size="100,100">You can stand for longer.  You can walk for longer, you can run for longer, you can run lower, you can carry more.  You can throw yourself upon the ground and throw yourself back up again.
 
 Your muscles are bigger: in your arms, in your legs, in your stomach.
 
@@ -2636,8 +2638,8 @@ Danylo is dead.
 
 [[No.  No, he’s not.]]
 
-&lt;&lt;set $morale to $morale - 50000&gt;&gt;
-&lt;&lt;set $manpower to $manpower + 500&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="Push back, and try, try to make it work, try to make it fit, try to find a way of living." tags="" position="6401,1106" size="100,100">You live in a small chamber, which you share with Danylo, Isai, and another hero of Tielze, a man who wishes to be called &quot;Ogre&quot;.  The chamber is cold and damp and dark and at any moment-
+&lt;&lt;set $morale to $morale - 5000&gt;&gt;
+&lt;&lt;set $manpower to $manpower + 100&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="Push back, and try, try to make it work, try to make it fit, try to find a way of living." tags="" position="5893,1098" size="100,100">You live in a small chamber, which you share with Danylo, Isai, and another hero of Tielze, a man who wishes to be called &quot;Ogre&quot;.  The chamber is cold and damp and dark and at any moment-
 
 You live in a cottage, a small house in the woods.  The patterns on the walls are the lines of wood grain, not cracks.  You live there with Isai, Danylo, and a kindly young Ogre.  You spend your days preparing yourselves, and cooking and keeping the place clean and maintained.  You look out at the sun through the crown glass windows.  It’s beautiful.  Maybe you should go outside, and work on the garden-
 
@@ -2667,7 +2669,7 @@ He’s dead.
 
 [[No.  No, he’s not.]]
 
-&lt;&lt;set $morale to $morale + 50000&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="Scream." tags="" position="6197,1299" size="100,100">He’s lying in the mud of a Donetsk trench, a bullet through his head.
+&lt;&lt;set $morale to $morale + 5000&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="Scream." tags="" position="5689,1291" size="100,100">He’s lying in the mud of a Donetsk trench, a bullet through his head.
 
 You’re standing above him, an AK-74 in your hands.
 
@@ -2733,8 +2735,8 @@ Isai pauses.
 
 [[Fight.  Fight for Ukraine.|if6end]]
 
-&lt;&lt;set $morale to $morale - 500000&gt;&gt;
-&lt;&lt;set $manpower to $manpower - 10000&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="No.  No, he’s not." tags="" position="6404,1299" size="100,100">No, no the great hero of Tielze, he cannot be dead, he is merely-
+&lt;&lt;set $morale to $morale - 50000&gt;&gt;
+&lt;&lt;set $manpower to $manpower - 1000&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="No.  No, he’s not." tags="" position="5896,1287" size="100,100">No, no the great hero of Tielze, he cannot be dead, he is merely-
 
 You cannot see the hole, there is too much blood.
 
@@ -2744,7 +2746,7 @@ He does not blink it away.
 
 [[Scream.]]
 
-&lt;&lt;set $morale to $morale - 100000&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="if6start4m" tags="" position="4496,701" size="100,100">It was a sunny day, and a chore day, but her mamma was kind enough to let Ivanna spend it in the garden.  They have a very large garden now, most of it turned over to growing vegetables.  
+&lt;&lt;set $morale to $morale - 10000&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="if6start4m" tags="" position="4496,701" size="100,100">It was a sunny day, and a chore day, but her mamma was kind enough to let Ivanna spend it in the garden.  They have a very large garden now, most of it turned over to growing vegetables.  
 
 It’s Ivanna’s favourite work, even if it is difficult.  They’ve taken over the land that was around what used to be their neighbour’s houses.  Some were beautiful, and Ivanna was very upset when she had to rip out what was already there, but some were already overgrown or taken over by weeds.  Although even there Ivanna was sad; pulling the nature out and replacing it with what humans thought was best.  It didn’t seem quite fair on the wild grasses and nightshade and sneezeweed.
 
@@ -2772,7 +2774,7 @@ She’s quite happy with it, really.  She looks more tired than she had expected
 
 She sits back and smiles.  She’s been smiling the whole time, trying not to giggle at the absurdity of her situation as she sketched.  But now her laptop is running out of battery, so she just has enough time to take a photo of it, put it on the flash drive, and go to bed.
 
-[[Continue.|if6end][$morale = $morale + 50000]]</tw-passagedata><tw-passagedata pid="66" name="if6start6m" tags="" position="5692,701" size="100,100">&quot;You’re awake.&quot;
+[[Continue.|if6end][$morale = $morale + 10000]]</tw-passagedata><tw-passagedata pid="66" name="if6start7m" tags="" position="6392,693" size="100,100">&quot;You’re awake.&quot;
 
 Isai walks over and crouches by your bed.
 
@@ -2842,7 +2844,7 @@ Isai looks disapproving, but says nothing.
 
 [[Take the drug.]]
 
-[[Refuse.]]</tw-passagedata><tw-passagedata pid="67" name="Take the drug." tags="" position="5592,901" size="100,100">&quot;I promise, it will help,&quot; Ogre assures you.  &quot;And don’t worry about it.  I’ve got my girl sending me more from home.  I’ve got plenty.  Just ask when you need more.&quot;
+[[Refuse.]]</tw-passagedata><tw-passagedata pid="67" name="Take the drug." tags="" position="6292,893" size="100,100">&quot;I promise, it will help,&quot; Ogre assures you.  &quot;And don’t worry about it.  I’ve got my girl sending me more from home.  I’ve got plenty.  Just ask when you need more.&quot;
 
 &quot;Keep it hidden, alright?&quot;  Isai reminds you.  You hear a little snort from Ogre, but he says nothing.
 
@@ -2858,7 +2860,7 @@ You get up, go to ‘relieve yourself’.
 
 When you come back, you can still hear the explosions.  But it’s easier now.  And before too long, you sleep.
 
-[[Continue.|if6end][$morale to $morale + 150000; $land to $land - 500]] </tw-passagedata><tw-passagedata pid="68" name="Refuse." tags="" position="5792,902" size="100,100">&quot;Suit yourself.&quot;  Ogre’s tone is unaffectedly neutral as he lifts the spliff back out of your field of view.  &quot;But I hope you find something else.  Because that Aragorn shit wasn’t healthy.&quot;
+[[Continue.|if6end][$morale to $morale + 15000; $land to $land - 100]] </tw-passagedata><tw-passagedata pid="68" name="Refuse." tags="" position="6492,894" size="100,100">&quot;Suit yourself.&quot;  Ogre’s tone is unaffectedly neutral as he lifts the spliff back out of your field of view.  &quot;But I hope you find something else.  Because that Aragorn shit wasn’t healthy.&quot;
 
 Isai looks back to you, but you both know the moment has passed.
 
@@ -2870,7 +2872,7 @@ And he turns silently and climbs into bed.  It is not long before he is snoring.
 
 You stare upwards, at nothing, and listen to the sound of explosions.
 
-[[Continue.|if6end][$morale = $morale - 25000]]</tw-passagedata><tw-passagedata pid="69" name="Yes, she goes out to the club with her best friends." tags="" position="4501,2099" size="100,100">&quot;I’m really sorry, Oksana, but that’s my friend.  She wants me to go out tonight.
+[[Continue.|if6end][$morale = $morale - 7500]]</tw-passagedata><tw-passagedata pid="69" name="Yes, she goes out to the club with her best friends." tags="" position="4501,2099" size="100,100">&quot;I’m really sorry, Oksana, but that’s my friend.  She wants me to go out tonight.
 
 &quot;You can use the TV if you want?&quot;
 
@@ -2892,7 +2894,7 @@ And so Ewa puts Kropka back in his cage and goes off to get dressed.
 
 &quot;Yes, that sounds good.&quot;
 
-[[Continue.|if6end][$morale to $morale + 50000]]</tw-passagedata><tw-passagedata pid="71" name="&quot;Go on then, tell me.&quot;" tags="" position="5794,2100" size="100,100">The butcher smiles, like a shark who’s just outwitted a snake.
+[[Continue.|if6end][$morale to $morale + 10000]]</tw-passagedata><tw-passagedata pid="71" name="&quot;Go on then, tell me.&quot;" tags="" position="5794,2100" size="100,100">The butcher smiles, like a shark who’s just outwitted a snake.
 
 &quot;I recognise that lanyard.  You work for the treasury department, yes?&quot;
 
@@ -2948,7 +2950,7 @@ As you turn to leave, they say one last thing.
 
 &quot;You know.  For listening.&quot;
 
-[[Continue.|if6end][$morale to $morale + 50000]] </tw-passagedata><tw-passagedata pid="72" name="He runs, to tell others of what he saw." tags="" position="6300,2101" size="100,100">The following day, when he cannot find the Belarusian, he tells everyone else everything that he can.  Most simply disbelieve him.
+[[Continue.|if6end][$morale to $morale + 10000]] </tw-passagedata><tw-passagedata pid="72" name="He runs, to tell others of what he saw." tags="" position="6300,2101" size="100,100">The following day, when he cannot find the Belarusian, he tells everyone else everything that he can.  Most simply disbelieve him.
 
 But one babushka takes him aside, weeping.
 
@@ -2960,7 +2962,7 @@ But one babushka takes him aside, weeping.
 
 &quot;But for what?&quot;
 
-[[Continue.|if6end][$morale to $morale + 100000]]</tw-passagedata><tw-passagedata pid="73" name="That he cannot face.  Better now, better here.  He steps within the claw." tags="" position="6499,2102" size="100,100">He steps forward and the creature does not move.  It is only when he places his hand on the cold metal of the claw, rusty flakes of paint fluttering down to the snow at his touch, that he hears the rustle of it drawing its immense black wings into itself.
+[[Continue.|if6end][$morale to $morale + 50000]]</tw-passagedata><tw-passagedata pid="73" name="That he cannot face.  Better now, better here.  He steps within the claw." tags="" position="6499,2102" size="100,100">He steps forward and the creature does not move.  It is only when he places his hand on the cold metal of the claw, rusty flakes of paint fluttering down to the snow at his touch, that he hears the rustle of it drawing its immense black wings into itself.
 
 He crouches, awkwardly sits within the centre of the device, shifting to lean his backs against one of the steel talons.
 
@@ -2968,7 +2970,7 @@ The thing above crouches too, unmoving.
 
 When he’s found the following day, the creature is gone, but Artyom is dead.
 
-[[Continue.|if6end][$morale to $morale - 200000]]</tw-passagedata><tw-passagedata pid="74" name="if6start9m" tags="" position="7603,701" size="100,100">&quot;I didn’t even think to tell her.&quot;
+[[Continue.|if6end][$morale to $morale - 100000]]</tw-passagedata><tw-passagedata pid="74" name="if6start9m" tags="" position="7603,701" size="100,100">&quot;I didn’t even think to tell her.&quot;
 
 &quot;I did.&quot;  Isai leans heavily on his spade, levers up the compact earth he’s just pulled out and slams it hard into the side of the trench.  &quot;I told her that night, as soon as I could get signal.&quot;
 
@@ -3080,7 +3082,7 @@ He simply rolls over in the dirt and closes his eyes.
 
 ‘They better come today,’ Volodymyr thinks to himself.  ‘They better come.’
 
-[[Continue.|if6end][$morale to $morale - 50000]]</tw-passagedata><tw-passagedata pid="76" name="Pylyp knows they won’t see.  Yakov must be buried, and Pylyp must bury him now." tags="" position="7099,2097" size="100,100">Volodymyr is rolled up in a ball, his arms protecting his head before he has even reached full consciousness.  If the situation had not been what it was, he might have been proud of himself.
+[[Continue.|if6end][$morale to $morale - 10000]]</tw-passagedata><tw-passagedata pid="76" name="Pylyp knows they won’t see.  Yakov must be buried, and Pylyp must bury him now." tags="" position="7099,2097" size="100,100">Volodymyr is rolled up in a ball, his arms protecting his head before he has even reached full consciousness.  If the situation had not been what it was, he might have been proud of himself.
 
 He uncurls slowly once the shelling stops.
 
@@ -3090,7 +3092,7 @@ Eventually, slowly, he realises that he can see light.  The tunnel entrance has 
 
 Finally, he weeps.  When the radio crackles, maybe then, when there is another voice waiting for him, he will turn to see Yakov buried in the rubble, and Pylyp in his place.
 
-[[Continue.|if6end][$morale to $morale - 100000; $manpower to $manpower - 9000]]</tw-passagedata><tw-passagedata pid="77" name="“Of course.”  Ivan said." tags="" position="7493,2103" size="100,100">“The promise is a simple one.
+[[Continue.|if6end][$morale to $morale - 20000; $manpower to $manpower - 900]]</tw-passagedata><tw-passagedata pid="77" name="“Of course.”  Ivan said." tags="" position="7493,2103" size="100,100">“The promise is a simple one.
 
 “You must place your hand on your heart and look to the sky, and say: ‘I will love my neighbour’.
 
@@ -3114,7 +3116,7 @@ And so, Ivan went to the garden, dug two beets from the ground, and entered the 
 
 They ate the Borsch hot, but he filled his flask with more, to eat cold as he continued his journey, his search for the land where he could live as a free man.
 
-[[Continue.|if6end][$morale to $morale + 50000]]</tw-passagedata><tw-passagedata pid="78" name="“I cannot do such things for a stranger in a strange land.  Your word is all I have, and I can trust it only so far.  I must continue, and hope to find sustenance elsewhere.” said Ivan." tags="" position="7698,2098" size="100,100">“It was but trifling things that I was to ask, but if you cannot trust I, than I sadly must not trust you.
+[[Continue.|if6end][$morale to $morale + 30000]]</tw-passagedata><tw-passagedata pid="78" name="“I cannot do such things for a stranger in a strange land.  Your word is all I have, and I can trust it only so far.  I must continue, and hope to find sustenance elsewhere.” said Ivan." tags="" position="7698,2098" size="100,100">“It was but trifling things that I was to ask, but if you cannot trust I, than I sadly must not trust you.
 
 “Carry on your way, wanderer.
 
@@ -3170,7 +3172,7 @@ After that she goes wild.  Every bottle in the shop, even those that land intact
 
 That’s how the police find her.  She’s still screaming, swearing, bleeding.  She throws the bat into a display of Russian sweets, but does not resist arrest.
 
-[[Continue.|if6end][$morale to $morale + 50000; $economy to $economy - 100000]]</tw-passagedata><tw-passagedata pid="80" name="“You want to dance?”" tags="" position="8302,2102" size="100,100">“Sure!”
+[[Continue.|if6end][$morale to $morale + 15000; $economy to $economy - 50000]]</tw-passagedata><tw-passagedata pid="80" name="“You want to dance?”" tags="" position="8302,2102" size="100,100">“Sure!”
 
 And so they dance, thrashing as hard as they can on an otherwise empty dance floor.  But it’s not enough.
 
@@ -3232,7 +3234,7 @@ Oksana holds up her hand.
 
 “Sure.  Come sit here, it’s more comfortable.  Now you’re awake.”
 
-[[Continue|if6end][$morale to $morale + 50000]] </tw-passagedata><tw-passagedata pid="81" name="if6start11s" tags="" position="8799,1900" size="100,100">“What is it Private?  Can’t you see we’re busy?”
+[[Continue|if6end][$morale to $morale + 10000]] </tw-passagedata><tw-passagedata pid="81" name="if6start11s" tags="" position="8799,1900" size="100,100">“What is it Private?  Can’t you see we’re busy?”
 
 “Yes, I can sir.  I know how important the hill is, sir.  But we’ve had a repo-”
 
@@ -3264,17 +3266,17 @@ Oksana holds up her hand.
 
 [[Advance on the hill as planned.]]
 
-[[Reroute forces to checkpoint 49.]]</tw-passagedata><tw-passagedata pid="82" name="Advance on the hill as planned." tags="" position="8699,2097" size="100,100">&lt;&lt;set $chance = random(1, 10) &gt;&gt;&lt;&lt;if $chance is 10&gt;&gt;They take the hill.  And they lose a village.  They get the distress call as their men are advancing and by then it is too late.
+[[Reroute forces to checkpoint 49.]]</tw-passagedata><tw-passagedata pid="82" name="Advance on the hill as planned." tags="" position="8697.333333333334,2097" size="100,100">&lt;&lt;set $chance = random(1, 10) &gt;&gt;&lt;&lt;if $chance is 10&gt;&gt;They take the hill.  And they lose a village.  They get the distress call as their men are advancing and by then it is too late.
 
 The Russians set a couple of the houses on fire, but mostly they just round up all the of the villagers and shoot them.
 
 The Wolf lies next to his mother.  His eyes are unreadable.  They’re gone.
 
-&lt;&lt;set $morale to $morale - 1000000&gt;&gt;&lt;&lt;else&gt;&gt;They take the hill, and afterwards send a few men to the village.
+&lt;&lt;set $morale to $morale - 100000&gt;&gt;&lt;&lt;else&gt;&gt;They take the hill, and afterwards send a few men to the village.
 
 “It’s just The Wolf sir, no-one else saw anything.  As usual.  The family’s saying it might have happened though, a few stealth units infiltrating, scouting around.  They say we can’t send him away if we don’t have proof.  They’re very upset, sir, shall I let them off?”
 
-“Once more, this once more.  But tell them, not again.  Tell them he shouldn’t be here.  This is no place for a kid.  Even if he is a dangerous, lying bastard.”&lt;&lt;set $land to $land + 7500&gt;&gt;&lt;&lt;/if&gt;&gt;
+“Once more, this once more.  But tell them, not again.  Tell them he shouldn’t be here.  This is no place for a kid.  Even if he is a dangerous, lying bastard.”&lt;&lt;set $land to $land + 8000&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 [[Continue.|if6end]]</tw-passagedata><tw-passagedata pid="83" name="Reroute forces to checkpoint 49." tags="" position="8900,2100" size="100,100">&lt;&lt;set $chance = random(1, 10) &gt;&gt;&lt;&lt;if $chance is 10&gt;&gt;There were six Russians.  Enough to do what they were sent to do: turn the town into a graveyard.
 
@@ -3284,7 +3286,7 @@ The Wolf is given a medal, a fake little thing made out of a bottle cap and tinf
 
 Nevertheless, his parents are still told they should take him away from the front.  Again, they refuse, and again, the matter is dropped.
 
-&lt;&lt;set $morale to $morale + 500000&gt;&gt;&lt;&lt;else&gt;&gt;“Was that worth it, Private?  No hill and for what?  So we could tear a young boy away from his family?”
+&lt;&lt;set $morale to $morale + 75000&gt;&gt;&lt;&lt;else&gt;&gt;“Was that worth it, Private?  No hill and for what?  So we could tear a young boy away from his family?”
 
 “It was the right thing to do, taking the boy away.”
 
@@ -3294,7 +3296,7 @@ Nevertheless, his parents are still told they should take him away from the fron
 
 “Well, what’s done is done.”
 
-&lt;&lt;set $economy to $economy - 100000&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;set $economy to $economy - 10000&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 [[Continue.|if6end]]</tw-passagedata><tw-passagedata pid="84" name="if6start12s" tags="" position="9396,1899" size="100,100">“They’re cheering for you, Prime Minister.”
 
@@ -3396,7 +3398,7 @@ Khrystyna, the Ukrainian Abassador, raises an eyebrow.  David doesn’t react.
 
 “Good.  I don’t think you’d jerk me around on this, David.”  She stretches out.  “I can’t tell you, when you’re not used to it, how uncomfortable it is living in a bunker.  Now, we’ve got a moment, tell me, how are things back in London?”
 
-[[Continue.|if6end][$morale to $morale + 500000]]</tw-passagedata><tw-passagedata pid="86" name="“You know him, Khrystyna.  You know no-one can vouch for either his motives or his consistency.”" tags="" position="9501,2097" size="100,100">She purses her lips.
+[[Continue.|if6end][$morale to $morale + 50000]]</tw-passagedata><tw-passagedata pid="86" name="“You know him, Khrystyna.  You know no-one can vouch for either his motives or his consistency.”" tags="" position="9501,2097" size="100,100">She purses her lips.
 
 “Very well.  Thank you.  We’ll … we’ll start looking around.”  She stretches out.  “I can’t tell you, when you’re not used to it, how uncomfortable it is living in a bunker.  Now, we’ve got a moment, tell me, how are things back home?”
 
@@ -3470,7 +3472,7 @@ Ogre grunts and shrugs.
 
 “Yeah, me too.”
 
-[[Continue.|if6end][$morale to $morale + 50000; $manpower to $manpower - 10000]]</tw-passagedata><tw-passagedata pid="89" name="“Nah.  Don’t think you’d be very good for killing Russians.”" tags="" position="10101,2100" size="100,100">“You know that’s not nice, right Ogre?  I thought you’d be more fun, awesome nickname and all.”
+[[Continue.|if6end][$morale to $morale + 15000; $manpower to $manpower - 1000]]</tw-passagedata><tw-passagedata pid="89" name="“Nah.  Don’t think you’d be very good for killing Russians.”" tags="" position="10101,2100" size="100,100">“You know that’s not nice, right Ogre?  I thought you’d be more fun, awesome nickname and all.”
 
 “I just got it for my face.”
 
@@ -3488,7 +3490,7 @@ Ogre grunts and shrugs.
 
 “Ah.  Very good then.”
 
-[[Continue.|if6end][$morale to $morale - 40000]]</tw-passagedata><tw-passagedata pid="90" name="if6start14s" tags="" position="10600,1900" size="100,100">Yuri woke from his shift to find that he was alone.  Nikita and Georgy were simply gone.  He had not thought it would be possible.  They turned traitor.  They abandoned their position, headed back to base to tell of some non-existent enemy assault, or…
+[[Continue.|if6end][$morale to $morale - 8000]]</tw-passagedata><tw-passagedata pid="90" name="if6start14s" tags="" position="10600,1900" size="100,100">Yuri woke from his shift to find that he was alone.  Nikita and Georgy were simply gone.  He had not thought it would be possible.  They turned traitor.  They abandoned their position, headed back to base to tell of some non-existent enemy assault, or…
 
 Or they just surrendered themselves to the enemy.
 
@@ -3592,9 +3594,7 @@ It is their laughs he hears as he goes, not the cheers of the enemy soldiers sec
 
 It is their smiles he sees as he goes, not the flag the enemy raises above the shattered barn, the yellow and blue snapping proudly in the breeze.
 
-{Lose 4 soldiers}
-
-[[Continue.|if6end][$manpower to $manpower - 35000]]</tw-passagedata><tw-passagedata pid="92" name="He won’t.  He places the rifle back down on the floor and walks out, walks towards the enemy, so that one day, a coward and a traitor, he may see his children again." tags="" position="10700,2097" size="100,100">He stops in the doorway and closes his eyes.  He asks God for a sign, but God does not answer.
+[[Continue.|if6end][$manpower to $manpower - 3500]]</tw-passagedata><tw-passagedata pid="92" name="He won’t.  He places the rifle back down on the floor and walks out, walks towards the enemy, so that one day, a coward and a traitor, he may see his children again." tags="" position="10700,2097" size="100,100">He stops in the doorway and closes his eyes.  He asks God for a sign, but God does not answer.
 
 So he talks to the image of his wife instead.  His beautiful wife.  But when he asks her about death, she simply starts to cry.
 
@@ -3638,7 +3638,7 @@ But for now, he is too tired to be angry.
 
 He just thinks of them - the people he loves – as he lets himself fall asleep, a prisoner in a Ukrainian camp.
 
-[[Continue.|if6end][$morale to $morale + 75000]]</tw-passagedata><tw-passagedata pid="93" name="if6start15s" tags="" position="11101,1895" size="100,100">“Madison!  Madison darlin’, Madison can you come down?  There’s someone I’d like you to meet!”
+[[Continue.|if6end][$morale to $morale + 50000]]</tw-passagedata><tw-passagedata pid="93" name="if6start15s" tags="" position="11105,1899" size="100,100">“Madison!  Madison darlin’, Madison can you come down?  There’s someone I’d like you to meet!”
 
 &lt;div style=&quot;text-align: center;&quot;&gt;&lt;img src= &quot;Sketches/CurlyHair.jpg&quot; width=&quot;1000vw&quot;&gt;&lt;/div&gt;
 
@@ -3756,7 +3756,7 @@ But once she has, she smiles.
 
 She will be a good politician one day.  But //definitely// not for //their// side.
 
-[[Continue.|if6end][$morale to $morale + 50000]]</tw-passagedata><tw-passagedata pid="96" name="if6start16s" tags="" position="11700,1900" size="100,100">&quot;Sir.&quot;  The Lieutenant salutes crisply.  &quot;A communiqué from the Russian Ministry of Defence.&quot;
+[[Continue.|if6end][$morale to $morale + 10000]]</tw-passagedata><tw-passagedata pid="96" name="if6start16s" tags="" position="11700,1900" size="100,100">&quot;Sir.&quot;  The Lieutenant salutes crisply.  &quot;A communiqué from the Russian Ministry of Defence.&quot;
 
 &quot;Let me guess,&quot; the Deputy Minister of Defence Krutyvus says, leaning forward in his chair and picking up the surprisingly thick file the Lieutenant dropped on his desk.  &quot;A prisoner exchange?&quot;
 
@@ -3836,7 +3836,7 @@ The Lieutenant turns when he reaches the door, looking back to see Krutyvus stil
 
 He admires that about him.  So he lets him think alone.
 
-[[Continue.|if6end][$morale to $morale + 75000; $manpower to $manpower + 10000]]</tw-passagedata><tw-passagedata pid="98" name="&quot;Reject the exchange.  Or try something to get the Rostov group off.  Whatever you need to do and then bring it back to me.&quot;" tags="" position="11803,2095" size="100,100">&quot;Are you sure sir?  I don’t see a high likelihood of success.&quot;
+[[Continue.|if6end][$morale to $morale + 100000; $manpower to $manpower + 2000]]</tw-passagedata><tw-passagedata pid="98" name="&quot;Reject the exchange.  Or try something to get the Rostov group off.  Whatever you need to do and then bring it back to me.&quot;" tags="" position="11803,2095" size="100,100">&quot;Are you sure sir?  I don’t see a high likelihood of success.&quot;
 
 &quot;Neither do I Lieutenant.  But we can’t send them back.  Not after making them assurances.&quot;
 
@@ -3854,7 +3854,7 @@ The Lieutenant hesitates, then nods.  He’s worked with the Deputy Minister sin
 
 He admires that about him.  So he lets him keep the photos.
 
-[[Continue.|if6end][$morale to $morale - 25000]] </tw-passagedata><tw-passagedata pid="99" name="if6start17s" tags="" position="12302,1897" size="100,100">Oleksandr meets Polina backstage.
+[[Continue.|if6end][$morale to $morale - 50000]] </tw-passagedata><tw-passagedata pid="99" name="if6start17s" tags="" position="12302,1897" size="100,100">Oleksandr meets Polina backstage.
 
 &quot;Are we ready for this?&quot; he asks, trying to keep his feet from their nervous tapping.
 
@@ -3942,7 +3942,7 @@ Of course, he is not the only one to think so.  The judges see it too.
 
 Second place.  Which might have been a disappointment.  If the Russians hadn’t placed third.
 
-[[Continue.|if6end][$morale to $morale + 60000]]</tw-passagedata><tw-passagedata pid="101" name="Oleksandr focusses on every movement, every angle, every step.  It has to be perfect.  He has to beat the Russians." tags="" position="12402,2100" size="100,100">&lt;div style=&quot;text-align: center;&quot;&gt;&lt;img src= &quot;Sketches/Dancers.jpg&quot; width=&quot;1000vw&quot;&gt;&lt;/div&gt;
+[[Continue.|if6end][$morale to $morale + 20000]]</tw-passagedata><tw-passagedata pid="101" name="Oleksandr focusses on every movement, every angle, every step.  It has to be perfect.  He has to beat the Russians." tags="" position="12402,2100" size="100,100">&lt;div style=&quot;text-align: center;&quot;&gt;&lt;img src= &quot;Sketches/Dancers.jpg&quot; width=&quot;1000vw&quot;&gt;&lt;/div&gt;
 
 That dip was imperfect.  If he had approached it from-
 
@@ -3966,7 +3966,7 @@ And he can’t even tell.
 
 It’s a disaster.  They place third.  Which would have been perfectly acceptable.  If the Russians hadn’t placed second.
 
-[[Continue.|if6end][$morale to $morale - 40000]]</tw-passagedata><tw-passagedata pid="102" name="if6start8m" tags="" position="7003,698" size="100,100">Today it is raining and Ivanna is staying inside, even though her mother has gone out.  She’s visiting the Klymenkos and Ivanna does not care for the Klymenkos.  They’re not the kind of people who really ever see anything as beautiful.
+[[Continue.|if6end][$morale to $morale - 12000]]</tw-passagedata><tw-passagedata pid="102" name="if6start8m" tags="" position="7003,698" size="100,100">Today it is raining and Ivanna is staying inside, even though her mother has gone out.  She’s visiting the Klymenkos and Ivanna does not care for the Klymenkos.  They’re not the kind of people who really ever see anything as beautiful.
 
 So Ivanna stays inside.  There isn’t much to do.  She’s read all the books, most twice and played all the games, even the children’s ones, against herself too many times.  Her laptop has barely any charge and she does not want to use it all up too early.  So she sits and thinks for a while, until she hears a sound at the kitchen window.
 
@@ -3982,7 +3982,7 @@ Both stare at each other for a long time.  Ivanna, slowly, takes out her sketchb
 
 It’s a quick sketch, a little panicked at the idea that her subject might just run away part way through.  But it does not.  In fact, when her mother comes home, she finds the cat still there, having moved only a few feet to curl up and fall asleep on Ivanna, who in turn has fallen asleep on the sofa, her hand resting gently on top of the softly purring animal.
 
-[[Continue.|if6end][$morale to $morale + 50000]]</tw-passagedata><tw-passagedata pid="104" name="She doesn’t want her mother to come home to a mess, so she leaves it outside and finds something else to draw." tags="" position="7107,896" size="100,100">Ivanna wanders around the little house, picking objects up more or less at random.  A salt shaker.  An empty vase.  Finally, she picks up a framed photo, one of the few pictures of her father, smiling kindly beside her mother.
+[[Continue.|if6end][$morale to $morale + 10000]]</tw-passagedata><tw-passagedata pid="104" name="She doesn’t want her mother to come home to a mess, so she leaves it outside and finds something else to draw." tags="" position="7107,896" size="100,100">Ivanna wanders around the little house, picking objects up more or less at random.  A salt shaker.  An empty vase.  Finally, she picks up a framed photo, one of the few pictures of her father, smiling kindly beside her mother.
 
 It has been a long time since she has attempted to draw from this photo.  But she’s a lot better now, she supposes.  And, suddenly, it feels as if it would be an insult, to draw a chair or an apple or something, when she could try to draw her father and mother.
 
@@ -4082,11 +4082,7 @@ And
 
 He nods, smiles kindly one last time, and drives out of the village.
 
-[[Continue.|if6end]]</tw-passagedata><tw-passagedata pid="107" name="&quot;We will be fine,&quot; Ivanna says." tags="" position="8310,890" size="100,100">&lt;&lt;set $usb to 2&gt;&gt;
-
-&lt;&lt;set $morale to 1&gt;&gt;
-
-The aid worker smiles thinly.
+[[Continue.|if6end][$morale to $morale + ($usb * 20000)]]</tw-passagedata><tw-passagedata pid="107" name="&quot;We will be fine,&quot; Ivanna says." tags="" position="8310,886" size="100,100">The aid worker smiles thinly.
 
 &quot;I hope so.  But I respect your decision to find out.
 
@@ -4096,7 +4092,7 @@ The aid worker smiles thinly.
 
 He nods, smiles kindly one last time, and drives out of the village.
 
-[[Continue.|if6end][$morale to $morale + (100000 * $usb)]]</tw-passagedata><tw-passagedata pid="108" name="if6start18s" tags="" position="12905,1905" size="100,100">They are sitting in a cafe.  Somehow the waitress knew they wanted to be alone and so put them in a booth.  Or not, maybe it was just chance.  A kindness, either way.
+[[Continue.|if6end]]</tw-passagedata><tw-passagedata pid="108" name="if6start18s" tags="" position="12905,1905" size="100,100">They are sitting in a cafe.  Somehow the waitress knew they wanted to be alone and so put them in a booth.  Or not, maybe it was just chance.  A kindness, either way.
 
 Kuzma is bouncing baby Myrodar on his knee.  The baby claps and giggles, the food they tried hard to get in his mouth running down his chin.
 
@@ -4306,7 +4302,7 @@ Dedicated to Nick and all the other amazing people at [[Road to Relief.|https://
 
 [[About]]
 
-[[Credits]]</tw-passagedata><tw-passagedata pid="113" name="Start" tags="" position="368,293.3333333333333" size="100,100">&lt;&lt;= window.pass_back() &gt;&gt;
+[[Credits]]</tw-passagedata><tw-passagedata pid="113" name="Start" tags="" position="368,309" size="100,100">&lt;&lt;= window.pass_back() &gt;&gt;
 
 &lt;&lt;goto &quot;Landing Node&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="Content warnings" tags="" position="600,298" size="100,100">//Not yet Perished// is a game about the Russian invasion of Ukraine and therefore contains much that could be distressing.  One of the main reasons that this game was made was to raise awareness for what&#39;s happening in Ukraine, but there should be no shame in knowing yourself well enough to know when to avoid something for your own safety.
 
@@ -4382,7 +4378,49 @@ Secondly, we&#39;d like to thank everyone who donated to our stream (see the abo
 
 Donors (in scoreboard order):
 
+Emma&#39;s Dad
+Sean Grey
 &lt;&lt;if $finished is &quot;True&quot;&gt;&gt;[[Ben McCallum]]&lt;&lt;else&gt;&gt;Ben McCallum&lt;&lt;/if&gt;&gt;
+Jussi Pardoe
+Phoebe O&#39;Carroll-Morgan
+Wendy Ebblewhite
+Ro van Mesdag
+Gwyn Hart
+Gladys and John Rae
+Vic H
+Alex Kiker
+Angus McEwing
+Savanna van Mesdag
+Radu Constantin
+Eleanor Parrott
+Josh Shanks
+Benjamin S
+Emma
+Aaron Whapshot
+Callum McMilan
+Evan McGookin
+Stuart Petrie
+Nigel Ebblewhite
+Amy Varga
+Emi Booth
+Henry Daniels
+Annelies Scott
+Luke Belardo
+M&amp;S Ben
+Izzy Parrott
+Guy Bullivant
+Sakura Brandi
+Hannah Danson
+Tudor Ferraria
+CT Nielsen
+Rory Ortlepp
+Anne Rushing
+Gunnah Tank
+BlindIRL
+Ewan
+Geof
+William Hedges
+Dylan Mc
 
 Thirdly, we&#39;d like to thank everyone who came and chatted to us on stream, whether they gave or not.  Those long morning/late night slogs weren&#39;t particularly fun, but having company made all the difference in getting through.
 
@@ -4390,9 +4428,11 @@ Last, we&#39;d like to thank Epidemic Sounds and their fabulous free trial.  I d
 
 &lt;&lt;if $finished is &quot;True&quot;&gt;&gt;
 
+[[List of scenes (see what you missed!)]]
+
 &lt;&lt;else&gt;&gt;[[Start]]
 
-[[Back|Intro]]&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="117" name="Ben McCallum" tags="" position="15040.333333333334,1627.6666666666667" size="100,100">Interior.  Late evening.
+[[Back|Intro]]&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="117" name="Ben McCallum" tags="" position="15305.000000000002,1702" size="100,100">Interior.  Late evening.
 
 Mike:  So we’ve decided then.  We’re not going.
 
@@ -4448,7 +4488,7 @@ Jeremy: Yes, let’s!
 
 [[Continue.]]
 
-[[The end.|Credits]]</tw-passagedata><tw-passagedata pid="118" name="Continue." tags="" position="15103,1800" size="100,100">Jason: Really?  You’re going to put that in the game?
+[[The end.|Credits]]</tw-passagedata><tw-passagedata pid="118" name="Continue." tags="" position="15298.000000000002,1903.3333333333333" size="100,100">Jason: Really?  You’re going to put that in the game?
 
 &lt;div style=&quot;text-align: center;&quot;&gt;&lt;img src= &quot;Sketches/JasonVsMilo.jpg&quot; width=&quot;1000vw&quot;&gt;&lt;/div&gt;
 
@@ -4466,7 +4506,41 @@ Anyway, here’s Wonderwall: {link to youtube video of Milo playing Wonderwall (
 
 [[The end.|Credits]]
 
-[[Reset Game|Handover Node]]</tw-passagedata></tw-storydata>
+[[Reset Game|Handover Node]]</tw-passagedata><tw-passagedata pid="119" name="List of scenes (see what you missed!)" tags="" position="15106.333333333334,1694.6666666666667" size="100,100">[[The rat|if6start1s]]
+
+[[The truck|if6start2s]]
+
+[[The cellist|if6start3s]]
+
+[[The guinea pig|if6start4s]]
+
+[[The borsch|if6start5s]]
+
+[[The butcher|if6start6s]]
+
+[[The black bird|if6start7s]]
+
+[[The upyr|if6start8s]]
+
+[[Baba yaga|if6start9s]]
+
+[[Metal|if6start10s]]
+
+[[The wolf|if6start11s]]
+
+[[The Prime Minister comes for tea|if6start12s]]
+
+[[Nilbog|if6start13s]]
+
+[[The last stand|if6start14s]]
+
+[[The congressional candidate|if6start15s]]
+
+[[The prisoner exchange|if6start16s]]
+
+[[The dancers|if6start17s]]
+
+[[The goodbye|if6start18s]]</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){var e="(?:[\\x2D.0-9A-Z_a-z\\xB7\\xC0-\\xD6\\xD8-\\xF6\\xF8-\\u037D\\u037F-\\u1FFF\\u200C\\u200D\\u203F\\u2040\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD]|[\\uD800-\\uDB7F][\\uDC00-\\uDFFF])";return"[A-Za-z](?:"+e+"*-"+e+"*|[0-9A-Za-z]*)"}(),o=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",htmlTagName:i,cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:o,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_stringify",{value:JSON.stringify}),Object.defineProperty(JSON,"stringify",{configurable:!0,writable:!0,value:function(e,t,r){return JSON._real_stringify(e,function(e,r){var n=r;if("function"==typeof t)try{n=t(e,n)}catch(e){}return void 0===n&&(n=["(revive:eval)","undefined"]),n},r)}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e)

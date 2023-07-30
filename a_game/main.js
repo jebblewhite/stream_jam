@@ -13,17 +13,17 @@ var usb = 0
 
 var foreignAidGiven = false
 var morale = 1000000
-var manpower = 500000
+var manpower = 1000000
 var economy = 3000000
 var land = 120000
 var foreignAidValue = 200000
-var section5prebreak = ["Spirit", "Grivna", "Soldiers", "Trophies", "Make war with neighbouring states", "Push back in the East -- Cost : 10K grivna", "Push back in the North -- Cost : 20K grivna", "Push back in the South -- Cost : 50K grivna", "Recruit Soldiers -- Cost : 5K grivna", "The Barony"]
-var section5postbreak = ["Morale", "Economy", "Manpower", "Land", "Defend your home. Defend Ukraine.", "Push back in the East -- Cost : 10K economy", "Push back in the North -- Cost : 20K economy", "Push back in the South -- Cost : 50K economy", "Recruit Soldiers -- Cost : 5K economy", "Russia"]
+var section5prebreak = ["Spirit", "Grivna", "Soldiers", "Trophies", "Make war with neighbouring states", "Push back in the North -- Cost : 10K grivna", "Push back in the South -- Cost : 20K grivna", "Push back in the East -- Cost : 50K grivna", "Recruit Soldiers -- Cost : 5K grivna", "The Barony"]
+var section5postbreak = ["Morale", "Economy", "Manpower", "Land", "Defend your home. Defend Ukraine.", "Push back in the North -- Cost : 10K economy", "Push back in the South -- Cost : 20K economy", "Push back in the East -- Cost : 50K economy", "Recruit Soldiers -- Cost : 5K economy", "Russia"]
 
 var section5progress = 0
 var section5type = "m"
 var section5scene = 0
-var timeTil5end = 60*20 // 60
+var timeTil5end = 60 // 60
 var section5scenelist = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 
 var timeTil8end = 100
@@ -51,7 +51,7 @@ var workPerTen = [1,1,1,1,1,1,1,0]
 var timeTilDecay = 13
 var socialWarned = false
 var eventCounter = 0
-var timeTilWeekend = 0 // 600
+var timeTilWeekend = 2 // 600
 var section3outcome = "none"
 
 var eventList = [
@@ -230,14 +230,14 @@ function harvestCrops(x, click){
             resources.tin = resources.tin + x
         }
         resources.spirit = resources.spirit+(x*farmerSpirit)
-        document.getElementById('spirit').innerHTML = resources.spirit;
-        document.getElementById('crops').innerHTML = resources.crops;
+        document.getElementById('spirit').innerHTML = resources.spirit.toLocaleString("en-UK");
+        document.getElementById('crops').innerHTML = resources.crops.toLocaleString("en-UK");
         document.getElementById('divcrops').style.display = "block";
-        document.getElementById('copper').innerHTML = resources.copper;
+        document.getElementById('copper').innerHTML = resources.copper.toLocaleString("en-UK");
         if (resources.copper > 0) {
             document.getElementById('divcopper').style.display = "block";
         }
-        document.getElementById('tin').innerHTML = resources.tin;
+        document.getElementById('tin').innerHTML = resources.tin.toLocaleString("en-UK");
         if (resources.tin > 0) {
             document.getElementById('divtin').style.display = "block";
         }
@@ -253,12 +253,12 @@ function buyWorker(){
         unassignedWorkers = unassignedWorkers + 1;
         resources.crops = resources.crops - workerCost;
         workerCost = Math.ceil(workerCost*1.08)
-        document.getElementById('crops').innerHTML = resources.crops;
-        document.getElementById('workers').innerHTML = workers + " -- gen. " + workers*workerSpirit + " Spirit per tick";
-        document.getElementById('unassignedworkers').innerHTML = unassignedWorkers;        
+        document.getElementById('crops').innerHTML = resources.crops.toLocaleString("en-UK");
+        document.getElementById('workers').innerHTML = workers.toLocaleString("en-UK") + " -- gen. " + (workers*workerSpirit).toLocaleString("en-UK") + " Spirit per tick";
+        document.getElementById('unassignedworkers').innerHTML = unassignedWorkers.toLocaleString("en-UK");        
         document.getElementById('divworkers').style.display = "block";
         document.getElementById('divunassignedworkers').style.display = "block";
-        document.getElementById('buyworker').innerHTML = "Offer food -- Cost : " + workerCost + " crops";
+        document.getElementById('buyworker').innerHTML = "Offer food -- Cost : " + workerCost.toLocaleString("en-UK") + " crops";
         document.getElementById('divassignfarmer').style.display = "block";
         document.getElementById('divassignmerchant').style.display = "block";
         document.getElementById('divassignsoldier').style.display = "block";
@@ -269,8 +269,8 @@ function assignFarmer() {
     if (unassignedWorkers > 0) {
         unassignedWorkers = unassignedWorkers - 1
         farmers = farmers + 1
-        document.getElementById('farmers').innerHTML = farmers + " -- gen. " + farmers*farmerPower + " Crops per tick"; 
-        document.getElementById('unassignedworkers').innerHTML = unassignedWorkers; 
+        document.getElementById('farmers').innerHTML = farmers.toLocaleString("en-UK") + " -- gen. " + (farmers*farmerPower).toLocaleString("en-UK") + " Crops per tick"; 
+        document.getElementById('unassignedworkers').innerHTML = unassignedWorkers.toLocaleString("en-UK"); 
     }
 }
 
@@ -280,17 +280,17 @@ function assignMerchant() {
         merchants = merchants + 1
         if (merchants == 1) {
             generateTrades(merchantPower)
-            document.getElementById('merchantpower').innerHTML = merchantPower
+            document.getElementById('merchantpower').innerHTML = merchantPower.toLocaleString("en-UK")
             resources.grivna = resources.grivna + 10
             console.log("Your first Merchant brings with him 10 grivna.")
             console.log("(The local currency)")
-            document.getElementById('grivna').innerHTML = resources.grivna
+            document.getElementById('grivna').innerHTML = resources.grivna.toLocaleString("en-UK")
             document.getElementById('divgrivna').style.display = "block";
         } else {
             tradeCooldown()
         }
-        document.getElementById('merchants').innerHTML = merchants+ " -- gen. " + merchants*merchantSpirit + " Spirit per tick"; 
-        document.getElementById('unassignedworkers').innerHTML = unassignedWorkers;
+        document.getElementById('merchants').innerHTML = merchants.toLocaleString("en-UK") + " -- gen. " + (merchants*merchantSpirit).toLocaleString("en-UK") + " Spirit per tick"; 
+        document.getElementById('unassignedworkers').innerHTML = unassignedWorkers.toLocaleString("en-UK");
         document.getElementById('divtrade').style.display = "block"; 
     }
 }
@@ -300,8 +300,8 @@ function assignSoldier() {
         unassignedWorkers = unassignedWorkers - 1
         soldiers = soldiers + 1
         
-        document.getElementById('soldiers').innerHTML = soldiers
-        document.getElementById('unassignedworkers').innerHTML = unassignedWorkers; 
+        document.getElementById('soldiers').innerHTML = soldiers.toLocaleString("en-UK")
+        document.getElementById('unassignedworkers').innerHTML = unassignedWorkers.toLocaleString("en-UK"); 
         document.getElementById('divwarfare').style.display = "block";
         if (soldiers==1){
             generateWar()
@@ -320,7 +320,7 @@ function fuseMetalsUp() {
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = "none"; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
         document.getElementById('divbronze').style.display = 'block';
     }
@@ -333,7 +333,7 @@ function farmerClickUp() {
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
 }
@@ -345,7 +345,7 @@ function farmerSpiritUp() {
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2**1000; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
 }
@@ -358,7 +358,7 @@ function farmerPowerUp() {
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
 }
@@ -370,9 +370,9 @@ function soldierMultiUp() {
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
-        document.getElementById("soldiermulti").innerHTML = Math.round(rewardMultiplier)
+        document.getElementById("soldiermulti").innerHTML = (Math.round(rewardMultiplier)).toLocaleString("en-UK")
         warCooldown()
     }
 }
@@ -384,9 +384,9 @@ function soldierChanceUp() {
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
-        document.getElementById("soldierreward").innerHTML = Math.round(soldierChance/10)
+        document.getElementById("soldierreward").innerHTML = (Math.round(soldierChance/10)).toLocaleString("en-UK")
         warCooldown()
     }
 }
@@ -398,9 +398,9 @@ function soldierRiskUp() {
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
-        document.getElementById("soldierrisk").innerHTML = Math.round(soldierRisk/10)
+        document.getElementById("soldierrisk").innerHTML = (Math.round(soldierRisk/10)).toLocaleString("en-UK")
         warCooldown()
     }
 }
@@ -408,7 +408,7 @@ function soldierRiskUp() {
 function reduceTradeCooldown(){
     upgradeName = "reduceTradeCooldown"
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades["reduceTradeCooldown"]["cost"]) {
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades["reduceTradeCooldown"]["cost"];
+        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades["reduceTradeCooldown"]["cost"].toLocaleString("en-UK");
         upgrades["reduceTradeCooldown"]["cost"] = upgrades["reduceTradeCooldown"]["cost"]*2;
         if (tradeCooldownTime>1000){
             tradeCooldownTime = tradeCooldownTime - 1000
@@ -417,7 +417,7 @@ function reduceTradeCooldown(){
         }
         
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades["reduceTradeCooldown"]["element_id"]).innerHTML = upgrades["reduceTradeCooldown"]["element_content"].replace("^^^F", upgrades["reduceTradeCooldown"]["cost"])
+        document.getElementById(upgrades["reduceTradeCooldown"]["element_id"]).innerHTML = upgrades["reduceTradeCooldown"]["element_content"].replace("^^^F", upgrades["reduceTradeCooldown"]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades["reduceTradeCooldown"]["div"]).style.display = "none";
         document.getElementById("merchantcooldown").innerHTML = Math.round(tradeCooldownTime/1000)
     }
@@ -430,7 +430,7 @@ function betterTradeDeals(){
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades["betterTradeDeals"]["cost"];
         upgrades["betterTradeDeals"]["cost"] = upgrades["betterTradeDeals"]["cost"]*2;
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades["betterTradeDeals"]["element_id"]).innerHTML = upgrades["betterTradeDeals"]["element_content"].replace("^^^F", upgrades["betterTradeDeals"]["cost"])
+        document.getElementById(upgrades["betterTradeDeals"]["element_id"]).innerHTML = upgrades["betterTradeDeals"]["element_content"].replace("^^^F", upgrades["betterTradeDeals"]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades["betterTradeDeals"]["div"]).style.display = "none";
         document.getElementById("merchantdeals").innerHTML = Math.round((dealModifier-1)*100)
 
@@ -445,7 +445,7 @@ function doubleTradeValue(){
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
         tradeCooldown()
     }
@@ -458,7 +458,7 @@ function doubleSpiritValue(){
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
 }
@@ -474,7 +474,7 @@ function taxThePops(){
         resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]];
-        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"])
+        document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
     }
 }
@@ -486,14 +486,14 @@ function increaseOreChance(){
         resources.crops = resources.crops - upgrades["oreChanceIncrease"]["cost"];
         upgrades["oreChanceIncrease"]["cost"] = upgrades["oreChanceIncrease"]["cost"]*2;
         document.getElementById('crops').innerHTML = resources.crops;
-        document.getElementById('oreincrease').innerHTML = "Increase chance of finding ores when harvesting crops -- Cost : " + upgrades["oreChanceIncrease"]["cost"] + " crops";
+        document.getElementById('oreincrease').innerHTML = "Increase chance of finding ores when harvesting crops -- Cost : " + upgrades["oreChanceIncrease"]["cost"].toLocaleString("en-UK") + " crops";
         document.getElementById('divoreincrease').style.display = "none";
     }
 }
 
 function eatFood(x){
     resources.spirit = resources.spirit + x;
-    document.getElementById('spirit').innerHTML = resources.spirit;
+    document.getElementById('spirit').innerHTML = resources.spirit.toLocaleString("en-UK");
     document.getElementById('divspirit').style.display = "block";
 }
 
@@ -533,13 +533,13 @@ function generateTrades(x){
     if (document.getElementById('trade1').disabled == false){
     trade1list = generateSingleTrade(x)
     fullTrade[1] = trade1list
-    document.getElementById('trade1').innerHTML = trade1list[0] + " offers you " + trade1list[4] + " " + trade1list[3] + " for " + trade1list[2] + " " + trade1list[1]+".";
+    document.getElementById('trade1').innerHTML = trade1list[0] + " offers you " + trade1list[4].toLocaleString("en-UK") + " " + trade1list[3] + " for " + trade1list[2].toLocaleString("en-UK") + " " + trade1list[1]+".";
     trade2list = generateSingleTrade(x)
     fullTrade[2] = trade2list
-    document.getElementById('trade2').innerHTML = trade2list[0] + " offers you " + trade2list[4] + " " + trade2list[3] + " for " + trade2list[2] + " " + trade2list[1]+".";
+    document.getElementById('trade2').innerHTML = trade2list[0] + " offers you " + trade2list[4].toLocaleString("en-UK") + " " + trade2list[3] + " for " + trade2list[2].toLocaleString("en-UK") + " " + trade2list[1]+".";
     trade3list = generateSingleTrade(x)
     fullTrade[3] = trade3list
-    document.getElementById('trade3').innerHTML = trade3list[0] + " offers you " + trade3list[4] + " " + trade3list[3] + " for " + trade3list[2] + " " + trade3list[1]+".";
+    document.getElementById('trade3').innerHTML = trade3list[0] + " offers you " + trade3list[4].toLocaleString("en-UK") + " " + trade3list[3] + " for " + trade3list[2].toLocaleString("en-UK") + " " + trade3list[1]+".";
     //update trades
     }
 }
@@ -552,11 +552,11 @@ function trade(x){
         console.log("Traded " + fullTrade[x][2] + " " + fullTrade[x][1] + " for " + fullTrade[x][4] + " " + fullTrade[x][3] + ".")
         console.log("Gained " + 10*fullTrade[x][5] + " Spirit through Trade")
         //update all resources
-        document.getElementById('tin').innerHTML = resources.tin;
-        document.getElementById('copper').innerHTML = resources.copper;
-        document.getElementById('crops').innerHTML = resources.crops;
-        document.getElementById('spirit').innerHTML = resources.spirit;
-        document.getElementById('grivna').innerHTML = resources.grivna;
+        document.getElementById('tin').innerHTML = resources.tin.toLocaleString("en-UK");
+        document.getElementById('copper').innerHTML = resources.copper.toLocaleString("en-UK");
+        document.getElementById('crops').innerHTML = resources.crops.toLocaleString("en-UK");
+        document.getElementById('spirit').innerHTML = resources.spirit.toLocaleString("en-UK");
+        document.getElementById('grivna').innerHTML = resources.grivna.toLocaleString("en-UK");
         tradeCooldown()
         
     }
@@ -583,13 +583,13 @@ function generateWar(){
     if (document.getElementById('war1').disabled == false){
         war1list = generateSingleWar(0)
         fullWar[1] = war1list
-        document.getElementById('war1').innerHTML = "Go to war with " + tradeFactions[0] + " -- " + fullWar[1][1] + "% Chance of Small Reward / " + fullWar[1][0] + "% Chance of Minor Casualties.";
+        document.getElementById('war1').innerHTML = "Go to war with " + tradeFactions[0] + " -- " + Math.min(100, fullWar[1][1]) + "% Chance of Small Reward / " + fullWar[1][0] + "% Chance of Minor Casualties.";
         war2list = generateSingleWar(1)
         fullWar[2] = war2list
-        document.getElementById('war2').innerHTML = "Go to war with " + tradeFactions[1] + " -- " + fullWar[2][1] + "% Chance of Moderate Reward / " + fullWar[2][0] + "% Chance of Casualties.";
+        document.getElementById('war2').innerHTML = "Go to war with " + tradeFactions[1] + " -- " + Math.min(100,fullWar[2][1]) + "% Chance of Moderate Reward / " + fullWar[2][0] + "% Chance of Casualties.";
         war3list = generateSingleWar(2)
         fullWar[3] = war3list
-        document.getElementById('war3').innerHTML = "Go to war with " + tradeFactions[2] + " -- " + fullWar[3][1] + "% Chance of Great Reward / " + fullWar[3][0] + "% Chance of Significant Casualties.";
+        document.getElementById('war3').innerHTML = "Go to war with " + tradeFactions[2] + " -- " + Math.min(fullWar[3][1]) + "% Chance of Great Reward / " + fullWar[3][0] + "% Chance of Significant Casualties.";
     }
 }
 
@@ -643,16 +643,16 @@ function makeWar(x, riskChance, rewardChance, riskMultiplier, rewardMultiplier, 
     if (warOutcome == "None"){
         randSpirit = Math.round((x)*(1.2 - Math.random()*0.4)*10)
         resources.spirit = resources.spirit + randSpirit;
-        console.log("Your soldiers fight to a bitter stalemate.")
+        console.log("Your soldiers fight to a stalemate.")
         console.log("You gain " + randSpirit + " spirit.")
     }
-    document.getElementById('trophies').innerHTML = resources.trophies;
-    document.getElementById('soldiers').innerHTML = soldiers ; 
-    document.getElementById('workers').innerHTML = workers + " -- gen. " + workers*workerSpirit + " Spirit per tick";
-    document.getElementById('tin').innerHTML = resources.tin;
-    document.getElementById('copper').innerHTML = resources.copper;
-    document.getElementById('crops').innerHTML = resources.crops;
-    document.getElementById('buyworker').innerHTML = "Offer food -- Cost : " + workerCost + " crops";
+    document.getElementById('trophies').innerHTML = resources.trophies.toLocaleString("en-UK");
+    document.getElementById('soldiers').innerHTML = soldiers.toLocaleString("en-UK") ; 
+    document.getElementById('workers').innerHTML = workers.toLocaleString("en-UK") + " -- gen. " + (workers*workerSpirit).toLocaleString("en-UK") + " Spirit per tick";
+    document.getElementById('tin').innerHTML = resources.tin.toLocaleString("en-UK");
+    document.getElementById('copper').innerHTML = resources.copper.toLocaleString("en-UK");
+    document.getElementById('crops').innerHTML = resources.crops.toLocaleString("en-UK");
+    document.getElementById('buyworker').innerHTML = "Offer food -- Cost : " + workerCost.toLocaleString("en-UK") + " crops";
     document.getElementById('divtin').style.display = "block";
     document.getElementById('divcopper').style.display = "block";
     document.getElementById('divtrophies').style.display = "block";
@@ -666,9 +666,9 @@ function warCooldown(){
     document.getElementById('war1').disabled = true;
     document.getElementById('war2').disabled = true;
     document.getElementById('war3').disabled = true;
-    document.getElementById('war1').innerHTML = 'War on cooldown...';
-    document.getElementById('war2').innerHTML = 'War on cooldown...';
-    document.getElementById('war3').innerHTML = 'War on cooldown...';
+    document.getElementById('war1').innerHTML = 'Strategising...';
+    document.getElementById('war2').innerHTML = 'Strategising...';
+    document.getElementById('war3').innerHTML = 'Strategising...';
     setTimeout(function(){
         document.getElementById('war1').disabled = false;
         document.getElementById('war2').disabled = false;
@@ -687,7 +687,7 @@ function tradeCooldown(){
     document.getElementById('trade2').innerHTML = 'Refreshing...';
     document.getElementById('trade3').innerHTML = 'Refreshing...';
     document.getElementById('refreshtrade').innerHTML = 'Refreshing...'
-    document.getElementById('merchantpower').innerHTML = merchantPower*merchants;
+    document.getElementById('merchantpower').innerHTML = (merchantPower*merchants).toLocaleString("en-UK");
     setTimeout(function(){
         document.getElementById('trade1').disabled = false;
         document.getElementById('trade2').disabled = false;
@@ -704,9 +704,9 @@ function makeBronze() {
         resources.tin = resources.tin - 1
         resources.bronze = resources.bronze + 1;
         document.getElementById('divbronze').style.display = 'block';
-        document.getElementById('tin').innerHTML = resources.tin;
-        document.getElementById('copper').innerHTML = resources.copper;
-        document.getElementById('bronze').innerHTML = resources.bronze;
+        document.getElementById('tin').innerHTML = resources.tin.toLocaleString("en-UK");
+        document.getElementById('copper').innerHTML = resources.copper.toLocaleString("en-UK");
+        document.getElementById('bronze').innerHTML = resources.bronze.toLocaleString("en-UK");
         goodsList.indexOf("bronze") === -1 ? goodsList.push("bronze") : oops = 1;
     }
     
@@ -757,13 +757,13 @@ function rewireLoggingToElement(eleLocator, eleOverflowLocator, autoScroll) {
 
 function trophySpirit(){
     resources.spirit = resources.spirit + resources.trophies
-    document.getElementById('spirit').innerHTML = resources.spirit;
+    document.getElementById('spirit').innerHTML = resources.spirit.toLocaleString("en-UK");
 }
 
 function taxation(){
     resources.grivna = resources.grivna + (workers*taxWorkers)
     console.log("Your workers pay " + (workers*taxWorkers) + " grivna in tax.")
-    document.getElementById('grivna').innerHTML = resources.grivna;
+    document.getElementById('grivna').innerHTML = resources.grivna.toLocaleString("en-UK");
 }
 
 function checkUpgrades(){
@@ -771,7 +771,7 @@ function checkUpgrades(){
         if (resources[upgrades[item]["resource"]] >= upgrades[item]["cost"]) {
             if (document.getElementById(upgrades[item]["segment"]).style.display == "block") {
                 document.getElementById(upgrades[item]["div"]).style.display = "block";
-                document.getElementById(upgrades[item]["element_id"]).innerHTML = upgrades[item]["element_content"].replace("^^^F", upgrades[item]["cost"])
+                document.getElementById(upgrades[item]["element_id"]).innerHTML = upgrades[item]["element_content"].replace("^^^F", upgrades[item]["cost"].toLocaleString("en-UK"))
             }
             
         }
@@ -815,17 +815,24 @@ function setProcParams(x) {
 }
 
 function handOver(x) {
-    document.getElementById("procedural"+(x-1)).style.display = "none";
-    document.getElementById("log-container").style.color = "#424242";
-    document.getElementById("hehe").style.overflow = "hidden";
-    document.getElementById("interactiveFiction2").style.display = "block";
+    if(x==10){
+        document.getElementById("procedural"+(5)).style.display = "none";
+        document.getElementById("log-container").style.color = "#424242";
+        document.getElementById("hehe").style.overflow = "hidden";
+        document.getElementById("interactiveFiction2").style.display = "block";
+    } else {
+        document.getElementById("procedural"+(x-1)).style.display = "none";
+        document.getElementById("log-container").style.color = "#424242";
+        document.getElementById("hehe").style.overflow = "hidden";
+        document.getElementById("interactiveFiction2").style.display = "block";
+    }
     procSection = x
     console.log(x)
     if (procSection == 6) {
         if (section5progress >= 19) {//I think this is right
             procSection = 7
         } else {
-            timeTil5end = 60
+            timeTil5end = 60 // 60
             foreignAidGiven = false
         }
     
@@ -864,10 +871,10 @@ function startProcedural(x) {
         dignity = i_f_params[x-1][5]
         peace = i_f_params[x-1][6]
         social = i_f_params[x-1][7]
-        document.getElementById("job").innerHTML = job
-        document.getElementById("dignity").innerHTML = dignity
-        document.getElementById("peace").innerHTML = peace
-        document.getElementById("social").innerHTML = social
+        document.getElementById("job").innerHTML = job.toLocaleString("en-UK")
+        document.getElementById("dignity").innerHTML = dignity.toLocaleString("en-UK")
+        document.getElementById("peace").innerHTML = peace.toLocaleString("en-UK")
+        document.getElementById("social").innerHTML = social.toLocaleString("en-UK")
         console.log("")
         console.log("")
         console.log("")
@@ -914,11 +921,28 @@ function startProcedural(x) {
         console.log("")
         console.log("")
         console.log("")
-        if (section5progress <=8){ //I think this is right!  The mental break happens after 9 events.
+        if (section5progress>0){
+            morale = i_f_params[6][10]
+            manpower = i_f_params[6][11]
+            economy = i_f_params[6][12]
+            land = i_f_params[6][13]
+            insubordination = i_f_params[6][14]
+            usb = i_f_params[6][15]
+        }
+        if (section5progress <=10){ //I think this is right!  The mental break happens after 9 events.
+            document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale.toLocaleString("en-UK")
+            document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy.toLocaleString("en-UK")
+            document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land.toLocaleString("en-UK")
+            document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower.toLocaleString("en-UK")
             console.log("You are at war with The Barony of St Byzantinov.")
             console.log("Each day they push further into your territory and claim your trophies.")
             console.log("Fight for Tielze! Push them back!")
+            
         } else {
+            document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale.toLocaleString("en-UK")
+            document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy.toLocaleString("en-UK")
+            document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land.toLocaleString("en-UK")
+            document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower.toLocaleString("en-UK")
             console.log("You are at war with The Russian Federation.")
             console.log("Each day they push further into your territory and claim your land.")
             console.log("Stay strong! Slava Ukraini!")
@@ -993,12 +1017,12 @@ function jobClick() {
     jobDone = 1
     noWorkDone = 0
     jobWarned = false
-    document.getElementById('job').innerHTML =  job
+    document.getElementById('job').innerHTML =  job.toLocaleString("en-UK")
 }
 
 function dignityClick() {
     dignity = dignity + dignityPerClick   
-    document.getElementById('dignity').innerHTML =  dignity
+    document.getElementById('dignity').innerHTML =  dignity.toLocaleString("en-UK")
     console.log("You maintain your dignity. (+" + dignityPerClick +" dignity)")
     dignityPerClick = 0
 }
@@ -1008,7 +1032,7 @@ function peaceClick() {
     console.log("You breathe deeply and find your focus. (+" + peacePerClick +" inner peace)")
     peacePerClick = 0
     peaceincrementSteps = [1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
-    document.getElementById('peace').innerHTML =  peace
+    document.getElementById('peace').innerHTML =  peace.toLocaleString("en-UK")
 }
 
 function socialClick() {
@@ -1019,8 +1043,8 @@ function socialClick() {
     socincrementSteps = [1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
     timeTilDecay = 13
     socialWarned = false
-    document.getElementById('social').innerHTML =  social
-    document.getElementById('job').innerHTML =  job
+    document.getElementById('social').innerHTML =  social.toLocaleString("en-UK")
+    document.getElementById('job').innerHTML =  job.toLocaleString("en-UK")
 }
 
 function increasePerClick() {
@@ -1053,7 +1077,7 @@ function changeSpirit() {
     mentalSpirit += jobContribution + dignityContribution + peaceContribution + socialContribution - 1;
     mentalSpirit = Math.max(0, mentalSpirit);
 
-    document.getElementById('spirit3').innerHTML = mentalSpirit;
+    document.getElementById('spirit3').innerHTML = mentalSpirit.toLocaleString("en-UK");
 }
 
 function statDecay() {
@@ -1121,10 +1145,10 @@ function statDecay() {
             socialLow = true
         }
     }
-    document.getElementById('job').innerHTML =  job
-    document.getElementById('dignity').innerHTML =  dignity
-    document.getElementById('peace').innerHTML =  peace
-    document.getElementById('social').innerHTML =  social
+    document.getElementById('job').innerHTML =  job.toLocaleString("en-UK")
+    document.getElementById('dignity').innerHTML =  dignity.toLocaleString("en-UK")
+    document.getElementById('peace').innerHTML =  peace.toLocaleString("en-UK")
+    document.getElementById('social').innerHTML =  social.toLocaleString("en-UK")
 }
 
 function showEvent(x){
@@ -1205,10 +1229,10 @@ function eventOutcome(decision){
                 socialLow = true
             }
         }
-        document.getElementById('job').innerHTML =  job
-        document.getElementById('dignity').innerHTML =  dignity
-        document.getElementById('peace').innerHTML =  peace
-        document.getElementById('social').innerHTML =  social
+        document.getElementById('job').innerHTML =  job.toLocaleString("en-UK")
+        document.getElementById('dignity').innerHTML =  dignity.toLocaleString("en-UK")
+        document.getElementById('peace').innerHTML =  peace.toLocaleString("en-UK")
+        document.getElementById('social').innerHTML =  social.toLocaleString("en-UK")
     } else {
         console.log("You are paralysed by indecision.")
     }
@@ -1224,14 +1248,14 @@ function doctorsPrognosis(){
 function loseSpirit(){
     //if (!screamPressed){
         mentalSpirit = mentalSpirit - 100
-        document.getElementById("section8spirit").innerHTML = mentalSpirit
+        document.getElementById("section8spirit").innerHTML = mentalSpirit.toLocaleString("en-UK")
     //}
     
 }
 
 function powerThrough(){
     mentalSpirit = mentalSpirit + 5
-    document.getElementById("section8spirit").innerHTML = mentalSpirit
+    document.getElementById("section8spirit").innerHTML = mentalSpirit.toLocaleString("en-UK")
 }
 
 function scream(){
@@ -1240,62 +1264,64 @@ function scream(){
     screamPressed = true
     time_until_scream = 5
     console.log("You scream through the pain")
-    document.getElementById("section8spirit").innerHTML = mentalSpirit
-    document.getElementById("weakness").innerHTML = weakness
+    document.getElementById("section8spirit").innerHTML = mentalSpirit.toLocaleString("en-UK")
+    document.getElementById("weakness").innerHTML = weakness.toLocaleString("en-UK")
     document.getElementById("scream").style.display = "none"
 }   
 
 function recruit(){
     if (economy >= 5000) {
         economy -= 5000
-        manpower += 5000
-        if (section5progress<=8){
-            document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy
-            document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower
+        manpower += 2000
+        if (section5progress<=10){
+            document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy.toLocaleString("en-UK")
+            document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower.toLocaleString("en-UK")
         } else {
-            document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy
-            document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower
+            document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy.toLocaleString("en-UK")
+            document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower.toLocaleString("en-UK")
         }
     }
 }
 
 function war5(x){
     if ((x==0 && economy>10000 && manpower>20000) || (x==1 && economy>20000 && manpower>15000) || (x==2 && economy>50000 && manpower>80000)){
+        if (section8outcome == "bad_end"){
+            document.getElementById("procedural"+(5)).style.display = "none";
+            document.getElementById("procedural5_end").style.display = "block";
+            setTimeout(function(){
+                handOver(10)
+            }, 5000)
+            
+        } 
         let z = Math.random() * 100;
         if (x==0){
-            var manpowerchange = 10000+(Math.round((z/100)*10000))
+            var manpowerchange = 5000+(Math.round((z/100)*5000))
             var economychange = 10000
-            var landchange = 600+(Math.round(((100-z)/100)*600))
-            var moralechange = (Math.round(((100-z)/100)*20000))
+            var landchange = 1200+(Math.round(((100-z)/100)*1200))
 
         }
         if (x==1) {
-            var manpowerchange = 5000+(Math.round((z/100)*10000))
+            var manpowerchange = 2500+(Math.round((z/100)*5000))
             var economychange = 20000
-            var landchange = 900+(Math.round(((100-z)/100)*200))
-            var moralechange = 5000+(Math.round(((100-z)/100)*10000))
+            var landchange = 1800+(Math.round(((100-z)/100)*400))
         }
         if (x==2) {
-            var manpowerchange = 20000+(Math.round((z/100)*60000))
+            var manpowerchange = 10000+(Math.round((z/100)*30000))
             var economychange = 50000
-            var landchange = 3000+(Math.round(((100-z)/100)*2000))
-            var moralechange = 10000+(Math.round(((100-z)/100)*70000))
+            var landchange = 6000+(Math.round(((100-z)/100)*4000))
         }
         manpower = manpower - manpowerchange
         economy = economy - economychange
         land = land + landchange
-        morale = morale + moralechange
         
-        if (section5progress<=8){
+        if (section5progress<=10){
             var landortrophies = section5prebreak[3]
-            var moraleorspirit = section5prebreak[0]
-            document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale
-            document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy
-            document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land
-            document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower
+            document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy.toLocaleString("en-UK")
+            document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land.toLocaleString("en-UK")
+            document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower.toLocaleString("en-UK")
             document.getElementById("fightforukraine").innerHTML = section5prebreak[4]
             document.getElementById("recruit").innerHTML = section5prebreak[8]
-            if (document.getElementById('war5').innerHTML != 'War on cooldown...'){
+            if (document.getElementById('war5').innerHTML != 'Strategising...'){
                 document.getElementById("war5").innerHTML = section5prebreak[5]
                 document.getElementById("war5_1").innerHTML = section5prebreak[6]
                 document.getElementById("war5_2").innerHTML = section5prebreak[7]
@@ -1303,14 +1329,12 @@ function war5(x){
             
         } else {
             var landortrophies = section5postbreak[3]
-            var moraleorspirit = section5postbreak[0]
-            document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale
-            document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy
-            document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land
-            document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower
+            document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy.toLocaleString("en-UK")
+            document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land.toLocaleString("en-UK")
+            document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower.toLocaleString("en-UK")
             document.getElementById("fightforukraine").innerHTML = section5postbreak[4]
             document.getElementById("recruit").innerHTML = section5postbreak[8]
-            if (document.getElementById('war5').innerHTML != 'War on cooldown...'){
+            if (document.getElementById('war5').innerHTML != 'Strategising...'){
                 document.getElementById("war5").innerHTML = section5postbreak[5]
                 document.getElementById("war5_1").innerHTML = section5postbreak[6]
                 document.getElementById("war5_2").innerHTML = section5postbreak[7]
@@ -1325,22 +1349,22 @@ function war5(x){
         } else {
             console.log("The campaign was a bloodbath.")
         }
-        console.log("You lost " + manpowerchange + " men.")
-        console.log("You took back " + landchange + " " + landortrophies + " and gained " + moralechange + " " + moraleorspirit + ".")
+        console.log("You lost " + manpowerchange.toLocaleString("en-UK") + " men.")
+        console.log("You took back " + landchange.toLocaleString("en-UK") + " " + landortrophies + ".")
         war5Cooldown()
         
         function war5Cooldown(){
             document.getElementById('war5').disabled = true;
             document.getElementById('war5_1').disabled = true;
             document.getElementById('war5_2').disabled = true;
-            document.getElementById('war5').innerHTML = 'War on cooldown...';
-            document.getElementById('war5_1').innerHTML = 'War on cooldown...';
-            document.getElementById('war5_2').innerHTML = 'War on cooldown...';
+            document.getElementById('war5').innerHTML = 'Strategising...';
+            document.getElementById('war5_1').innerHTML = 'Strategising...';
+            document.getElementById('war5_2').innerHTML = 'Strategising...';
             setTimeout(function(){
                 document.getElementById('war5').disabled = false;
                 document.getElementById('war5_1').disabled = false;
                 document.getElementById('war5_2').disabled = false;
-                if (section5progress<=8){
+                if (section5progress<=10){
                     document.getElementById("war5").innerHTML = section5prebreak[5]
                     document.getElementById("war5_1").innerHTML = section5prebreak[6]
                     document.getElementById("war5_2").innerHTML = section5prebreak[7]
@@ -1357,16 +1381,16 @@ function war5(x){
 }
 
 function loseMoraleEtc(){
-    morale = morale - 1000
-    manpower = manpower - 400
-    land = land - 100
+    morale = (morale - Math.round((120000-land)/30)) - Math.round((1000000-manpower)/10000) //Was feeling too easy so I changed this back to 120000 (from 110000)
+    manpower = manpower - Math.round((500000-morale)/5000)
+    land = land - Math.round(0.004*land)
     economy = economy - 2000
 }
 
 function foreignAid(){
     const foreignAidListPre = ["New Anglimerican Terran Order"]
     const foreignAidListPost = ["NATO"]
-    if (section5progress<=8){
+    if (section5progress<=10){
         var aidGiver = foreignAidListPre[getRandomInt(foreignAidListPre.length)]
         var aidResource = "Grivna"
     } else {
@@ -1387,16 +1411,16 @@ function russianAttack(globalPower, landttack, moraleattack) {
     morale -= moraleLosses
     console.log(globalPower + " pushes into your territory.")
     console.log("They claim " + landLosses + " " + landttack + ".")
-    console.log("You lose " + menLosses + " men and " + moraleLosses + " " + moraleattack + ".")
-    if (section5progress<=8){
-        document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale
-        document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land
-        document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower
+    console.log("You lose " + menLosses.toLocaleString("en-UK") + " men and " + moraleLosses.toLocaleString("en-UK") + " " + moraleattack + ".")
+    if (section5progress<=10){
+        document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale.toLocaleString("en-UK")
+        document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land.toLocaleString("en-UK")
+        document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower.toLocaleString("en-UK")
         
     } else {
-        document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale
-        document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land
-        document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower
+        document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale.toLocaleString("en-UK")
+        document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land.toLocaleString("en-UK")
+        document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower.toLocaleString("en-UK")
     }
 }
 
@@ -1485,7 +1509,7 @@ window.setInterval(function(){
                     if (mentalSpirit<0) {
                         mentalSpirit = 0
                     }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
                 }
                 if (timeTilWeekend <=510) {eventOption(3)}
             }
@@ -1498,7 +1522,7 @@ window.setInterval(function(){
                     if (mentalSpirit<0) {
                         mentalSpirit = 0
                     }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
                 }
                 if (timeTilWeekend <=450) {eventOption(3)}
             }
@@ -1511,7 +1535,7 @@ window.setInterval(function(){
                     if (mentalSpirit<0) {
                         mentalSpirit = 0
                     }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
                 }
                 if (timeTilWeekend <=390) {eventOption(3)}
             }
@@ -1524,7 +1548,7 @@ window.setInterval(function(){
                     if (mentalSpirit<0) {
                         mentalSpirit = 0
                     }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
                 }
                 if (timeTilWeekend <=330) {eventOption(3)}
             }
@@ -1537,7 +1561,7 @@ window.setInterval(function(){
                     if (mentalSpirit<0) {
                         mentalSpirit = 0
                     }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
                 }
                 if (timeTilWeekend <=270) {eventOption(3)}
             }
@@ -1550,7 +1574,7 @@ window.setInterval(function(){
                     if (mentalSpirit<0) {
                         mentalSpirit = 0
                     }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
                 }
                 if (timeTilWeekend <=210) {eventOption(3)}
             }
@@ -1563,7 +1587,7 @@ window.setInterval(function(){
                     if (mentalSpirit<0) {
                         mentalSpirit = 0
                     }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
                 }
                 if (timeTilWeekend <=150) {eventOption(3)}
             }
@@ -1576,7 +1600,7 @@ window.setInterval(function(){
                     if (mentalSpirit<0) {
                         mentalSpirit = 0
                     }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
                 }
                 if (timeTilWeekend <=90) {eventOption(3)}
             }
@@ -1589,7 +1613,7 @@ window.setInterval(function(){
                     if (mentalSpirit<0) {
                         mentalSpirit = 0
                     }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit
+                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
                 }
                 if (timeTilWeekend <=30) {eventOption(3)}
             }
@@ -1610,17 +1634,17 @@ window.setInterval(function(){
         
     }
     if (procSection == 5 || procSection == 69) {
-        if (section5progress<=8){
+        if (section5progress<=10){
             var globalPower = section5prebreak[9]
             var landttack = section5prebreak[3]
             var moraleattack = section5prebreak[0]
-            document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale
-            document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy
-            document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land
-            document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower
+            document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale.toLocaleString("en-UK")
+            document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy.toLocaleString("en-UK")
+            document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land.toLocaleString("en-UK")
+            document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower.toLocaleString("en-UK")
             document.getElementById("fightforukraine").innerHTML = section5prebreak[4]
             document.getElementById("recruit").innerHTML = section5prebreak[8]
-            if (document.getElementById('war5').innerHTML != 'War on cooldown...'){
+            if (document.getElementById('war5').innerHTML != 'Strategising...'){
                 document.getElementById("war5").innerHTML = section5prebreak[5]
                 document.getElementById("war5_1").innerHTML = section5prebreak[6]
                 document.getElementById("war5_2").innerHTML = section5prebreak[7]
@@ -1630,13 +1654,13 @@ window.setInterval(function(){
             var globalPower = section5postbreak[9]
             var landttack = section5postbreak[3]
             var moraleattack = section5postbreak[0]
-            document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale
-            document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy
-            document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land
-            document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower
+            document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale.toLocaleString("en-UK")
+            document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy.toLocaleString("en-UK")
+            document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land.toLocaleString("en-UK")
+            document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower.toLocaleString("en-UK")
             document.getElementById("fightforukraine").innerHTML = section5postbreak[4]
             document.getElementById("recruit").innerHTML = section5postbreak[8]
-            if (document.getElementById('war5').innerHTML != 'War on cooldown...'){
+            if (document.getElementById('war5').innerHTML != 'Strategising...'){
                 document.getElementById("war5").innerHTML = section5postbreak[5]
                 document.getElementById("war5_1").innerHTML = section5postbreak[6]
                 document.getElementById("war5_2").innerHTML = section5postbreak[7]
@@ -1662,7 +1686,7 @@ window.setInterval(function(){
         }
     }
     if (procSection == 8) {
-        document.getElementById("section8spirit").innerHTML = mentalSpirit
+        document.getElementById("section8spirit").innerHTML = mentalSpirit.toLocaleString("en-UK")
         timeTil8end--
         doctorsPrognosis()
         loseSpirit()

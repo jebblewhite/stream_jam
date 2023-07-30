@@ -212,15 +212,15 @@ const warTable = {
 
 document.addEventListener("keypress", function(event) {
     if (event.keyCode == 13) {
-      resources.crops = resources.crops + 1000;
+      resources.crops += 1000;
     }
   });
 
 function harvestCrops(x, click){
         if (click == 1){
-            x = x + Math.floor(x*farmerClick*farmers*farmerPower*0.1)
+            x += Math.floor(x*farmerClick*farmers*farmerPower*0.1)
         }
-        resources.crops = resources.crops + x;
+        resources.crops += x;
         let y = Math.random() * 100;
         if (copperChance > y) {
             resources.copper = resources.copper + x;
@@ -768,12 +768,9 @@ function taxation(){
 
 function checkUpgrades(){
     for (let item in upgrades){
-        if (resources[upgrades[item]["resource"]] >= upgrades[item]["cost"]) {
-            if (document.getElementById(upgrades[item]["segment"]).style.display == "block") {
-                document.getElementById(upgrades[item]["div"]).style.display = "block";
-                document.getElementById(upgrades[item]["element_id"]).innerHTML = upgrades[item]["element_content"].replace("^^^F", upgrades[item]["cost"].toLocaleString("en-UK"))
-            }
-            
+        if (resources[upgrades[item]["resource"]] >= upgrades[item]["cost"] && document.getElementById(upgrades[item]["segment"]).style.display == "block") {
+              document.getElementById(upgrades[item]["div"]).style.display = "block";
+              document.getElementById(upgrades[item]["element_id"]).innerHTML = upgrades[item]["element_content"].replace("^^^F", upgrades[item]["cost"].toLocaleString("en-UK"))
         }
     }     
 }

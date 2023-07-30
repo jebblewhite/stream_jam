@@ -222,7 +222,11 @@ document.addEventListener("keypress", function(event) {
   });
 */
 
-
+document.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  });
 
 function harvestCrops(x, click){
         if (click == 1){
@@ -884,6 +888,7 @@ function resetGame(){
     manpower = 1000000
     economy = 3000000
     land = 120000
+    section5scenelist = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
     startProcedural(5)
 }
 

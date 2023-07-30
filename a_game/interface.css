@@ -222,3 +222,8 @@ body{
 .costtrophies{
   border-color: rgb(234, 154, 125);
 }
+
+.smaller{
+  font-size: 12px;
+  border: 1px solid white;
+}

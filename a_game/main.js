@@ -136,9 +136,9 @@ var farmerClick = 0
 var farmerSpirit = 0
 var fuseMetals = false
 
-var soldierReward = 1
 var soldierRisk = 0
 var soldierChance = 0
+var soldierMultiplier = 1
 
 
 var merchantSpirit = 2
@@ -372,13 +372,13 @@ function farmerPowerUp() {
 function soldierMultiUp() {
     upgradeName = "soldierMultiUp" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
-        rewardMultiplier *= 2 //Upgrade Effect
+        soldierMultiplier *= 2 //Upgrade Effect
         resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] *= 2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
-        document.getElementById("soldiermulti").innerHTML = (Math.round(rewardMultiplier)).toLocaleString("en-UK")
+        document.getElementById("soldierpower").innerHTML = soldierMultiplier
         warCooldown()
     }
 }
@@ -406,7 +406,7 @@ function soldierRiskUp() {
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
-        document.getElementById("soldierrisk").innerHTML = (Math.round(soldierRisk/10)).toLocaleString("en-UK")
+        document.getElementById("soldierrisk").innerHTML = (Math.round(soldierRisk/10))
         warCooldown()
     }
 }
@@ -578,7 +578,7 @@ function generateSingleWar(x){
     riskChance = Math.round((1.2 - Math.random()*0.4)*warTable[warPartner]["riskChance"])
     rewardChance = Math.round((1.2 - Math.random()*0.4)*warTable[warPartner]["rewardChance"])
     riskMultiplier = warTable[warPartner]["riskMultiplier"]
-    rewardMultiplier = warTable[warPartner]["rewardMultiplier"]
+    rewardMultiplier = warTable[warPartner]["rewardMultiplier"]*soldierMultiplier
     bonusResource = warTable[warPartner]["bonusResource"]
     displaychance = Math.round(100*rewardChance/(100-Math.min(soldierChance,99)))
     displayrisk = Math.max(0,Math.round(100*riskChance/(100+soldierRisk)))
@@ -959,7 +959,7 @@ function save() {
     localStorage.setItem('farmerClick', JSON.stringify(farmerClick)) //0
     localStorage.setItem('farmerSpirit', JSON.stringify(farmerSpirit)) //0
     localStorage.setItem('fuseMetals', JSON.stringify(fuseMetals)) //false
-    localStorage.setItem('soldierReward', JSON.stringify(soldierReward)) //1
+    localStorage.setItem('soldierMultiplier', JSON.stringify(soldierMultiplier)) //1
     localStorage.setItem('soldierRisk', JSON.stringify(soldierRisk)) //0
     localStorage.setItem('soldierChance', JSON.stringify(soldierChance)) //0
     localStorage.setItem('merchantSpirit', JSON.stringify(merchantSpirit)) //2
@@ -1041,7 +1041,7 @@ function load() {
     farmerClick = JSON.parse(localStorage.getItem('farmerClick'));
     farmerSpirit = JSON.parse(localStorage.getItem('farmerSpirit'));
     fuseMetals = JSON.parse(localStorage.getItem('fuseMetals'));
-    soldierReward = JSON.parse(localStorage.getItem('soldierReward'));
+    soldierMultiplier = JSON.parse(localStorage.getItem('soldierMultiplier'));
     soldierRisk = JSON.parse(localStorage.getItem('soldierRisk'));
     soldierChance = JSON.parse(localStorage.getItem('soldierChance'));
     merchantSpirit = JSON.parse(localStorage.getItem('merchantSpirit'));
@@ -1081,12 +1081,20 @@ function load() {
             document.getElementById('divgrivna').style.display = "block";
             document.getElementById('merchants').innerHTML = merchants.toLocaleString("en-UK") + " -- gen. " + (merchants*merchantSpirit).toLocaleString("en-UK") + " Spirit per tick"; 
             document.getElementById('divtrade').style.display = "block";
+            document.getElementById("merchantcooldown").innerHTML = Math.round(tradeCooldownTime/1000)
+            document.getElementById("merchantdeals").innerHTML = Math.round((dealModifier-1)*100)
+            document.getElementById('merchantpower').innerHTML = merchantPower*merchants;    
+            generateTrades(merchants*merchantPower)
         }
         if (soldiers>0){
             document.getElementById('soldiers').innerHTML = soldiers.toLocaleString("en-UK")
             document.getElementById('unassignedworkers').innerHTML = unassignedWorkers.toLocaleString("en-UK"); 
             document.getElementById('divwarfare').style.display = "block";
             document.getElementById('trophies').innerHTML = resources.trophies.toLocaleString("en-UK");
+            document.getElementById("soldierpower").innerHTML = soldierMultiplier
+            document.getElementById("soldierreward").innerHTML = (Math.round(soldierChance/10)).toLocaleString("en-UK")
+            document.getElementById("soldierrisk").innerHTML = (Math.round(soldierRisk/10)).toLocaleString("en-UK")
+            generateWar()
         }
         if (resources.copper > 0) {
             document.getElementById('divcopper').style.display = "block";
@@ -1763,6 +1771,8 @@ window.setInterval(function(){
         }
         if (progression == 3 && workers > 0) {
             console.log("The wanderer agrees to work with you.")
+            document.getElementById('savegame').style.display = "block";
+            document.getElementById('loadgame').style.display = "block";
             progression++
         }
         

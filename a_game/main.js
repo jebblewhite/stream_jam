@@ -214,12 +214,13 @@ const warTable = {
 
 
 
-
+/*
 document.addEventListener("keypress", function(event) {
     if (event.keyCode == 13) {
       resources.crops += 1000;
     }
   });
+*/
 
 function harvestCrops(x, click){
         if (click == 1){
@@ -874,6 +875,175 @@ function handleEvent(e) {
 }
   
 }
+
+function resetGame(){
+
+}
+
+function save() {
+    localStorage.setItem('timer', JSON.stringify(timer)) 
+    localStorage.setItem('procSection', JSON.stringify(procSection)) 
+    localStorage.setItem('i_f_params', JSON.stringify(i_f_params)) 
+    localStorage.setItem('proc_params', JSON.stringify(proc_params)) 
+    localStorage.setItem('weakness', JSON.stringify(weakness)) 
+    localStorage.setItem('section8outcome', JSON.stringify(section8outcome)) 
+    localStorage.setItem('screamPressed', JSON.stringify(screamPressed)) 
+    localStorage.setItem('time_until_scream', JSON.stringify(time_until_scream)) 
+    localStorage.setItem('insubordination', JSON.stringify(insubordination)) 
+    localStorage.setItem('usb', JSON.stringify(usb))
+    localStorage.setItem('foreignAidGiven', JSON.stringify(foreignAidGiven)) 
+    localStorage.setItem('morale', JSON.stringify(morale)) //1000000
+    localStorage.setItem('manpower', JSON.stringify(manpower))
+    localStorage.setItem('economy', JSON.stringify(economy))
+    localStorage.setItem('land', JSON.stringify(land)) 
+    localStorage.setItem('foreignAidValue', JSON.stringify(foreignAidValue)) 
+    localStorage.setItem('section5progress', JSON.stringify(section5progress)) //0
+    localStorage.setItem('section5type', JSON.stringify(section5type)) //"m"
+    localStorage.setItem('section5scene', JSON.stringify(section5scene)) //0
+    localStorage.setItem('timeTil5end', JSON.stringify(timeTil5end)) //60 // 60
+    localStorage.setItem('section5scenelist', JSON.stringify(section5scenelist)) //[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+    localStorage.setItem('timeTil8end', JSON.stringify(timeTil8end)) //100
+    localStorage.setItem('job', JSON.stringify(job)) //0
+    localStorage.setItem('peace', JSON.stringify(peace)) //0
+    localStorage.setItem('dignity', JSON.stringify(dignity)) //0
+    localStorage.setItem('social', JSON.stringify(social)) //0
+    localStorage.setItem('mentalSpirit', JSON.stringify(mentalSpirit)) //5146
+    localStorage.setItem('jobLow', JSON.stringify(jobLow)) //false
+    localStorage.setItem('peaceLow', JSON.stringify(peaceLow)) //false
+    localStorage.setItem('socialLow', JSON.stringify(socialLow)) //false
+    localStorage.setItem('dignityLow', JSON.stringify(dignityLow)) //false
+    localStorage.setItem('jobDone', JSON.stringify(jobDone)) //0
+    localStorage.setItem('peacePerClick', JSON.stringify(peacePerClick)) //1
+    localStorage.setItem('dignityPerClick', JSON.stringify(dignityPerClick)) //1
+    localStorage.setItem('socialPerClick', JSON.stringify(socialPerClick)) //1
+    localStorage.setItem('socincrementSteps', JSON.stringify(socincrementSteps)) //[1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
+    localStorage.setItem('peaceincrementSteps', JSON.stringify(peaceincrementSteps)) //[1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
+    localStorage.setItem('noWorkDone', JSON.stringify(noWorkDone)) //0
+    localStorage.setItem('jobWarned', JSON.stringify(jobWarned)) //false
+    localStorage.setItem('workPerTen', JSON.stringify(workPerTen)) //[1,1,1,1,1,1,1,0]
+    localStorage.setItem('timeTilDecay', JSON.stringify(timeTilDecay)) //13
+    localStorage.setItem('socialWarned', JSON.stringify(socialWarned)) //false
+    localStorage.setItem('eventCounter', JSON.stringify(eventCounter)) //0
+    localStorage.setItem('timeTilWeekend', JSON.stringify(timeTilWeekend)) //600 // 600
+    localStorage.setItem('section3outcome', JSON.stringify(section3outcome)) //"none"
+    localStorage.setItem('taxWorkers', JSON.stringify(taxWorkers)) //0
+    localStorage.setItem('harvestPower', JSON.stringify(harvestPower)) //1;
+    localStorage.setItem('workers', JSON.stringify(workers)) //0;
+    localStorage.setItem('workerCost', JSON.stringify(workerCost)) //20;
+    localStorage.setItem('copperChance', JSON.stringify(copperChance)) //0;
+    localStorage.setItem('tinChance', JSON.stringify(tinChance)) //0;
+    localStorage.setItem('oreChanceIncreaseCost', JSON.stringify(oreChanceIncreaseCost)) //100;
+    localStorage.setItem('unassignedWorkers', JSON.stringify(unassignedWorkers)) //0
+    localStorage.setItem('workerSpirit', JSON.stringify(workerSpirit)) //1
+    localStorage.setItem('spiritThreshold', JSON.stringify(spiritThreshold)) //10000000 // 10000000
+    localStorage.setItem('farmers', JSON.stringify(farmers)) //0
+    localStorage.setItem('merchants', JSON.stringify(merchants)) //0
+    localStorage.setItem('soldiers', JSON.stringify(soldiers)) //0
+    localStorage.setItem('farmerPower', JSON.stringify(farmerPower)) //2
+    localStorage.setItem('merchantPower', JSON.stringify(merchantPower)) //10
+    localStorage.setItem('soldierPower', JSON.stringify(soldierPower)) //10
+    localStorage.setItem('farmerPower', JSON.stringify(farmerPower)) //2
+    localStorage.setItem('farmerClick', JSON.stringify(farmerClick)) //0
+    localStorage.setItem('farmerSpirit', JSON.stringify(farmerSpirit)) //0
+    localStorage.setItem('fuseMetals', JSON.stringify(fuseMetals)) //false
+    localStorage.setItem('soldierReward', JSON.stringify(soldierReward)) //1
+    localStorage.setItem('soldierRisk', JSON.stringify(soldierRisk)) //0
+    localStorage.setItem('soldierChance', JSON.stringify(soldierChance)) //0
+    localStorage.setItem('merchantSpirit', JSON.stringify(merchantSpirit)) //2
+    localStorage.setItem('spiritModifier', JSON.stringify(spiritModifier)) //1
+    localStorage.setItem('dealModifier', JSON.stringify(dealModifier)) //1;
+    localStorage.setItem('tradeCooldownTime', JSON.stringify(tradeCooldownTime)) //6000;
+    localStorage.setItem('progression', JSON.stringify(progression)) //0;
+    localStorage.setItem('warCooldownTime', JSON.stringify(warCooldownTime)) //4000;
+    localStorage.setItem('resources', JSON.stringify(resources)) 
+    localStorage.setItem('upgrades', JSON.stringify(upgrades)) 
+    localStorage.setItem('goodsList', JSON.stringify(goodsList)) 
+    localStorage.setItem('fullTrade', JSON.stringify(fullTrade)) 
+    localStorage.setItem('fullWar', JSON.stringify(fullWar)) 
+}
+  
+function load() {
+    timer = JSON.parse(localStorage.getItem('timer'));
+    procSection = JSON.parse(localStorage.getItem('procSection'));
+    i_f_params = JSON.parse(localStorage.getItem('i_f_params'));
+    proc_params = JSON.parse(localStorage.getItem('proc_params'));
+    weakness = JSON.parse(localStorage.getItem('weakness'));
+    section8outcome = JSON.parse(localStorage.getItem('section8outcome'));
+    screamPressed = JSON.parse(localStorage.getItem('screamPressed'));
+    time_until_scream = JSON.parse(localStorage.getItem('time_until_scream'));
+    insubordination = JSON.parse(localStorage.getItem('insubordination'));
+    usb = JSON.parse(localStorage.getItem('usb'));
+    foreignAidGiven = JSON.parse(localStorage.getItem('foreignAidGiven'));
+    morale = JSON.parse(localStorage.getItem('morale'));
+    manpower = JSON.parse(localStorage.getItem('manpower'));
+    economy = JSON.parse(localStorage.getItem('economy'));
+    land = JSON.parse(localStorage.getItem('land'));
+    foreignAidValue = JSON.parse(localStorage.getItem('foreignAidValue'));
+    section5progress = JSON.parse(localStorage.getItem('section5progress'));
+    section5type = JSON.parse(localStorage.getItem('section5type'));
+    section5scene = JSON.parse(localStorage.getItem('section5scene'));
+    timeTil5end = JSON.parse(localStorage.getItem('timeTil5end'));
+    section5scenelist = JSON.parse(localStorage.getItem('section5scenelist'));
+    timeTil8end = JSON.parse(localStorage.getItem('timeTil8end'));
+    job = JSON.parse(localStorage.getItem('job'));
+    peace = JSON.parse(localStorage.getItem('peace'));
+    dignity = JSON.parse(localStorage.getItem('dignity'));
+    social = JSON.parse(localStorage.getItem('social'));
+    mentalSpirit = JSON.parse(localStorage.getItem('mentalSpirit'));
+    jobLow = JSON.parse(localStorage.getItem('jobLow'));
+    peaceLow = JSON.parse(localStorage.getItem('peaceLow'));
+    socialLow = JSON.parse(localStorage.getItem('socialLow'));
+    dignityLow = JSON.parse(localStorage.getItem('dignityLow'));
+    jobDone = JSON.parse(localStorage.getItem('jobDone'));
+    peacePerClick = JSON.parse(localStorage.getItem('peacePerClick'));
+    dignityPerClick = JSON.parse(localStorage.getItem('dignityPerClick'));
+    socialPerClick = JSON.parse(localStorage.getItem('socialPerClick'));
+    socincrementSteps = JSON.parse(localStorage.getItem('socincrementSteps'));
+    peaceincrementSteps = JSON.parse(localStorage.getItem('peaceincrementSteps'));
+    noWorkDone = JSON.parse(localStorage.getItem('noWorkDone'));
+    jobWarned = JSON.parse(localStorage.getItem('jobWarned'));
+    workPerTen = JSON.parse(localStorage.getItem('workPerTen'));
+    timeTilDecay = JSON.parse(localStorage.getItem('timeTilDecay'));
+    socialWarned = JSON.parse(localStorage.getItem('socialWarned'));
+    eventCounter = JSON.parse(localStorage.getItem('eventCounter'));
+    timeTilWeekend = JSON.parse(localStorage.getItem('timeTilWeekend'));
+    section3outcome = JSON.parse(localStorage.getItem('section3outcome'));
+    taxWorkers = JSON.parse(localStorage.getItem('taxWorkers'));
+    harvestPower = JSON.parse(localStorage.getItem('harvestPower'));
+    workers = JSON.parse(localStorage.getItem('workers'));
+    workerCost = JSON.parse(localStorage.getItem('workerCost'));
+    copperChance = JSON.parse(localStorage.getItem('copperChance'));
+    tinChance = JSON.parse(localStorage.getItem('tinChance'));
+    oreChanceIncreaseCost = JSON.parse(localStorage.getItem('oreChanceIncreaseCost'));
+    unassignedWorkers = JSON.parse(localStorage.getItem('unassignedWorkers'));
+    workerSpirit = JSON.parse(localStorage.getItem('workerSpirit'));
+    spiritThreshold = JSON.parse(localStorage.getItem('spiritThreshold'));
+    farmers = JSON.parse(localStorage.getItem('farmers'));
+    merchants = JSON.parse(localStorage.getItem('merchants'));
+    soldiers = JSON.parse(localStorage.getItem('soldiers'));
+    farmerPower = JSON.parse(localStorage.getItem('farmerPower'));
+    merchantPower = JSON.parse(localStorage.getItem('merchantPower'));
+    soldierPower = JSON.parse(localStorage.getItem('soldierPower'));
+    farmerClick = JSON.parse(localStorage.getItem('farmerClick'));
+    farmerSpirit = JSON.parse(localStorage.getItem('farmerSpirit'));
+    fuseMetals = JSON.parse(localStorage.getItem('fuseMetals'));
+    soldierReward = JSON.parse(localStorage.getItem('soldierReward'));
+    soldierRisk = JSON.parse(localStorage.getItem('soldierRisk'));
+    soldierChance = JSON.parse(localStorage.getItem('soldierChance'));
+    merchantSpirit = JSON.parse(localStorage.getItem('merchantSpirit'));
+    spiritModifier = JSON.parse(localStorage.getItem('spiritModifier'));
+    dealModifier = JSON.parse(localStorage.getItem('dealModifier'));
+    tradeCooldownTime = JSON.parse(localStorage.getItem('tradeCooldownTime'));
+    progression = JSON.parse(localStorage.getItem('progression'));
+    warCooldownTime = JSON.parse(localStorage.getItem('warCooldownTime'));
+    resources = JSON.parse(localStorage.getItem('resources'));
+    upgrades = JSON.parse(localStorage.getItem('upgrades'));
+    goodsList = JSON.parse(localStorage.getItem('goodsList'));
+    fullTrade = JSON.parse(localStorage.getItem('fullTrade'));
+    fullWar = JSON.parse(localStorage.getItem('fullWar'));
+    
+}
+  
 
 function startProcedural(x) {
     if (x==1) {
@@ -1669,6 +1839,25 @@ window.setInterval(function(){
         }
         timeTil5end--
         loseMoraleEtc()
+        if (morale<=0) {
+            console.log("You have lost the will to go on. Game Over.")
+            resetGame()
+        }
+        if (land<=0) {
+            morale -= 5000
+            manpower -= 1000
+        }
+        if (manpower<=0) {
+            morale -= 2000
+            land -= 200
+        }
+        if (economy<=0) {
+            morale -= 1000
+        }
+        morale = max(morale, 0)
+        land = max(land, 0)
+        manpower = max(manpower, 0)
+        
         if (timeTil5end % 30 == 0 && timeTil5end % 60 != 0 && !foreignAidGiven){
             foreignAid()
             foreignAidGiven = true

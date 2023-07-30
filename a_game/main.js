@@ -23,7 +23,7 @@ const section5postbreak = ["Morale", "Economy", "Manpower", "Land", "Defend your
 var section5progress = 0
 var section5type = "m"
 var section5scene = 0
-var timeTil5end = 2 // 60
+var timeTil5end = 60 // 60
 var section5scenelist = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 
 var timeTil8end = 100
@@ -51,8 +51,13 @@ var workPerTen = [1,1,1,1,1,1,1,0]
 var timeTilDecay = 13
 var socialWarned = false
 var eventCounter = 0
-var timeTilWeekend = 2 // 600
+var timeTilWeekend = 600 // 600
 var section3outcome = "none"
+
+const jobhtml = document.getElementById('job')
+const dignityhtml = document.getElementById('dignity')
+const peacehtml = document.getElementById('peace')
+const socialhtml = document.getElementById('social')
 
 const eventList = [
     {
@@ -116,7 +121,7 @@ var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
 var workerSpirit = 1
-var spiritThreshold = 0 // 10000000
+var spiritThreshold = 10000000 // 10000000
 
 var farmers = 0
 var merchants = 0
@@ -838,7 +843,7 @@ function handOver(x) {
         if (section5progress >= 19) {//I think this is right
             procSection = 7
         } else {
-            timeTil5end = 2 // 60
+            timeTil5end = 60 // 60
             foreignAidGiven = false
         }
     
@@ -1045,13 +1050,13 @@ function jobClick() {
     jobDone = 1
     noWorkDone = 0
     jobWarned = false
-    document.getElementById('job').innerHTML =  job.toLocaleString("en-UK")
+    jobhtml.innerHTML =  job.toLocaleString("en-UK")
 }
 
 function dignityClick() { 
     if (dignityPerClick>0){
         dignity += dignityPerClick   
-        document.getElementById('dignity').innerHTML =  dignity.toLocaleString("en-UK")
+        dignityhtml.innerHTML =  dignity.toLocaleString("en-UK")
         console.log("You maintain your dignity. (+" + dignityPerClick +" dignity)")
         dignityPerClick = 0
     }
@@ -1062,7 +1067,7 @@ function peaceClick() {
     console.log("You breathe deeply and find your focus. (+" + peacePerClick +" inner peace)")
     peacePerClick = 0
     peaceincrementSteps = [1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
-    document.getElementById('peace').innerHTML =  peace.toLocaleString("en-UK")
+    peacehtml.innerHTML =  peace.toLocaleString("en-UK")
 }
 
 function socialClick() {
@@ -1073,8 +1078,8 @@ function socialClick() {
     socincrementSteps = [1, 2, 3, 4, 6, 8, 10, 13, 16, 20];
     timeTilDecay = 13
     socialWarned = false
-    document.getElementById('social').innerHTML =  social.toLocaleString("en-UK")
-    document.getElementById('job').innerHTML =  job.toLocaleString("en-UK")
+    socialhtml.innerHTML =  social.toLocaleString("en-UK")
+    jobhtml.innerHTML =  job.toLocaleString("en-UK")
 }
 
 function increasePerClick() {
@@ -1174,10 +1179,10 @@ function statDecay() {
             socialLow = true
         }
     }
-    document.getElementById('job').innerHTML =  job.toLocaleString("en-UK")
-    document.getElementById('dignity').innerHTML =  dignity.toLocaleString("en-UK")
-    document.getElementById('peace').innerHTML =  peace.toLocaleString("en-UK")
-    document.getElementById('social').innerHTML =  social.toLocaleString("en-UK")
+    jobhtml.innerHTML =  job.toLocaleString("en-UK")
+    dignityhtml.innerHTML =  dignity.toLocaleString("en-UK")
+    peacehtml.innerHTML =  peace.toLocaleString("en-UK")
+    socialhtml.innerHTML =  social.toLocaleString("en-UK")
 }
 
 function showEvent(x){
@@ -1258,10 +1263,10 @@ function eventOutcome(decision){
                 socialLow = true
             }
         }
-        document.getElementById('job').innerHTML =  job.toLocaleString("en-UK")
-        document.getElementById('dignity').innerHTML =  dignity.toLocaleString("en-UK")
-        document.getElementById('peace').innerHTML =  peace.toLocaleString("en-UK")
-        document.getElementById('social').innerHTML =  social.toLocaleString("en-UK")
+        jobhtml.innerHTML =  job.toLocaleString("en-UK")
+        dignityhtml.innerHTML =  dignity.toLocaleString("en-UK")
+        peacehtml.innerHTML =  peace.toLocaleString("en-UK")
+        socialhtml.innerHTML =  social.toLocaleString("en-UK")
     } else {
         console.log("You are paralysed by indecision.")
     }

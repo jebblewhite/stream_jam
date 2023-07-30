@@ -877,6 +877,19 @@ function handleEvent(e) {
 }
 
 function resetGame(){
+    section5progress = 0
+    morale = 1000000
+    manpower = 1000000
+    economy = 3000000
+    land = 120000
+    startProcedural(5)
+}
+
+function hide_all_proc(){
+    document.getElementById("procedural1").style.display = "none";
+    document.getElementById("procedural3").style.display = "none";
+    document.getElementById("procedural5").style.display = "none";
+    document.getElementById("procedural8").style.display = "none";
 
 }
 
@@ -960,6 +973,7 @@ function save() {
     localStorage.setItem('goodsList', JSON.stringify(goodsList)) 
     localStorage.setItem('fullTrade', JSON.stringify(fullTrade)) 
     localStorage.setItem('fullWar', JSON.stringify(fullWar)) 
+    console.log("Game saved.")
 }
   
 function load() {
@@ -1041,7 +1055,83 @@ function load() {
     goodsList = JSON.parse(localStorage.getItem('goodsList'));
     fullTrade = JSON.parse(localStorage.getItem('fullTrade'));
     fullWar = JSON.parse(localStorage.getItem('fullWar'));
-    
+    hide_all_proc()
+    if (procSection==1){
+        document.getElementById("procedural1").style.display = "block";
+        document.getElementById('tin').innerHTML = resources.tin.toLocaleString("en-UK");
+        document.getElementById('copper').innerHTML = resources.copper.toLocaleString("en-UK");
+        document.getElementById('bronze').innerHTML = resources.bronze.toLocaleString("en-UK");
+        document.getElementById('crops').innerHTML = resources.crops.toLocaleString("en-UK");
+        document.getElementById('workers').innerHTML = workers.toLocaleString("en-UK") + " -- gen. " + (workers*workerSpirit).toLocaleString("en-UK") + " Spirit per tick";
+        document.getElementById('unassignedworkers').innerHTML = unassignedWorkers.toLocaleString("en-UK");        
+        document.getElementById('divworkers').style.display = "block";
+        document.getElementById('divunassignedworkers').style.display = "block";
+        document.getElementById('buyworker').innerHTML = "Offer food -- Cost : " + workerCost.toLocaleString("en-UK") + " crops";
+        document.getElementById('divassignfarmer').style.display = "block";
+        document.getElementById('divassignmerchant').style.display = "block";
+        document.getElementById('divassignsoldier').style.display = "block";
+        document.getElementById('farmers').innerHTML = farmers.toLocaleString("en-UK") + " -- gen. " + (farmers*farmerPower).toLocaleString("en-UK") + " Crops per tick"; 
+        document.getElementById('unassignedworkers').innerHTML = unassignedWorkers.toLocaleString("en-UK");
+        document.getElementById('spirit').innerHTML = resources.spirit.toLocaleString("en-UK");
+        document.getElementById('crops').innerHTML = resources.crops.toLocaleString("en-UK");
+        document.getElementById('divcrops').style.display = "block";
+        document.getElementById('copper').innerHTML = resources.copper.toLocaleString("en-UK");
+        if (merchants>0){
+            document.getElementById('grivna').innerHTML = resources.grivna.toLocaleString("en-UK")
+            document.getElementById('divgrivna').style.display = "block";
+            document.getElementById('merchants').innerHTML = merchants.toLocaleString("en-UK") + " -- gen. " + (merchants*merchantSpirit).toLocaleString("en-UK") + " Spirit per tick"; 
+            document.getElementById('divtrade').style.display = "block";
+        }
+        if (soldiers>0){
+            document.getElementById('soldiers').innerHTML = soldiers.toLocaleString("en-UK")
+            document.getElementById('unassignedworkers').innerHTML = unassignedWorkers.toLocaleString("en-UK"); 
+            document.getElementById('divwarfare').style.display = "block";
+            document.getElementById('trophies').innerHTML = resources.trophies.toLocaleString("en-UK");
+        }
+        if (resources.copper > 0) {
+            document.getElementById('divcopper').style.display = "block";
+        }
+        document.getElementById('tin').innerHTML = resources.tin.toLocaleString("en-UK");
+        if (resources.tin > 0) {
+            document.getElementById('divtin').style.display = "block";
+        }
+        if (resources.bronze > 0) {
+            document.getElementById('divbronze').style.display = "block";
+        }
+    }
+    if (procSection==3){
+        document.getElementById("procedural3").style.display = "block";
+        jobhtml.innerHTML =  job.toLocaleString("en-UK")
+        dignityhtml.innerHTML =  dignity.toLocaleString("en-UK")
+        peacehtml.innerHTML =  peace.toLocaleString("en-UK")
+        socialhtml.innerHTML =  social.toLocaleString("en-UK")
+        document.getElementById('spirit3').innerHTML = mentalSpirit.toLocaleString("en-UK");
+        document.getElementById('timetilweekend').innerHTML = timeTilWeekend;
+
+    }
+    if (procSection==5){
+        document.getElementById("procedural5").style.display = "block";
+
+        if (section5progress <=10){ //I think this is right!  The mental break happens after 9 events.
+            document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale.toLocaleString("en-UK")
+            document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy.toLocaleString("en-UK")
+            document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land.toLocaleString("en-UK")
+            document.getElementById("manpower").innerHTML = section5prebreak[2] + " : " + manpower.toLocaleString("en-UK")
+            
+        } else {
+            document.getElementById("morale").innerHTML = section5postbreak[0] + " : " + morale.toLocaleString("en-UK")
+            document.getElementById("economy").innerHTML = section5postbreak[1] + " : " + economy.toLocaleString("en-UK")
+            document.getElementById("land").innerHTML = section5postbreak[3] + " : " + land.toLocaleString("en-UK")
+            document.getElementById("manpower").innerHTML = section5postbreak[2] + " : " + manpower.toLocaleString("en-UK")
+        }
+    }
+    if (procSection==8){
+        document.getElementById("procedural8").style.display = "block";
+        document.getElementById("prognosis").innerHTML = prognosis
+        document.getElementById("section8spirit").innerHTML = mentalSpirit.toLocaleString("en-UK")
+        document.getElementById("weakness").innerHTML = weakness.toLocaleString("en-UK")
+    }
+    console.log("Save game loaded.")
 }
   
 

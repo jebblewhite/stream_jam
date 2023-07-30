@@ -23,7 +23,7 @@ const section5postbreak = ["Morale", "Economy", "Manpower", "Land", "Defend your
 var section5progress = 0
 var section5type = "m"
 var section5scene = 0
-var timeTil5end = 60 // 60
+var timeTil5end = 5 // 60
 var section5scenelist = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 
 var timeTil8end = 100
@@ -51,7 +51,7 @@ var workPerTen = [1,1,1,1,1,1,1,0]
 var timeTilDecay = 13
 var socialWarned = false
 var eventCounter = 0
-var timeTilWeekend = 600 // 600
+var timeTilWeekend = 1 // 600
 var section3outcome = "none"
 
 const jobhtml = document.getElementById('job')
@@ -121,7 +121,7 @@ var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
 var workerSpirit = 1
-var spiritThreshold = 10000000 // 10000000
+var spiritThreshold = 10 // 10000000
 
 var farmers = 0
 var merchants = 0
@@ -221,6 +221,8 @@ document.addEventListener("keypress", function(event) {
     }
   });
 */
+
+
 
 function harvestCrops(x, click){
         if (click == 1){
@@ -1056,6 +1058,7 @@ function load() {
     fullTrade = JSON.parse(localStorage.getItem('fullTrade'));
     fullWar = JSON.parse(localStorage.getItem('fullWar'));
     hide_all_proc()
+    console.log(localStorage)
     if (procSection==1){
         document.getElementById("procedural1").style.display = "block";
         document.getElementById('tin').innerHTML = resources.tin.toLocaleString("en-UK");
@@ -1690,13 +1693,11 @@ function loseMoraleEtc(){
 }
 
 function foreignAid(){
-    const foreignAidListPre = ["New Anglimerican Terran Order"]
-    const foreignAidListPost = ["NATO"]
     if (section5progress<=10){
-        var aidGiver = foreignAidListPre[getRandomInt(foreignAidListPre.length)]
+        var aidGiver = "New Anglimerican Terran Order"
         var aidResource = "Grivna"
     } else {
-        var aidGiver = foreignAidListPost[getRandomInt(foreignAidListPost.length)]
+        var aidGiver = "NATO"
         var aidResource = "Dollars in aid"
     }
     economy += foreignAidValue-(section5progress*2500)
@@ -1954,9 +1955,9 @@ window.setInterval(function(){
         if (economy<=0) {
             morale -= 1000
         }
-        morale = max(morale, 0)
-        land = max(land, 0)
-        manpower = max(manpower, 0)
+        morale = Math.max(morale, 0)
+        land = Math.max(land, 0)
+        manpower = Math.max(manpower, 0)
         
         if (timeTil5end % 30 == 0 && timeTil5end % 60 != 0 && !foreignAidGiven){
             foreignAid()

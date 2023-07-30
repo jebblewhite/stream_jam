@@ -17,13 +17,13 @@ var manpower = 1000000
 var economy = 3000000
 var land = 120000
 var foreignAidValue = 200000
-var section5prebreak = ["Spirit", "Grivna", "Soldiers", "Trophies", "Make war with neighbouring states", "Push back in the North -- Cost : 10K grivna", "Push back in the South -- Cost : 20K grivna", "Push back in the East -- Cost : 50K grivna", "Recruit Soldiers -- Cost : 5K grivna", "The Barony"]
-var section5postbreak = ["Morale", "Economy", "Manpower", "Land", "Defend your home. Defend Ukraine.", "Push back in the North -- Cost : 10K economy", "Push back in the South -- Cost : 20K economy", "Push back in the East -- Cost : 50K economy", "Recruit Soldiers -- Cost : 5K economy", "Russia"]
+const section5prebreak = ["Spirit", "Grivna", "Soldiers", "Trophies", "Make war with neighbouring states", "Push back in the North -- Cost : 10K grivna", "Push back in the South -- Cost : 20K grivna", "Push back in the East -- Cost : 50K grivna", "Recruit Soldiers -- Cost : 5K grivna", "The Barony"]
+const section5postbreak = ["Morale", "Economy", "Manpower", "Land", "Defend your home. Defend Ukraine.", "Push back in the North -- Cost : 10K economy", "Push back in the South -- Cost : 20K economy", "Push back in the East -- Cost : 50K economy", "Recruit Soldiers -- Cost : 5K economy", "Russia"]
 
 var section5progress = 0
 var section5type = "m"
 var section5scene = 0
-var timeTil5end = 60 // 60
+var timeTil5end = 2 // 60
 var section5scenelist = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 
 var timeTil8end = 100
@@ -54,7 +54,7 @@ var eventCounter = 0
 var timeTilWeekend = 2 // 600
 var section3outcome = "none"
 
-var eventList = [
+const eventList = [
     {
         "event_text": "Borysko says you're behind on the Kostenko account.  You are, of course.  Very behind.",
         "options": ["Find someone else to help you.","Put in some (unpaid) overtime.","Just leave it."], 
@@ -223,13 +223,13 @@ function harvestCrops(x, click){
         resources.crops += x;
         let y = Math.random() * 100;
         if (copperChance > y) {
-            resources.copper = resources.copper + x;
+            resources.copper += x;
         }
         let z = Math.random() * 100;
         if (tinChance > z) {
-            resources.tin = resources.tin + x
+            resources.tin += x
         }
-        resources.spirit = resources.spirit+(x*farmerSpirit)
+        resources.spirit += x*farmerSpirit
         document.getElementById('spirit').innerHTML = resources.spirit.toLocaleString("en-UK");
         document.getElementById('crops').innerHTML = resources.crops.toLocaleString("en-UK");
         document.getElementById('divcrops').style.display = "block";
@@ -249,9 +249,9 @@ function harvestCrops(x, click){
 
 function buyWorker(){
     if (resources.crops >= workerCost) {
-        workers = workers + 1;
-        unassignedWorkers = unassignedWorkers + 1;
-        resources.crops = resources.crops - workerCost;
+        workers += 1;
+        unassignedWorkers += 1;
+        resources.crops -= workerCost;
         workerCost = Math.ceil(workerCost*1.08)
         document.getElementById('crops').innerHTML = resources.crops.toLocaleString("en-UK");
         document.getElementById('workers').innerHTML = workers.toLocaleString("en-UK") + " -- gen. " + (workers*workerSpirit).toLocaleString("en-UK") + " Spirit per tick";
@@ -267,8 +267,8 @@ function buyWorker(){
 
 function assignFarmer() {
     if (unassignedWorkers > 0) {
-        unassignedWorkers = unassignedWorkers - 1
-        farmers = farmers + 1
+        unassignedWorkers -= 1
+        farmers += 1
         document.getElementById('farmers').innerHTML = farmers.toLocaleString("en-UK") + " -- gen. " + (farmers*farmerPower).toLocaleString("en-UK") + " Crops per tick"; 
         document.getElementById('unassignedworkers').innerHTML = unassignedWorkers.toLocaleString("en-UK"); 
     }
@@ -276,12 +276,12 @@ function assignFarmer() {
 
 function assignMerchant() {
     if (unassignedWorkers > 0) {
-        unassignedWorkers = unassignedWorkers - 1
-        merchants = merchants + 1
+        unassignedWorkers -= 1
+        merchants += 1
         if (merchants == 1) {
             generateTrades(merchantPower)
             document.getElementById('merchantpower').innerHTML = merchantPower.toLocaleString("en-UK")
-            resources.grivna = resources.grivna + 10
+            resources.grivna += 10
             console.log("Your first Merchant brings with him 10 grivna.")
             console.log("(The local currency)")
             document.getElementById('grivna').innerHTML = resources.grivna.toLocaleString("en-UK")
@@ -297,8 +297,8 @@ function assignMerchant() {
 
 function assignSoldier() {
     if (unassignedWorkers > 0) {
-        unassignedWorkers = unassignedWorkers - 1
-        soldiers = soldiers + 1
+        unassignedWorkers -= 1
+        soldiers += 1
         
         document.getElementById('soldiers').innerHTML = soldiers.toLocaleString("en-UK")
         document.getElementById('unassignedworkers').innerHTML = unassignedWorkers.toLocaleString("en-UK"); 
@@ -317,7 +317,7 @@ function fuseMetalsUp() {
     upgradeName = "fuseMetalsUp" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
         fuseMetals = true //Upgrade Effect
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
+        resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"];
         upgrades[upgradeName]["cost"] = "none"; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
@@ -330,8 +330,8 @@ function farmerClickUp() {
     upgradeName = "farmerClickUp" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
         farmerClick++ //Upgrade Effect
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
+        resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] *= 3
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -342,8 +342,8 @@ function farmerSpiritUp() {
     upgradeName = "farmerSpiritUp" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
         farmerSpirit = 1//Upgrade Effect
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2**1000; // Change for onetime use
+        resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"]
+        upgrades[upgradeName]["cost"] *= 2**1000; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -355,8 +355,8 @@ function farmerPowerUp() {
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
         farmerPower = Math.round(farmerPower*1.5) //Upgrade Effect
         document.getElementById('farmers').innerHTML = farmers + " -- gen. " + farmers*farmerPower + " Crops per tick"; 
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] *= 2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -366,9 +366,9 @@ function farmerPowerUp() {
 function soldierMultiUp() {
     upgradeName = "soldierMultiUp" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
-        rewardMultiplier = rewardMultiplier*2 //Upgrade Effect
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        rewardMultiplier *= 2 //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] *= 2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -380,9 +380,9 @@ function soldierMultiUp() {
 function soldierChanceUp() {
     upgradeName = "soldierChanceUp" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
-        soldierChance = soldierChance + 10 //Upgrade Effect
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        soldierChance += 10 //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] *= 2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -394,9 +394,9 @@ function soldierChanceUp() {
 function soldierRiskUp() {
     upgradeName = "soldierRiskUp" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
-        soldierRisk = soldierRisk + 10 //Upgrade Effect
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        soldierRisk += 10 //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] *= 2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -408,10 +408,10 @@ function soldierRiskUp() {
 function reduceTradeCooldown(){
     upgradeName = "reduceTradeCooldown"
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades["reduceTradeCooldown"]["cost"]) {
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades["reduceTradeCooldown"]["cost"].toLocaleString("en-UK");
-        upgrades["reduceTradeCooldown"]["cost"] = upgrades["reduceTradeCooldown"]["cost"]*2;
+        resources[upgrades[upgradeName]["resource"]] -= upgrades["reduceTradeCooldown"]["cost"].toLocaleString("en-UK");
+        upgrades["reduceTradeCooldown"]["cost"] *= 2;
         if (tradeCooldownTime>1000){
-            tradeCooldownTime = tradeCooldownTime - 1000
+            tradeCooldownTime -= 1000
         } else { 
             upgrades["reduceTradeCooldown"]["cost"] = 10**200
         }
@@ -426,9 +426,9 @@ function reduceTradeCooldown(){
 function betterTradeDeals(){
     upgradeName = "betterTradeDeals"
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades["betterTradeDeals"]["cost"]) {
-        dealModifier = dealModifier + 0.2
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades["betterTradeDeals"]["cost"];
-        upgrades["betterTradeDeals"]["cost"] = upgrades["betterTradeDeals"]["cost"]*2;
+        dealModifier += 0.2
+        resources[upgrades[upgradeName]["resource"]] -= upgrades["betterTradeDeals"]["cost"];
+        upgrades["betterTradeDeals"]["cost"] *= 2;
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades["betterTradeDeals"]["element_id"]).innerHTML = upgrades["betterTradeDeals"]["element_content"].replace("^^^F", upgrades["betterTradeDeals"]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades["betterTradeDeals"]["div"]).style.display = "none";
@@ -440,10 +440,10 @@ function betterTradeDeals(){
 function doubleTradeValue(){
     upgradeName = "doubleTradeValue" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
-        merchantPower = merchantPower*2 //Upgrade Effect
+        merchantPower *= 2 //Upgrade Effect
         document.getElementById('merchantpower').innerHTML = merchantPower*merchants;
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
+        resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] *= 3; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -454,9 +454,9 @@ function doubleTradeValue(){
 function doubleSpiritValue(){
     upgradeName = "doubleSpiritValue" //Upgrade Name
     if (resources[upgrades[upgradeName]["resource"]] >= upgrades[upgradeName]["cost"]) {
-        spiritModifier = spiritModifier * 2 //Upgrade Effect
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*3; // Change for onetime use
+        spiritModifier *= 2 //Upgrade Effect
+        resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] *= 3; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -469,10 +469,10 @@ function taxThePops(){
         if (taxWorkers==0){
             taxWorkers++
         }else{
-            taxWorkers = taxWorkers*2 //Upgrade Effect
+            taxWorkers *= 2 //Upgrade Effect
         }
-        resources[upgrades[upgradeName]["resource"]] = resources[upgrades[upgradeName]["resource"]] - upgrades[upgradeName]["cost"];
-        upgrades[upgradeName]["cost"] = upgrades[upgradeName]["cost"]*2; // Change for onetime use
+        resources[upgrades[upgradeName]["resource"]] -= upgrades[upgradeName]["cost"];
+        upgrades[upgradeName]["cost"] *= 2; // Change for onetime use
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
@@ -481,10 +481,10 @@ function taxThePops(){
 
 function increaseOreChance(){
     if (resources.crops >= upgrades["oreChanceIncrease"]["cost"]) {
-        copperChance = copperChance + 4;
-        tinChance = tinChance + 2;
-        resources.crops = resources.crops - upgrades["oreChanceIncrease"]["cost"];
-        upgrades["oreChanceIncrease"]["cost"] = upgrades["oreChanceIncrease"]["cost"]*2;
+        copperChance += 4;
+        tinChance += 2;
+        resources.crops -= upgrades["oreChanceIncrease"]["cost"];
+        upgrades["oreChanceIncrease"]["cost"] *= 2;
         document.getElementById('crops').innerHTML = resources.crops.toLocaleString("en-UK");
         document.getElementById('oreincrease').innerHTML = "Increase chance of finding ores when harvesting crops -- Cost : " + upgrades["oreChanceIncrease"]["cost"].toLocaleString("en-UK") + " crops";
         document.getElementById('divoreincrease').style.display = "none";
@@ -492,7 +492,7 @@ function increaseOreChance(){
 }
 
 function eatFood(x){
-    resources.spirit = resources.spirit + x;
+    resources.spirit += x;
     document.getElementById('spirit').innerHTML = resources.spirit.toLocaleString("en-UK");
     document.getElementById('divspirit').style.display = "block";
 }
@@ -546,9 +546,9 @@ function generateTrades(x){
 
 function trade(x){
     if (resources[fullTrade[x][1]] >= fullTrade[x][2]){
-        resources[fullTrade[x][1]] = resources[fullTrade[x][1]] - fullTrade[x][2]
-        resources[fullTrade[x][3]] = resources[fullTrade[x][3]] + fullTrade[x][4]
-        resources.spirit = resources.spirit + 10*fullTrade[x][5]*spiritModifier
+        resources[fullTrade[x][1]] -= fullTrade[x][2]
+        resources[fullTrade[x][3]] += fullTrade[x][4]
+        resources.spirit += 10*fullTrade[x][5]*spiritModifier
         console.log("Traded " + fullTrade[x][2] + " " + fullTrade[x][1] + " for " + fullTrade[x][4] + " " + fullTrade[x][3] + ".")
         console.log("Gained " + 10*fullTrade[x][5] + " Spirit through Trade")
         //update all resources
@@ -619,9 +619,9 @@ function makeWar(x, riskChance, rewardChance, riskMultiplier, rewardMultiplier, 
         randRes = Math.round((x/grivnaTable[bonusResource])*(1.2 - Math.random()*0.4)*rewardMultiplier*8)
         randRes2 = Math.round((x/grivnaTable[appropList[yum]])*(1.2 - Math.random()*0.4)*rewardMultiplier*4)
         randTrophies = Math.round((x)*(1.2 - Math.random()*0.4)*rewardMultiplier)
-        resources[bonusResource] = resources[bonusResource] + randRes
-        resources[appropList[yum]] = resources[appropList[yum]] + randRes2
-        resources.trophies = resources.trophies + randTrophies;
+        resources[bonusResource] += randRes
+        resources[appropList[yum]] += randRes2
+        resources.trophies += randTrophies;
         goodsList.indexOf("trophies") === -1 ? goodsList.push("trophies") : oops = 1;
         console.log("Your army returns with spoils of war!")
         console.log("(Gained " + randTrophies + " trophies, looted " + randRes + " " + bonusResource + " and "+ randRes2 + " "+ appropList[yum] + ".)")
@@ -631,8 +631,8 @@ function makeWar(x, riskChance, rewardChance, riskMultiplier, rewardMultiplier, 
     let y = Math.random() * (100);
     if (riskChance >= y) {
         var volDead = Math.ceil(soldiers*riskMultiplier/100)
-        soldiers = soldiers - volDead
-        workers = workers - volDead
+        soldiers -= volDead
+        workers -= volDead
         workerCost = Math.ceil(20*1.08**workers)
         if (warOutcome == "Success"){
             console.log("However,")
@@ -642,7 +642,7 @@ function makeWar(x, riskChance, rewardChance, riskMultiplier, rewardMultiplier, 
     }
     if (warOutcome == "None"){
         randSpirit = Math.round((x)*(1.2 - Math.random()*0.4)*10)
-        resources.spirit = resources.spirit + randSpirit;
+        resources.spirit += randSpirit;
         console.log("Your soldiers fight to a stalemate.")
         console.log("You gain " + randSpirit + " spirit.")
     }
@@ -700,9 +700,9 @@ function tradeCooldown(){
 
 function makeBronze() {
     if (resources.copper >= 2 && resources.tin >= 1){
-        resources.copper = resources.copper - 2
-        resources.tin = resources.tin - 1
-        resources.bronze = resources.bronze + 1;
+        resources.copper -= 2
+        resources.tin -= 1
+        resources.bronze += 1;
         document.getElementById('divbronze').style.display = 'block';
         document.getElementById('tin').innerHTML = resources.tin.toLocaleString("en-UK");
         document.getElementById('copper').innerHTML = resources.copper.toLocaleString("en-UK");
@@ -756,12 +756,12 @@ function rewireLoggingToElement(eleLocator, eleOverflowLocator, autoScroll) {
 }
 
 function trophySpirit(){
-    resources.spirit = resources.spirit + resources.trophies
+    resources.spirit += resources.trophies
     document.getElementById('spirit').innerHTML = resources.spirit.toLocaleString("en-UK");
 }
 
 function taxation(){
-    resources.grivna = resources.grivna + (workers*taxWorkers)
+    resources.grivna += workers*taxWorkers
     console.log("Your workers pay " + (workers*taxWorkers) + " grivna in tax.")
     document.getElementById('grivna').innerHTML = resources.grivna.toLocaleString("en-UK");
 }
@@ -810,6 +810,9 @@ function setProcParams(x) {
     if (x==0){
         passedArray = [0,]
     }
+    if (x==10){
+        passedArray = [10,]
+    }
     return passedArray
 }
 
@@ -835,7 +838,7 @@ function handOver(x) {
         if (section5progress >= 19) {//I think this is right
             procSection = 7
         } else {
-            timeTil5end = 60 // 60
+            timeTil5end = 2 // 60
             foreignAidGiven = false
         }
     
@@ -844,7 +847,7 @@ function handOver(x) {
     if (procSection == 9) {
         procSection = "8_5"
     }
-    var myArray = setProcParams(procSection)
+    let myArray = setProcParams(procSection)
     console.log(myArray)
     document.getElementById("interactiveFiction2").contentWindow.postMessage(myArray, '*');
 }
@@ -1000,6 +1003,7 @@ function startProcedural(x) {
     }
     procSection = x
     if (procSection == 69) {
+        // sourcery skip: dont-reassign-parameters
         x = 5
         console.log("")
         console.log("")
@@ -1208,21 +1212,21 @@ function eventOption(x){
 
 function eventOutcome(decision){
     if (decision.length == 4){
-        peace = peace + decision[0]
-        dignity = dignity + decision[1]
-        job = job + decision[2]
-        social = social + decision[3]
+        peace += decision[0]
+        dignity += decision[1]
+        job += decision[2]
+        social += decision[3]
         if (mentalSpirit<=2000) {
-            peace = peace + 10
-            dignity = dignity + 10
-            job = job + 10
-            social = social + 10
+            peace += 10
+            dignity += 10
+            job += 10
+            social += 10
         }
         if (mentalSpirit>=5000) {
-            peace = peace - 10
-            dignity = dignity - 10
-            job = job - 10
-            social = social - 10
+            peace -= 10
+            dignity -= 10
+            job -= 10
+            social -= 10
         }
         
         if (peace<0){
@@ -1272,19 +1276,19 @@ function doctorsPrognosis(){
 
 function loseSpirit(){
     //if (!screamPressed){
-        mentalSpirit = mentalSpirit - 100
+        mentalSpirit -= 100
         document.getElementById("section8spirit").innerHTML = mentalSpirit.toLocaleString("en-UK")
     //}
     
 }
 
 function powerThrough(){
-    mentalSpirit = mentalSpirit + 5
+    mentalSpirit += 5
     document.getElementById("section8spirit").innerHTML = mentalSpirit.toLocaleString("en-UK")
 }
 
 function scream(){
-    mentalSpirit = mentalSpirit + 400
+    mentalSpirit += 400
     weakness++
     screamPressed = true
     time_until_scream = 5
@@ -1335,9 +1339,9 @@ function war5(x){
             var economychange = 50000
             var landchange = 6000+(Math.round(((100-z)/100)*4000))
         }
-        manpower = manpower - manpowerchange
-        economy = economy - economychange
-        land = land + landchange
+        manpower -= manpowerchange
+        economy -= economychange
+        land += landchange
         
         if (section5progress<=10){
             var landortrophies = section5prebreak[3]
@@ -1407,9 +1411,9 @@ function war5(x){
 
 function loseMoraleEtc(){
     morale = (morale - Math.round((120000-land)/30)) - Math.round((1000000-manpower)/10000) //Was feeling too easy so I changed this back to 120000 (from 110000)
-    manpower = manpower - Math.round((500000-morale)/5000)
-    land = land - Math.round(0.004*land)
-    economy = economy - 2000
+    manpower -= Math.round((500000-morale)/5000)
+    land -= Math.round(0.004*land)
+    economy -= 2000
 }
 
 function foreignAid(){
@@ -1422,8 +1426,8 @@ function foreignAid(){
         var aidGiver = foreignAidListPost[getRandomInt(foreignAidListPost.length)]
         var aidResource = "Dollars in aid"
     }
-    economy = economy + (foreignAidValue-(section5progress*2500))
-    console.log(aidGiver + " provide "+ (foreignAidValue-(section5progress*2500)).toLocaleString + " " + aidResource)
+    economy += foreignAidValue-(section5progress*2500)
+    console.log(aidGiver + " provide "+ (foreignAidValue-(section5progress*2500)).toLocaleString("en-UK") + " " + aidResource)
 }
 
 function russianAttack(globalPower, landttack, moraleattack) {
@@ -1529,122 +1533,86 @@ window.setInterval(function(){
         changeSpirit()
         statDecay()
         increasePerClick()
-        if (timeTilWeekend <=570) {
-            if (eventCounter==0) {
-                showEvent(0)
-                if (timeTilWeekend<=540){
-                    mentalSpirit = mentalSpirit - 3
-                    if (mentalSpirit<0) {
-                        mentalSpirit = 0
-                    }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
-                }
-                if (timeTilWeekend <=510) {eventOption(3)}
-            }
+        if (timeTilWeekend <=570 && eventCounter==0) {
+              showEvent(0)
+              if (timeTilWeekend<=540){
+                  mentalSpirit -= 3
+                  mentalSpirit = Math.max(mentalSpirit, 0)
+                  document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
+              }
+              if (timeTilWeekend <=510) {eventOption(3)}
         }
-        if (timeTilWeekend <=510) {
-            if (eventCounter==1) {
-                showEvent(1)
-                if (timeTilWeekend<=480){
-                    mentalSpirit = mentalSpirit - 3
-                    if (mentalSpirit<0) {
-                        mentalSpirit = 0
-                    }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
-                }
-                if (timeTilWeekend <=450) {eventOption(3)}
-            }
+        if (timeTilWeekend <=510 && eventCounter==1) {
+              showEvent(1)
+              if (timeTilWeekend<=480){
+                  mentalSpirit -= 3
+                  mentalSpirit = Math.max(mentalSpirit, 0)
+                  document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
+              }
+              if (timeTilWeekend <=450) {eventOption(3)}
         }
-        if (timeTilWeekend <=450) {
-            if (eventCounter==2) {
-                showEvent(2)
-                if (timeTilWeekend<=420){
-                    mentalSpirit = mentalSpirit - 3
-                    if (mentalSpirit<0) {
-                        mentalSpirit = 0
-                    }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
-                }
-                if (timeTilWeekend <=390) {eventOption(3)}
-            }
+        if (timeTilWeekend <=450 && eventCounter==2) {
+              showEvent(2)
+              if (timeTilWeekend<=420){
+                  mentalSpirit -= 3
+                  mentalSpirit = Math.max(mentalSpirit, 0)
+                  document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
+              }
+              if (timeTilWeekend <=390) {eventOption(3)}
         }
-        if (timeTilWeekend <=390) {
-            if (eventCounter==3) {
-                showEvent(3)
-                if (timeTilWeekend<=360){
-                    mentalSpirit = mentalSpirit - 3
-                    if (mentalSpirit<0) {
-                        mentalSpirit = 0
-                    }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
-                }
-                if (timeTilWeekend <=330) {eventOption(3)}
-            }
+        if (timeTilWeekend <=390 && eventCounter==3) {
+              showEvent(3)
+              if (timeTilWeekend<=360){
+                  mentalSpirit -= 3
+                  mentalSpirit = Math.max(mentalSpirit, 0)
+                  document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
+              }
+              if (timeTilWeekend <=330) {eventOption(3)}
         }
-        if (timeTilWeekend <=330) {
-            if (eventCounter==4) {
-                showEvent(4)
-                if (timeTilWeekend<=300){
-                    mentalSpirit = mentalSpirit - 3
-                    if (mentalSpirit<0) {
-                        mentalSpirit = 0
-                    }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
-                }
-                if (timeTilWeekend <=270) {eventOption(3)}
-            }
+        if (timeTilWeekend <=330 && eventCounter==4) {
+              showEvent(4)
+              if (timeTilWeekend<=300){
+                  mentalSpirit -= 3
+                  mentalSpirit = Math.max(mentalSpirit, 0)
+                  document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
+              }
+              if (timeTilWeekend <=270) {eventOption(3)}
         }
-        if (timeTilWeekend <=270) {
-            if (eventCounter==5) {
-                showEvent(5)
-                if (timeTilWeekend<=240){
-                    mentalSpirit = mentalSpirit - 3
-                    if (mentalSpirit<0) {
-                        mentalSpirit = 0
-                    }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
-                }
-                if (timeTilWeekend <=210) {eventOption(3)}
-            }
+        if (timeTilWeekend <=270 && eventCounter==5) {
+              showEvent(5)
+              if (timeTilWeekend<=240){
+                  mentalSpirit -= 3
+                  mentalSpirit = Math.max(mentalSpirit, 0)
+                  document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
+              }
+              if (timeTilWeekend <=210) {eventOption(3)}
         }
-        if (timeTilWeekend <=210) {
-            if (eventCounter==6) {
-                showEvent(6)
-                if (timeTilWeekend<=180){
-                    mentalSpirit = mentalSpirit - 3
-                    if (mentalSpirit<0) {
-                        mentalSpirit = 0
-                    }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
-                }
-                if (timeTilWeekend <=150) {eventOption(3)}
-            }
+        if (timeTilWeekend <=210 && eventCounter==6) {
+              showEvent(6)
+              if (timeTilWeekend<=180){
+                  mentalSpirit -= 3
+                  mentalSpirit = Math.max(mentalSpirit, 0)
+                  document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
+              }
+              if (timeTilWeekend <=150) {eventOption(3)}
         }
-        if (timeTilWeekend <=150) {
-            if (eventCounter==7) {
-                showEvent(7)
-                if (timeTilWeekend<=120){
-                    mentalSpirit = mentalSpirit - 3
-                    if (mentalSpirit<0) {
-                        mentalSpirit = 0
-                    }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
-                }
-                if (timeTilWeekend <=90) {eventOption(3)}
-            }
+        if (timeTilWeekend <=150 && eventCounter==7) {
+              showEvent(7)
+              if (timeTilWeekend<=120){
+                  mentalSpirit -= 3
+                  mentalSpirit = Math.max(mentalSpirit, 0)
+                  document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
+              }
+              if (timeTilWeekend <=90) {eventOption(3)}
         }
-        if (timeTilWeekend <=90) {
-            if (eventCounter==8) {
-                showEvent(8)
-                if (timeTilWeekend<=60){
-                    mentalSpirit = mentalSpirit - 3
-                    if (mentalSpirit<0) {
-                        mentalSpirit = 0
-                    }
-                    document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
-                }
-                if (timeTilWeekend <=30) {eventOption(3)}
-            }
+        if (timeTilWeekend <=90 && eventCounter==8) {
+              showEvent(8)
+              if (timeTilWeekend<=60){
+                  mentalSpirit -= 3
+                  mentalSpirit = Math.max(mentalSpirit, 0)
+                  document.getElementById("spirit3").innerHTML = mentalSpirit.toLocaleString("en-UK")
+              }
+              if (timeTilWeekend <=30) {eventOption(3)}
         }
         //The last one needs to work differently here, see my note.
         if (timeTilWeekend <= 1) {

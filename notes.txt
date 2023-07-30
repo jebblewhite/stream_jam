@@ -249,5 +249,5 @@ X spirit gain from raids removed
 Milo's final night notes:
     'Cancel roleplaying' isn't working, it's taking me to if I hadn't cancelled.
     Didn't notice any other bugs I didn't cause myself.
-    Somehow, section 5 is too easy now.  Played it twice being 'stupid' and each time ended with almost 1mil spirit.  Proposed (and very thematic) nerf: reduce the amount of foreign aid each time it's given, I'd say by 5000.  Hammers home the 'how important foreign aid is' message.
-    
+    Somehow, section 5 is too easy now.  Played it twice being 'stupid' and each time ended with almost 1mil spirit.  Proposed (and very thematic) nerf: reduce the amount of foreign aid each time it's given, I'd say by 2500.  Hammers home the 'how important foreign aid is' message.
+

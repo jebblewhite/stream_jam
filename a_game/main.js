@@ -12,9 +12,9 @@ var insubordination = 0
 var usb = 0
 
 var foreignAidGiven = false
-var morale = 1000000
+var morale = 1200000
 var manpower = 1000000
-var economy = 3000000
+var economy = 3200000
 var land = 120000
 var foreignAidValue = 200000
 const section5prebreak = ["Spirit", "Grivna", "Soldiers", "Trophies", "Make war with neighbouring states", "Push back in the North -- Cost : 10K grivna", "Push back in the South -- Cost : 20K grivna", "Push back in the East -- Cost : 50K grivna", "Recruit Soldiers -- Cost : 5K grivna", "The Barony"]
@@ -23,7 +23,7 @@ const section5postbreak = ["Morale", "Economy", "Manpower", "Land", "Defend your
 var section5progress = 0
 var section5type = "m"
 var section5scene = 0
-var timeTil5end = 5 // 60
+var timeTil5end = 60 // 60
 var section5scenelist = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 
 var timeTil8end = 100
@@ -51,7 +51,7 @@ var workPerTen = [1,1,1,1,1,1,1,0]
 var timeTilDecay = 13
 var socialWarned = false
 var eventCounter = 0
-var timeTilWeekend = 1 // 600
+var timeTilWeekend = 600 // 600
 var section3outcome = "none"
 
 const jobhtml = document.getElementById('job')
@@ -121,7 +121,7 @@ var tinChance = 0;
 var oreChanceIncreaseCost = 100;
 var unassignedWorkers = 0
 var workerSpirit = 1
-var spiritThreshold = 10 // 10000000
+var spiritThreshold = 10000000 // 10000000
 
 var farmers = 0
 var merchants = 0
@@ -412,7 +412,7 @@ function soldierRiskUp() {
         document.getElementById(upgrades[upgradeName]["resource"]).innerHTML = resources[upgrades[upgradeName]["resource"]].toLocaleString("en-UK");
         document.getElementById(upgrades[upgradeName]["element_id"]).innerHTML = upgrades[upgradeName]["element_content"].replace("^^^F", upgrades[upgradeName]["cost"].toLocaleString("en-UK"))
         document.getElementById(upgrades[upgradeName]["div"]).style.display = "none";
-        document.getElementById("soldierrisk").innerHTML = (Math.round(soldierRisk/10))
+        document.getElementById("soldierrisk").innerHTML = Math.round(soldierRisk/10)
         warCooldown()
     }
 }
@@ -601,7 +601,7 @@ function generateWar(){
         document.getElementById('war2').innerHTML = "Go to war with " + tradeFactions[1] + " -- " + Math.min(100,fullWar[2][1]) + "% Chance of Moderate Reward / " + fullWar[2][0] + "% Chance of Casualties.";
         war3list = generateSingleWar(2)
         fullWar[3] = war3list
-        document.getElementById('war3').innerHTML = "Go to war with " + tradeFactions[2] + " -- " + Math.min(fullWar[3][1]) + "% Chance of Great Reward / " + fullWar[3][0] + "% Chance of Significant Casualties.";
+        document.getElementById('war3').innerHTML = "Go to war with " + tradeFactions[2] + " -- " + Math.min(100,fullWar[3][1]) + "% Chance of Great Reward / " + fullWar[3][0] + "% Chance of Significant Casualties.";
     }
 }
 
@@ -829,6 +829,7 @@ function setProcParams(x) {
 }
 
 function handOver(x) {
+    document.getElementById("saveload").style.display = "none";
     if(x==10){
         document.getElementById("procedural"+(5)).style.display = "none";
         document.getElementById("log-container").style.color = "#424242";
@@ -869,6 +870,7 @@ window.document.addEventListener('myCustomEvent', handleEvent, false)
 function handleEvent(e) {
   console.log(e.detail) // outputs: {foo: 'bar'}
   hide_i_f();
+  document.getElementById("saveload").style.display = "block";
   i_f_params[e.detail.section] = e.detail.passedArray
   if (e.detail.section == "8_5") {
     startProcedural(69)
@@ -884,6 +886,8 @@ function handleEvent(e) {
 
 function resetGame(){
     section5progress = 0
+    section5type = "m"
+    section5scene = 0
     morale = 1000000
     manpower = 1000000
     economy = 3000000
@@ -1063,7 +1067,6 @@ function load() {
     fullTrade = JSON.parse(localStorage.getItem('fullTrade'));
     fullWar = JSON.parse(localStorage.getItem('fullWar'));
     hide_all_proc()
-    console.log(localStorage)
     if (procSection==1){
         document.getElementById("procedural1").style.display = "block";
         document.getElementById('tin').innerHTML = resources.tin.toLocaleString("en-UK");

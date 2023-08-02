@@ -24,7 +24,8 @@ var section5progress = 0
 var section5type = "m"
 var section5scene = 0
 var timeTil5end = 60 // 60
-var section5scenelist = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+var section5scenelist = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18]
+var oksanaAdded = false 
 
 var timeTil8end = 100
 
@@ -888,11 +889,12 @@ function resetGame(){
     section5progress = 0
     section5type = "m"
     section5scene = 0
-    morale = 1000000
+    morale = 1200000
     manpower = 1000000
-    economy = 3000000
+    economy = 3200000
     land = 120000
-    section5scenelist = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+    section5scenelist = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18]
+    oksanaAdded = false
     startProcedural(5)
 }
 
@@ -983,7 +985,8 @@ function save() {
     localStorage.setItem('upgrades', JSON.stringify(upgrades)) 
     localStorage.setItem('goodsList', JSON.stringify(goodsList)) 
     localStorage.setItem('fullTrade', JSON.stringify(fullTrade)) 
-    localStorage.setItem('fullWar', JSON.stringify(fullWar)) 
+    localStorage.setItem('fullWar', JSON.stringify(fullWar))
+    localStorage.setItem('oksanaAdded', JSON.stringify(oksanaAdded)) 
     console.log("Game saved.")
 }
   
@@ -1066,6 +1069,7 @@ function load() {
     goodsList = JSON.parse(localStorage.getItem('goodsList'));
     fullTrade = JSON.parse(localStorage.getItem('fullTrade'));
     fullWar = JSON.parse(localStorage.getItem('fullWar'));
+    oksanaAdded = JSON.parse(localStorage.getItem('oksanaAdded'));
     hide_all_proc()
     if (procSection==1){
         document.getElementById("procedural1").style.display = "block";
@@ -1241,6 +1245,10 @@ function startProcedural(x) {
             usb = i_f_params[6][15]
         }
         if (section5progress <=10){ //I think this is right!  The mental break happens after 9 events.
+            if (!oksanaAdded){
+                section5scenelist.push(10)
+                oksanaAdded = true
+            }
             document.getElementById("morale").innerHTML = section5prebreak[0] + " : " + morale.toLocaleString("en-UK")
             document.getElementById("economy").innerHTML = section5prebreak[1] + " : " + economy.toLocaleString("en-UK")
             document.getElementById("land").innerHTML = section5prebreak[3] + " : " + land.toLocaleString("en-UK")

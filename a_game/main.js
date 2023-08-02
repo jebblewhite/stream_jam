@@ -1694,7 +1694,7 @@ function war5(x){
 }
 
 function loseMoraleEtc(){
-    morale = (morale - Math.round((120000-land)/30)) - Math.round((1000000-manpower)/10000) //Was feeling too easy so I changed this back to 120000 (from 110000)
+    morale = (morale - Math.round((100000-land)/30)) - Math.round((1000000-manpower)/10000) //Was feeling too easy so I changed this back to 120000 (from 110000)
     manpower -= Math.round((500000-morale)/5000)
     land -= Math.round(0.004*land)
     economy -= 2000
